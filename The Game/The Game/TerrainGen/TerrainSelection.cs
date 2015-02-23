@@ -3,7 +3,14 @@ using Confusing_Hobo_Unleashed.Map;
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
-    
+    public enum Layers
+    {
+        Space,
+        Sky,
+        Earth,
+        Cave,
+        Underworld
+    }
 
     internal class TerrainSelection
     {
@@ -15,21 +22,21 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             int roomAmount2 = 0;
             switch (VarDatabase.CurrentLayer)
             {
-                case MapLayers.Space:
+                case Layers.Space:
                     multiplier = 0;
                     roomAmount = SpaceTerrain.MapAmount;
                     break;
-                case MapLayers.Sky:
+                case Layers.Sky:
                     multiplier = 100;
                     roomAmount = SkyTerrain.MapAmount;
                     break;
-                case MapLayers.Earth:
+                case Layers.Earth:
                     multiplier = 200;
                     multiplier2 = 300;
                     roomAmount = LandTerrain.MapAmount;
                     roomAmount2 = SeaTerrain.MapAmount;
                     break;
-                case MapLayers.Cave:
+                case Layers.Cave:
                     multiplier = 400;
                     roomAmount = CaveTerrain.MapAmount;
                     break;

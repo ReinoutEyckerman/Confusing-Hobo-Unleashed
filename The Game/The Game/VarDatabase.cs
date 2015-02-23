@@ -7,7 +7,7 @@ namespace Confusing_Hobo_Unleashed
     {
         public const int FrameTimeMs = 40;
         public static int Invertrate = 1;
-        public static MapLayers CurrentLayer = MapLayers.Earth;
+        public static Layers CurrentLayer = Layers.Earth;
         public static bool Bw = false;
         public static ColorSchemes ColorScheme = new ColorSchemes();
         public static int ColorSchemenumber = 0;

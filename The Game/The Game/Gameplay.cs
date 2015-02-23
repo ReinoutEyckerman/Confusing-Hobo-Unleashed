@@ -48,8 +48,9 @@ namespace Confusing_Hobo_Unleashed
             }
             Game.FillEntities();
             foreach (AiCore entity in Game.Entities)
+            {
                 entity.SetSpawn();
-            
+            }
         }
 
         public static void EnableTerrain()

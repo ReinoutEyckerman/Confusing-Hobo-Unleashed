@@ -1623,13 +1623,13 @@ namespace Confusing_Hobo_Unleashed
                         break;
                     case "World Type":
                         if (t.ButtonList[3].Value)
-                            VarDatabase.CurrentLayer = MapLayers.Cave;
+                            VarDatabase.CurrentLayer = Layers.Cave;
                         else if (t.ButtonList[2].Value)
-                            VarDatabase.CurrentLayer = MapLayers.Earth;
+                            VarDatabase.CurrentLayer = Layers.Earth;
                         else if (t.ButtonList[1].Value)
-                            VarDatabase.CurrentLayer = MapLayers.Sky;
+                            VarDatabase.CurrentLayer = Layers.Sky;
                         else if (t.ButtonList[0].Value)
-                            VarDatabase.CurrentLayer = MapLayers.Space;
+                            VarDatabase.CurrentLayer = Layers.Space;
                         break;
                     case "Extra":
                         VarDatabase.Invertrate = t.ButtonList[0].Value ? 1 : 0;

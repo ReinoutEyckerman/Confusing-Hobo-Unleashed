@@ -66,7 +66,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -80,12 +79,10 @@
     <Compile Include="Enemies\Roflcopter.cs" />
     <Compile Include="Enemies\Zerg.cs" />
     <Compile Include="Map\CustomMap.cs" />
-    <Compile Include="Map\ICustomMap.cs" />
     <Compile Include="Map\Layer.cs" />
     <Compile Include="AlphaBootScreen.cs" />
     <Compile Include="BootScreen.cs" />
     <Compile Include="buffer.cs" />
-    <Compile Include="Map\MapGenerator.cs" />
     <Compile Include="Multiplayer\Client.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Controls.cs" />
@@ -96,7 +93,6 @@
     <Compile Include="GameUI.cs" />
     <Compile Include="TerrainGen\LandTerrain.cs" />
     <Compile Include="Multiplayer\LidgrenAdaptions.cs" />
-    <Compile Include="TerrainGen\MapLayers.cs" />
     <Compile Include="TerrainGen\SeaTerrain.cs" />
     <Compile Include="Multiplayer\Server.cs" />
     <Compile Include="TerrainGen\SkyTerrain.cs" />

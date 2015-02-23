@@ -79,10 +79,10 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         {
             switch (VarDatabase.CurrentLayer)
             {
-                case MapLayers.Cave:
+                case Layers.Cave:
                     CaveOverlay(map);
                     break;
-                case MapLayers.Earth:
+                case Layers.Earth:
                     GenGravField(map, invert);
                     if (map.Sea)
                         GenSea(map, invert);
@@ -101,7 +101,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         GenForest(map, invert);
                     }
                     break;
-                case MapLayers.Sky:
+                case Layers.Sky:
                     GenerateDay(map);
                     GenTime(map);
                     GenClouds(map, cloudHeight);
@@ -109,7 +109,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         GenJungle(map, invert);
                     GenForest(map, invert);
                     break;
-                case MapLayers.Space:
+                case Layers.Space:
                     break;
             }
         }

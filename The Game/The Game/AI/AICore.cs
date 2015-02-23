@@ -67,8 +67,9 @@ namespace Confusing_Hobo_Unleashed.AI
             set
             {
                 if (value >= 0)
+                {
                     _x = value;
-                
+                }
             }
         }
 
@@ -78,8 +79,9 @@ namespace Confusing_Hobo_Unleashed.AI
             set
             {
                 if (value >= 0)
+                {
                     _y = value;
-               
+                }
             }
         }
 
@@ -144,7 +146,9 @@ namespace Confusing_Hobo_Unleashed.AI
                 Mana++;
         }
 
-
+        public void ChooseWeapon()
+        {
+        }
 
         public void GenerateClass()
         {

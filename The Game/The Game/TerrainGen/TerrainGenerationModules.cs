@@ -50,13 +50,24 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 {
                     ywall += direction*2;
                 }
-                else if (_up == 9 && ywall < map.Mapheight - 1)               
-                    ywall += direction*3;              
+                else if (_up == 9 && ywall < map.Mapheight - 1)
+                {
+                    ywall += direction*3;
+                }
                 if (invert)
+                {
                     for (int y = ywall; y >= 0; y--)
-                        Game.CurrentLoadedMap.Collision[y, xwall] = true;  
-                else for (int y = ywall; y <= map.Mapheight - 1; y++)
+                    {
+                        Game.CurrentLoadedMap.Collision[y, xwall] = true;
+                    }
+                }
+                else
+                {
+                    for (int y = ywall; y <= map.Mapheight - 1; y++)
+                    {
                         map.Collision[y, xwall] = true;
+                    }
+                }
             }
             return ywall;
         }

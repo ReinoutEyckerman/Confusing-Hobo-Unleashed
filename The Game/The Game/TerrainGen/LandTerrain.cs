@@ -3,13 +3,13 @@ using Confusing_Hobo_Unleashed.Map;
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
-     class LandTerrain
+    public class LandTerrain
     {
-        public  int MapAmount = 7;
+        public static int MapAmount = 7;
 
-        private  readonly Random Random = new Random();
+        private static readonly Random Random = new Random();
 
-        public  void Redirect(CustomMap map, int selected, bool invert = false)
+        public static void Redirect(CustomMap map, int selected, bool invert = false)
         {
             if (map.Invertrate == 1)
                 invert = true;
@@ -44,7 +44,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 Redirect(map, selected, true);
         }
 
-        private  void Mountain(CustomMap map, bool invert)
+        private static void Mountain(CustomMap map, bool invert)
         {
             int ywall = Game.CurrentLoadedMap.Mapheight - 10;
 
@@ -54,7 +54,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, 1, invert);
         }
 
-        private  void Valley(CustomMap map, bool invert)
+        private static void Valley(CustomMap map, bool invert)
         {
             int ywall = Game.CurrentLoadedMap.Mapheight/4 + Random.Next(8);
             ywall = TerrainGenerationModules.ExtremeY(map, ywall, 0, Console.WindowWidth/4, 1, invert);
@@ -63,7 +63,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, -1, invert);
         }
 
-        private  void Forest(CustomMap map, bool invert)
+        private static void Forest(CustomMap map, bool invert)
         {
             int ywall = Game.CurrentLoadedMap.Mapheight - Random.Next(Game.CurrentLoadedMap.Mapheight/3, Game.CurrentLoadedMap.Mapheight/2);
             if (invert)
@@ -71,7 +71,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             TerrainGenerationModules.Flat(map, ywall, 0, Console.WindowWidth, invert);
         }
 
-        private  void Cliff(CustomMap map, bool invert)
+        private static void Cliff(CustomMap map, bool invert)
         {
             int ywall = Console.WindowHeight/2;
             if (invert)
@@ -80,7 +80,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             TerrainGenerationModules.Cliff(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, -1, invert);
         }
 
-        private  void Flat(CustomMap map, bool invert)
+        private static void Flat(CustomMap map, bool invert)
         {
             int ywall = map.Mapheight - 8;
             if (invert)

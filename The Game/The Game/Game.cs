@@ -129,7 +129,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void UpdateGame()
         {
-            if (VarDatabase.CurrentLayer != MapLayers.Cave && Random.Next(10000) == 0)
+            if (VarDatabase.CurrentLayer != Layers.Cave && Random.Next(10000) == 0)
                 TerrainGraphics.CopterAnimation = true;
             if (!Boss && Random.Next(100000) == 0)
                 GodzillaAnimation.Animate = true;
