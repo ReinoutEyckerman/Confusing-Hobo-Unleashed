@@ -73,6 +73,8 @@
     <Compile Include="AI\AICore.cs" />
     <Compile Include="AI\AIMovementCore.cs" />
     <Compile Include="AI\BulletCore.cs" />
+    <Compile Include="Colors\ColorScheme.cs" />
+    <Compile Include="Colors\Painter.cs" />
     <Compile Include="Enemies\Godzilla.cs" />
     <Compile Include="Enemies\Harpy.cs" />
     <Compile Include="Enemies\Necromancer.cs" />

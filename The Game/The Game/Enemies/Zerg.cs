@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -8,8 +10,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
     {
         public Zerg(CustomMap map) : base(map)
         {
-            Background = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
-            Foreground = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
+            Background = Painter.Instance.Paint(ConsoleColor.DarkRed);
+            Foreground = Painter.Instance.Paint(ConsoleColor.White);
             DrawChar = '7';
             HpTotal = 5;
             HpCurrent = (int) HpTotal;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.User;
 using Microsoft.Xna.Framework.Input;
@@ -9,7 +10,7 @@ namespace Confusing_Hobo_Unleashed
     {
         public static void DrawMap()
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Console.Clear();
             Game.CurrentLoadedMap = new CustomMap(Console.WindowHeight, Console.WindowWidth, false);
             TerrainSelection.Redirect(Game.CurrentLoadedMap, 202, false);
@@ -25,7 +26,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void DrawMapBg()
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkCyan;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkCyan);
             Console.SetCursorPosition(MapDrawing.Xposmin - 1, MapDrawing.Yposmin - 1);
 
             for (var x = MapDrawing.Xposmin - 1;
@@ -156,20 +157,20 @@ namespace Confusing_Hobo_Unleashed
         public static void LeftoverPerson()
         {
             Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]
-                ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen
-                : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
+                ? Painter.Instance.Paint(ConsoleColor.DarkGreen)
+                : Painter.Instance.Paint(ConsoleColor.DarkRed);
 
             Console.Write("   ");
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
         }
 
         public static void DrawPerson()
         {
             Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]
-                ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen
-                : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
+                ? Painter.Instance.Paint(ConsoleColor.DarkGreen)
+                : Painter.Instance.Paint(ConsoleColor.DarkRed);
             Console.Write(MapDrawing.HorizontalBlockLength >= 7 ? "'-'" : "o");
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed
@@ -8,20 +9,16 @@ namespace Confusing_Hobo_Unleashed
         private const int UiLeftX = 2;
 
         private static readonly short UiBoxColors =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray),Painter.Instance.Paint(ConsoleColor.Black, true));
 
         private static readonly short UiTextColors =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Cyan);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Cyan,true));
 
         private static readonly short HpBarColor =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Green,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Green), Painter.Instance.Paint(ConsoleColor.Black,true));
 
         private static readonly short HpBarLostColor =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Red), Painter.Instance.Paint(ConsoleColor.Black,true));
 
         private static readonly int UiRightX = Game.CurrentLoadedMap.Background.GetLength(1) - 2;
         private static readonly int UiTopY = Game.CurrentLoadedMap.Background.GetLength(0) + 1;

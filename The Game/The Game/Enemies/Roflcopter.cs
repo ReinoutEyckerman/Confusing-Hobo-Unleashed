@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -10,8 +12,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public Roflcopter(CustomMap map) : base(map)
         {
-            Background = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
-            Foreground = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
+            Background = Painter.Instance.Paint(ConsoleColor.DarkRed);
+            Foreground = Painter.Instance.Paint(ConsoleColor.White);
             DrawChar = 'T';
             HpTotal = 35;
             HpCurrent = (int) HpTotal;
@@ -26,8 +28,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
             PlayerColor = Color.ColorsToAttribute(Background, Foreground);
             WeaponInv = new Dictionary<byte, Weapon>();
             WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10,
-                bulletBackground: VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White,
-                bulletForeground: VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, speed: 1);
+                bulletBackground: Painter.Instance.Paint(ConsoleColor.White),
+                bulletForeground: Painter.Instance.Paint(ConsoleColor.Black), speed: 1);
         }
 
         public override void CalculateAttack()

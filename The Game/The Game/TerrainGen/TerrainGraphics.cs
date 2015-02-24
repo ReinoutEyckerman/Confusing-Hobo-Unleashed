@@ -1,4 +1,5 @@
 ﻿using System;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
@@ -147,7 +148,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 {
                     map.Layers[0].Characters[a, b] = ' ';
                     map.Layers[0].Background[a, b] =
-                        VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Gray;
+                        Painter.Instance.Paint(ConsoleColor.Gray);
                 }
             map.PushtoArray(map.Layers[0].Background, map.Layers[0].Foreground, map.Layers[0].Colors);
             for (var a = 0; a < map.Mapheight; a++)
@@ -156,15 +157,15 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     if (map.Collision[a, b])
                         map.Layers[Maplayers.Collision].Characters[a, b] = ' ';
                     map.Layers[Maplayers.Collision].Background[a, b] =
-                        VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
+                        Painter.Instance.Paint(ConsoleColor.DarkGray);
                 }
         }
 
         private static void GenerateDay(CustomMap map)
         {
             Console.BackgroundColor = VarDatabase.Day
-                ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Cyan
-                : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkBlue;
+                ? Painter.Instance.Paint(ConsoleColor.Cyan)
+                : Painter.Instance.Paint(ConsoleColor.DarkBlue);
             for (var xwall = 0; xwall < map.Mapwidth; xwall++)
             {
                 for (var ywall = 0; ywall < map.Mapheight; ywall++)
@@ -173,8 +174,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         map.Grav[ywall, xwall] == Convert.ToInt16((short) GravFields.Sea*-1))
                     {
                         map.Layers[0].Background[ywall, xwall] =
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
-                        if (VarDatabase.Bw)
+                            Painter.Instance.Paint(ConsoleColor.Blue);
+                        if (Painter.Instance.Bw)
                             map.Layers[0].Characters[ywall, xwall] = '.';
                         else map.Layers[0].Characters[ywall, xwall] = ' ';
                     }
@@ -204,16 +205,16 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                           ((ywall - 1 > 0 && map.Collision[ywall - 1, xwall]) || ywall - 1 == 0))))
                     {
                         map.Layers[Maplayers.Collision].Background[ywall, xwall] =
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
+                            Painter.Instance.Paint(ConsoleColor.DarkGreen);
                         map.Layers[Maplayers.Collision].Foreground[ywall, xwall] =
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Green;
+                            Painter.Instance.Paint(ConsoleColor.Green);
                         map.Layers[Maplayers.Collision].Characters[ywall, xwall] = '"';
                     }
                     else if (map.Collision[ywall, xwall])
                     {
                         map.Layers[Maplayers.Collision].Background[ywall, xwall] =
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
-                        if (VarDatabase.Bw)
+                            Painter.Instance.Paint(ConsoleColor.DarkRed);
+                        if (Painter.Instance.Bw)
                             map.Layers[Maplayers.Collision].Characters[ywall, xwall] = '#';
                         else map.Layers[Maplayers.Collision].Characters[ywall, xwall] = ' ';
                     }
@@ -257,13 +258,13 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             ConsoleColor color2;
             if (VarDatabase.Day)
             {
-                color1 = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-                color2 = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkYellow;
+                color1 = Painter.Instance.Paint(ConsoleColor.Red);
+                color2 = Painter.Instance.Paint(ConsoleColor.DarkYellow);
             }
             else
             {
-                color1 = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Gray;
-                color2 = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
+                color1 = Painter.Instance.Paint(ConsoleColor.Gray);
+                color2 = Painter.Instance.Paint(ConsoleColor.DarkGray);
             }
             for (var x = 0; x < moon.GetLength(0); x++)
                 for (var y = 0; y < moon.GetLength(1); y++)
@@ -281,7 +282,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 for (var j = 0; j < moon.GetLength(1); j++)
                     if (i + _moonX < map.Mapwidth && i + _moonX > 0 && j + moonY < map.Mapheight && moonY + j > 0 &&
                         map.Layers[Maplayers.Air].Background[moonY + j, _moonX + i] !=
-                        VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue)
+                        Painter.Instance.Paint(ConsoleColor.Blue))
                     {
                         moonattribute[i + _moonX, j + moonY] = Color.ColorsToAttribute(mooncolor[i, j], mooncolor[i, j]);
                         var charToString = Convert.ToString(' ');
@@ -316,7 +317,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     {
                         if (array[y, x] == 1)
                         {
-                            if (VarDatabase.Bw)
+                            if (Painter.Instance.Bw)
                                 map.Layers[Maplayers.Destructible].Characters[
                                     ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = 'I';
                             else
@@ -325,11 +326,11 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                             map.Destructible[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = true;
                             map.Layers[Maplayers.Destructible].Background[
                                 ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] =
-                                VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
+                                Painter.Instance.Paint(ConsoleColor.DarkRed);
                         }
                         else if (array[y, x] == 2)
                         {
-                            if (VarDatabase.Bw)
+                            if (Painter.Instance.Bw)
                                 map.Layers[Maplayers.Destructible].Characters[
                                     ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = '*';
                             else
@@ -337,7 +338,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                                     ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = ' ';
                             map.Layers[Maplayers.Destructible].Background[
                                 ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] =
-                                VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
+                                Painter.Instance.Paint(ConsoleColor.DarkGreen);
                             map.Destructible[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = true;
                         }
                     }
@@ -365,8 +366,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             {
                 map.Destructible[ypos - 5*reverse, xpos + x] = true;
                 map.Layers[Maplayers.Destructible].Background[ypos - 5*reverse, xpos + x] =
-                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-                if (VarDatabase.Bw)
+                    Painter.Instance.Paint(ConsoleColor.DarkGreen);
+                if (Painter.Instance.Bw)
                     map.Layers[Maplayers.Destructible].Characters[ypos - 5*reverse, xpos + x] = '*';
                 else map.Layers[Maplayers.Destructible].Characters[ypos - 5*reverse, xpos + x] = ' ';
             }
@@ -375,8 +376,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             {
                 map.Destructible[ypos - 4*reverse, xpos + x] = true;
                 map.Layers[Maplayers.Destructible].Background[ypos - 4*reverse, xpos + x] =
-                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-                if (VarDatabase.Bw)
+                    Painter.Instance.Paint(ConsoleColor.DarkGreen);
+                if (Painter.Instance.Bw)
                     map.Layers[Maplayers.Destructible].Characters[ypos - 4*reverse, xpos + x] = '*';
                 else map.Layers[Maplayers.Destructible].Characters[ypos - 4*reverse, xpos + x] = ' ';
             }
@@ -385,8 +386,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             {
                 map.Destructible[ypos - y*reverse, xpos] = true;
                 map.Layers[Maplayers.Destructible].Background[ypos - y*reverse, xpos] =
-                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
-                if (VarDatabase.Bw)
+                    Painter.Instance.Paint(ConsoleColor.DarkRed);
+                if (Painter.Instance.Bw)
                     map.Layers[Maplayers.Destructible].Characters[ypos - y*reverse, xpos] = 'I';
                 else map.Layers[Maplayers.Destructible].Characters[ypos - y*reverse, xpos] = ' ';
             }
@@ -433,8 +434,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         {
                             map.Destructible[ypos - (y)*invert, xpos + negX] = true;
                             map.Layers[Maplayers.Destructible].Background[ypos - (y)*invert, xpos + negX] =
-                                VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Green;
-                            if (VarDatabase.Bw)
+                                Painter.Instance.Paint(ConsoleColor.Green);
+                            if (Painter.Instance.Bw)
                                 map.Layers[Maplayers.Destructible].Characters[ypos - (y)*invert, xpos + negX] = 'L';
                             else map.Layers[Maplayers.Destructible].Characters[ypos - (y)*invert, xpos + negX] = ' ';
                         }
@@ -475,9 +476,9 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             };
 
             bool[,] cloudarray;
-            var cloudcolor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
+            var cloudcolor = Painter.Instance.Paint(ConsoleColor.White);
             if (thunder)
-                cloudcolor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
+                cloudcolor = Painter.Instance.Paint(ConsoleColor.DarkGray);
 
             if (Random.Next(2) == 1)
             {
@@ -505,7 +506,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         if (ypos + y < map.Mapheight && xpos + negX < map.Mapwidth && xpos + negX > 0)
                         {
                             map.Layers[Maplayers.Clouds].Background[ypos + y, xpos + negX] = cloudcolor;
-                            if (VarDatabase.Bw)
+                            if (Painter.Instance.Bw)
                                 map.Layers[Maplayers.Clouds].Characters[ypos + y, xpos + negX] = 'L';
                             else map.Layers[Maplayers.Clouds].Characters[ypos + y, xpos + negX] = ' ';
                         }

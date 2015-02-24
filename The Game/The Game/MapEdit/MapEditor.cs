@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Confusing_Hobo_Unleashed.Colors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Keyboard = System.Windows.Input.Keyboard;
@@ -12,24 +13,24 @@ namespace Confusing_Hobo_Unleashed.MapEdit
     internal class MapEditor
     {
         public static short UiBorderColors =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGreen),
+                 Painter.Instance.Paint(ConsoleColor.White, true));
 
         public static short UiTextColors =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGreen),
+                Painter.Instance.Paint(ConsoleColor.White, true));
 
         public static short UiActiveLayer =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+          Color.ColorsToAttribute( Painter.Instance.Paint(ConsoleColor.Yellow),
+                Painter.Instance.Paint(ConsoleColor.Black,true));
 
         public static short UiInactiveLayer =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Gray);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),
+                 Painter.Instance.Paint(ConsoleColor.Gray, true));
 
         public static short UiActiveButDisabledLayer =
-            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red);
+            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),
+                 Painter.Instance.Paint(ConsoleColor.Red, true));
 
         public static int Ww = Console.WindowWidth;
         public static int KeypressTimer;

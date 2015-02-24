@@ -1,5 +1,6 @@
 ﻿using System;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
@@ -169,13 +170,13 @@ namespace Confusing_Hobo_Unleashed.Enemies
                 for (var j = 0; j < Zilla.GetLength(0); j++)
                     if (Zilla[j, i] != 0 && _pos + i < map.Mapwidth && _pos + i >= 0 && j < map.Mapheight && j >= 0)
                     {
-                        var color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
+                        var color = Painter.Instance.Paint(ConsoleColor.DarkGreen);
                         if (Zilla[j, i] == 2)
-                            color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkYellow;
+                            color = Painter.Instance.Paint(ConsoleColor.DarkYellow);
                         else if (Zilla[j, i] == 3)
-                            color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
+                            color = Painter.Instance.Paint(ConsoleColor.Red);
                         else if (Zilla[j, i] == 4)
-                            color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+                            color = Painter.Instance.Paint(ConsoleColor.Black);
                         var num = Color.ColorsToAttribute(color, color + 1);
                         Game.GameBuffer.Draw(" ", _pos + i, map.Mapheight - Zilla.GetLength(0) - 8 + j, num);
                         if (Game.Boss)

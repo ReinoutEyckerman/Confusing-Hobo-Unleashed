@@ -1,233 +1,214 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed
 {
-    public class ColorList
-    {
-        public ConsoleColor Black { get; set; }
-        public ConsoleColor Green { get; set; }
-        public ConsoleColor DarkGreen { get; set; }
-        public ConsoleColor Blue { get; set; }
-        public ConsoleColor DarkBlue { get; set; }
-        public ConsoleColor Yellow { get; set; }
-        public ConsoleColor DarkYellow { get; set; }
-        public ConsoleColor Red { get; set; }
-        public ConsoleColor DarkRed { get; set; }
-        public ConsoleColor Cyan { get; set; }
-        public ConsoleColor DarkCyan { get; set; }
-        public ConsoleColor Magenta { get; set; }
-        public ConsoleColor DarkMagenta { get; set; }
-        public ConsoleColor Gray { get; set; }
-        public ConsoleColor DarkGray { get; set; }
-        public ConsoleColor White { get; set; }
-    }
-
+   
     public class ColorSchemes
     {
-        public ColorSchemes()
+        public void Refresh()
         {
-            BackGroundList = new List<ColorList>
+            BackGroundList = new Dictionary<ColorScheme,Dictionary<ConsoleColor, ConsoleColor>>
             {
-                new ColorList //Normal
+                {ColorScheme.Normal, new Dictionary<ConsoleColor, ConsoleColor> //Normal
                 {
-                    Black = ConsoleColor.Black,
-                    Green = ConsoleColor.Green,
-                    DarkGreen = ConsoleColor.DarkGreen,
-                    Blue = ConsoleColor.Blue,
-                    DarkBlue = ConsoleColor.DarkBlue,
-                    Red = ConsoleColor.Red,
-                    DarkRed = ConsoleColor.DarkRed,
-                    Yellow = ConsoleColor.Yellow,
-                    DarkYellow = ConsoleColor.DarkYellow,
-                    Cyan = ConsoleColor.Cyan,
-                    DarkCyan = ConsoleColor.DarkCyan,
-                    Magenta = ConsoleColor.Magenta,
-                    DarkMagenta = ConsoleColor.DarkMagenta,
-                    Gray = ConsoleColor.Gray,
-                    DarkGray = ConsoleColor.DarkGray,
-                    White = ConsoleColor.White
-                },
-                new ColorList // Black/White
+                    {ConsoleColor.Black , ConsoleColor.Black},
+                    {ConsoleColor.Green , ConsoleColor.Green},
+                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGreen},
+                    {ConsoleColor.Blue , ConsoleColor.Blue},
+                    {ConsoleColor.DarkBlue , ConsoleColor.DarkBlue},
+                    {ConsoleColor.Red , ConsoleColor.Red},
+                    {ConsoleColor.DarkRed , ConsoleColor.DarkRed},
+                    {ConsoleColor.Yellow , ConsoleColor.Yellow},
+                    {ConsoleColor.DarkYellow , ConsoleColor.DarkYellow},
+                    {ConsoleColor.Cyan, ConsoleColor.Cyan},
+                    {ConsoleColor.DarkCyan , ConsoleColor.DarkCyan},
+                    {ConsoleColor.Magenta , ConsoleColor.Magenta},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkMagenta},
+                    {ConsoleColor.Gray , ConsoleColor.Gray},
+                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
+                    {ConsoleColor.White , ConsoleColor.White}
+                }},
+                {ColorScheme.BlackWhite, new Dictionary<ConsoleColor, ConsoleColor>  // Black/White
                 {
-                    Black = ConsoleColor.Black,
-                    Green = ConsoleColor.Black,
-                    DarkGreen = ConsoleColor.Black,
-                    Blue = ConsoleColor.Black,
-                    DarkBlue = ConsoleColor.Black,
-                    Red = ConsoleColor.Black,
-                    DarkRed = ConsoleColor.Black,
-                    Yellow = ConsoleColor.Black,
-                    DarkYellow = ConsoleColor.Black,
-                    Cyan = ConsoleColor.Black,
-                    DarkCyan = ConsoleColor.Black,
-                    Magenta = ConsoleColor.Black,
-                    DarkMagenta = ConsoleColor.Black,
-                    Gray = ConsoleColor.Black,
-                    DarkGray = ConsoleColor.Black,
-                    White = ConsoleColor.Black
-                },
-                new ColorList //4 Shades of Gray
+                    {ConsoleColor.Black , ConsoleColor.Black},
+                    {ConsoleColor.Green , ConsoleColor.Black},
+                    {ConsoleColor.DarkGreen , ConsoleColor.Black},
+                    {ConsoleColor.Blue , ConsoleColor.Black},
+                    {ConsoleColor.DarkBlue , ConsoleColor.Black},
+                    {ConsoleColor.Red , ConsoleColor.Black},
+                    {ConsoleColor.DarkRed , ConsoleColor.Black},
+                    {ConsoleColor.Yellow , ConsoleColor.Black},
+                    {ConsoleColor.DarkYellow , ConsoleColor.Black},
+                    {ConsoleColor.Cyan, ConsoleColor.Black},
+                    {ConsoleColor.DarkCyan , ConsoleColor.Black},
+                    {ConsoleColor.Magenta , ConsoleColor.Black},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.Black},
+                    {ConsoleColor.Gray , ConsoleColor.Black},
+                    {ConsoleColor.DarkGray , ConsoleColor.Black},
+                    {ConsoleColor.White , ConsoleColor.Black}
+                }},
+                {ColorScheme.Gray, new Dictionary<ConsoleColor, ConsoleColor>  //4 Shades of Gray
                 {
-                    Black = ConsoleColor.Black,
-                    Green = ConsoleColor.Gray,
-                    DarkGreen = ConsoleColor.DarkGray,
-                    Blue = ConsoleColor.Gray,
-                    DarkBlue = ConsoleColor.DarkGray,
-                    Red = ConsoleColor.Gray,
-                    DarkRed = ConsoleColor.Black,
-                    Yellow = ConsoleColor.Gray,
-                    DarkYellow = ConsoleColor.Gray,
-                    Cyan = ConsoleColor.Gray,
-                    DarkCyan = ConsoleColor.White,
-                    Magenta = ConsoleColor.Gray,
-                    DarkMagenta = ConsoleColor.DarkGray,
-                    Gray = ConsoleColor.Gray,
-                    DarkGray = ConsoleColor.DarkGray,
-                    White = ConsoleColor.White
-                },
-                new ColorList //4 Shades of Gray Inverted
+                    {ConsoleColor.Black , ConsoleColor.Black},
+                    {ConsoleColor.Green , ConsoleColor.Gray},
+                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGray},
+                    {ConsoleColor.Blue , ConsoleColor.Gray},
+                    {ConsoleColor.DarkBlue , ConsoleColor.DarkGray},
+                    {ConsoleColor.Red , ConsoleColor.Gray},
+                    {ConsoleColor.DarkRed , ConsoleColor.Black},
+                    {ConsoleColor.Yellow , ConsoleColor.Gray},
+                    {ConsoleColor.DarkYellow , ConsoleColor.Gray},
+                    {ConsoleColor.Cyan, ConsoleColor.Gray},
+                    {ConsoleColor.DarkCyan , ConsoleColor.White},
+                    {ConsoleColor.Magenta , ConsoleColor.Gray},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkGray},
+                    {ConsoleColor.Gray , ConsoleColor.Gray},
+                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
+                    {ConsoleColor.White , ConsoleColor.White}
+                }},
+                {ColorScheme.GrayInverted, new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray Inverted
                 {
-                    Black = ConsoleColor.White,
-                    Green = ConsoleColor.DarkGray,
-                    DarkGreen = ConsoleColor.Gray,
-                    Blue = ConsoleColor.DarkGray,
-                    DarkBlue = ConsoleColor.Gray,
-                    Red = ConsoleColor.DarkGray,
-                    DarkRed = ConsoleColor.White,
-                    Yellow = ConsoleColor.DarkGray,
-                    DarkYellow = ConsoleColor.DarkGray,
-                    Cyan = ConsoleColor.DarkGray,
-                    DarkCyan = ConsoleColor.Black,
-                    Magenta = ConsoleColor.DarkGray,
-                    DarkMagenta = ConsoleColor.Gray,
-                    Gray = ConsoleColor.DarkGray,
-                    DarkGray = ConsoleColor.Gray,
-                    White = ConsoleColor.Black
-                },
-                new ColorList //Random
+                    {ConsoleColor.Black , ConsoleColor.White},
+                    {ConsoleColor.Green , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkGreen , ConsoleColor.Gray},
+                    {ConsoleColor.Blue , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkBlue , ConsoleColor.Gray},
+                    {ConsoleColor.Red , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkRed , ConsoleColor.White},
+                    {ConsoleColor.Yellow , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkYellow , ConsoleColor.DarkGray},
+                    {ConsoleColor.Cyan, ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkCyan , ConsoleColor.Black},
+                    {ConsoleColor.Magenta , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.Gray},
+                    {ConsoleColor.Gray , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkGray , ConsoleColor.Gray},
+                    {ConsoleColor.White , ConsoleColor.Black}
+                }},
+                {ColorScheme.Random, new Dictionary<ConsoleColor, ConsoleColor>  //Random
                 {
-                    Black = Color.RandomColor(),
-                    Green = Color.RandomColor(),
-                    DarkGreen = Color.RandomColor(),
-                    Blue = Color.RandomColor(),
-                    DarkBlue = Color.RandomColor(),
-                    Red = Color.RandomColor(),
-                    DarkRed = Color.RandomColor(),
-                    Yellow = Color.RandomColor(),
-                    DarkYellow = Color.RandomColor(),
-                    Cyan = Color.RandomColor(),
-                    DarkCyan = Color.RandomColor(),
-                    Magenta = Color.RandomColor(),
-                    DarkMagenta = Color.RandomColor(),
-                    Gray = Color.RandomColor(),
-                    DarkGray = Color.RandomColor(),
-                    White = Color.RandomColor()
-                }
-            };
-            ForeGroundList = new List<ColorList>
+                    {ConsoleColor.Black , Color.RandomColor()},
+                    {ConsoleColor.Green , Color.RandomColor()},
+                    {ConsoleColor.DarkGreen , Color.RandomColor()},
+                    {ConsoleColor.Blue , Color.RandomColor()},
+                    {ConsoleColor.DarkBlue , Color.RandomColor()},
+                    {ConsoleColor.Red , Color.RandomColor()},
+                    {ConsoleColor.DarkRed , Color.RandomColor()},
+                    {ConsoleColor.Yellow , Color.RandomColor()},
+                    {ConsoleColor.DarkYellow , Color.RandomColor()},
+                    {ConsoleColor.Cyan, Color.RandomColor()},
+                    {ConsoleColor.DarkCyan , Color.RandomColor()},
+                    {ConsoleColor.Magenta , Color.RandomColor()},
+                    {ConsoleColor.DarkMagenta , Color.RandomColor()},
+                    {ConsoleColor.Gray ,Color.RandomColor()},
+                    {ConsoleColor.DarkGray , Color.RandomColor()},
+                    {ConsoleColor.White , Color.RandomColor()}
+                }}};
+            ForeGroundList = new Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>>
             {
-                new ColorList //Normal
+                {ColorScheme.Normal,new Dictionary<ConsoleColor, ConsoleColor> //Normal
                 {
-                    Black = ConsoleColor.Black,
-                    Green = ConsoleColor.Green,
-                    DarkGreen = ConsoleColor.DarkGreen,
-                    Blue = ConsoleColor.Blue,
-                    DarkBlue = ConsoleColor.DarkBlue,
-                    Red = ConsoleColor.Red,
-                    DarkRed = ConsoleColor.DarkRed,
-                    Yellow = ConsoleColor.Yellow,
-                    DarkYellow = ConsoleColor.DarkYellow,
-                    Cyan = ConsoleColor.Cyan,
-                    DarkCyan = ConsoleColor.DarkCyan,
-                    Magenta = ConsoleColor.Magenta,
-                    DarkMagenta = ConsoleColor.DarkMagenta,
-                    Gray = ConsoleColor.Gray,
-                    DarkGray = ConsoleColor.DarkGray,
-                    White = ConsoleColor.White
-                },
-                new ColorList // Black/White
+                   {ConsoleColor.Black , ConsoleColor.Black},
+                    {ConsoleColor.Green , ConsoleColor.Green},
+                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGreen},
+                    {ConsoleColor.Blue , ConsoleColor.Blue},
+                    {ConsoleColor.DarkBlue , ConsoleColor.DarkBlue},
+                    {ConsoleColor.Red , ConsoleColor.Red},
+                    {ConsoleColor.DarkRed , ConsoleColor.DarkRed},
+                    {ConsoleColor.Yellow , ConsoleColor.Yellow},
+                    {ConsoleColor.DarkYellow , ConsoleColor.DarkYellow},
+                    {ConsoleColor.Cyan, ConsoleColor.Cyan},
+                    {ConsoleColor.DarkCyan , ConsoleColor.DarkCyan},
+                    {ConsoleColor.Magenta , ConsoleColor.Magenta},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkMagenta},
+                    {ConsoleColor.Gray , ConsoleColor.Gray},
+                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
+                    {ConsoleColor.White , ConsoleColor.White}
+                }},
+                {ColorScheme.BlackWhite,new Dictionary<ConsoleColor, ConsoleColor> // Black/White
                 {
-                    Black = ConsoleColor.White,
-                    Green = ConsoleColor.White,
-                    DarkGreen = ConsoleColor.White,
-                    Blue = ConsoleColor.White,
-                    DarkBlue = ConsoleColor.White,
-                    Red = ConsoleColor.White,
-                    DarkRed = ConsoleColor.White,
-                    Yellow = ConsoleColor.White,
-                    DarkYellow = ConsoleColor.White,
-                    Cyan = ConsoleColor.White,
-                    DarkCyan = ConsoleColor.White,
-                    Magenta = ConsoleColor.White,
-                    DarkMagenta = ConsoleColor.White,
-                    Gray = ConsoleColor.White,
-                    DarkGray = ConsoleColor.White,
-                    White = ConsoleColor.White
-                },
-                new ColorList //4 Shades of Gray
+                     {ConsoleColor.Black , ConsoleColor.White},
+                    {ConsoleColor.Green , ConsoleColor.White},
+                    {ConsoleColor.DarkGreen , ConsoleColor.White},
+                    {ConsoleColor.Blue , ConsoleColor.White},
+                    {ConsoleColor.DarkBlue , ConsoleColor.White},
+                    {ConsoleColor.Red , ConsoleColor.White},
+                    {ConsoleColor.DarkRed , ConsoleColor.White},
+                    {ConsoleColor.Yellow , ConsoleColor.White},
+                    {ConsoleColor.DarkYellow , ConsoleColor.White},
+                    {ConsoleColor.Cyan, ConsoleColor.White},
+                    {ConsoleColor.DarkCyan , ConsoleColor.White},
+                    {ConsoleColor.Magenta , ConsoleColor.White},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.White},
+                    {ConsoleColor.Gray , ConsoleColor.White},
+                    {ConsoleColor.DarkGray , ConsoleColor.White},
+                    {ConsoleColor.White , ConsoleColor.White}
+                }},
+                {ColorScheme.Gray,new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray
                 {
-                    Black = ConsoleColor.Black,
-                    Green = ConsoleColor.Gray,
-                    DarkGreen = ConsoleColor.DarkGray,
-                    Blue = ConsoleColor.Gray,
-                    DarkBlue = ConsoleColor.DarkGray,
-                    Red = ConsoleColor.Gray,
-                    DarkRed = ConsoleColor.Black,
-                    Yellow = ConsoleColor.Gray,
-                    DarkYellow = ConsoleColor.DarkGray,
-                    Cyan = ConsoleColor.Gray,
-                    DarkCyan = ConsoleColor.DarkGray,
-                    Magenta = ConsoleColor.Gray,
-                    DarkMagenta = ConsoleColor.DarkGray,
-                    Gray = ConsoleColor.Gray,
-                    DarkGray = ConsoleColor.DarkGray,
-                    White = ConsoleColor.White
-                },
-                new ColorList //4 Shades of Gray Inverted
+                 {ConsoleColor.Black , ConsoleColor.Black},
+                    {ConsoleColor.Green , ConsoleColor.Gray},
+                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGray},
+                    {ConsoleColor.Blue , ConsoleColor.Gray},
+                    {ConsoleColor.DarkBlue , ConsoleColor.DarkGray},
+                    {ConsoleColor.Red , ConsoleColor.Gray},
+                    {ConsoleColor.DarkRed , ConsoleColor.Black},
+                    {ConsoleColor.Yellow , ConsoleColor.Gray},
+                    {ConsoleColor.DarkYellow , ConsoleColor.Gray},
+                    {ConsoleColor.Cyan, ConsoleColor.Gray},
+                    {ConsoleColor.DarkCyan , ConsoleColor.White},
+                    {ConsoleColor.Magenta , ConsoleColor.Gray},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkGray},
+                    {ConsoleColor.Gray , ConsoleColor.Gray},
+                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
+                    {ConsoleColor.White , ConsoleColor.White}
+                }},
+                {ColorScheme.GrayInverted,new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray Inverted
                 {
-                    Black = ConsoleColor.White,
-                    Green = ConsoleColor.DarkGray,
-                    DarkGreen = ConsoleColor.Gray,
-                    Blue = ConsoleColor.DarkGray,
-                    DarkBlue = ConsoleColor.Gray,
-                    Red = ConsoleColor.DarkGray,
-                    DarkRed = ConsoleColor.White,
-                    Yellow = ConsoleColor.DarkGray,
-                    DarkYellow = ConsoleColor.Gray,
-                    Cyan = ConsoleColor.DarkGray,
-                    DarkCyan = ConsoleColor.Gray,
-                    Magenta = ConsoleColor.DarkGray,
-                    DarkMagenta = ConsoleColor.Gray,
-                    Gray = ConsoleColor.DarkGray,
-                    DarkGray = ConsoleColor.Gray,
-                    White = ConsoleColor.Black
-                },
-                new ColorList //Random
+                   {ConsoleColor.Black , ConsoleColor.White},
+                    {ConsoleColor.Green , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkGreen , ConsoleColor.Gray},
+                    {ConsoleColor.Blue , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkBlue , ConsoleColor.Gray},
+                    {ConsoleColor.Red , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkRed , ConsoleColor.White},
+                    {ConsoleColor.Yellow , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkYellow , ConsoleColor.DarkGray},
+                    {ConsoleColor.Cyan, ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkCyan , ConsoleColor.Black},
+                    {ConsoleColor.Magenta , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkMagenta , ConsoleColor.Gray},
+                    {ConsoleColor.Gray , ConsoleColor.DarkGray},
+                    {ConsoleColor.DarkGray , ConsoleColor.Gray},
+                    {ConsoleColor.White , ConsoleColor.Black}
+                }},
+                {ColorScheme.Random,new Dictionary<ConsoleColor, ConsoleColor> //Random
                 {
-                    Black = Color.RandomColor(),
-                    Green = Color.RandomColor(),
-                    DarkGreen = Color.RandomColor(),
-                    Blue = Color.RandomColor(),
-                    DarkBlue = Color.RandomColor(),
-                    Red = Color.RandomColor(),
-                    DarkRed = Color.RandomColor(),
-                    Yellow = Color.RandomColor(),
-                    DarkYellow = Color.RandomColor(),
-                    Cyan = Color.RandomColor(),
-                    DarkCyan = Color.RandomColor(),
-                    Magenta = Color.RandomColor(),
-                    DarkMagenta = Color.RandomColor(),
-                    Gray = Color.RandomColor(),
-                    DarkGray = Color.RandomColor(),
-                    White = Color.RandomColor()
-                }
+                     {ConsoleColor.Black , Color.RandomColor()},
+                    {ConsoleColor.Green , Color.RandomColor()},
+                    {ConsoleColor.DarkGreen , Color.RandomColor()},
+                    {ConsoleColor.Blue , Color.RandomColor()},
+                    {ConsoleColor.DarkBlue , Color.RandomColor()},
+                    {ConsoleColor.Red , Color.RandomColor()},
+                    {ConsoleColor.DarkRed , Color.RandomColor()},
+                    {ConsoleColor.Yellow , Color.RandomColor()},
+                    {ConsoleColor.DarkYellow , Color.RandomColor()},
+                    {ConsoleColor.Cyan, Color.RandomColor()},
+                    {ConsoleColor.DarkCyan , Color.RandomColor()},
+                    {ConsoleColor.Magenta , Color.RandomColor()},
+                    {ConsoleColor.DarkMagenta , Color.RandomColor()},
+                    {ConsoleColor.Gray ,Color.RandomColor()},
+                    {ConsoleColor.DarkGray , Color.RandomColor()},
+                    {ConsoleColor.White , Color.RandomColor()}
+                }}
             };
         }
 
-        public List<ColorList> ForeGroundList { get; set; }
-        public List<ColorList> BackGroundList { get; set; }
+        public Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> ForeGroundList { get; set; }
+        public Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> BackGroundList { get; set; }
     }
 
     internal class Color

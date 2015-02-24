@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Enemies;
 using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.User;
@@ -36,7 +37,7 @@ namespace Confusing_Hobo_Unleashed
 
         private static void Init()
         {
-            Console.ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
+            Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
             Console.CursorVisible = false;
             //Setting Window Size
             const int xpos = 0;

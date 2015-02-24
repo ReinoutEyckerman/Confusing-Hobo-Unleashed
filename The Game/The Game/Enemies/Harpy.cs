@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -11,8 +13,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public Harpy(CustomMap map) : base(map)
         {
-            Background = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
-            Foreground = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Background = Painter.Instance.Paint(ConsoleColor.White);
+            Foreground = Painter.Instance.Paint(ConsoleColor.Black,true);
             DrawChar = 'F';
             HpTotal = 5;
             HpCurrent = (int) HpTotal;

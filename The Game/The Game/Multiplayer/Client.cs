@@ -6,6 +6,7 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Input;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 using Lidgren.Network;
 using Timer = System.Timers.Timer;
@@ -32,8 +33,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
 
         public static void Start()
         {
-            Console.ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White);
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Console.Clear();
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Enter IP To Connect");
@@ -51,8 +52,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             outmsg.Write((byte) PacketTypes.Login);
             var user = new Player(Game.CurrentLoadedMap, 3, 3, 100,
                 Encoding.GetEncoding(437).GetChars(new byte[] {001})[0],
-                VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
-                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
+                Painter.Instance.Paint(ConsoleColor.Black),
+                Painter.Instance.Paint(ConsoleColor.White,true));
             LidgrenAdaptions.CompileCore(outmsg, user);
             _client.Connect(hostip, 22401, outmsg);
             Console.WriteLine("Client Started");

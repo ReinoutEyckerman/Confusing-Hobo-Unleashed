@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.User;
 
@@ -40,8 +41,8 @@ namespace Confusing_Hobo_Unleashed
             Game.Players = new List<Player>
             {
                 new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0],
-                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
-                    VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White)
+                    Painter.Instance.Paint(ConsoleColor.Black),
+                    Painter.Instance.Paint(ConsoleColor.White,true))
             };
         }
 
@@ -49,7 +50,7 @@ namespace Confusing_Hobo_Unleashed
         {
             if (VarDatabase.Debug)
             {
-                Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+                Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
                 Console.Clear();
                 foreach (var item in LoadMessages)
                 {
@@ -60,14 +61,14 @@ namespace Confusing_Hobo_Unleashed
             }
             else
             {
-                Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
+                Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
                 Console.Clear();
                 StartMenu.DrawFirePits();
                 StartMenu.Fire = new Thread(StartMenu.DrawFire);
                 StartMenu.Fire.Start();
                 Draw.Box(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth*3/5,
                     Console.WindowHeight*5/6 + 4,
-                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue);
+                    Painter.Instance.Paint(ConsoleColor.Blue));
                 foreach (var item in LoadMessages)
                 {
                     Loadbar(item.Key);
@@ -82,7 +83,7 @@ namespace Confusing_Hobo_Unleashed
 
         private static void Loadbar(string message)
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkCyan;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkCyan);
             var barLength = Console.WindowWidth/5/LoadMessages.Count;
             for (var a = 1; a <= 3; a++)
             {
@@ -94,7 +95,7 @@ namespace Confusing_Hobo_Unleashed
             }
             _barCount++;
             Thread.Sleep(20);
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
             int w;
             if (_prevMessage > Console.WindowWidth/5)
                 w = (_prevMessage - Console.WindowWidth/5)/2;

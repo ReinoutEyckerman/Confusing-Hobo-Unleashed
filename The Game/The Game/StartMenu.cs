@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.MapEdit;
 using Confusing_Hobo_Unleashed.Multiplayer;
 using Confusing_Hobo_Unleashed.TerrainGen;
@@ -40,7 +41,7 @@ namespace Confusing_Hobo_Unleashed
         public static void DrawFirePits()
         {
             _firepits = new short[Console.WindowWidth*2/5 - 10, Console.WindowHeight/6];
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGray);
             var rico = Convert.ToDouble((Console.WindowHeight - 1 - Console.WindowHeight*5/6))/
                        ((Console.WindowWidth*2/15 - 5) - 5);
 
@@ -80,12 +81,12 @@ namespace Confusing_Hobo_Unleashed
                     var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i, j,
                         Color.ColorsToAttribute(
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue,
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue));
+                             Painter.Instance.Paint(ConsoleColor.Blue),
+                            Painter.Instance.Paint(ConsoleColor.Blue)));
                     FireBuffer2.Draw(charToString, i, j,
                         Color.ColorsToAttribute(
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue,
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue));
+                            Painter.Instance.Paint(ConsoleColor.Blue),
+                            Painter.Instance.Paint(ConsoleColor.Blue)));
                 }
 
 
@@ -113,31 +114,31 @@ namespace Confusing_Hobo_Unleashed
                     ycur = 0;
                 for (var y = ycur; y < fire1.GetLength(1); y++)
                 {
-                    fire1[x, y] = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow;
+                    fire1[x, y] = Painter.Instance.Paint(ConsoleColor.Yellow);
                 }
             }
             for (var i = 0; i < fire1.GetLength(0); i++)
             {
                 for (var j = 0; j < fire1.GetLength(1); j++)
                 {
-                    if (fire1[i, j] == VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow &&
+                    if (fire1[i, j] == Painter.Instance.Paint(ConsoleColor.Yellow) &&
                         ((i - 1 >= 0 &&
-                          fire1[i - 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red &&
+                          fire1[i - 1, j] != Painter.Instance.Paint(ConsoleColor.Red) &&
                           fire1[i - 1, j] !=
-                          VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow ||
+                          Painter.Instance.Paint(ConsoleColor.Yellow) ||
                           i + 1 < fire1.GetLength(0) &&
-                          fire1[i + 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red &&
+                          fire1[i + 1, j] != Painter.Instance.Paint(ConsoleColor.Red) &&
                           fire1[i + 1, j] !=
-                          VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow) || i == 0 ||
+                          Painter.Instance.Paint(ConsoleColor.Yellow)) || i == 0 ||
                          i == fire1.GetLength(0) - 1))
-                        fire1[i, j] = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
+                        fire1[i, j] = Painter.Instance.Paint(ConsoleColor.Red);
                     fireattribute[i, j] = Color.ColorsToAttribute(fire1[i, j], fire1[i, j]);
                     var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i + 10, j, fireattribute[i, j]);
                     FireBuffer2.Draw(charToString, i + 10, j, fireattribute[i, j]);
                 }
             }
-            var color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Gray;
+            var color = Painter.Instance.Paint(ConsoleColor.Gray);
             for (var i = 0; i < firepitattribute.GetLength(0); i++)
             {
                 for (var j = 0; j < firepitattribute.GetLength(1); j++)
@@ -145,9 +146,9 @@ namespace Confusing_Hobo_Unleashed
                     if (_firepits[i, j] == 0)
                         break;
                     if (_firepits[i, j] == 1)
-                        color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Gray;
+                        color = Painter.Instance.Paint(ConsoleColor.Gray);
                     else if (_firepits[i, j] == 2)
-                        color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
+                        color = Painter.Instance.Paint(ConsoleColor.DarkGray);
 
                     firepitattribute[i, j] = Color.ColorsToAttribute(color, color);
                     var charToString = Convert.ToString(' ');
@@ -817,8 +818,8 @@ namespace Confusing_Hobo_Unleashed
             DrawFirePits();
             Fire = new Thread(DrawFire);
             Fire.Start();
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
-            Console.ForegroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
+            Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White);
             DrawUi.RedrawBackground();
             DrawUi.Select(Main);
         }
@@ -892,8 +893,8 @@ namespace Confusing_Hobo_Unleashed
                 for (var j = 0; j < Console.WindowHeight; j++)
                     SelectionBuffer.Draw(" ", i, j,
                         Color.ColorsToAttribute(
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue,
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White));
+                            Painter.Instance.Paint(ConsoleColor.Blue),
+                            Painter.Instance.Paint(ConsoleColor.White)));
         }
 
         public static void Select(List<OptionsMenu> list)
@@ -994,9 +995,9 @@ namespace Confusing_Hobo_Unleashed
                                 break;
                             case 3:
                                 Console.ForegroundColor =
-                                    VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
+                                    Painter.Instance.Paint(ConsoleColor.White,true);
                                 Console.BackgroundColor =
-                                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+                                    Painter.Instance.Paint(ConsoleColor.Black);
                                 Console.Clear();
                                 Server.Start();
                                 break;
@@ -1190,7 +1191,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void ShowCredits()
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
             Console.Clear();
             for (var y = Console.WindowHeight; y > StartMenu.Credits.Count*-2; y--)
             {
@@ -1221,7 +1222,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void DrawTitle(buffer buffer)
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
             var meslength =
                 "   ______            ____           _                __  __      __             __  __      __                __             __"
                     .Length/2;
@@ -1353,11 +1354,11 @@ namespace Confusing_Hobo_Unleashed
                         break;
                     case "Color Schemes":
                         //Defining Color Scheme usage
-                        VarDatabase.Bw = t.ButtonList[1].Value;
-                        VarDatabase.ColorScheme = new ColorSchemes();
+                        Painter.Instance.Bw = t.ButtonList[1].Value;
+                        Painter.Instance.Refresh();
                         for (var b = 0; b < t.ButtonList.Count; b++)
                             if (t.ButtonList[b].Value)
-                                VarDatabase.ColorSchemenumber = b;
+                                Painter.Instance.ColorScheme = (ColorScheme)b;
                         break;
                     case "World Type":
                         if (t.ButtonList[3].Value)

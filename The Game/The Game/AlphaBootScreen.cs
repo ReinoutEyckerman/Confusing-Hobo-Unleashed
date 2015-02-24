@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed
 {
@@ -18,7 +19,7 @@ namespace Confusing_Hobo_Unleashed
         public static void DrawAlpha()
 
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.White);
             for (var y = YQuarter; y < YQuarter + Calculatrix; y++)
             {
                 for (var x = XQuarter; x < XHalf; x++)
@@ -90,14 +91,14 @@ namespace Confusing_Hobo_Unleashed
                     Write(x, y);
                 }
             }
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Console.SetCursorPosition(0, YQuarter + Calculatrix*6);
             Console.Write("Confusing Hobo Unleashed".PadLeft(XHalf + 12));
             Console.SetCursorPosition(0, YQuarter + Calculatrix*6 + 1);
             Console.Write("By Oliver Hofkens & Reinout Eyckerman".PadLeft(XHalf + 18));
             Console.SetCursorPosition(0, YQuarter + Calculatrix*6 + 3);
             Console.Write("A Team Alpha Production".PadLeft(XHalf + 11));
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Thread.Sleep(5000);
             Console.Clear();
         }

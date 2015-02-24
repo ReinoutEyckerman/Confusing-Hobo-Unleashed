@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.User;
 
@@ -113,9 +114,9 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static ConsoleColor Bg = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-        public static ConsoleColor Border = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-        public static ConsoleColor Fg = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
+        public static ConsoleColor Bg = Painter.Instance.Paint(ConsoleColor.DarkGreen);
+        public static ConsoleColor Border = Painter.Instance.Paint(ConsoleColor.Red);
+        public static ConsoleColor Fg = Painter.Instance.Paint(ConsoleColor.White,true);
         public static short BorderColors = Color.ColorsToAttribute(Bg, Border);
         public static short TextColors = Color.ColorsToAttribute(Bg, Fg);
     }

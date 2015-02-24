@@ -1,4 +1,5 @@
 ﻿using System;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.MapEdit;
 
 namespace Confusing_Hobo_Unleashed
@@ -253,7 +254,7 @@ namespace Confusing_Hobo_Unleashed
             //Top Border
             var hori = "-";
             var verti = "|";
-            if (VarDatabase.Bw && selected)
+            if (Painter.Instance.Bw && selected)
                 hori = verti = "o";
 
 

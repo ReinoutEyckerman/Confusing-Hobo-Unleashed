@@ -1,4 +1,5 @@
 ﻿using System;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
@@ -17,7 +18,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     if (Random.Next(12) == 7)
                     {
                         Game.CurrentLoadedMap.Layers[Maplayers.Collision].Background[ywall, xwall] =
-                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
+                            Painter.Instance.Paint(ConsoleColor.DarkRed);
                         Game.CurrentLoadedMap.Collision[ywall, xwall] = true;
                         Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ywall, xwall] = ' ';
                     }

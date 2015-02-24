@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -11,8 +13,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public Necromancer(CustomMap map) : base(map)
         {
-            Background = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Green;
-            Foreground = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Background = Painter.Instance.Paint(ConsoleColor.Green);
+            Foreground = Painter.Instance.Paint(ConsoleColor.Black,true);
             DrawChar = Encoding.GetEncoding(437).GetChars(new byte[] {127})[0];
             HpTotal = 40;
             HpCurrent = (int) HpTotal;
@@ -88,8 +90,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
             Y = bot.Y;
             _graveBot = bot;
             DrawChar = Encoding.GetEncoding(437).GetChars(new byte[] {127})[0];
-            Background = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
-            Foreground = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
+            Background = Painter.Instance.Paint(ConsoleColor.DarkGray);
+            Foreground = Painter.Instance.Paint(ConsoleColor.White);
             CurrentClass = Classes.Grave;
             HpCurrent = 15;
         }

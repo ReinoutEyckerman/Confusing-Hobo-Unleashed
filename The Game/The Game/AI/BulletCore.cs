@@ -1,4 +1,5 @@
 ﻿using System;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Multiplayer;
 
 namespace Confusing_Hobo_Unleashed.AI
@@ -16,9 +17,7 @@ namespace Confusing_Hobo_Unleashed.AI
         public BulletCore()
         {
             Character = 'o';
-            BulletColor =
-                Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
-                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White);
+            BulletColor = Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),Painter.Instance.Paint(ConsoleColor.White));
             Damage = 10;
         }
 

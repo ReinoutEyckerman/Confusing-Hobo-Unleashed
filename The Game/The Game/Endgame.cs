@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Media;
 using System.Threading;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Enemies;
 using Confusing_Hobo_Unleashed.TerrainGen;
 
@@ -71,7 +72,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void Losebots()
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Console.Clear();
             Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 10);
             Console.Write("    _                                _    _      _ _     _                 _ _     ");
@@ -103,8 +104,8 @@ namespace Confusing_Hobo_Unleashed
 
         public static void Win()
         {
-            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
-            Console.ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
+            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
+            Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White,true);
             Game.GameBuffer.Clear();
             var meslength = "   ____                            _         _       _   _".Length/2;
             Game.GameBuffer.Draw(@"   ____                            _         _       _   _",
