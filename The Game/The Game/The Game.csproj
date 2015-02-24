@@ -86,7 +86,7 @@
     <Compile Include="BootScreen.cs" />
     <Compile Include="buffer.cs" />
     <Compile Include="Multiplayer\Client.cs" />
-    <Compile Include="Color.cs" />
+    <Compile Include="Colors\ColorSchemes.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Endgame.cs" />

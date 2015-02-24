@@ -117,7 +117,7 @@ namespace Confusing_Hobo_Unleashed
         public static ConsoleColor Bg = Painter.Instance.Paint(ConsoleColor.DarkGreen);
         public static ConsoleColor Border = Painter.Instance.Paint(ConsoleColor.Red);
         public static ConsoleColor Fg = Painter.Instance.Paint(ConsoleColor.White,true);
-        public static short BorderColors = Color.ColorsToAttribute(Bg, Border);
-        public static short TextColors = Color.ColorsToAttribute(Bg, Fg);
+        public static short BorderColors = Painter.Instance.ColorsToAttribute(Bg, Border);
+        public static short TextColors = Painter.Instance.ColorsToAttribute(Bg, Fg);
     }
 }

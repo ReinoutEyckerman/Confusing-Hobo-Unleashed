@@ -177,7 +177,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
                             color = Painter.Instance.Paint(ConsoleColor.Red);
                         else if (Zilla[j, i] == 4)
                             color = Painter.Instance.Paint(ConsoleColor.Black);
-                        var num = Color.ColorsToAttribute(color, color + 1);
+                        var num = Painter.Instance.ColorsToAttribute(color, color + 1);
                         Game.GameBuffer.Draw(" ", _pos + i, map.Mapheight - Zilla.GetLength(0) - 8 + j, num);
                         if (Game.Boss)
                             Game.DamageArray[map.Mapheight - Zilla.GetLength(0) - 8 + j, _pos + i] = true;

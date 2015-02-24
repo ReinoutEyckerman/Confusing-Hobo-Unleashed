@@ -51,7 +51,7 @@ namespace Confusing_Hobo_Unleashed
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))]
                         .Characters[ypos, x1] = paintBrush.PaintChar;
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Colors[
-                        ypos, x1] = Color.ColorsToAttribute(paintBrush.PaintBgColor,
+                        ypos, x1] = Painter.Instance.ColorsToAttribute(paintBrush.PaintBgColor,
                             paintBrush.PaintFgColor);
                     mapToDraw.Collision[ypos, x1] = paintBrush.PaintCollision;
                     mapToDraw.Destructible[ypos, x1] = paintBrush.PaintDestruct;
@@ -72,7 +72,7 @@ namespace Confusing_Hobo_Unleashed
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))]
                         .Characters[ypos, x] = paintBrush.PaintChar;
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Colors[
-                        ypos, x] = Color.ColorsToAttribute(paintBrush.PaintBgColor,
+                        ypos, x] = Painter.Instance.ColorsToAttribute(paintBrush.PaintBgColor,
                             paintBrush.PaintFgColor);
                     mapToDraw.Collision[ypos, x] = paintBrush.PaintCollision;
                     mapToDraw.Destructible[ypos, x] = paintBrush.PaintDestruct;
@@ -106,7 +106,7 @@ namespace Confusing_Hobo_Unleashed
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))]
                         .Characters[ypos, xpos] = paintBrush.PaintChar;
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Colors[
-                        ypos, xpos] = Color.ColorsToAttribute(paintBrush.PaintBgColor,
+                        ypos, xpos] = Painter.Instance.ColorsToAttribute(paintBrush.PaintBgColor,
                             paintBrush.PaintFgColor);
                     mapToDraw.Collision[ypos, xpos] = paintBrush.PaintCollision;
                     mapToDraw.Destructible[ypos, xpos] = paintBrush.PaintDestruct;
@@ -154,7 +154,7 @@ namespace Confusing_Hobo_Unleashed
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))]
                         .Characters[i, j] = paintBrush.PaintChar;
                     mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Colors[
-                        i, j] = Color.ColorsToAttribute(paintBrush.PaintBgColor,
+                        i, j] = Painter.Instance.ColorsToAttribute(paintBrush.PaintBgColor,
                             paintBrush.PaintFgColor);
                     mapToDraw.Collision[i, j] = paintBrush.PaintCollision;
                     mapToDraw.Destructible[i, j] = paintBrush.PaintDestruct;
@@ -209,7 +209,7 @@ namespace Confusing_Hobo_Unleashed
                 paintBrush.Y, paintBrush.X] = paintBrush.PaintFgColor;
             mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Colors[
                 paintBrush.Y, paintBrush.X] =
-                Color.ColorsToAttribute(paintBrush.PaintBgColor, paintBrush.PaintFgColor);
+                Painter.Instance.ColorsToAttribute(paintBrush.PaintBgColor, paintBrush.PaintFgColor);
             mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Characters[
                 paintBrush.Y, paintBrush.X] = paintBrush.PaintChar;
             mapToDraw.Collision[paintBrush.Y, paintBrush.X] = paintBrush.PaintCollision;

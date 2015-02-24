@@ -110,24 +110,24 @@ namespace Confusing_Hobo_Unleashed
             var meslength = "   ____                            _         _       _   _".Length/2;
             Game.GameBuffer.Draw(@"   ____                            _         _       _   _",
                 Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 3,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Draw(@"  / ___|___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_(_) ___  _ __  ___",
                 Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 2,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Draw(@" | |   / _ \| '_ \ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \| '_ \/ __|",
                 Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 1,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Draw(@" | |__| (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \__ \ ",
                 Console.WindowWidth/2 - meslength, Console.WindowHeight/2,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Draw(@"  \____\___/|_| |_|\__, |_|  \__,_|\__|\__,_|_|\__,_|\__|_|\___/|_| |_|___/",
                 Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 1,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Draw(@"                   |___/                                                 ",
                 Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 2,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Draw(@"And now complete the game on a harder difficulty!", Console.WindowWidth/2 - meslength,
-                Console.WindowHeight/2 + 4, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Console.WindowHeight / 2 + 4, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Print();
         }
     }

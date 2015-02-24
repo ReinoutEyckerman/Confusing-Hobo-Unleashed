@@ -9,16 +9,16 @@ namespace Confusing_Hobo_Unleashed
         private const int UiLeftX = 2;
 
         private static readonly short UiBoxColors =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray),Painter.Instance.Paint(ConsoleColor.Black, true));
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Black, true));
 
         private static readonly short UiTextColors =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Cyan,true));
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Cyan, true));
 
         private static readonly short HpBarColor =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Green), Painter.Instance.Paint(ConsoleColor.Black,true));
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Green), Painter.Instance.Paint(ConsoleColor.Black, true));
 
         private static readonly short HpBarLostColor =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Red), Painter.Instance.Paint(ConsoleColor.Black,true));
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Red), Painter.Instance.Paint(ConsoleColor.Black, true));
 
         private static readonly int UiRightX = Game.CurrentLoadedMap.Background.GetLength(1) - 2;
         private static readonly int UiTopY = Game.CurrentLoadedMap.Background.GetLength(0) + 1;

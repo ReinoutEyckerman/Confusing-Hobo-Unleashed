@@ -80,11 +80,11 @@ namespace Confusing_Hobo_Unleashed
                 {
                     var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i, j,
-                        Color.ColorsToAttribute(
+                        Painter.Instance.ColorsToAttribute(
                              Painter.Instance.Paint(ConsoleColor.Blue),
                             Painter.Instance.Paint(ConsoleColor.Blue)));
                     FireBuffer2.Draw(charToString, i, j,
-                        Color.ColorsToAttribute(
+                        Painter.Instance.ColorsToAttribute(
                             Painter.Instance.Paint(ConsoleColor.Blue),
                             Painter.Instance.Paint(ConsoleColor.Blue)));
                 }
@@ -132,7 +132,7 @@ namespace Confusing_Hobo_Unleashed
                           Painter.Instance.Paint(ConsoleColor.Yellow)) || i == 0 ||
                          i == fire1.GetLength(0) - 1))
                         fire1[i, j] = Painter.Instance.Paint(ConsoleColor.Red);
-                    fireattribute[i, j] = Color.ColorsToAttribute(fire1[i, j], fire1[i, j]);
+                    fireattribute[i, j] = Painter.Instance.ColorsToAttribute(fire1[i, j], fire1[i, j]);
                     var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i + 10, j, fireattribute[i, j]);
                     FireBuffer2.Draw(charToString, i + 10, j, fireattribute[i, j]);
@@ -150,7 +150,7 @@ namespace Confusing_Hobo_Unleashed
                     else if (_firepits[i, j] == 2)
                         color = Painter.Instance.Paint(ConsoleColor.DarkGray);
 
-                    firepitattribute[i, j] = Color.ColorsToAttribute(color, color);
+                    firepitattribute[i, j] = Painter.Instance.ColorsToAttribute(color, color);
                     var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i, j + fire1.GetLength(1), firepitattribute[i, j]);
                     FireBuffer2.Draw(charToString, i, j + fire1.GetLength(1), firepitattribute[i, j]);
@@ -892,7 +892,7 @@ namespace Confusing_Hobo_Unleashed
             for (var i = 0; i < Console.WindowWidth; i++)
                 for (var j = 0; j < Console.WindowHeight; j++)
                     SelectionBuffer.Draw(" ", i, j,
-                        Color.ColorsToAttribute(
+                        Painter.Instance.ColorsToAttribute(
                             Painter.Instance.Paint(ConsoleColor.Blue),
                             Painter.Instance.Paint(ConsoleColor.White)));
         }
@@ -1229,25 +1229,25 @@ namespace Confusing_Hobo_Unleashed
             buffer.Draw(
                 @"   ______            ____           _                __  __      __             __  __      __                __             __",
                 Console.WindowWidth/2 - meslength, 1,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             buffer.Draw(
                 @"  / ____/___  ____  / __/_  _______(_)___  ____ _   / / / /___  / /_  ____     / / / /___  / /__  ____ ______/ /_  ___  ____/ /",
                 Console.WindowWidth/2 - meslength, 2,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             buffer.Draw(
                 @" / /   / __ \/ __ \/ /_/ / / / ___/ / __ \/ __ `/  / /_/ / __ \/ __ \/ __ \   / / / / __ \/ / _ \/ __ `/ ___/ __ \/ _ \/ __  / ",
                 Console.WindowWidth/2 - meslength, 3,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             buffer.Draw(
                 @"/ /___/ /_/ / / / / __/ /_/ (__  ) / / / / /_/ /  / __  / /_/ / /_/ / /_/ /  / /_/ / / / / /  __/ /_/ (__  ) / / /  __/ /_/ / ",
                 Console.WindowWidth/2 - meslength, 4,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             buffer.Draw(
                 @"\____/\____/_/ /_/_/  \__,_/____/_/_/ /_/\__, /  /_/ /_/\____/_.___/\____/   \____/_/ /_/_/\___/\__,_/____/_/ /_/\___/\__,_/ ",
                 Console.WindowWidth/2 - meslength, 5,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             buffer.Draw(@"                                        /____/", Console.WindowWidth/2 - meslength, 6,
-                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+                Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
         }
 
         public static void PostStart(bool color = true)

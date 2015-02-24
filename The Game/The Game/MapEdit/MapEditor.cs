@@ -13,23 +13,23 @@ namespace Confusing_Hobo_Unleashed.MapEdit
     internal class MapEditor
     {
         public static short UiBorderColors =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGreen),
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGreen),
                  Painter.Instance.Paint(ConsoleColor.White, true));
 
         public static short UiTextColors =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGreen),
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGreen),
                 Painter.Instance.Paint(ConsoleColor.White, true));
 
         public static short UiActiveLayer =
-          Color.ColorsToAttribute( Painter.Instance.Paint(ConsoleColor.Yellow),
+          Painter.Instance.ColorsToAttribute( Painter.Instance.Paint(ConsoleColor.Yellow),
                 Painter.Instance.Paint(ConsoleColor.Black,true));
 
         public static short UiInactiveLayer =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),
                  Painter.Instance.Paint(ConsoleColor.Gray, true));
 
         public static short UiActiveButDisabledLayer =
-            Color.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),
+            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black),
                  Painter.Instance.Paint(ConsoleColor.Red, true));
 
         public static int Ww = Console.WindowWidth;
@@ -104,20 +104,20 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             ClearConsoleLine(UiPaints, UiTextColors);
 
             MapBuffer.Draw("Current Paint: (-)BG:", 1, UiPaints, UiTextColors);
-            for (var i = 0; i < Color.Kleuren.Length; i++)
+            for (var i = 0; i < Painter.Instance.Kleuren.Length; i++)
             {
-                var drawColor = (ConsoleColor) Color.Kleuren.GetValue(i);
-                var drawColorShort = Color.ColorsToAttribute(drawColor, ConsoleColor.White);
+                var drawColor = (ConsoleColor)Painter.Instance.Kleuren.GetValue(i);
+                var drawColorShort = Painter.Instance.ColorsToAttribute(drawColor, ConsoleColor.White);
 
                 MapBuffer.Draw(" ", 24 + i, UiPaints, drawColorShort);
             }
 
             MapBuffer.Draw(" (-)FG:", 45, UiPaints, UiTextColors);
 
-            for (var i = 0; i < Color.Kleuren.Length; i++)
+            for (var i = 0; i < Painter.Instance.Kleuren.Length; i++)
             {
-                var drawColor = (ConsoleColor) Color.Kleuren.GetValue(i);
-                var drawColorShort = Color.ColorsToAttribute(drawColor, ConsoleColor.White);
+                var drawColor = (ConsoleColor) Painter.Instance.Kleuren.GetValue(i);
+                var drawColorShort = Painter.Instance.ColorsToAttribute(drawColor, ConsoleColor.White);
 
                 MapBuffer.Draw(" ", 54 + i, UiPaints, drawColorShort);
             }
@@ -127,16 +127,16 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             MapBuffer.Draw(paintPrefs, 70, UiPaints, UiTextColors);
 
             var preview = Convert.ToString(HuidigeCursor.PaintChar);
-            var previewColor = Color.ColorsToAttribute(HuidigeCursor.PaintBgColor, HuidigeCursor.PaintFgColor);
+            var previewColor = Painter.Instance.ColorsToAttribute(HuidigeCursor.PaintBgColor, HuidigeCursor.PaintFgColor);
             MapBuffer.Draw(preview, 115, UiPaints, previewColor);
 
             //Second line, only the indicators for the colors on the line above.
             ClearConsoleLine(UiPaints + 1, UiTextColors);
 
-            var bGindex = Array.IndexOf(Color.Kleuren, HuidigeCursor.PaintBgColor);
+            var bGindex = Array.IndexOf(Painter.Instance.Kleuren, HuidigeCursor.PaintBgColor);
             MapBuffer.Draw("^", 24 + bGindex, UiPaints + 1, UiTextColors);
 
-            var fGindex = Array.IndexOf(Color.Kleuren, HuidigeCursor.PaintFgColor);
+            var fGindex = Array.IndexOf(Painter.Instance.Kleuren, HuidigeCursor.PaintFgColor);
             MapBuffer.Draw("^", 54 + fGindex, UiPaints + 1, UiTextColors);
             MapBuffer.Print();
         }

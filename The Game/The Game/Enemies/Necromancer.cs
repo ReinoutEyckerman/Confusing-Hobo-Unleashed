@@ -21,7 +21,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             MinHorizontalProximity = 20 + Random.Next(-5, 6);
             MaxHorizontalProximity = 1;
             MaxVerticalProximity = 1;
-            PlayerColor = Color.ColorsToAttribute(Background, Foreground);
+            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
             WeaponInv = new Dictionary<byte, Weapon>();
             WeaponInv[0] = new Weapon("Iron Sword", WeaponType.Sword, 10, 5);
             CurrentClass = Classes.Necromancer;

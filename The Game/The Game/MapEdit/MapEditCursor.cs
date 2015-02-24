@@ -1,4 +1,5 @@
 using System;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.MapEdit
 {
@@ -40,12 +41,12 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         public void ToggleBgColor(bool up)
         {
             //create an array of all possible ConsoleColors and find the index of the currently selected color.
-            var currentindex = Array.IndexOf(Color.Kleuren, PaintBgColor);
+            var currentindex = Array.IndexOf(Painter.Instance.Kleuren, PaintBgColor);
 
             //add or subtract 1 of the index of the current color.
             if (up)
             {
-                if (currentindex + 1 >= Color.Kleuren.Length)
+                if (currentindex + 1 >= Painter.Instance.Kleuren.Length)
                 {
                     currentindex = 0;
                 }
@@ -58,7 +59,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             {
                 if (currentindex - 1 < 0)
                 {
-                    currentindex = Color.Kleuren.Length - 1;
+                    currentindex = Painter.Instance.Kleuren.Length - 1;
                 }
                 else
                 {
@@ -66,17 +67,17 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                 }
             }
 
-            PaintBgColor = (ConsoleColor) Color.Kleuren.GetValue(currentindex);
+            PaintBgColor = (ConsoleColor)Painter.Instance.Kleuren.GetValue(currentindex);
         }
 
         public void ToggleFgColor(bool up)
         {
             //See ToggleBgColor for explanation.
-            var currentindex = Array.IndexOf(Color.Kleuren, PaintFgColor);
+            var currentindex = Array.IndexOf(Painter.Instance.Kleuren, PaintFgColor);
 
             if (up)
             {
-                if (currentindex + 1 >= Color.Kleuren.Length)
+                if (currentindex + 1 >= Painter.Instance.Kleuren.Length)
                 {
                     currentindex = 0;
                 }
@@ -89,7 +90,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             {
                 if (currentindex - 1 < 0)
                 {
-                    currentindex = Color.Kleuren.Length - 1;
+                    currentindex = Painter.Instance.Kleuren.Length - 1;
                 }
                 else
                 {
@@ -97,7 +98,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                 }
             }
 
-            PaintFgColor = (ConsoleColor) Color.Kleuren.GetValue(currentindex);
+            PaintFgColor = (ConsoleColor)Painter.Instance.Kleuren.GetValue(currentindex);
         }
 
         public void ToggleChar()

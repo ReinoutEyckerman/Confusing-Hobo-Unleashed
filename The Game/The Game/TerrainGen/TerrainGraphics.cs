@@ -284,7 +284,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         map.Layers[Maplayers.Air].Background[moonY + j, _moonX + i] !=
                         Painter.Instance.Paint(ConsoleColor.Blue))
                     {
-                        moonattribute[i + _moonX, j + moonY] = Color.ColorsToAttribute(mooncolor[i, j], mooncolor[i, j]);
+                        moonattribute[i + _moonX, j + moonY] = Painter.Instance.ColorsToAttribute(mooncolor[i, j], mooncolor[i, j]);
                         var charToString = Convert.ToString(' ');
                         Game.GameBuffer.Draw(charToString, i + _moonX, j + moonY, moonattribute[i + _moonX, j + moonY]);
                     }

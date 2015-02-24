@@ -21,7 +21,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             MinHorizontalProximity = 0;
             MaxHorizontalProximity = 0;
             MaxVerticalProximity = 0;
-            PlayerColor = Color.ColorsToAttribute(Background, Foreground);
+            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
             WeaponInv = new Dictionary<byte, Weapon>();
             WeaponInv[0] = new Weapon("Fist", WeaponType.Fist, 2, 5);
             CurrentClass = Classes.Zerg;

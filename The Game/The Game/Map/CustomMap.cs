@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.MapEdit;
 
@@ -112,7 +113,7 @@ namespace Confusing_Hobo_Unleashed
             {
                 for (var j = 0; j < SourceBG.GetLength(1); j++)
                 {
-                    Destination[i, j] = Color.ColorsToAttribute(SourceBG[i, j], SourceFG[i, j]);
+                    Destination[i, j] = Painter.Instance.ColorsToAttribute(SourceBG[i, j], SourceFG[i, j]);
                 }
             }
         }
@@ -213,8 +214,8 @@ namespace Confusing_Hobo_Unleashed
                                 t.Value.Characters[i, j] = Convert.ToChar(characterInFile);
                             }
                             t.Value.Colors[i, j] = Convert.ToInt16(reader.GetAttribute("Color"));
-                            t.Value.Background[i, j] = Color.BackgroundFromAttribute(t.Value.Colors[i, j]);
-                            t.Value.Foreground[i, j] = Color.ForegroundFromAttribute(t.Value.Colors[i, j]);
+                            t.Value.Background[i, j] = Painter.Instance.BackgroundFromAttribute(t.Value.Colors[i, j]);
+                            t.Value.Foreground[i, j] = Painter.Instance.ForegroundFromAttribute(t.Value.Colors[i, j]);
                         }
                     }
                 }

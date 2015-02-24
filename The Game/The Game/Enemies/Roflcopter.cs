@@ -25,7 +25,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             MinVerticalProximity = 10;
             CurrentClass = Classes.Roflcopter;
             MaxVerticalProximity = 30;
-            PlayerColor = Color.ColorsToAttribute(Background, Foreground);
+            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
             WeaponInv = new Dictionary<byte, Weapon>();
             WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10,
                 bulletBackground: Painter.Instance.Paint(ConsoleColor.White),

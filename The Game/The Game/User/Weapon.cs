@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Media;
 using Confusing_Hobo_Unleashed.AI;
+using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.User
 {
@@ -29,7 +30,7 @@ namespace Confusing_Hobo_Unleashed.User
             Damage = damage;
             Color = color;
             Cooldown = cooldown;
-            _bulletColor = Confusing_Hobo_Unleashed.Color.ColorsToAttribute(bulletBackground, bulletForeground);
+            _bulletColor = Painter.Instance.ColorsToAttribute(bulletBackground, bulletForeground);
             _bulletChar = bulletCharacter;
             switch (Wtype)
             {

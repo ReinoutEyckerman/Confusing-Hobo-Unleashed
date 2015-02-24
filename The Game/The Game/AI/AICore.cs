@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.AI
@@ -42,7 +43,7 @@ namespace Confusing_Hobo_Unleashed.AI
             Foreground = foreGround;
             AnimHitFrame = 0;
             AttackCooldown = 0;
-            PlayerColor = Color.ColorsToAttribute(Background, Foreground);
+            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
             SpeedY = 0;
             WeaponInv = new Dictionary<byte, Weapon>();
             GenerateClass();
@@ -112,19 +113,19 @@ namespace Confusing_Hobo_Unleashed.AI
                 switch (_attackDirection)
                 {
                     case Move.Left:
-                        color = Color.ColorsToAttribute(map.Background[Y, X - 1], WeaponInv[0].Color);
+                        color = Painter.Instance.ColorsToAttribute(map.Background[Y, X - 1], WeaponInv[0].Color);
                         outputbuffer.Draw(stringToDraw, X - 1, Y, color);
                         break;
                     case Move.Up:
-                        color = Color.ColorsToAttribute(map.Background[Y - 1, X], WeaponInv[0].Color);
+                        color = Painter.Instance.ColorsToAttribute(map.Background[Y - 1, X], WeaponInv[0].Color);
                         outputbuffer.Draw(stringToDraw, X, Y - 1, color);
                         break;
                     case Move.Right:
-                        color = Color.ColorsToAttribute(map.Background[Y, X + 1], WeaponInv[0].Color);
+                        color = Painter.Instance.ColorsToAttribute(map.Background[Y, X + 1], WeaponInv[0].Color);
                         outputbuffer.Draw(stringToDraw, X + 1, Y, color);
                         break;
                     case Move.Down:
-                        color = Color.ColorsToAttribute(map.Background[Y + 1, X], WeaponInv[0].Color);
+                        color = Painter.Instance.ColorsToAttribute(map.Background[Y + 1, X], WeaponInv[0].Color);
                         outputbuffer.Draw(stringToDraw, X, Y + 1, color);
                         break;
                 }
