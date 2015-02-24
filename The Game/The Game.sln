@@ -18,15 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SFX", "SFX", "{88D55DCE-7EA
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://aidsmidget.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = The\u0020Game\\The\u0020Game.csproj
-		SccProjectName1 = The\u0020Game
-		SccLocalPath1 = The\u0020Game
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -42,8 +33,5 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{88D55DCE-7EAD-4716-8587-C9FBCEC2CF90} = {F855762F-2CB1-454B-9AD2-0A100EA22ADD}
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

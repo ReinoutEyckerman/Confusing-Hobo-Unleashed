@@ -1,1 +1,9 @@
 E:\Repositories\TFS\ConfusingHoboUnleashed\The Game\The Game\The Game\bin\Debug\Confusing_Hobo_Unleashed.exe.config
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\bin\Debug\Confusing_Hobo_Unleashed.exe.config
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\obj\Debug\Confusing_Hobo_Unleashed.exe
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\obj\Debug\The Game.csprojResolveAssemblyReference.cache
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\bin\Debug\Confusing_Hobo_Unleashed.exe
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\bin\Debug\Confusing_Hobo_Unleashed.pdb
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\bin\Debug\Lidgren.Network.dll
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\bin\Debug\Microsoft.Xna.Framework.xml
+C:\Repos\Confusing-Hobo-Unleashed\The Game\The Game\obj\Debug\Confusing_Hobo_Unleashed.pdb

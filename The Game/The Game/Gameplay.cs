@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Enemies;
-using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed
 {
@@ -16,15 +15,16 @@ namespace Confusing_Hobo_Unleashed
             {
                 Game.CurrentLoadedMap.PushtoArray(layer.Value.Background, layer.Value.Foreground, layer.Value.Colors);
             }
-            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Mapheight*Console.WindowWidth);
+            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp,
+                Game.CurrentLoadedMap.Mapheight*Console.WindowWidth);
         }
 
         private static void Enemies()
         {
             var random = new Random();
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
-                int number = random.Next(5);
+                var number = random.Next(5);
                 switch (number)
                 {
                     case 0:
@@ -41,13 +41,13 @@ namespace Confusing_Hobo_Unleashed
                         break;
                 }
             }
-            foreach (Player player in Game.Players)
+            foreach (var player in Game.Players)
             {
                 if (player.HpTotal != null) player.HpCurrent = (int) player.HpTotal;
                 player.Map = Game.CurrentLoadedMap;
             }
             Game.FillEntities();
-            foreach (AiCore entity in Game.Entities)
+            foreach (var entity in Game.Entities)
             {
                 entity.SetSpawn();
             }

@@ -48,11 +48,13 @@ namespace Confusing_Hobo_Unleashed
         /// ///
         /// <param name="wWidth"></param>
         /// <param name="wHeight"></param>
-        public buffer(int width, int height, int wWidth, int wHeight) // Create and fill in a multideminsional list with blank spaces.
+        public buffer(int width, int height, int wWidth, int wHeight)
+            // Create and fill in a multideminsional list with blank spaces.
         {
             if (width > wWidth || height > wHeight)
             {
-                throw new ArgumentException("The buffer width and height can not be greater than the window width and height.");
+                throw new ArgumentException(
+                    "The buffer width and height can not be greater than the window width and height.");
             }
             _h = CreateFile("CONOUT$", 0x40000000, 2, IntPtr.Zero, FileMode.Open, 0, IntPtr.Zero);
             _width = width;
@@ -101,11 +103,12 @@ namespace Confusing_Hobo_Unleashed
             }
             if (str != null)
             {
-                Char[] temp = str.ToCharArray();
-                int tc = 0;
-                foreach (Char le in temp)
+                var temp = str.ToCharArray();
+                var tc = 0;
+                foreach (var le in temp)
                 {
-                    _buf[(width + tc) + (height*_width)].Char.AsciiChar = (byte) le; //Height * width is to get to the correct spot (since this array is not two dimensions).
+                    _buf[(width + tc) + (height*_width)].Char.AsciiChar = (byte) le;
+                        //Height * width is to get to the correct spot (since this array is not two dimensions).
                     if (attribute != 0)
                         _buf[(width + tc) + (height*_width)].Attributes = attribute;
                     tc++;
@@ -129,7 +132,7 @@ namespace Confusing_Hobo_Unleashed
         /// </summary>
         public void Clear()
         {
-            for (int i = 0; i < _buf.Length; i++)
+            for (var i = 0; i < _buf.Length; i++)
             {
                 _buf[i].Attributes = 1;
                 _buf[i].Char.AsciiChar = 32;
@@ -166,7 +169,7 @@ namespace Confusing_Hobo_Unleashed
         /// <param name="row"></param>
         public void ClearRow(int row)
         {
-            for (int i = (row*_width); i < ((row*_width + _width)); i++)
+            for (var i = (row*_width); i < ((row*_width + _width)); i++)
             {
                 if (row > _windowHeight - 1)
                 {
@@ -187,7 +190,7 @@ namespace Confusing_Hobo_Unleashed
             {
                 throw new ArgumentOutOfRangeException();
             }
-            for (int i = col; i < _windowHeight*_windowWidth; i += _windowWidth)
+            for (var i = col; i < _windowHeight*_windowWidth; i += _windowWidth)
             {
                 _buf[i].Attributes = 0;
                 _buf[i].Char.AsciiChar = 32;
@@ -209,7 +212,8 @@ namespace Confusing_Hobo_Unleashed
             {
                 throw new ArgumentOutOfRangeException();
             }
-            return new KeyValuePair<byte, byte>(_buf[((y*_width + x))].Char.AsciiChar, (byte) _buf[((y*_width + x))].Attributes);
+            return new KeyValuePair<byte, byte>(_buf[((y*_width + x))].Char.AsciiChar,
+                (byte) _buf[((y*_width + x))].Attributes);
         }
 
         [StructLayout(LayoutKind.Explicit)]
@@ -229,8 +233,8 @@ namespace Confusing_Hobo_Unleashed
         [StructLayout(LayoutKind.Sequential)]
         public struct Coord
         {
-            private short X;
-            private short Y;
+            private readonly short X;
+            private readonly short Y;
 
             public Coord(short x, short y)
             {

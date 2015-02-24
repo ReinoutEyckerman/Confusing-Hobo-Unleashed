@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Lidgren.Network;
 
 namespace Confusing_Hobo_Unleashed.User
@@ -13,23 +12,31 @@ namespace Confusing_Hobo_Unleashed.User
         {
             Name = "Joe";
             Target = null;
-           WeaponInv = new Dictionary<byte, Weapon>();
-           WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5, bulletBackground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red, bulletForeground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red, bulletCharacter: '*', speed: 2);
+            WeaponInv = new Dictionary<byte, Weapon>();
+            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5,
+                bulletBackground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red,
+                bulletForeground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red,
+                bulletCharacter: '*', speed: 2);
             WeaponInv[1] = new Weapon("Fists", WeaponType.Fist, 10, 5);
         }
 
-        public Player(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter, ConsoleColor backGround, ConsoleColor foreGround) : base(map, xpos, ypos, totalHp, playerCharacter, backGround, foreGround)
+        public Player(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter, ConsoleColor backGround,
+            ConsoleColor foreGround) : base(map, xpos, ypos, totalHp, playerCharacter, backGround, foreGround)
         {
             Name = "Joe";
             Target = null;
             WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5, bulletBackground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red, bulletForeground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red,bulletCharacter:'*', speed:2);
+            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5,
+                bulletBackground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red,
+                bulletForeground: VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red,
+                bulletCharacter: '*', speed: 2);
             WeaponInv[1] = new Weapon("Fists", WeaponType.Fist, 10, 5);
             CurrentClass = Classes.Player;
         }
 
         public string Name { get; set; }
         public NetConnection Connection { get; set; }
+
         public override void SelectTarget()
         {
         }
@@ -77,5 +84,5 @@ namespace Confusing_Hobo_Unleashed.User
                     break;
             }
         }
-     }
+    }
 }

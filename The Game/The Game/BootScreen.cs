@@ -10,19 +10,6 @@ namespace Confusing_Hobo_Unleashed
 {
     public class BootScreen
     {
-        public static Stopwatch GameTimer = new Stopwatch();
-        private static int _barCount = 1;
-        private static int _prevMessage;
-
-
-        private static readonly Dictionary<string, TempDelegate> LoadMessages = new Dictionary<string, TempDelegate>
-        {
-            {"Clearing Variables...", MapGeneration.Clearvars},
-            {"Map Generation Started...", MapGeneration.GenerateCorridors},
-            {"Advanced Map Generation Initiated...", MapFixVars},
-            {"Defining Variables...", Definevars}
-        };
-
         public static string GameDuration(int x)
         {
             switch (x)
@@ -31,7 +18,7 @@ namespace Confusing_Hobo_Unleashed
                     GameTimer.Start();
                     break;
                 case 1:
-                    TimeSpan time = GameTimer.Elapsed;
+                    var time = GameTimer.Elapsed;
                     return time.ToString("hh\\:mm\\:ss");
                 case 2:
                     GameTimer.Stop();
@@ -50,7 +37,12 @@ namespace Confusing_Hobo_Unleashed
             MapDrawing.RoomFound = new bool[MapGeneration.RoomsHorizontal, MapGeneration.RoomsVertical];
             TerrainSelection.RoomDistribution();
             MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] = true;
-            Game.Players = new List<Player> {new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White)};
+            Game.Players = new List<Player>
+            {
+                new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0],
+                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
+                    VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White)
+            };
         }
 
         public static void LoadScreen()
@@ -73,7 +65,9 @@ namespace Confusing_Hobo_Unleashed
                 StartMenu.DrawFirePits();
                 StartMenu.Fire = new Thread(StartMenu.DrawFire);
                 StartMenu.Fire.Start();
-                Draw.Box(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth*3/5, Console.WindowHeight*5/6 + 4, VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue);
+                Draw.Box(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth*3/5,
+                    Console.WindowHeight*5/6 + 4,
+                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue);
                 foreach (var item in LoadMessages)
                 {
                     Loadbar(item.Key);
@@ -89,11 +83,11 @@ namespace Confusing_Hobo_Unleashed
         private static void Loadbar(string message)
         {
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkCyan;
-            int barLength = Console.WindowWidth/5/LoadMessages.Count;
-            for (int a = 1; a <= 3; a++)
+            var barLength = Console.WindowWidth/5/LoadMessages.Count;
+            for (var a = 1; a <= 3; a++)
             {
                 Console.SetCursorPosition(Console.WindowWidth*2/5 + 1, Console.WindowHeight*5/6 + a);
-                for (int b = Console.WindowWidth*2/5 + 1; b < Console.WindowWidth*2/5 + _barCount*barLength; b++)
+                for (var b = Console.WindowWidth*2/5 + 1; b < Console.WindowWidth*2/5 + _barCount*barLength; b++)
                 {
                     Console.Write(" ");
                 }
@@ -106,7 +100,7 @@ namespace Confusing_Hobo_Unleashed
                 w = (_prevMessage - Console.WindowWidth/5)/2;
             else w = 0;
             Console.SetCursorPosition(Console.WindowWidth*4/10 - w, Console.WindowHeight*5/6 - 1);
-            for (int a = 0; a < _prevMessage; a++)
+            for (var a = 0; a < _prevMessage; a++)
             {
                 Console.Write(" ");
             }
@@ -120,5 +114,17 @@ namespace Confusing_Hobo_Unleashed
         }
 
         private delegate void TempDelegate();
+
+        public static Stopwatch GameTimer = new Stopwatch();
+        private static int _barCount = 1;
+        private static int _prevMessage;
+
+        private static readonly Dictionary<string, TempDelegate> LoadMessages = new Dictionary<string, TempDelegate>
+        {
+            {"Clearing Variables...", MapGeneration.Clearvars},
+            {"Map Generation Started...", MapGeneration.GenerateCorridors},
+            {"Advanced Map Generation Initiated...", MapFixVars},
+            {"Defining Variables...", Definevars}
+        };
     }
 }

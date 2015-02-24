@@ -98,6 +98,10 @@
     <Compile Include="TerrainGen\SkyTerrain.cs" />
     <Compile Include="TerrainGen\SpaceTerrain.cs" />
     <Compile Include="TerrainGen\CaveTerrain.cs" />
+    <Compile Include="UI\OptionsMenu.cs" />
+    <Compile Include="UI\UIElements\Button.cs" />
+    <Compile Include="UI\UIElements\InsertBox.cs" />
+    <Compile Include="UI\UIElements\TextBox.cs" />
     <Compile Include="User\InputHandler.cs" />
     <Compile Include="MapEdit\MapEditCursor.cs" />
     <Compile Include="PauseMenu.cs" />

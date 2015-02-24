@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Enemies;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.User;
 
@@ -15,22 +14,6 @@ namespace Confusing_Hobo_Unleashed
     internal class Game
     {
         public const int SWP_NOSIZE = 0x0001;
-
-        //Used for Window Size
-
-        public static IntPtr MyConsole = GetConsoleWindow();
-
-        public static bool Versus = false;
-
-        public static bool BotsEnabled = true;
-        public static int MoonCount = 0;
-        public static List<AiCore> Entities = new List<AiCore>();
-        public static List<BulletCore> Bullets = new List<BulletCore>();
-        public static Stopwatch FrameTimer = new Stopwatch();
-        public static bool Boss = false;
-        public static bool[,] DamageArray;
-        private static readonly Random Random = new Random();
-        public static int BotErrorCount;
         public static CustomMap CurrentLoadedMap { get; set; }
         public static buffer GameBuffer { get; set; }
         public static List<Player> Players { get; set; }
@@ -71,10 +54,9 @@ namespace Confusing_Hobo_Unleashed
             Endgame.PlayMusic();
         }
 
-
         public static void FillEntities()
         {
-            foreach (Player player in Players)
+            foreach (var player in Players)
                 Entities.Add(player);
         }
 
@@ -87,7 +69,8 @@ namespace Confusing_Hobo_Unleashed
             while (true)
             {
                 frameTimer.Restart();
-                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision, CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
+                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision,
+                    CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
                 UpdateGame();
                 if (CheckWin())
                     return;
@@ -103,9 +86,9 @@ namespace Confusing_Hobo_Unleashed
 
         private static bool CheckWin()
         {
-            int players = 0;
-            int enemies = 0;
-            foreach (AiCore entity in Entities)
+            var players = 0;
+            var enemies = 0;
+            foreach (var entity in Entities)
             {
                 if (entity.CurrentClass == Classes.Player)
                     players++;
@@ -134,10 +117,11 @@ namespace Confusing_Hobo_Unleashed
             if (!Boss && Random.Next(100000) == 0)
                 GodzillaAnimation.Animate = true;
 
-            for (int i = 0; i < Entities.Count; i++)
+            for (var i = 0; i < Entities.Count; i++)
             {
-                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision, CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
-                for (int j = 0; j < Entities.Count; j++)
+                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision,
+                    CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
+                for (var j = 0; j < Entities.Count; j++)
                     if (i != j && Entities[j].CurrentClass != Classes.Boss)
                         CurrentLoadedMap.Collision[Entities[j].Y, Entities[j].X] = true;
                 Entities[i].UpdateMana();
@@ -146,17 +130,18 @@ namespace Confusing_Hobo_Unleashed
                 Entities[i].CalculateAttack();
                 if (Entities[i].CurrentClass != Classes.Grave)
                     Entities[i].Special();
-                if (DamageArray != null && Entities[i].CurrentClass != Classes.Boss && DamageArray[Entities[i].Y, Entities[i].X])
+                if (DamageArray != null && Entities[i].CurrentClass != Classes.Boss &&
+                    DamageArray[Entities[i].Y, Entities[i].X])
                 {
                     Entities[i].HpCurrent--;
                 }
             }
-            for (int i = 0; i < Bullets.Count; i++)
+            for (var i = 0; i < Bullets.Count; i++)
             {
-               if (Bullets[i].CalculateMovement(CurrentLoadedMap))
-                   Bullets.RemoveAt(i);
+                if (Bullets[i].CalculateMovement(CurrentLoadedMap))
+                    Bullets.RemoveAt(i);
             }
-            for (int index = 0; index < Entities.Count; index++)
+            for (var index = 0; index < Entities.Count; index++)
             {
                 Entities[index].Update();
                 if (Entities[index].HpCurrent <= 0)
@@ -196,11 +181,11 @@ namespace Confusing_Hobo_Unleashed
                 CurrentLoadedMap.Layers[Maplayers.Decor].LayerToBuffer(GameBuffer);
 
 
-            foreach (AiCore entity in Entities)
+            foreach (var entity in Entities)
             {
                 entity.Render(GameBuffer, CurrentLoadedMap);
             }
-            foreach (BulletCore bullet in Bullets)
+            foreach (var bullet in Bullets)
             {
                 bullet.Render(GameBuffer, CurrentLoadedMap);
                 bullet.Rendered = true;
@@ -217,7 +202,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void Gravity()
         {
-            foreach (AiCore player in Entities)
+            foreach (var player in Entities)
             {
                 if (player.SpeedY != 0 || player.CanFly)
                 {
@@ -236,5 +221,19 @@ namespace Confusing_Hobo_Unleashed
             Entities.Add(new Necromancer(CurrentLoadedMap));
             GameLoop();
         }
+
+        //Used for Window Size
+
+        public static IntPtr MyConsole = GetConsoleWindow();
+        public static bool Versus = false;
+        public static bool BotsEnabled = true;
+        public static int MoonCount;
+        public static List<AiCore> Entities = new List<AiCore>();
+        public static List<BulletCore> Bullets = new List<BulletCore>();
+        public static Stopwatch FrameTimer = new Stopwatch();
+        public static bool Boss = false;
+        public static bool[,] DamageArray;
+        private static readonly Random Random = new Random();
+        public static int BotErrorCount;
     }
 }

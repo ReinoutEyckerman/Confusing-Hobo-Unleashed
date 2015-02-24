@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Confusing_Hobo_Unleashed.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Keyboard = System.Windows.Input.Keyboard;
@@ -12,23 +11,28 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 {
     internal class MapEditor
     {
-        public static short UiBorderColors = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
-        public static short UiTextColors = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
-        public static short UiActiveLayer = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
-        public static short UiInactiveLayer = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Gray);
-        public static short UiActiveButDisabledLayer = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red);
+        public static short UiBorderColors =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
 
-        public static int Wh = Console.WindowHeight;
+        public static short UiTextColors =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
+
+        public static short UiActiveLayer =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+
+        public static short UiInactiveLayer =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Gray);
+
+        public static short UiActiveButDisabledLayer =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Red);
+
         public static int Ww = Console.WindowWidth;
-
-        public static int UiLine = Wh - 12;
-        public static int UiControls = Wh - 11;
-        public static int UiCurrentPixel = Wh - 9;
-        public static int UiPaints = Wh - 7;
-        public static int UiLayers = Wh - 5;
-        public static int UiSysMes = Wh - 3;
-
-        public static int KeypressTimer = 0;
+        public static int KeypressTimer;
         public static TaskCompletionSource<object> ContinueCommand { get; set; }
         public static CustomMap CurrentMapInEditor { get; set; }
         public static MapEditCursor HuidigeCursor { get; set; }
@@ -64,7 +68,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         {
             Console.Clear();
             //Writes ---          
-            for (int xui = 0; xui < Console.WindowWidth; xui++)
+            for (var xui = 0; xui < Console.WindowWidth; xui++)
             {
                 MapBuffer.Draw("-", xui, UiLine, UiBorderColors);
             }
@@ -81,7 +85,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         {
             ClearConsoleLine(UiCurrentPixel, UiTextColors);
             HuidigeCursor.UpdateCursorValues(CurrentMapInEditor, ActiveLayer);
-            string currentPixelValues =
+            var currentPixelValues =
                 String.Format("Current Pixel: BG:{0} FG:{1} Char:{2} Coll:{3} Destr:{4} X:{5} Y:{6}",
                     HuidigeCursor.CurrentPosBgColor, HuidigeCursor.CurrentPosFgColor,
                     HuidigeCursor.CurrentPosChar, HuidigeCursor.CurrentPosColl,
@@ -99,39 +103,39 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             ClearConsoleLine(UiPaints, UiTextColors);
 
             MapBuffer.Draw("Current Paint: (-)BG:", 1, UiPaints, UiTextColors);
-            for (int i = 0; i < Color.Kleuren.Length; i++)
+            for (var i = 0; i < Color.Kleuren.Length; i++)
             {
                 var drawColor = (ConsoleColor) Color.Kleuren.GetValue(i);
-                short drawColorShort = Color.ColorsToAttribute(drawColor, ConsoleColor.White);
+                var drawColorShort = Color.ColorsToAttribute(drawColor, ConsoleColor.White);
 
                 MapBuffer.Draw(" ", 24 + i, UiPaints, drawColorShort);
             }
 
             MapBuffer.Draw(" (-)FG:", 45, UiPaints, UiTextColors);
 
-            for (int i = 0; i < Color.Kleuren.Length; i++)
+            for (var i = 0; i < Color.Kleuren.Length; i++)
             {
                 var drawColor = (ConsoleColor) Color.Kleuren.GetValue(i);
-                short drawColorShort = Color.ColorsToAttribute(drawColor, ConsoleColor.White);
+                var drawColorShort = Color.ColorsToAttribute(drawColor, ConsoleColor.White);
 
                 MapBuffer.Draw(" ", 54 + i, UiPaints, drawColorShort);
             }
 
-            string paintPrefs = String.Format(" ()Char:{0} ()Coll:{1} ()Destr:{2} Preview:", HuidigeCursor.PaintChar,
+            var paintPrefs = String.Format(" ()Char:{0} ()Coll:{1} ()Destr:{2} Preview:", HuidigeCursor.PaintChar,
                 HuidigeCursor.PaintCollision, HuidigeCursor.PaintDestruct);
             MapBuffer.Draw(paintPrefs, 70, UiPaints, UiTextColors);
 
-            string preview = Convert.ToString(HuidigeCursor.PaintChar);
-            short previewColor = Color.ColorsToAttribute(HuidigeCursor.PaintBgColor, HuidigeCursor.PaintFgColor);
+            var preview = Convert.ToString(HuidigeCursor.PaintChar);
+            var previewColor = Color.ColorsToAttribute(HuidigeCursor.PaintBgColor, HuidigeCursor.PaintFgColor);
             MapBuffer.Draw(preview, 115, UiPaints, previewColor);
 
             //Second line, only the indicators for the colors on the line above.
             ClearConsoleLine(UiPaints + 1, UiTextColors);
 
-            int bGindex = Array.IndexOf(Color.Kleuren, HuidigeCursor.PaintBgColor);
+            var bGindex = Array.IndexOf(Color.Kleuren, HuidigeCursor.PaintBgColor);
             MapBuffer.Draw("^", 24 + bGindex, UiPaints + 1, UiTextColors);
 
-            int fGindex = Array.IndexOf(Color.Kleuren, HuidigeCursor.PaintFgColor);
+            var fGindex = Array.IndexOf(Color.Kleuren, HuidigeCursor.PaintFgColor);
             MapBuffer.Draw("^", 54 + fGindex, UiPaints + 1, UiTextColors);
             MapBuffer.Print();
         }
@@ -140,7 +144,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         {
             ClearConsoleLine(UiLayers, UiTextColors);
             MapBuffer.Draw("Layers: ", 1, UiLayers, UiTextColors);
-            int index = 9;
+            var index = 9;
 
             foreach (var layer in CurrentMapInEditor.Layers)
             {
@@ -155,22 +159,24 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                     MapBuffer.Draw("Clouds (LOCKED)", index, UiLayers, UiInactiveLayer);
                     index += 10;
                 }
-                    //Active Layer and enabled.
-                else if (layer.Value.IsEnabled && layer.Key == (Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer)))
+                //Active Layer and enabled.
+                else if (layer.Value.IsEnabled &&
+                         layer.Key == (Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer)))
                 {
                     MapBuffer.Draw(layer.Key.ToString(), index, UiLayers, UiActiveLayer);
                 }
-                    //Active Layer but disabled
-                else if (!layer.Value.IsEnabled && layer.Key == (Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer)))
+                //Active Layer but disabled
+                else if (!layer.Value.IsEnabled &&
+                         layer.Key == (Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer)))
                 {
                     MapBuffer.Draw(layer.Key.ToString(), index, UiLayers, UiActiveButDisabledLayer);
                 }
-                    //Disabled Layer
+                //Disabled Layer
                 else if (!layer.Value.IsEnabled)
                 {
                     MapBuffer.Draw(layer.Key.ToString(), index, UiLayers, UiInactiveLayer);
                 }
-                    //Enabled layer
+                //Enabled layer
                 else
                 {
                     MapBuffer.Draw(layer.Key.ToString(), index, UiLayers, UiTextColors);
@@ -182,7 +188,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public static void ClearConsoleLine(int row, short colors)
         {
-            for (int i = 0; i < Ww; i++)
+            for (var i = 0; i < Ww; i++)
             {
                 MapBuffer.Draw(" ", i, row, colors);
             }
@@ -192,7 +198,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         {
             ClearConsoleLine(UiSysMes, UiTextColors);
 
-            string Message = String.Format("System Message:{0}", message);
+            var Message = String.Format("System Message:{0}", message);
             MapBuffer.Draw(Message, 1, UiSysMes, UiTextColors);
             MapBuffer.Print();
         }
@@ -221,7 +227,10 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public static void ToggleLayer()
         {
-            CurrentMapInEditor.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer))].IsEnabled = !CurrentMapInEditor.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer))].IsEnabled;
+            CurrentMapInEditor.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer))]
+                .IsEnabled =
+                !CurrentMapInEditor.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(ActiveLayer))]
+                    .IsEnabled;
             DrawActiveLayers();
         }
 
@@ -241,7 +250,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public static void ClearMapBuffer()
         {
-            for (int i = 0; i < CurrentMapInEditor.Layers[Maplayers.Collision].Background.GetLength(0); i++)
+            for (var i = 0; i < CurrentMapInEditor.Layers[Maplayers.Collision].Background.GetLength(0); i++)
             {
                 MapBuffer.ClearRow(i);
             }
@@ -255,16 +264,16 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             ContinueCommand = new TaskCompletionSource<object>();
             await ContinueCommand.Task;
 
-            int x1 = HuidigeCursor.X;
-            int y1 = HuidigeCursor.Y;
+            var x1 = HuidigeCursor.X;
+            var y1 = HuidigeCursor.Y;
 
             SystemMessage("Select the second point and press enter.");
 
             ContinueCommand = new TaskCompletionSource<object>();
             await ContinueCommand.Task;
 
-            int x2 = HuidigeCursor.X;
-            int y2 = HuidigeCursor.Y;
+            var x2 = HuidigeCursor.X;
+            var y2 = HuidigeCursor.Y;
 
             Draw.Line(CurrentMapInEditor, ActiveLayer, MapBuffer, HuidigeCursor, x1, x2, y1, y2);
             SystemMessage(" ");
@@ -280,16 +289,16 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             ContinueCommand = new TaskCompletionSource<object>();
             await ContinueCommand.Task;
 
-            int x1 = HuidigeCursor.X;
-            int y1 = HuidigeCursor.Y;
+            var x1 = HuidigeCursor.X;
+            var y1 = HuidigeCursor.Y;
 
             SystemMessage("Select a point on the circle and press enter.");
 
             ContinueCommand = new TaskCompletionSource<object>();
             await ContinueCommand.Task;
 
-            int radiusX = HuidigeCursor.X;
-            int radiusY = HuidigeCursor.Y;
+            var radiusX = HuidigeCursor.X;
+            var radiusY = HuidigeCursor.Y;
 
             Draw.CircleCenterRadius(CurrentMapInEditor, ActiveLayer, MapBuffer, HuidigeCursor, x1, y1, radiusX, radiusY);
             SystemMessage(" ");
@@ -305,16 +314,16 @@ namespace Confusing_Hobo_Unleashed.MapEdit
             ContinueCommand = new TaskCompletionSource<object>();
             await ContinueCommand.Task;
 
-            int x1 = HuidigeCursor.X;
-            int y1 = HuidigeCursor.Y;
+            var x1 = HuidigeCursor.X;
+            var y1 = HuidigeCursor.Y;
 
             SystemMessage("Select the second corner and press enter.");
 
             ContinueCommand = new TaskCompletionSource<object>();
             await ContinueCommand.Task;
 
-            int x2 = HuidigeCursor.X;
-            int y2 = HuidigeCursor.Y;
+            var x2 = HuidigeCursor.X;
+            var y2 = HuidigeCursor.Y;
 
             Draw.FillRectangle(CurrentMapInEditor, ActiveLayer, MapBuffer, HuidigeCursor, x1, x2, y1, y2);
             SystemMessage(" ");
@@ -335,12 +344,12 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                     }
                     SystemMessage("Filename (without extension):");
                     Console.SetCursorPosition(50, Console.WindowHeight - 2);
-                    string filename = Console.ReadLine();
+                    var filename = Console.ReadLine();
 
                     //Check if the filename entered is valid
-                    bool isValid = !String.IsNullOrEmpty(filename) &&
-                                   filename.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 &&
-                                   !File.Exists(Path.Combine("maps", filename));
+                    var isValid = !String.IsNullOrEmpty(filename) &&
+                                  filename.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 &&
+                                  !File.Exists(Path.Combine("maps", filename));
 
                     //if valid set filename and newfile=false.
                     if (isValid)
@@ -414,9 +423,12 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public static void InputHandling()
         {
-            bool controller = GamePad.GetState(PlayerIndex.One).IsConnected;
+            var controller = GamePad.GetState(PlayerIndex.One).IsConnected;
 
-            if (Keyboard.IsKeyDown(Key.Right) || (controller && (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X == 1)))
+            if (Keyboard.IsKeyDown(Key.Right) ||
+                (controller &&
+                 (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed ||
+                  GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X == 1)))
             {
                 if (HuidigeCursor.X + 1 < CurrentMapInEditor.Layers[Maplayers.Collision].Background.GetLength(1))
                 {
@@ -425,7 +437,10 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                     UpdateUiCurrentPix();
                 }
             }
-            if (Keyboard.IsKeyDown(Key.Left) || (controller && (GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X == -1)))
+            if (Keyboard.IsKeyDown(Key.Left) ||
+                (controller &&
+                 (GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed ||
+                  GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X == -1)))
             {
                 if (HuidigeCursor.X - 1 >= 0)
                 {
@@ -434,7 +449,10 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                     UpdateUiCurrentPix();
                 }
             }
-            if (Keyboard.IsKeyDown(Key.Up) || (controller && (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y == 1)))
+            if (Keyboard.IsKeyDown(Key.Up) ||
+                (controller &&
+                 (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed ||
+                  GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y == 1)))
             {
                 if (HuidigeCursor.Y - 1 >= 0)
                 {
@@ -443,7 +461,10 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                     UpdateUiCurrentPix();
                 }
             }
-            if (Keyboard.IsKeyDown(Key.Down) || (controller && (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y == -1)))
+            if (Keyboard.IsKeyDown(Key.Down) ||
+                (controller &&
+                 (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed ||
+                  GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y == -1)))
             {
                 if (HuidigeCursor.Y + 1 < CurrentMapInEditor.Layers[Maplayers.Collision].Background.GetLength(0))
                 {
@@ -565,5 +586,13 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                 KeypressTimer--;
             }
         }
+
+        public static int Wh = Console.WindowHeight;
+        public static int UiLine = Wh - 12;
+        public static int UiControls = Wh - 11;
+        public static int UiCurrentPixel = Wh - 9;
+        public static int UiPaints = Wh - 7;
+        public static int UiLayers = Wh - 5;
+        public static int UiSysMes = Wh - 3;
     }
 }

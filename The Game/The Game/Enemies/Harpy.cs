@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -34,7 +33,8 @@ namespace Confusing_Hobo_Unleashed.Enemies
             set
             {
                 if (Target != null)
-                    if ((X - Target.X > _originalmaxhorizontalproximity + 10 || Target.X - X > _originalmaxhorizontalproximity + 10))
+                    if ((X - Target.X > _originalmaxhorizontalproximity + 10 ||
+                         Target.X - X > _originalmaxhorizontalproximity + 10))
                     {
                         if (Y - 10 > 0)
                             MinVerticalProximity = 10;
@@ -77,7 +77,6 @@ namespace Confusing_Hobo_Unleashed.Enemies
                     break;
             }
         }
-
 
         public override void SelectTarget()
         {

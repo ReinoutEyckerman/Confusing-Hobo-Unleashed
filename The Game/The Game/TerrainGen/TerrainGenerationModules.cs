@@ -1,5 +1,4 @@
 ﻿using System;
-using Confusing_Hobo_Unleashed.Map;
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
@@ -12,7 +11,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         public static int ExtremeY(CustomMap map, int ywall, int x1, int x2, int direction, bool invert)
         {
-            for (int xwall = x1; xwall < x2; xwall++)
+            for (var xwall = x1; xwall < x2; xwall++)
             {
                 if (ywall <= 10 && direction == -1 || ywall >= map.Mapheight - 10 && direction == 1)
                     _up = 1;
@@ -56,14 +55,14 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 }
                 if (invert)
                 {
-                    for (int y = ywall; y >= 0; y--)
+                    for (var y = ywall; y >= 0; y--)
                     {
                         Game.CurrentLoadedMap.Collision[y, xwall] = true;
                     }
                 }
                 else
                 {
-                    for (int y = ywall; y <= map.Mapheight - 1; y++)
+                    for (var y = ywall; y <= map.Mapheight - 1; y++)
                     {
                         map.Collision[y, xwall] = true;
                     }
@@ -74,7 +73,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         public static int SlowY(CustomMap map, int ywall, int x1, int x2, int direction, bool invert)
         {
-            for (int xwall = x1; xwall < x2; xwall++)
+            for (var xwall = x1; xwall < x2; xwall++)
             {
                 _up = Random.Next(13);
                 if (xwall > 0 && map.Collision[ywall, xwall - 1])
@@ -106,14 +105,14 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 }
                 if (invert)
                 {
-                    for (int x = ywall; x >= 0; x--)
+                    for (var x = ywall; x >= 0; x--)
                     {
                         map.Collision[x, xwall] = true;
                     }
                 }
                 else
                 {
-                    for (int x = ywall; x <= map.Mapheight - 1; x++)
+                    for (var x = ywall; x <= map.Mapheight - 1; x++)
                     {
                         map.Collision[x, xwall] = true;
                     }
@@ -125,8 +124,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         public static int Cliff(CustomMap map, int ywall, int xwall, int x2, int direction, bool invert)
         {
             xwall -= 1;
-            int xwallStart = xwall;
-            for (int y = ywall; y < map.Mapheight; y++)
+            var xwallStart = xwall;
+            for (var y = ywall; y < map.Mapheight; y++)
             {
                 _up = Random.Next(5);
                 if (map.Collision[y - 1, xwall])
@@ -156,10 +155,10 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
 
                 if (direction == 1)
-                    for (int x = xwallStart; x <= xwall; x++)
+                    for (var x = xwallStart; x <= xwall; x++)
                         map.Collision[y, x] = true;
                 else
-                    for (int x = xwall + 1; x <= xwallStart; x++)
+                    for (var x = xwall + 1; x <= xwallStart; x++)
                         map.Collision[y, x] = false;
             }
             return ywall;
@@ -167,7 +166,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         public static int Flat(CustomMap map, int ywall, int x1, int x2, bool invert)
         {
-            for (int xwall = x1; xwall < x2; xwall++)
+            for (var xwall = x1; xwall < x2; xwall++)
             {
                 if (xwall < map.Mapwidth)
                 {
@@ -204,12 +203,12 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     }
                     if (invert)
                     {
-                        for (int y = ywall; y >= 0; y--)
+                        for (var y = ywall; y >= 0; y--)
                             map.Collision[y, xwall] = true;
                     }
                     else
                     {
-                        for (int y = ywall; y < map.Collision.GetLength(0); y++)
+                        for (var y = ywall; y < map.Collision.GetLength(0); y++)
                             map.Collision[y, xwall] = true;
                     }
                 }
@@ -217,19 +216,20 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             return ywall;
         }
 
-        public static void Detach(int xBegin, int xend, int horizontalCutoff, int ytopBegin, int ytopEnd, int verticalCutoff)
+        public static void Detach(int xBegin, int xend, int horizontalCutoff, int ytopBegin, int ytopEnd,
+            int verticalCutoff)
         {
             double x1 = (xBegin);
             double x2 = (xend - horizontalCutoff - xBegin)/6 + xBegin;
             double y1 = ytopBegin;
             double y3 = verticalCutoff;
-            double y2 = (y3 - y1)*2/3 + y1;
-            double y4 = (y3 - ytopEnd)*2/3 + ytopEnd;
-            double severeSlope = (y1 - y2)/(x1 - x2);
-            double timidSlope = (y2 - y3)/(x1 - x2);
-            double severeSlopeReturn = (y4 - ytopEnd)/(x1 - x2);
+            var y2 = (y3 - y1)*2/3 + y1;
+            var y4 = (y3 - ytopEnd)*2/3 + ytopEnd;
+            var severeSlope = (y1 - y2)/(x1 - x2);
+            var timidSlope = (y2 - y3)/(x1 - x2);
+            var severeSlopeReturn = (y4 - ytopEnd)/(x1 - x2);
 
-            for (int x = xBegin; x < xend; x++)
+            for (var x = xBegin; x < xend; x++)
             {
                 if (x < Game.CurrentLoadedMap.Mapwidth)
                 {
@@ -240,7 +240,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     }
                     else if ((x - xBegin) < (xend - xBegin)/3)
                     {
-                        int xtemp = x - (xend - xBegin)/6;
+                        var xtemp = x - (xend - xBegin)/6;
                         ypos = Convert.ToInt32(timidSlope*(xtemp - x1) + y2);
                     }
                     else if ((x - xBegin) < (xend - xBegin)*2/3)
@@ -249,15 +249,15 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     }
                     else if ((x - xBegin) < (xend - xBegin)*5/6)
                     {
-                        int xtemp = x - (xend - xBegin)*2/3;
+                        var xtemp = x - (xend - xBegin)*2/3;
                         ypos = Convert.ToInt32(-timidSlope*(xtemp - x1) + y3);
                     }
                     else
                     {
-                        int xtemp = x - (xend - xBegin)*5/6;
+                        var xtemp = x - (xend - xBegin)*5/6;
                         ypos = Convert.ToInt32(severeSlopeReturn*(xtemp - x1) + y4);
                     }
-                    for (int y = ypos; y < Game.CurrentLoadedMap.Mapheight; y++)
+                    for (var y = ypos; y < Game.CurrentLoadedMap.Mapheight; y++)
                     {
                         Game.CurrentLoadedMap.Collision[y, x] = false;
                         Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[y, x] = null;
@@ -268,9 +268,9 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         public static void MakeDestructable(int chance)
         {
-            for (int i = 0; i < Game.CurrentLoadedMap.Mapheight; i++)
+            for (var i = 0; i < Game.CurrentLoadedMap.Mapheight; i++)
             {
-                for (int j = 0; j < Game.CurrentLoadedMap.Mapwidth; j++)
+                for (var j = 0; j < Game.CurrentLoadedMap.Mapwidth; j++)
                 {
                     if (Game.CurrentLoadedMap.Collision[i, j] && Random.Next(chance) == 0)
                         Game.CurrentLoadedMap.Destructible[i, j] = true;
@@ -280,8 +280,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         public static void FillCollision()
         {
-            for (int a = 0; a < Game.CurrentLoadedMap.Mapheight; a++)
-                for (int b = 0; b < Game.CurrentLoadedMap.Mapwidth; b++)
+            for (var a = 0; a < Game.CurrentLoadedMap.Mapheight; a++)
+                for (var b = 0; b < Game.CurrentLoadedMap.Mapwidth; b++)
                 {
                     Game.CurrentLoadedMap.Destructible[a, b] = true;
                     Game.CurrentLoadedMap.Collision[a, b] = true;
@@ -291,14 +291,14 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         public static int HCave(int x1, int x2, int ywall1, int ywall2, bool layer = false)
         {
             var collision = new bool[Game.CurrentLoadedMap.Mapheight, Game.CurrentLoadedMap.Mapwidth];
-            int horiCounter = 0;
-            int vertiCounter = 0;
-            for (int a = 0; a < 2; a++)
+            var horiCounter = 0;
+            var vertiCounter = 0;
+            for (var a = 0; a < 2; a++)
             {
-                for (int xwall = x1; xwall < x2; xwall++)
+                for (var xwall = x1; xwall < x2; xwall++)
                 {
                     collision[ywall1, xwall] = true;
-                    int up = Random.Next(15);
+                    var up = Random.Next(15);
                     if (xwall > 0 && Game.CurrentLoadedMap.Collision[ywall1, xwall - 1])
                     {
                         vertiCounter = 0;
@@ -337,14 +337,14 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         public static void VCave(int y1, int y2, int xwall1, int xwall2, bool layer = false)
         {
             var collision = new bool[Game.CurrentLoadedMap.Mapheight, Game.CurrentLoadedMap.Mapwidth];
-            int horiCounter = 0;
-            int vertiCounter = 0;
-            for (int a = 0; a < 2; a++)
+            var horiCounter = 0;
+            var vertiCounter = 0;
+            for (var a = 0; a < 2; a++)
             {
-                for (int ywall = y1; ywall < y2; ywall++)
+                for (var ywall = y1; ywall < y2; ywall++)
                 {
                     collision[ywall, xwall1] = true;
-                    int up = Random.Next(15);
+                    var up = Random.Next(15);
                     if (ywall > 0 && Game.CurrentLoadedMap.Collision[ywall - 1, xwall1])
                     {
                         vertiCounter = 0;
@@ -381,11 +381,11 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         private static void Carve(bool[,] collision, bool vertical = false)
         {
-            bool cut = false;
+            var cut = false;
             if (vertical)
             {
-                for (int a = 0; a < Game.CurrentLoadedMap.Mapheight; a++)
-                    for (int b = 0; b < Game.CurrentLoadedMap.Mapwidth; b++)
+                for (var a = 0; a < Game.CurrentLoadedMap.Mapheight; a++)
+                    for (var b = 0; b < Game.CurrentLoadedMap.Mapwidth; b++)
 
                     {
                         if (collision[a, b])
@@ -398,8 +398,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             }
             else
             {
-                for (int b = 0; b < Game.CurrentLoadedMap.Mapwidth; b++)
-                    for (int a = 0; a < Game.CurrentLoadedMap.Mapheight; a++)
+                for (var b = 0; b < Game.CurrentLoadedMap.Mapwidth; b++)
+                    for (var a = 0; a < Game.CurrentLoadedMap.Mapheight; a++)
                     {
                         if (collision[a, b])
                             cut = !cut;
@@ -411,9 +411,9 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         public static void RandomCollision()
         {
-            for (int xwall = 0; xwall < Console.WindowWidth; xwall++)
+            for (var xwall = 0; xwall < Console.WindowWidth; xwall++)
             {
-                for (int ywall = 0; ywall <= Game.CurrentLoadedMap.Mapheight - 1; ywall++)
+                for (var ywall = 0; ywall <= Game.CurrentLoadedMap.Mapheight - 1; ywall++)
                 {
                     if (Random.Next(12) == 7)
                     {

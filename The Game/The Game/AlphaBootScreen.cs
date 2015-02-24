@@ -5,9 +5,7 @@ namespace Confusing_Hobo_Unleashed
 {
     internal class AlphaBootScreen
     {
-        private static readonly int Calculatrix = Console.WindowHeight/10;
         private static readonly int YQuarter = Console.WindowHeight/4;
-        private static readonly int XQuarter = Console.WindowWidth/4 + Calculatrix*3;
         private static readonly int XHalf = Console.WindowWidth/2;
         private static readonly int XThreeQuarter = Console.WindowWidth*3/4;
 
@@ -21,71 +19,73 @@ namespace Confusing_Hobo_Unleashed
 
         {
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White;
-            for (int y = YQuarter; y < YQuarter + Calculatrix; y++)
+            for (var y = YQuarter; y < YQuarter + Calculatrix; y++)
             {
-                for (int x = XQuarter; x < XHalf; x++)
+                for (var x = XQuarter; x < XHalf; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XThreeQuarter - XQuarter/2; x < XThreeQuarter - Calculatrix*2; x++)
+                for (var x = XThreeQuarter - XQuarter/2; x < XThreeQuarter - Calculatrix*2; x++)
                 {
                     Write(x, y);
                 }
             }
-            for (int y = YQuarter + Calculatrix; y < YQuarter + Calculatrix*2; y++)
+            for (var y = YQuarter + Calculatrix; y < YQuarter + Calculatrix*2; y++)
             {
-                for (int x = XQuarter - Calculatrix; x < XQuarter + Calculatrix; x++)
+                for (var x = XQuarter - Calculatrix; x < XQuarter + Calculatrix; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XHalf - Calculatrix; x < XHalf + Calculatrix; x++)
+                for (var x = XHalf - Calculatrix; x < XHalf + Calculatrix; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XThreeQuarter - XQuarter/2 - Calculatrix; x < XThreeQuarter - XQuarter/2 + Calculatrix;
+                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix;
+                    x < XThreeQuarter - XQuarter/2 + Calculatrix;
                     x++)
                 {
                     Write(x, y);
                 }
             }
-            for (int y = YQuarter + Calculatrix*2; y < YQuarter + Calculatrix*3; y++)
+            for (var y = YQuarter + Calculatrix*2; y < YQuarter + Calculatrix*3; y++)
             {
-                for (int x = XQuarter - Calculatrix*2; x < XQuarter; x++)
+                for (var x = XQuarter - Calculatrix*2; x < XQuarter; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XHalf; x < XThreeQuarter - XQuarter/2; x++)
+                for (var x = XHalf; x < XThreeQuarter - XQuarter/2; x++)
                 {
                     Write(x, y);
                 }
             }
-            for (int y = YQuarter + Calculatrix*3; y < YQuarter + Calculatrix*4; y++)
+            for (var y = YQuarter + Calculatrix*3; y < YQuarter + Calculatrix*4; y++)
             {
-                for (int x = XQuarter - Calculatrix; x < XQuarter + Calculatrix; x++)
+                for (var x = XQuarter - Calculatrix; x < XQuarter + Calculatrix; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XHalf - Calculatrix; x < XHalf + Calculatrix; x++)
+                for (var x = XHalf - Calculatrix; x < XHalf + Calculatrix; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XThreeQuarter - XQuarter/2 - Calculatrix; x < XThreeQuarter - XQuarter/2 + Calculatrix;
+                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix;
+                    x < XThreeQuarter - XQuarter/2 + Calculatrix;
                     x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XThreeQuarter - Calculatrix*3; x < XThreeQuarter - Calculatrix; x++)
+                for (var x = XThreeQuarter - Calculatrix*3; x < XThreeQuarter - Calculatrix; x++)
                 {
                     Write(x, y);
                 }
             }
-            for (int y = YQuarter + Calculatrix*4; y < YQuarter + Calculatrix*5; y++)
+            for (var y = YQuarter + Calculatrix*4; y < YQuarter + Calculatrix*5; y++)
             {
-                for (int x = XQuarter; x < XHalf; x++)
+                for (var x = XQuarter; x < XHalf; x++)
                 {
                     Write(x, y);
                 }
-                for (int x = XThreeQuarter - XQuarter/2; x < XThreeQuarter - Calculatrix*2; x++)
+                for (var x = XThreeQuarter - XQuarter/2; x < XThreeQuarter - Calculatrix*2; x++)
                 {
                     Write(x, y);
                 }
@@ -101,5 +101,8 @@ namespace Confusing_Hobo_Unleashed
             Thread.Sleep(5000);
             Console.Clear();
         }
+
+        private static readonly int Calculatrix = Console.WindowHeight/10;
+        private static readonly int XQuarter = Console.WindowWidth/4 + Calculatrix*3;
     }
 }

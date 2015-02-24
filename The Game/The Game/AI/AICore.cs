@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Confusing_Hobo_Unleashed.Enemies;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.AI
@@ -20,17 +18,18 @@ namespace Confusing_Hobo_Unleashed.AI
     abstract partial class AiCore
     {
         public readonly Random Random = new Random();
-        public Classes CurrentClass;
         private int? _hptotal;
         private short _x;
         private short _y;
+        public Classes CurrentClass;
 
         protected AiCore(CustomMap map)
         {
             Map = map;
         }
 
-        protected AiCore(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter, ConsoleColor backGround, ConsoleColor foreGround)
+        protected AiCore(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter,
+            ConsoleColor backGround, ConsoleColor foreGround)
         {
             Map = map;
 
@@ -50,15 +49,11 @@ namespace Confusing_Hobo_Unleashed.AI
         }
 
         public CustomMap Map { get; set; }
-
         protected int MaxMana { get; set; }
         public int Mana { get; set; }
         public char DrawChar { get; set; }
-
         public ConsoleColor Background { get; set; }
-
         public ConsoleColor Foreground { get; set; }
-
         public short PlayerColor { get; set; }
 
         public virtual short X
@@ -101,20 +96,18 @@ namespace Confusing_Hobo_Unleashed.AI
 
         public int HpCurrent { get; set; }
         public bool FacingRight { get; set; }
-
         public byte AnimHitFrame { get; set; }
-
         public int Proximity { get; set; }
-        
+
         public void Render(buffer outputbuffer, CustomMap map)
         {
-            string playerchar = Convert.ToString(DrawChar);
+            var playerchar = Convert.ToString(DrawChar);
             outputbuffer.Draw(playerchar, X, Y, PlayerColor);
 
             if (AnimHitFrame > 0)
             {
-                int nextAnimFrame = WeaponInv[0].UseAnimation.Length - AnimHitFrame;
-                string stringToDraw = Convert.ToString(WeaponInv[0].UseAnimation[nextAnimFrame]);
+                var nextAnimFrame = WeaponInv[0].UseAnimation.Length - AnimHitFrame;
+                var stringToDraw = Convert.ToString(WeaponInv[0].UseAnimation[nextAnimFrame]);
                 short color;
                 switch (_attackDirection)
                 {
@@ -172,7 +165,7 @@ namespace Confusing_Hobo_Unleashed.AI
 
         public void SwapWeapon()
         {
-            Weapon temp = WeaponInv[0];
+            var temp = WeaponInv[0];
             WeaponInv[0] = WeaponInv[1];
             WeaponInv[1] = temp;
         }
@@ -181,7 +174,7 @@ namespace Confusing_Hobo_Unleashed.AI
         {
             X = 0;
             Y = 0;
-            for (short xpos = Convert.ToInt16(Map.Mapwidth - 1); xpos >= 0; xpos--)
+            for (var xpos = Convert.ToInt16(Map.Mapwidth - 1); xpos >= 0; xpos--)
             {
                 for (short ypos = 0; ypos < Map.Mapheight; ypos++)
                 {

@@ -21,13 +21,13 @@ namespace Confusing_Hobo_Unleashed.Map
 
         public void LayerToBuffer(buffer outputbuffer)
         {
-            for (int i = 0; i < Background.GetLength(0); i++)
+            for (var i = 0; i < Background.GetLength(0); i++)
             {
-                for (int j = 0; j < Background.GetLength(1); j++)
+                for (var j = 0; j < Background.GetLength(1); j++)
                 {
                     if (Characters[i, j].HasValue)
                     {
-                        string charToString = Convert.ToString(Characters[i, j]);
+                        var charToString = Convert.ToString(Characters[i, j]);
                         outputbuffer.Draw(charToString, j, i, Colors[i, j]);
                     }
                 }

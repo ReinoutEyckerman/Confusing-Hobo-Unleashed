@@ -5,11 +5,24 @@ namespace Confusing_Hobo_Unleashed
 {
     internal class GameUi
     {
-        private static readonly short UiBoxColors = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
-        private static readonly short UiTextColors = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Cyan);
-        private static readonly short HpBarColor = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Green, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
-        private static readonly short HpBarLostColor = Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
         private const int UiLeftX = 2;
+
+        private static readonly short UiBoxColors =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+
+        private static readonly short UiTextColors =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Cyan);
+
+        private static readonly short HpBarColor =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Green,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+
+        private static readonly short HpBarLostColor =
+            Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].Black);
+
         private static readonly int UiRightX = Game.CurrentLoadedMap.Background.GetLength(1) - 2;
         private static readonly int UiTopY = Game.CurrentLoadedMap.Background.GetLength(0) + 1;
         private static int _uiBotY = Console.WindowHeight - 2;
@@ -21,7 +34,8 @@ namespace Confusing_Hobo_Unleashed
             {
                 _uiBotY = UiTopY + 7;
             }
-            Draw.FillRectangle(UiBoxColors, 0, Console.WindowWidth - 1, UiTopY - 2, Console.WindowHeight - 1, outputbuffer);
+            Draw.FillRectangle(UiBoxColors, 0, Console.WindowWidth - 1, UiTopY - 2, Console.WindowHeight - 1,
+                outputbuffer);
             Draw.Box(UiLeftX, UiTopY, UiRightX, _uiBotY, UiBoxColors, outputbuffer);
             DrawPlayerHp(outputbuffer, player1, "player 1", UiLeftX + 2, UiTopY + 2);
         }
@@ -32,7 +46,7 @@ namespace Confusing_Hobo_Unleashed
             //Draw a 10-block wide hp-bar in red, this will be partially covered up by the green current hp.
             outputbuffer.Draw("           ", xpos, ypos + 1, HpBarLostColor);
             //Draw as many green blocks as currentHP/10 (100 HP = 10 Green blocks.)
-            for (int i = 0; i <= player.HpCurrent/10; i++)
+            for (var i = 0; i <= player.HpCurrent/10; i++)
             {
                 outputbuffer.Draw(" ", xpos + i, ypos + 1, HpBarColor);
             }

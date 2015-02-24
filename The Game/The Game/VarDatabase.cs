@@ -1,5 +1,4 @@
-﻿using System;
-using Confusing_Hobo_Unleashed.TerrainGen;
+﻿using Confusing_Hobo_Unleashed.TerrainGen;
 
 namespace Confusing_Hobo_Unleashed
 {
@@ -20,6 +19,5 @@ namespace Confusing_Hobo_Unleashed
         public static bool ShowApprovementRate = false;
         public static bool ShowSideMatrix = false;
         public static bool ShowMapSizeDebug = false;
-        //Olivers Database hieronder
     }
 }

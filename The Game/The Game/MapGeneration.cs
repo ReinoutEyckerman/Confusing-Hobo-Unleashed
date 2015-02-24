@@ -5,8 +5,6 @@ namespace Confusing_Hobo_Unleashed
 {
     public class MapGeneration
     {
-        public static int RoomsHorizontal = 7;
-        public static int RoomsVertical = 4;
         private static int _x1;
         private static int _x2;
         private static int _x3;
@@ -14,19 +12,15 @@ namespace Confusing_Hobo_Unleashed
         private static int _x5;
         private static int _x6;
         private static int _x7;
-        public static int DeadEndAmount = 0;
+        public static int DeadEndAmount;
         public static int MaxDeadEnd;
         public static int Approved;
         public static double ApprovementReq = 75;
-        public static bool[,,] Corridors = new bool[RoomsHorizontal, RoomsVertical, 5];
-        public static bool[,,] Counter = new bool[RoomsHorizontal, RoomsVertical, 5];
-        public static int[,] EnableMoreCorridors = new int[RoomsHorizontal*RoomsVertical, 2];
-        public static int FailureCounter = 0;
-        public static int[,] Terrains = new int[RoomsHorizontal, RoomsVertical];
+        public static int FailureCounter;
 
         public static void Clearvars()
         {
-            foreach (Options t in StartMenu.Configuration)
+            foreach (var t in StartMenu.Configuration)
                 if (t.Name == "Spawn Point")
                 {
                     MapDrawing.Xposcurrent = t.TextBoxList[0].VarChanger[0];
@@ -47,7 +41,6 @@ namespace Confusing_Hobo_Unleashed
             _x7 = 0;
             DeadEndAmount = 0;
         }
-
 
         //MAPGENERATING AND FIXING MAIN METHOD
         public static void MainMapFix(int xPos, int yPos, int[,] enableMoreCorridors)
@@ -71,7 +64,7 @@ namespace Confusing_Hobo_Unleashed
             _x3 = _x2;
             _x2 = _x1;
             _x1 = Approved;
-            int testvar = Convert.ToInt32(RoomsHorizontal*RoomsVertical*ApprovementReq/100);
+            var testvar = Convert.ToInt32(RoomsHorizontal*RoomsVertical*ApprovementReq/100);
 
             if (Approved >= testvar)
             {
@@ -90,7 +83,8 @@ namespace Confusing_Hobo_Unleashed
                 if (FailureCounter >= 35)
                 {
                     Console.Clear();
-                    Console.WriteLine("Error: Map generation took too long. Are you sure you configured it right? Rebooting in 5 seconds, please check the configuration.");
+                    Console.WriteLine(
+                        "Error: Map generation took too long. Are you sure you configured it right? Rebooting in 5 seconds, please check the configuration.");
                     Thread.Sleep(5000);
                 }
                 GenerateCorridors();
@@ -110,18 +104,18 @@ namespace Confusing_Hobo_Unleashed
         //GENERATES BASIC MAP (THIS IS THE BASIC MAP, THIS IS NOT FIXED FOR COMPLETION.)
         public static void GenerateCorridors()
         {
-            for (int yCoord = 0; yCoord < RoomsVertical; yCoord++)
+            for (var yCoord = 0; yCoord < RoomsVertical; yCoord++)
             {
-                for (int xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
+                for (var xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
                 {
                     var random = new Random();
-                    int randomEast = random.Next(6);
-                    int randomSouth = random.Next(6);
+                    var randomEast = random.Next(6);
+                    var randomSouth = random.Next(6);
                     //0: Disabled. 1: Enabled. 2: Forced enabled
                     int west;
                     int north;
-                    int east = 1;
-                    int south = 1;
+                    var east = 1;
+                    var south = 1;
                     //Fixing 0 Coords
                     if (xCoord > 0 && Corridors[xCoord - 1, yCoord, 2])
                     {
@@ -175,7 +169,8 @@ namespace Confusing_Hobo_Unleashed
         //CHECKS IF GENERATED/FIXED MAP FULFILLS REQUIREMENTS BY TRACING THE AMOUNT OF ROOMS REACHABLE FROM STARTING POINT X Y
         public static void Tester(int xPos, int yPos, bool[,,] counter, int[,] enableMoreCorridors)
         {
-            if (counter[xPos, yPos, 0] != true && counter[xPos, yPos, 1] != true && counter[xPos, yPos, 2] != true && counter[xPos, yPos, 3] != true)
+            if (counter[xPos, yPos, 0] != true && counter[xPos, yPos, 1] != true && counter[xPos, yPos, 2] != true &&
+                counter[xPos, yPos, 3] != true)
             {
                 if (counter[xPos, yPos, 4] != true)
                 {
@@ -217,8 +212,8 @@ namespace Confusing_Hobo_Unleashed
                         Tester(xPos, yPos + 1, counter, enableMoreCorridors);
                     }
                 }
-                int y = 0;
-                for (int x = 0; x <= 3; x++)
+                var y = 0;
+                for (var x = 0; x <= 3; x++)
                 {
                     if (counter[xPos, yPos, x])
                     {
@@ -242,22 +237,22 @@ namespace Confusing_Hobo_Unleashed
         //--DO NOT TOUCH-- MAP FIXING ALGORITHM, GETS CLOSER TO FULFILLING REQUIREMENTS OF THE MAP --DO NOT TOUCH--
         public static void FixMap(int[,] enableMoreCorridors)
         {
-            bool error = false;
+            var error = false;
             var randomNum = new Random();
             if (DeadEndAmount > MaxDeadEnd)
             {
                 DeadEndAmount = MaxDeadEnd;
             }
 
-            for (int x = 0; x < DeadEndAmount; x += 3)
+            for (var x = 0; x < DeadEndAmount; x += 3)
             {
-                int fixMapX = enableMoreCorridors[x, 0];
-                int fixMapY = enableMoreCorridors[x, 1];
+                var fixMapX = enableMoreCorridors[x, 0];
+                var fixMapY = enableMoreCorridors[x, 1];
                 if (Corridors[fixMapX, fixMapY, 0])
                 {
                     do
                     {
-                        int random = randomNum.Next(5);
+                        var random = randomNum.Next(5);
                         switch (random)
                         {
                             case 0:
@@ -294,7 +289,7 @@ namespace Confusing_Hobo_Unleashed
                 {
                     do
                     {
-                        int random = randomNum.Next(5);
+                        var random = randomNum.Next(5);
                         switch (random)
                         {
                             case 0:
@@ -332,7 +327,7 @@ namespace Confusing_Hobo_Unleashed
                 {
                     do
                     {
-                        int random = randomNum.Next(5);
+                        var random = randomNum.Next(5);
                         switch (random)
                         {
                             case 0:
@@ -370,7 +365,7 @@ namespace Confusing_Hobo_Unleashed
                 {
                     do
                     {
-                        int random = randomNum.Next(5);
+                        var random = randomNum.Next(5);
                         switch (random)
                         {
                             case 0:
@@ -407,7 +402,7 @@ namespace Confusing_Hobo_Unleashed
                 {
                     do
                     {
-                        int random = randomNum.Next(5);
+                        var random = randomNum.Next(5);
                         switch (random)
                         {
                             case 0:
@@ -452,8 +447,8 @@ namespace Confusing_Hobo_Unleashed
         // USED FOR ATTEMPTING TO FIX THE MAP ALGORITHMS IN CASE YOU TOUCHED IT
         public static void ShowDead()
         {
-            int x = 0;
-            foreach (int item in EnableMoreCorridors)
+            var x = 0;
+            foreach (var item in EnableMoreCorridors)
             {
                 Console.WriteLine("Dead end" + x/2 + ":".PadRight(30) + item);
                 x++;
@@ -465,36 +460,36 @@ namespace Confusing_Hobo_Unleashed
         public static void ShowMatrix()
         {
             Console.WriteLine("WEST MATRIX");
-            for (int yCoord = 0; yCoord < RoomsVertical; yCoord++)
+            for (var yCoord = 0; yCoord < RoomsVertical; yCoord++)
             {
-                for (int xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
+                for (var xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
                 {
                     Console.Write(Corridors[xCoord, yCoord, 0]);
                 }
                 Console.Write('\n');
             }
             Console.WriteLine("\n NORTH MATRIX");
-            for (int yCoord = 0; yCoord < RoomsVertical; yCoord++)
+            for (var yCoord = 0; yCoord < RoomsVertical; yCoord++)
             {
-                for (int xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
+                for (var xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
                 {
                     Console.Write(Corridors[xCoord, yCoord, 1]);
                 }
                 Console.Write('\n');
             }
             Console.WriteLine("\n EAST MATRIX");
-            for (int yCoord = 0; yCoord < RoomsVertical; yCoord++)
+            for (var yCoord = 0; yCoord < RoomsVertical; yCoord++)
             {
-                for (int xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
+                for (var xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
                 {
                     Console.Write(Corridors[xCoord, yCoord, 2]);
                 }
                 Console.Write('\n');
             }
             Console.WriteLine("\n SOUTH MATRIX");
-            for (int yCoord = 0; yCoord < RoomsVertical; yCoord++)
+            for (var yCoord = 0; yCoord < RoomsVertical; yCoord++)
             {
-                for (int xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
+                for (var xCoord = 0; xCoord < RoomsHorizontal; xCoord++)
                 {
                     Console.Write(Corridors[xCoord, yCoord, 3]);
                 }
@@ -502,5 +497,12 @@ namespace Confusing_Hobo_Unleashed
             }
             Console.ReadLine();
         }
+
+        public static int RoomsHorizontal = 7;
+        public static int RoomsVertical = 4;
+        public static bool[,,] Corridors = new bool[RoomsHorizontal, RoomsVertical, 5];
+        public static bool[,,] Counter = new bool[RoomsHorizontal, RoomsVertical, 5];
+        public static int[,] EnableMoreCorridors = new int[RoomsHorizontal*RoomsVertical, 2];
+        public static int[,] Terrains = new int[RoomsHorizontal, RoomsVertical];
     }
 }

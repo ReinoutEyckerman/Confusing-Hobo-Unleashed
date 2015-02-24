@@ -1,5 +1,4 @@
 ﻿using System;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.User;
 using Microsoft.Xna.Framework.Input;
@@ -13,7 +12,7 @@ namespace Confusing_Hobo_Unleashed
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
             Console.Clear();
             Game.CurrentLoadedMap = new CustomMap(Console.WindowHeight, Console.WindowWidth, false);
-            TerrainSelection.Redirect(Game.CurrentLoadedMap, 202);
+            TerrainSelection.Redirect(Game.CurrentLoadedMap, 202, false);
             Gameplay.Push();
             Game.CurrentLoadedMap.Layers[Maplayers.Air].LayerToBuffer(Game.GameBuffer);
             Game.CurrentLoadedMap.Layers[Maplayers.Collision].LayerToBuffer(Game.GameBuffer);
@@ -29,21 +28,28 @@ namespace Confusing_Hobo_Unleashed
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkCyan;
             Console.SetCursorPosition(MapDrawing.Xposmin - 1, MapDrawing.Yposmin - 1);
 
-            for (int x = MapDrawing.Xposmin - 1; x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1; x++)
-            {
-                Console.Write("-");
-            }
-            Console.SetCursorPosition(MapDrawing.Xposmin - 1, MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical + 1);
-            for (int x = MapDrawing.Xposmin - 1;
+            for (var x = MapDrawing.Xposmin - 1;
                 x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1;
                 x++)
             {
                 Console.Write("-");
             }
-            for (int y = MapDrawing.Yposmin; y <= MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical; y++)
+            Console.SetCursorPosition(MapDrawing.Xposmin - 1,
+                MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical + 1);
+            for (var x = MapDrawing.Xposmin - 1;
+                x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1;
+                x++)
+            {
+                Console.Write("-");
+            }
+            for (var y = MapDrawing.Yposmin;
+                y <= MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical;
+                y++)
             {
                 Console.SetCursorPosition(MapDrawing.Xposmin, y);
-                for (int x = MapDrawing.Xposmin; x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal; x++)
+                for (var x = MapDrawing.Xposmin;
+                    x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal;
+                    x++)
                 {
                     Console.Write(" ");
                 }
@@ -53,16 +59,16 @@ namespace Confusing_Hobo_Unleashed
         public static void MoveUser()
         {
             MapDrawing.ShowMap();
-            int xpostemp = MapDrawing.Xposcurrent;
-            int ypostemp = MapDrawing.Yposcurrent;
-            int preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) +
+            var xpostemp = MapDrawing.Xposcurrent;
+            var ypostemp = MapDrawing.Yposcurrent;
+            var preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) +
                             MapDrawing.HorizontalBlockLength/2);
-            int preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) +
+            var preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) +
                             MapDrawing.VerticalBlockLength/2);
 
             Console.SetCursorPosition(preXCalc, preYCalc);
             DrawPerson();
-            Buttons input = InputHandler.ControlInputHandling();
+            var input = InputHandler.ControlInputHandling();
             switch (input)
             {
                 case Buttons.DPadDown:
@@ -103,8 +109,10 @@ namespace Confusing_Hobo_Unleashed
                     break;
             }
             MapDrawing.ShowMap();
-            preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) + MapDrawing.HorizontalBlockLength/2);
-            preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) + MapDrawing.VerticalBlockLength/2);
+            preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) +
+                        MapDrawing.HorizontalBlockLength/2);
+            preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) +
+                        MapDrawing.VerticalBlockLength/2);
             Console.SetCursorPosition(preXCalc, preYCalc);
             DrawPerson();
             if (MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] != true)
@@ -122,7 +130,8 @@ namespace Confusing_Hobo_Unleashed
                             Console.Clear();
                             Game.GameBuffer.Clear();
                             corBut = true;
-                            TerrainSelection.Redirect(Game.CurrentLoadedMap, MapGeneration.Terrains[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]);
+                            TerrainSelection.Redirect(Game.CurrentLoadedMap,
+                                MapGeneration.Terrains[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]);
                             Gameplay.EnableTerrain();
                             MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] = true;
                             DrawMap();
@@ -146,7 +155,9 @@ namespace Confusing_Hobo_Unleashed
 
         public static void LeftoverPerson()
         {
-            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
+            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]
+                ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen
+                : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
 
             Console.Write("   ");
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
@@ -154,7 +165,9 @@ namespace Confusing_Hobo_Unleashed
 
         public static void DrawPerson()
         {
-            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
+            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]
+                ? VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen
+                : VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkRed;
             Console.Write(MapDrawing.HorizontalBlockLength >= 7 ? "'-'" : "o");
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
         }

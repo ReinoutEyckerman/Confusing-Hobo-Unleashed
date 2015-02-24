@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -26,7 +25,9 @@ namespace Confusing_Hobo_Unleashed.Enemies
             MaxVerticalProximity = 30;
             PlayerColor = Color.ColorsToAttribute(Background, Foreground);
             WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10, bulletBackground: VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White, bulletForeground: VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, speed: 1);
+            WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10,
+                bulletBackground: VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White,
+                bulletForeground: VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, speed: 1);
         }
 
         public override void CalculateAttack()
@@ -50,7 +51,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             }
             if (_raining && Mana > 0)
             {
-                int vert = 0;
+                var vert = 0;
                 if (VarDatabase.Invertrate == 1)
                     vert = Map.Mapheight - 1;
                 WeaponInv[0].Shoot(300, Random.Next(Map.Mapwidth), vert);

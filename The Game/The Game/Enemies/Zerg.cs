@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies

@@ -19,7 +19,9 @@ namespace Confusing_Hobo_Unleashed.User
         private readonly short _bulletColor;
         private int _speed;
 
-        public Weapon(string weaponName, WeaponType type, int damage, byte cooldown, ConsoleColor color = ConsoleColor.Black, ConsoleColor bulletBackground = ConsoleColor.Black, ConsoleColor bulletForeground = ConsoleColor.Black, char bulletCharacter = 'o', int speed = 0)
+        public Weapon(string weaponName, WeaponType type, int damage, byte cooldown,
+            ConsoleColor color = ConsoleColor.Black, ConsoleColor bulletBackground = ConsoleColor.Black,
+            ConsoleColor bulletForeground = ConsoleColor.Black, char bulletCharacter = 'o', int speed = 0)
         {
             Speed = speed;
             Name = weaponName;
@@ -81,7 +83,6 @@ namespace Confusing_Hobo_Unleashed.User
         public byte Cooldown { get; set; }
         public bool IsMelee { get; set; }
         public SoundPlayer WeaponSound { get; set; }
-
         public char[] UseAnimation { get; set; }
 
         public void Shoot(int direction, int x, int y)

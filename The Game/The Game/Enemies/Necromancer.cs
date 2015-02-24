@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
@@ -37,7 +36,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             if (Target == null || _timer > 50 && Target.CurrentClass != Classes.Grave)
             {
                 _timer = 0;
-                foreach (AiCore t in Game.Entities)
+                foreach (var t in Game.Entities)
                 {
                     if (t.CurrentClass == Classes.Grave)
                     {
@@ -48,12 +47,11 @@ namespace Confusing_Hobo_Unleashed.Enemies
                         return;
                     }
                 }
-                
-                    Target = Game.Players[Random.Next(Game.Players.Count)];
-                    MinHorizontalProximity = 20 + Random.Next(-5, 6);
-                    MaxHorizontalProximity = 1;
-                    MaxVerticalProximity = 1;
-                
+
+                Target = Game.Players[Random.Next(Game.Players.Count)];
+                MinHorizontalProximity = 20 + Random.Next(-5, 6);
+                MaxHorizontalProximity = 1;
+                MaxVerticalProximity = 1;
             }
         }
 
@@ -61,12 +59,12 @@ namespace Confusing_Hobo_Unleashed.Enemies
         {
             if (Mana - 40 > 0 && Target.CurrentClass == Classes.Grave)
             {
-                for (int index = 0; index < Game.Entities.Count; index++)
+                for (var index = 0; index < Game.Entities.Count; index++)
                 {
                     if (Game.Entities[index].CurrentClass == Classes.Grave)
                     {
-                        int tempx = X - Game.Entities[index].X;
-                        int tempy = Y - Game.Entities[index].Y;
+                        var tempx = X - Game.Entities[index].X;
+                        var tempy = Y - Game.Entities[index].Y;
                         if (tempx < 10 && tempx > -10 && tempy < 5 && tempy > -5)
                         {
                             Mana -= 40;
@@ -107,7 +105,6 @@ namespace Confusing_Hobo_Unleashed.Enemies
         public override void Movement(CustomMap map)
         {
         }
-
 
         public override void Special()
         {

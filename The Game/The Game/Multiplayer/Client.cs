@@ -6,7 +6,6 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Input;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.User;
 using Lidgren.Network;
 using Timer = System.Timers.Timer;
@@ -27,7 +26,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
     {
         private static NetClient _client;
         private static Timer _update;
-        public static int PlayerNumber = 0;
+        public static int PlayerNumber;
         public static Key[] Input = new Key[9];
         private static readonly Stopwatch FrameTimer = new Stopwatch();
 
@@ -47,10 +46,13 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             } while (Uri.CheckHostName(hostip) != UriHostNameType.IPv4);
             var config = new NetPeerConfiguration("game");
             _client = new NetClient(config);
-            NetOutgoingMessage outmsg = _client.CreateMessage();
+            var outmsg = _client.CreateMessage();
             _client.Start();
             outmsg.Write((byte) PacketTypes.Login);
-            var user = new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black, VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
+            var user = new Player(Game.CurrentLoadedMap, 3, 3, 100,
+                Encoding.GetEncoding(437).GetChars(new byte[] {001})[0],
+                VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black,
+                VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White);
             LidgrenAdaptions.CompileCore(outmsg, user);
             _client.Connect(hostip, 22401, outmsg);
             Console.WriteLine("Client Started");
@@ -67,13 +69,13 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         }
 
         private static void update_Elapsed(object sender, ElapsedEventArgs e)
-        { 
+        {
             CheckServerMessages();
         }
 
         private static void WaitForStartingInfo()
         {
-            bool canStart = false;
+            var canStart = false;
             while (!canStart)
             {
                 NetIncomingMessage inc;
@@ -92,8 +94,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                 LidgrenAdaptions.OneReadList(inc);
                                 //
                                 PlayerNumber = inc.ReadInt16();
-                                short count = Convert.ToInt16(PlayerNumber + 1);
-                                for (int i = 0; i < count; i++)
+                                var count = Convert.ToInt16(PlayerNumber + 1);
+                                for (var i = 0; i < count; i++)
                                 {
                                     // Create new character to hold the data
                                     var ch = new Player(Game.CurrentLoadedMap);
@@ -122,23 +124,23 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             {
                 if (inc.MessageType == NetIncomingMessageType.Data)
                 {
-                    byte packet = inc.ReadByte();
+                    var packet = inc.ReadByte();
                     if (packet == (byte) PacketTypes.Worldstate2)
                     {
-                        short count = inc.ReadInt16();
-                        for (int i = 0; i < count; i++)
+                        var count = inc.ReadInt16();
+                        for (var i = 0; i < count; i++)
                         {
                             LidgrenAdaptions.DecompileCore(inc, Game.Players[i]);
                         }
                         count = inc.ReadInt16();
                         Game.Bullets = new List<BulletCore>();
-                        for (int i = 0; i < count; i++)
+                        for (var i = 0; i < count; i++)
                         {
                             var bullet = new BulletCore();
                             LidgrenAdaptions.DeCompileBullet(inc, bullet);
                             Game.Bullets.Add(bullet);
                         }
-                        bool change = inc.ReadBoolean();
+                        var change = inc.ReadBoolean();
                         if (change)
                             LidgrenAdaptions.VarReadList(inc);
                     }
@@ -159,7 +161,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         private static void GetInput()
         {
             FrameTimer.Restart();
-            NetOutgoingMessage outmsg = _client.CreateMessage();
+            var outmsg = _client.CreateMessage();
             outmsg.Write((byte) PacketTypes.Input);
             outmsg.Write((byte) PlayerNumber);
             for (byte i = 0; i < Input.GetLength(0); i++)

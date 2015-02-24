@@ -66,7 +66,7 @@ namespace Confusing_Hobo_Unleashed
                     DarkMagenta = ConsoleColor.Black,
                     Gray = ConsoleColor.Black,
                     DarkGray = ConsoleColor.Black,
-                    White = ConsoleColor.Black,
+                    White = ConsoleColor.Black
                 },
                 new ColorList //4 Shades of Gray
                 {
@@ -123,7 +123,7 @@ namespace Confusing_Hobo_Unleashed
                     DarkMagenta = Color.RandomColor(),
                     Gray = Color.RandomColor(),
                     DarkGray = Color.RandomColor(),
-                    White = Color.RandomColor(),
+                    White = Color.RandomColor()
                 }
             };
             ForeGroundList = new List<ColorList>
@@ -164,7 +164,7 @@ namespace Confusing_Hobo_Unleashed
                     DarkMagenta = ConsoleColor.White,
                     Gray = ConsoleColor.White,
                     DarkGray = ConsoleColor.White,
-                    White = ConsoleColor.White,
+                    White = ConsoleColor.White
                 },
                 new ColorList //4 Shades of Gray
                 {
@@ -221,7 +221,7 @@ namespace Confusing_Hobo_Unleashed
                     DarkMagenta = Color.RandomColor(),
                     Gray = Color.RandomColor(),
                     DarkGray = Color.RandomColor(),
-                    White = Color.RandomColor(),
+                    White = Color.RandomColor()
                 }
             };
         }
@@ -242,30 +242,30 @@ namespace Confusing_Hobo_Unleashed
         public static ConsoleColor RandomColor()
         {
             var random = new Random();
-            int randomgetal = random.Next(0, Kleuren.Length);
+            var randomgetal = random.Next(0, Kleuren.Length);
             Thread.Sleep(4);
             return (ConsoleColor) Kleuren.GetValue(randomgetal);
         }
 
         public static short ColorsToAttribute(ConsoleColor bg, ConsoleColor fg)
         {
-            short bgValue = ColorToValue(bg);
-            short fgValue = ColorToValue(fg);
+            var bgValue = ColorToValue(bg);
+            var fgValue = ColorToValue(fg);
 
-            short attribute = Convert.ToInt16((bgValue)*16 + fgValue);
+            var attribute = Convert.ToInt16((bgValue)*16 + fgValue);
 
             return attribute;
         }
 
         public static ConsoleColor BackgroundFromAttribute(short attribute)
         {
-            short bgvalue = Convert.ToInt16(attribute/16);
+            var bgvalue = Convert.ToInt16(attribute/16);
             return ValueToColor(bgvalue);
         }
 
         public static ConsoleColor ForegroundFromAttribute(short attribute)
         {
-            short fgvalue = Convert.ToInt16(attribute%16);
+            var fgvalue = Convert.ToInt16(attribute%16);
             return ValueToColor(fgvalue);
         }
 

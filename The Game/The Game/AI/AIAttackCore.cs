@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.Multiplayer;
 using Confusing_Hobo_Unleashed.User;
 
@@ -22,14 +21,13 @@ namespace Confusing_Hobo_Unleashed.AI
 
         public virtual void MeleeCheck(AiCore source, int xpos, int ypos)
         {
-            foreach (AiCore t in Game.Entities)
+            foreach (var t in Game.Entities)
             {
                 if (t.X == xpos && t.Y == ypos)
                     t.HpCurrent -= source.WeaponInv[0].Damage;
             }
             DestructibleCheck(xpos, ypos);
         }
-
 
         public void Attack(CustomMap map, Move direction)
         {

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
+using System.Xml;
 using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.MapEdit;
 
-using System.Xml;
-
 namespace Confusing_Hobo_Unleashed
 {
-    enum GravFields
+    internal enum GravFields
     {
         Normal = 51,
         Sea = 83,
@@ -24,16 +22,18 @@ namespace Confusing_Hobo_Unleashed
         Decor,
         Clouds
     }
-    public class CustomMap: ICustomMap
-    {
 
+    public class CustomMap
+    {
         public int Invertrate;
         public int Mapheight;
         public int Mapwidth;
+
         public CustomMap(int mapheight)
         {
             Mapheight = mapheight;
         }
+
         public CustomMap(int mapheight, int mapwidth, bool newfile, string filename = " ", bool clouds = true, bool daynight = true)
         {
             Invertrate = VarDatabase.Invertrate;
@@ -41,11 +41,11 @@ namespace Confusing_Hobo_Unleashed
             Mapwidth = mapwidth;
             Layers = new Dictionary<Maplayers, Layer>
             {
-                {Maplayers.Air, new Layer( daynight, mapwidth, mapheight)},
-                {Maplayers.Collision, new Layer( true, mapwidth, mapheight)},
-                {Maplayers.Destructible, new Layer( true, mapwidth, mapheight)}, 
-                {Maplayers.Decor,new Layer( true, mapwidth, mapheight)}, 
-                {Maplayers.Clouds,new Layer( clouds, mapwidth, mapheight)}
+                {Maplayers.Air, new Layer(daynight, mapwidth, mapheight)},
+                {Maplayers.Collision, new Layer(true, mapwidth, mapheight)},
+                {Maplayers.Destructible, new Layer(true, mapwidth, mapheight)},
+                {Maplayers.Decor, new Layer(true, mapwidth, mapheight)},
+                {Maplayers.Clouds, new Layer(clouds, mapwidth, mapheight)}
             };
 
             Grav = new short[mapheight, mapwidth];
@@ -61,11 +61,11 @@ namespace Confusing_Hobo_Unleashed
             CloudsEnabled = clouds;
             DayNightEnabled = daynight;
 
-            for (int i = 0; i < mapheight; i++)
+            for (var i = 0; i < mapheight; i++)
             {
-                for (int j = 0; j < mapwidth; j++)
+                for (var j = 0; j < mapwidth; j++)
                 {
-                    foreach (KeyValuePair<Maplayers, Layer> layer in Layers)
+                    foreach (var layer in Layers)
                     {
                         layer.Value.Background[i, j] = ConsoleColor.Black;
                         layer.Value.Foreground[i, j] = ConsoleColor.White;
@@ -73,7 +73,7 @@ namespace Confusing_Hobo_Unleashed
                         layer.Value.Colors[i, j] = 01;
                     }
 
-                    Grav[i, j] = (short)GravFields.Normal;
+                    Grav[i, j] = (short) GravFields.Normal;
                     Collision[i, j] = false;
                     Background[i, j] = ConsoleColor.Black;
                     Foreground[i, j] = ConsoleColor.White;
@@ -90,33 +90,27 @@ namespace Confusing_Hobo_Unleashed
         public short[,] Colors { get; set; }
         public bool[,] Collision { get; set; }
         public bool[,] CollisionBackUp { get; set; }
-
         public short[,] Grav { get; set; }
-
         public bool[,] Destructible { get; set; }
-
-
         public bool NewFile { get; set; }
         public string FileName { get; set; }
-
         public bool CloudsEnabled { get; set; }
         public bool DayNightEnabled { get; set; }
         public bool Sea { get; set; }
         public bool LowGravity { get; set; }
-
         public Dictionary<Maplayers, Layer> Layers { get; set; }
 
         public void RedrawPixel(int xpos, int ypos, buffer outputbuffer)
         {
-            string mapchar = Convert.ToString(Characters[ypos, xpos]);
+            var mapchar = Convert.ToString(Characters[ypos, xpos]);
             outputbuffer.Draw(mapchar, xpos, ypos, Colors[ypos, xpos]);
         }
 
         public void PushtoArray(ConsoleColor[,] SourceBG, ConsoleColor[,] SourceFG, short[,] Destination)
         {
-            for (int i = 0; i < SourceBG.GetLength(0); i++)
+            for (var i = 0; i < SourceBG.GetLength(0); i++)
             {
-                for (int j = 0; j < SourceBG.GetLength(1); j++)
+                for (var j = 0; j < SourceBG.GetLength(1); j++)
                 {
                     Destination[i, j] = Color.ColorsToAttribute(SourceBG[i, j], SourceFG[i, j]);
                 }
@@ -128,7 +122,7 @@ namespace Confusing_Hobo_Unleashed
             //Create the maps directory in case it doesn't exist yet.
             Directory.CreateDirectory("maps");
 
-            using (XmlWriter writer = XmlWriter.Create("maps/" + FileName))
+            using (var writer = XmlWriter.Create("maps/" + FileName))
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("Map");
@@ -138,41 +132,42 @@ namespace Confusing_Hobo_Unleashed
                 writer.WriteElementString("CloudGen", CloudsEnabled.ToString());
 
                 writer.WriteStartElement("CollDest");
-                for (int i = 0; i < Collision.GetLength(0); i++)
+                for (var i = 0; i < Collision.GetLength(0); i++)
                 {
                     writer.WriteStartElement("Y" + i);
-                    for (int j = 0; j < Collision.GetLength(1); j++)
+                    for (var j = 0; j < Collision.GetLength(1); j++)
                     {
                         writer.WriteStartElement("X" + j);
                         writer.WriteAttributeString("Col", Collision[i, j].ToString());
                         writer.WriteAttributeString("Des", Destructible[i, j].ToString());
-                        writer.WriteEndElement();//X
+                        writer.WriteEndElement(); //X
                     }
-                    writer.WriteEndElement();//Y
+                    writer.WriteEndElement(); //Y
                 }
-                writer.WriteEndElement();//Colldest
+                writer.WriteEndElement(); //Colldest
 
-                foreach (KeyValuePair<Maplayers, Layer> layer in Layers)
+                foreach (var layer in Layers)
                 {
                     writer.WriteStartElement(layer.Key.ToString());
 
-                    for (int i = 0; i < Background.GetLength(0); i++)
+                    for (var i = 0; i < Background.GetLength(0); i++)
                     {
                         writer.WriteStartElement("Y" + i);
-                        for (int j = 0; j < Background.GetLength(1); j++)
+                        for (var j = 0; j < Background.GetLength(1); j++)
                         {
                             writer.WriteStartElement("X" + j);
-                            writer.WriteAttributeString("Char", layer.Value.Characters[i, j] == null ? "niks" : layer.Value.Characters[i, j].ToString());
+                            writer.WriteAttributeString("Char",
+                                layer.Value.Characters[i, j] == null ? "niks" : layer.Value.Characters[i, j].ToString());
                             writer.WriteAttributeString("Color", layer.Value.Colors[i, j].ToString());
-                            writer.WriteEndElement();//X
+                            writer.WriteEndElement(); //X
                         }
-                        writer.WriteEndElement();//Y
+                        writer.WriteEndElement(); //Y
                     }
 
-                    writer.WriteEndElement();//layer
+                    writer.WriteEndElement(); //layer
                 }
 
-                writer.WriteEndElement();//doc
+                writer.WriteEndElement(); //doc
                 writer.WriteEndDocument();
             }
 
@@ -181,7 +176,7 @@ namespace Confusing_Hobo_Unleashed
 
         public void LoadMap(string filename)
         {
-            using (XmlReader reader = XmlReader.Create(filename))
+            using (var reader = XmlReader.Create(filename))
             {
                 reader.ReadToFollowing("Width");
                 Mapwidth = reader.ReadElementContentAsInt();
@@ -189,10 +184,10 @@ namespace Confusing_Hobo_Unleashed
                 DayNightEnabled = Convert.ToBoolean(reader.ReadElementContentAsString("DayNightGen", ""));
                 CloudsEnabled = Convert.ToBoolean(reader.ReadElementContentAsString("CloudGen", ""));
 
-                for (int i = 0; i < Mapheight; i++)
+                for (var i = 0; i < Mapheight; i++)
                 {
                     reader.ReadToFollowing("Y" + i);
-                    for (int j = 0; j < Mapwidth; j++)
+                    for (var j = 0; j < Mapwidth; j++)
                     {
                         reader.ReadToFollowing("X" + j);
                         Collision[i, j] = Convert.ToBoolean(reader.GetAttribute("Col"));
@@ -200,15 +195,15 @@ namespace Confusing_Hobo_Unleashed
                     }
                 }
 
-                foreach (KeyValuePair<Maplayers, Layer> t in Layers)
+                foreach (var t in Layers)
                 {
-                    for (int i = 0; i < Mapheight; i++)
+                    for (var i = 0; i < Mapheight; i++)
                     {
                         reader.ReadToFollowing("Y" + i);
-                        for (int j = 0; j < Mapwidth; j++)
+                        for (var j = 0; j < Mapwidth; j++)
                         {
                             reader.ReadToFollowing("X" + j);
-                            string characterInFile = reader.GetAttribute("Char");
+                            var characterInFile = reader.GetAttribute("Char");
                             if (characterInFile == "niks")
                             {
                                 t.Value.Characters[i, j] = null;
@@ -229,13 +224,13 @@ namespace Confusing_Hobo_Unleashed
 
         public void MapToBuffer(buffer outputbuffer, char?[,] chararray, short[,] colorarray)
         {
-            for (int i = 0; i < chararray.GetLength(0); i++)
+            for (var i = 0; i < chararray.GetLength(0); i++)
             {
-                for (int j = 0; j < chararray.GetLength(1); j++)
+                for (var j = 0; j < chararray.GetLength(1); j++)
                 {
                     if (chararray[i, j].HasValue)
                     {
-                        string CharToString = Convert.ToString(chararray[i, j]);
+                        var CharToString = Convert.ToString(chararray[i, j]);
                         outputbuffer.Draw(CharToString, j, i, colorarray[i, j]);
                     }
                 }

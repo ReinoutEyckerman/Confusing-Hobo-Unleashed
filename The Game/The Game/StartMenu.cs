@@ -4,386 +4,45 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.MapEdit;
 using Confusing_Hobo_Unleashed.Multiplayer;
 using Confusing_Hobo_Unleashed.TerrainGen;
+using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.User;
 using Microsoft.Xna.Framework.Input;
 
 namespace Confusing_Hobo_Unleashed
 {
-    internal class Button
-    {
-        public Button()
-        {
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            SelectedColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
-            SelectedColors = Color.ColorsToAttribute(SelectedColor, ForegroundColor);
+   
 
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            Value = false;
-            Xpos = Console.WindowWidth*2/5;
-            BlockLength = Console.WindowWidth/5;
-        }
-
-        public Button(int xpos, int ypos, string message, bool value = false, int blocklength = 20, int blockheight = 5)
-        {
-            Xpos = xpos;
-            Ypos = ypos;
-            BlockLength = blocklength;
-            BlockHeight = blockheight;
-            Message = message;
-            Value = value;
-
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            CenterMessage();
-        }
-
-        public int Xpos { get; set; }
-        public int Ypos { get; set; }
-        public int BlockLength { get; set; }
-        public int BlockHeight { get; set; }
-        public string Message { get; set; }
-        public int XPosForCenteredMessage { get; set; }
-        public int YPosForCenteredMessage { get; set; }
-        public bool Value { get; set; }
-        public ConsoleColor BackgroundColor { get; set; }
-        public ConsoleColor BorderColor { get; set; }
-        public ConsoleColor ForegroundColor { get; set; }
-        public ConsoleColor SelectedColor { get; set; }
-        public short BorderColors { get; set; }
-        public short BackgroundColors { get; set; }
-        public short SelectedColors { get; set; }
-        public List<int> VarChanger { get; set; }
-
-        private void CenterMessage()
-        {
-            XPosForCenteredMessage = (Xpos + (BlockLength/2)) - Message.Length/2;
-            YPosForCenteredMessage = (Ypos + (BlockHeight/2));
-        }
-
-        public void Recolor()
-        {
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            SelectedColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
-            SelectedColors = Color.ColorsToAttribute(SelectedColor, ForegroundColor);
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-        }
-
-        public void ChangeValue()
-        {
-            Value = !Value;
-        }
-
-        public void Render(buffer outputbuffer)
-        {
-            if (XPosForCenteredMessage == 0)
-                CenterMessage();
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, Value ? SelectedColors : BackgroundColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
-            outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
-        }
-
-        public void RenderActive(buffer outputbuffer)
-        {
-            if (XPosForCenteredMessage == 0)
-                CenterMessage();
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BorderColors, outputbuffer, true);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
-
-            outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
-        }
-    }
-
-    public class TextBox
-    {
-        public TextBox()
-        {
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BoxBackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
-            BoxForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            SelectedColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
-            BoxColors = Color.ColorsToAttribute(BoxBackgroundColor, BoxForegroundColor);
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            SelectedColors = Color.ColorsToAttribute(SelectedColor, ForegroundColor);
-            Value = false;
-            Xpos = Console.WindowWidth*2/5;
-            BlockLength = Console.WindowWidth/5;
-        }
-
-        public ConsoleColor ForegroundColor { get; set; }
-        public ConsoleColor BorderColor { get; set; }
-        public bool Value { get; set; }
-        public int Xpos { get; set; }
-        public int Ypos { get; set; }
-        public int XPosForCenteredMessage { get; set; }
-        public int YPosForCenteredMessage { get; set; }
-        public int BlockLength { get; set; }
-        public int BlockHeight { get; set; }
-        public string Message { get; set; }
-        public ConsoleColor BoxBackgroundColor { get; set; }
-        public ConsoleColor BoxForegroundColor { get; set; }
-        public ConsoleColor BackgroundColor { get; set; }
-        public ConsoleColor SelectedColor { get; set; }
-        public short BorderColors { get; set; }
-        public short BackgroundColors { get; set; }
-        public short BoxColors { get; set; }
-        public short SelectedColors { get; set; }
-        public List<InsertBox> Box { get; set; }
-        public List<int> VarChanger { get; set; }
-
-        private void CenterMessage()
-        {
-            XPosForCenteredMessage = (Xpos + (BlockLength/2)) - Message.Length/2;
-            YPosForCenteredMessage = (Ypos + (BlockHeight/3));
-        }
-
-        private void DrawBox(buffer outputbuffer)
-        {
-            for (int a = 0; a < Box.Count; a++)
-            {
-                if (Box[a].PosY == 0)
-                    Box[a].PosY = Ypos + BlockHeight*2/3;
-                for (int i = 0; i < Box[a].Length; i++)
-                    outputbuffer.Draw(" ", Box[a].PosX, Box[a].PosY, BoxColors);
-
-                outputbuffer.Draw(VarChanger[a].ToString(), Box[a].PosX, Ypos + BlockHeight*2/3, BoxColors);
-            }
-        }
-
-        public void Insert()
-        {
-            for (int a = 0; a < Box.Count; a++)
-            {
-                string var = "";
-                Console.CursorVisible = true;
-                for (int x = 0; x < Box[a].Length; x++)
-                {
-                    int w;
-                    Console.SetCursorPosition(Box[a].PosX + x, Box[a].PosY);
-                    if (Int32.TryParse(Console.ReadKey().KeyChar.ToString(), out w))
-                        var += Convert.ToString(w);
-                    else x--;
-                }
-                Console.CursorVisible = false;
-
-                VarChanger[a] = Convert.ToInt32(var);
-                bool input;
-                do
-                {
-                    Buttons Input = InputHandler.ControlInputHandling();
-                    switch (Input)
-                    {
-                        case Buttons.A:
-                            input = true;
-                            break;
-                        case Buttons.B:
-                        case Buttons.Back:
-                            a -= 1;
-                            input = true;
-                            break;
-                        default:
-                            input = false;
-                            break;
-                    }
-                } while (!input);
-            }
-        }
-
-        public void Recolor()
-        {
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BoxBackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
-            BoxForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            SelectedColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
-            SelectedColors = Color.ColorsToAttribute(SelectedColor, ForegroundColor);
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            BoxColors = Color.ColorsToAttribute(BoxBackgroundColor, BoxForegroundColor);
-        }
-
-        public void Render(buffer outputbuffer)
-        {
-            if (XPosForCenteredMessage == 0)
-                CenterMessage();
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, Value ? SelectedColors : BackgroundColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
-            outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
-            DrawBox(outputbuffer);
-        }
-
-        public void RenderActive(buffer outputbuffer)
-        {
-            if (XPosForCenteredMessage == 0)
-                CenterMessage();
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BorderColors, outputbuffer, true);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
-
-            outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
-            DrawBox(outputbuffer);
-        }
-    }
-
-    public class InsertBox
-    {
-        public InsertBox()
-        {
-            Length = 2;
-        }
-
-        public int Length { get; set; }
-        public int PosX { get; set; }
-        public int PosY { get; set; }
-    }
-
-    internal class Options
-    {
-        public Options()
-        {
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            BlockLength = Console.WindowWidth*5/7;
-            BlockHeight = 10;
-            Xpos = Console.WindowWidth/6;
-            TextBoxList = new List<TextBox>();
-            ButtonList = new List<Button>();
-            Content = "";
-            BiDirectional = false;
-        }
-
-        public Options(string name, int xpos, int ypos, int xposmax, string content, bool state, int blocklength, int blockheight)
-        {
-            Name = name;
-            Xpos = xpos;
-            Ypos = ypos;
-            XposMax = xposmax;
-            Content = content;
-            State = state;
-            BlockLength = blocklength;
-            BlockHeight = blockheight;
-            BiDirectional = false;
-
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-
-            TextBoxList = new List<TextBox>();
-            ButtonList = new List<Button>();
-        }
-
-        public bool BiDirectional { get; set; }
-        public string Name { get; set; }
-        public int Xpos { get; set; }
-        public int Ypos { get; set; }
-        public int XposMax { get; set; }
-        public string Content { get; set; }
-        public bool State { get; set; }
-        public int BlockLength { get; set; }
-        public int BlockHeight { get; set; }
-        public ConsoleColor BackgroundColor { get; set; }
-        public ConsoleColor ForegroundColor { get; set; }
-        public ConsoleColor BorderColor { get; set; }
-        public short BorderColors { get; set; }
-        public short BackgroundColors { get; set; }
-
-        public List<Button> ButtonList { get; set; }
-        public List<TextBox> TextBoxList { get; set; }
-
-        public void Recolor()
-        {
-            BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-            BorderColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-            ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            foreach (Button t in ButtonList)
-            {
-                t.Recolor();
-            }
-            foreach (TextBox t in TextBoxList)
-            {
-                t.Recolor();
-            }
-        }
-
-        private void WriteMessage(buffer outputbuffer)
-        {
-            if (Content != "")
-            {
-                int tempx = XposMax - 5 - Console.WindowWidth/6;
-                for (int x = Content.Length; x <= (tempx)*7; x++)
-                {
-                    Content += " ";
-                }
-                for (int i = 0; i < 7; i++)
-                {
-                    outputbuffer.Draw(Content.Substring(tempx*i, tempx), Console.WindowWidth/6 + 2, Ypos + i + 2, BackgroundColors);
-                }
-            }
-        }
-
-        public void Render(buffer outputbuffer)
-        {
-            BackgroundColors = Color.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight/3, Xpos, Ypos + BlockHeight*2/3 + 1, BackgroundColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos - Name.Length - 2, Xpos, Ypos + BlockHeight/3 + 1, Ypos + BlockHeight/3 + 3, outputbuffer);
-            outputbuffer.Draw(Name, Xpos - Name.Length - 1, Ypos + BlockHeight/2, BackgroundColors);
-
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BackgroundColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
-        }
-
-        public void RenderActive(buffer outputbuffer)
-        {
-            BorderColors = Color.ColorsToAttribute(BorderColor, ForegroundColor);
-            Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight/3, Xpos, Ypos + BlockHeight*2/3 + 1, BorderColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos - Name.Length - 2, Xpos, Ypos + BlockHeight/3 + 1, Ypos + BlockHeight/3 + 3, outputbuffer);
-            outputbuffer.Draw(Name, Xpos - Name.Length - 1, Ypos + BlockHeight/2, BackgroundColors);
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BorderColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
-            WriteMessage(outputbuffer);
-        }
-    }
-
+    
     internal class StartMenu
     {
-        public static List<Options> Main = new List<Options>();
-        public static List<Options> Configuration = new List<Options>();
-        public static List<Options> MapEditorMain = new List<Options>();
-        public static List<Options> MapEditorNewMap = new List<Options>();
-        public static List<Options> MapsInFolder = new List<Options>();
-        public static List<Options> Debug = new List<Options>();
-        public static List<Options> ControlsMain = new List<Options>();
+        public static List<OptionsMenu> Main = new List<OptionsMenu>();
+        public static List<OptionsMenu> Configuration = new List<OptionsMenu>();
+        public static List<OptionsMenu> MapEditorMain = new List<OptionsMenu>();
+        public static List<OptionsMenu> MapEditorNewMap = new List<OptionsMenu>();
+        public static List<OptionsMenu> MapsInFolder = new List<OptionsMenu>();
+        public static List<OptionsMenu> Debug = new List<OptionsMenu>();
+        public static List<OptionsMenu> ControlsMain = new List<OptionsMenu>();
         public static List<string> Credits = new List<string>();
         public static Thread Fire;
-        public static buffer FireBuffer = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
-        public static buffer FireBuffer2 = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
+
+        public static buffer FireBuffer = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6,
+            Console.WindowWidth, Console.WindowHeight);
+
+        public static buffer FireBuffer2 = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6,
+            Console.WindowWidth, Console.WindowHeight);
+
         private static short[,] _firepits;
-        public static List<Options> Versus = new List<Options>();
+        public static List<OptionsMenu> Versus = new List<OptionsMenu>();
 
         public static void DrawFirePits()
         {
             _firepits = new short[Console.WindowWidth*2/5 - 10, Console.WindowHeight/6];
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
-            double rico = Convert.ToDouble((Console.WindowHeight - 1 - Console.WindowHeight*5/6))/((Console.WindowWidth*2/15 - 5) - 5);
+            var rico = Convert.ToDouble((Console.WindowHeight - 1 - Console.WindowHeight*5/6))/
+                       ((Console.WindowWidth*2/15 - 5) - 5);
 
             var x1 = (short) (Console.WindowWidth*2/15 - 5);
             short w = 1;
@@ -398,7 +57,7 @@ namespace Confusing_Hobo_Unleashed
                     w = -1;
                     x1 = (short) (Console.WindowWidth*4/15 - 5);
                 }
-                short ypos = Convert.ToInt16(w*rico*(x - x1) + Console.WindowHeight/6 - 1);
+                var ypos = Convert.ToInt16(w*rico*(x - x1) + Console.WindowHeight/6 - 1);
                 for (short y = 0; y <= ypos; y++)
                 {
                     _firepits[x, y] = y == ypos ? (short) 2 : (short) 1;
@@ -411,20 +70,28 @@ namespace Confusing_Hobo_Unleashed
             var fire1 = new ConsoleColor[_firepits.GetLength(0) - 20, Console.WindowHeight*4/6];
             var fireattribute = new short[_firepits.GetLength(0) - 20, Console.WindowHeight*4/6];
             var firepitattribute = new short[_firepits.GetLength(0), _firepits.GetLength(1)];
-            FireBuffer = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
-            FireBuffer2 = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
-            for (int i = 0; i < Console.WindowWidth*2/5; i++)
-                for (int j = 0; j < Console.WindowHeight*5/6; j++)
+            FireBuffer = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth,
+                Console.WindowHeight);
+            FireBuffer2 = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth,
+                Console.WindowHeight);
+            for (var i = 0; i < Console.WindowWidth*2/5; i++)
+                for (var j = 0; j < Console.WindowHeight*5/6; j++)
                 {
-                    string charToString = Convert.ToString(' ');
-                    FireBuffer.Draw(charToString, i, j, Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue, VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue));
-                    FireBuffer2.Draw(charToString, i, j, Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue, VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue));
+                    var charToString = Convert.ToString(' ');
+                    FireBuffer.Draw(charToString, i, j,
+                        Color.ColorsToAttribute(
+                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue,
+                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue));
+                    FireBuffer2.Draw(charToString, i, j,
+                        Color.ColorsToAttribute(
+                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue,
+                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue));
                 }
 
 
-            int ycur = fire1.GetLength(1);
+            var ycur = fire1.GetLength(1);
             var random = new Random();
-            for (int x = 0; x < fire1.GetLength(0); x++)
+            for (var x = 0; x < fire1.GetLength(0); x++)
             {
                 int direction;
                 if (x < fire1.GetLength(0)/6)
@@ -444,27 +111,36 @@ namespace Confusing_Hobo_Unleashed
                 ycur += random.Next(-1, 2) + direction;
                 if (ycur < 0)
                     ycur = 0;
-                for (int y = ycur; y < fire1.GetLength(1); y++)
+                for (var y = ycur; y < fire1.GetLength(1); y++)
                 {
                     fire1[x, y] = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow;
                 }
             }
-            for (int i = 0; i < fire1.GetLength(0); i++)
+            for (var i = 0; i < fire1.GetLength(0); i++)
             {
-                for (int j = 0; j < fire1.GetLength(1); j++)
+                for (var j = 0; j < fire1.GetLength(1); j++)
                 {
-                    if (fire1[i, j] == VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow && ((i - 1 >= 0 && fire1[i - 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red && fire1[i - 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow || i + 1 < fire1.GetLength(0) && fire1[i + 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red && fire1[i + 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow) || i == 0 || i == fire1.GetLength(0) - 1))
+                    if (fire1[i, j] == VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow &&
+                        ((i - 1 >= 0 &&
+                          fire1[i - 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red &&
+                          fire1[i - 1, j] !=
+                          VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow ||
+                          i + 1 < fire1.GetLength(0) &&
+                          fire1[i + 1, j] != VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red &&
+                          fire1[i + 1, j] !=
+                          VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Yellow) || i == 0 ||
+                         i == fire1.GetLength(0) - 1))
                         fire1[i, j] = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
                     fireattribute[i, j] = Color.ColorsToAttribute(fire1[i, j], fire1[i, j]);
-                    string charToString = Convert.ToString(' ');
+                    var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i + 10, j, fireattribute[i, j]);
                     FireBuffer2.Draw(charToString, i + 10, j, fireattribute[i, j]);
                 }
             }
-            ConsoleColor color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Gray;
-            for (int i = 0; i < firepitattribute.GetLength(0); i++)
+            var color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Gray;
+            for (var i = 0; i < firepitattribute.GetLength(0); i++)
             {
-                for (int j = 0; j < firepitattribute.GetLength(1); j++)
+                for (var j = 0; j < firepitattribute.GetLength(1); j++)
                 {
                     if (_firepits[i, j] == 0)
                         break;
@@ -474,7 +150,7 @@ namespace Confusing_Hobo_Unleashed
                         color = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGray;
 
                     firepitattribute[i, j] = Color.ColorsToAttribute(color, color);
-                    string charToString = Convert.ToString(' ');
+                    var charToString = Convert.ToString(' ');
                     FireBuffer.Draw(charToString, i, j + fire1.GetLength(1), firepitattribute[i, j]);
                     FireBuffer2.Draw(charToString, i, j + fire1.GetLength(1), firepitattribute[i, j]);
                 }
@@ -482,7 +158,8 @@ namespace Confusing_Hobo_Unleashed
 
             FireBuffer.SetDrawCord(0, Convert.ToInt16(Console.WindowHeight/6));
             FireBuffer.Print();
-            FireBuffer2.SetDrawCord((Convert.ToInt16(Console.WindowWidth*10/15)), Convert.ToInt16(Console.WindowHeight/6));
+            FireBuffer2.SetDrawCord((Convert.ToInt16(Console.WindowWidth*10/15)),
+                Convert.ToInt16(Console.WindowHeight/6));
             FireBuffer2.Print();
             Thread.Sleep(1000);
             DrawFire();
@@ -490,15 +167,15 @@ namespace Confusing_Hobo_Unleashed
 
         public static void GenList()
         {
-            Configuration = new List<Options>();
-            MapEditorNewMap = new List<Options>();
-            MapsInFolder = new List<Options>();
-            Debug = new List<Options>();
-            ControlsMain = new List<Options>();
-            int confpos = 0;
-            Main = new List<Options>
+            Configuration = new List<OptionsMenu>();
+            MapEditorNewMap = new List<OptionsMenu>();
+            MapsInFolder = new List<OptionsMenu>();
+            Debug = new List<OptionsMenu>();
+            ControlsMain = new List<OptionsMenu>();
+            var confpos = 0;
+            Main = new List<OptionsMenu>
             {
-                new Options
+                new OptionsMenu
                 {
                     ButtonList = new List<Button>
                     {
@@ -506,38 +183,38 @@ namespace Confusing_Hobo_Unleashed
                         {
                             Message = "Start the Game!",
                             Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*0,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "Versus Mode",
                             Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*1,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "Map Editor",
                             Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*2,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "Configuration Screen",
                             Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*3,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "Credits",
                             Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*4,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         }
-                    },
+                    }
                 }
             };
-            Versus = new List<Options>
+            Versus = new List<OptionsMenu>
             {
-                new Options
+                new OptionsMenu
                 {
                     ButtonList = new List<Button>
                     {
@@ -545,35 +222,36 @@ namespace Confusing_Hobo_Unleashed
                         {
                             Message = "Single-Player",
                             Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*0,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "Split-Screen",
                             Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*1,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "LAN",
                             Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*2,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         },
                         new Button
                         {
                             Message = "New LAN Server",
                             Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*3,
-                            BlockHeight = Console.WindowHeight/9,
+                            BlockHeight = Console.WindowHeight/9
                         }
                     },
                     TextBoxList = new List<TextBox>()
                 }
             };
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Map Size",
-                Content = "This defines the size in number of rooms on the game-map. Note: Too much rooms may increase loading times or even make the game unable to generate or display properly. You can possibly fix the display size by picking 'Small' in map display size.",
+                Content =
+                    "This defines the size in number of rooms on the game-map. Note: Too much rooms may increase loading times or even make the game unable to generate or display properly. You can possibly fix the display size by picking 'Small' in map display size.",
                 XposMax = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*4,
                 Ypos = Console.WindowHeight/6 + confpos*4 - 1,
                 State = true,
@@ -583,7 +261,8 @@ namespace Confusing_Hobo_Unleashed
                     {
                         Message = "Small",
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*4,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
                         VarChanger = new List<int>
                         {
@@ -597,7 +276,8 @@ namespace Confusing_Hobo_Unleashed
                         Message = "Medium",
                         Value = true,
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*3,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
                         VarChanger = new List<int>
                         {
@@ -633,7 +313,7 @@ namespace Confusing_Hobo_Unleashed
                         Box = new List<InsertBox>
                         {
                             new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 5)},
-                            new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 1)},
+                            new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 1)}
                         },
                         VarChanger = new List<int>
                         {
@@ -644,11 +324,12 @@ namespace Confusing_Hobo_Unleashed
                 }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Map Display Size",
-                Content = "This defines the size of the displayed rooms on the map. Setting them to 'Small' will display larger maps correctly.",
+                Content =
+                    "This defines the size of the displayed rooms on the map. Setting them to 'Small' will display larger maps correctly.",
                 XposMax = Console.WindowWidth*6/7 - (Console.WindowWidth*4/42 + 2)*4,
                 Ypos = Console.WindowHeight/6 + confpos*4 - 1,
                 ButtonList = new List<Button>
@@ -657,12 +338,13 @@ namespace Confusing_Hobo_Unleashed
                     {
                         Message = "Small",
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*4,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
                         VarChanger = new List<int>
                         {
                             5,
-                            3,
+                            3
                         }
                     },
                     new Button
@@ -670,24 +352,26 @@ namespace Confusing_Hobo_Unleashed
                         Message = "Medium",
                         Value = true,
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*3,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
                         VarChanger = new List<int>
                         {
                             9,
-                            5,
+                            5
                         }
                     },
                     new Button
                     {
                         Message = "Large",
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*2,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
                         VarChanger = new List<int>
                         {
                             11,
-                            7,
+                            7
                         }
                     }
                 },
@@ -704,7 +388,7 @@ namespace Confusing_Hobo_Unleashed
                             Box = new List<InsertBox>
                             {
                                 new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 5)},
-                                new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 1)},
+                                new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 1)}
                             },
                             VarChanger = new List<int>
                             {
@@ -715,11 +399,12 @@ namespace Confusing_Hobo_Unleashed
                     }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Map Exploration Difficulty",
-                Content = "Difficulty of map. Very easy=Start with complete map. Easy=Map is retrievable en rooms discovered are registered. Medium=Map retrievable. Hard=Rooms registered. Very hard=None of these.",
+                Content =
+                    "Difficulty of map. Very easy=Start with complete map. Easy=Map is retrievable en rooms discovered are registered. Medium=Map retrievable. Hard=Rooms registered. Very hard=None of these.",
                 XposMax = Console.WindowWidth*6/7 - (Console.WindowWidth*4/42 + 2)*5,
                 Ypos = Console.WindowHeight/6 + confpos*4 - 1,
                 ButtonList = new List<Button>
@@ -728,8 +413,9 @@ namespace Confusing_Hobo_Unleashed
                     {
                         Message = "Very Easy",
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*5,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
+                        BlockHeight = 8
                     },
                     new Button
                     {
@@ -737,37 +423,42 @@ namespace Confusing_Hobo_Unleashed
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*4,
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        BlockHeight = 8
                     },
                     new Button
                     {
                         Message = "Medium",
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*3,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
+                        BlockHeight = 8
                     },
                     new Button
                     {
                         Message = "Hard",
-                        Value = true, Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*2,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        Value = true,
+                        Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*2,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
+                        BlockHeight = 8
                     },
                     new Button
                     {
                         Message = "Very Hard",
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*1,
-                        Ypos = Console.WindowHeight/6 + 4*confpos, BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        Ypos = Console.WindowHeight/6 + 4*confpos,
+                        BlockLength = Console.WindowWidth*2/21,
+                        BlockHeight = 8
                     }
-                },
+                }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Dead Ends in Map",
-                Content = "The higher this is, the higher the chance is you find dead ends in the map. Setting it too high might not allow the map to generate. Recommended is 6.",
+                Content =
+                    "The higher this is, the higher the chance is you find dead ends in the map. Setting it too high might not allow the map to generate. Recommended is 6.",
                 XposMax = Console.WindowWidth*6/7 - (Console.WindowWidth*4/42 + 2)*1,
                 Ypos = Console.WindowHeight/6 + confpos*4 - 1,
                 TextBoxList = new List<TextBox>
@@ -781,7 +472,7 @@ namespace Confusing_Hobo_Unleashed
                         Message = "Dead Ends",
                         Box = new List<InsertBox>
                         {
-                            new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 2)},
+                            new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 2)}
                         },
                         VarChanger = new List<int>
                         {
@@ -791,11 +482,12 @@ namespace Confusing_Hobo_Unleashed
                 }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Approvement Rate",
-                Content = "Defines how much of the generated rooms actually have to be used in percent. Setting this too high might not allow map generation. Setting it very low generates random patterns, useful for large maps. Recommended is 70",
+                Content =
+                    "Defines how much of the generated rooms actually have to be used in percent. Setting this too high might not allow map generation. Setting it very low generates random patterns, useful for large maps. Recommended is 70",
                 XposMax = Console.WindowWidth*6/7 - (Console.WindowWidth*4/42 + 2)*1,
                 Ypos = Console.WindowHeight/6 + confpos*4 - 1,
                 TextBoxList = new List<TextBox>
@@ -809,7 +501,7 @@ namespace Confusing_Hobo_Unleashed
                         Message = "Approvement Rate",
                         Box = new List<InsertBox>
                         {
-                            new InsertBox {Length = 3, PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 2)},
+                            new InsertBox {Length = 3, PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 2)}
                         },
                         VarChanger = new List<int>
 
@@ -820,7 +512,7 @@ namespace Confusing_Hobo_Unleashed
                 }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Spawn Point",
@@ -839,7 +531,7 @@ namespace Confusing_Hobo_Unleashed
                         Box = new List<InsertBox>
                         {
                             new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 5)},
-                            new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 1)},
+                            new InsertBox {PosX = Console.WindowWidth*6/7 - (Console.WindowWidth*2/49 + 1)}
                         },
                         VarChanger = new List<int>
                         {
@@ -850,7 +542,7 @@ namespace Confusing_Hobo_Unleashed
                 }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Color Schemes",
@@ -864,7 +556,7 @@ namespace Confusing_Hobo_Unleashed
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
                         Value = true,
-                        BlockHeight = 8,
+                        BlockHeight = 8
                     },
                     new Button
                     {
@@ -882,7 +574,7 @@ namespace Confusing_Hobo_Unleashed
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
-                        Value = false,
+                        Value = false
                     },
                     new Button
                     {
@@ -906,7 +598,7 @@ namespace Confusing_Hobo_Unleashed
             });
             confpos++;
 
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "World Type",
@@ -948,11 +640,11 @@ namespace Confusing_Hobo_Unleashed
                         BlockLength = Console.WindowWidth*2/21,
                         BlockHeight = 8,
                         Value = false
-                    },
-                },
+                    }
+                }
             });
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Extra",
@@ -968,11 +660,11 @@ namespace Confusing_Hobo_Unleashed
                         BlockHeight = 8,
                         Value = false
                     }
-                },
+                }
             });
 
             confpos++;
-            Configuration.Add(new Options
+            Configuration.Add(new OptionsMenu
             {
                 BiDirectional = true,
                 Name = "Debug Options",
@@ -986,7 +678,7 @@ namespace Confusing_Hobo_Unleashed
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*4,
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        BlockHeight = 8
                     },
                     new Button
                     {
@@ -994,7 +686,7 @@ namespace Confusing_Hobo_Unleashed
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*3,
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        BlockHeight = 8
                     },
                     new Button
                     {
@@ -1002,7 +694,7 @@ namespace Confusing_Hobo_Unleashed
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*2,
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        BlockHeight = 8
                     },
                     new Button
                     {
@@ -1010,7 +702,7 @@ namespace Confusing_Hobo_Unleashed
                         Xpos = Console.WindowWidth*6/7 - (Console.WindowWidth*2/21 + 2)*1,
                         Ypos = Console.WindowHeight/6 + 4*confpos,
                         BlockLength = Console.WindowWidth*2/21,
-                        BlockHeight = 8,
+                        BlockHeight = 8
                     }
                 }
             });
@@ -1069,9 +761,9 @@ namespace Confusing_Hobo_Unleashed
                 "Reinout's alter ego",
                 "No ethnic minorities were harmed during the creation of this game"
             };
-            MapEditorMain = new List<Options>
+            MapEditorMain = new List<OptionsMenu>
             {
-                new Options
+                new OptionsMenu
                 {
                     ButtonList = new List<Button>
                     {
@@ -1079,20 +771,20 @@ namespace Confusing_Hobo_Unleashed
                         {
                             Message = "Start New Map",
                             BlockHeight = Console.WindowHeight/9,
-                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*0,
+                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*0
                         },
                         new Button
                         {
                             BlockHeight = Console.WindowHeight/9,
                             Message = "Load Map From File",
-                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*1,
+                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*1
                         }
                     }
                 }
             };
-            MapEditorNewMap = new List<Options>
+            MapEditorNewMap = new List<OptionsMenu>
             {
-                new Options
+                new OptionsMenu
                 {
                     ButtonList = new List<Button>
                     {
@@ -1100,19 +792,19 @@ namespace Confusing_Hobo_Unleashed
                         {
                             Message = "Gen Clouds Ingame",
                             BlockHeight = Console.WindowHeight/9,
-                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*0,
+                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*0
                         },
                         new Button
                         {
                             BlockHeight = Console.WindowHeight/9,
                             Message = "Gen Sky Ingame",
-                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*1,
+                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*1
                         },
                         new Button
                         {
                             BlockHeight = Console.WindowHeight/9,
                             Message = "Continue",
-                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*2,
+                            Ypos = Console.WindowHeight/3 + (Console.WindowHeight/4)*2
                         }
                     }
                 }
@@ -1137,14 +829,14 @@ namespace Confusing_Hobo_Unleashed
         private static int _curSel;
         private static int _buttonSel;
         public static bool DrawLayout = true;
-        public static int ContStartX = Console.WindowWidth/6;
         public static int ContStartY = Console.WindowHeight/6;
         public static int ContStopX = Console.WindowWidth*6/7;
-        public static int ContStopY = ContStartX + 10;
         public static int ContLength = 9;
         private static string[] _files;
         private static bool _versus = true;
-        public static buffer SelectionBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
+
+        public static buffer SelectionBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth,
+            Console.WindowHeight);
 
         private static readonly string[] SplashText =
         {
@@ -1194,23 +886,27 @@ namespace Confusing_Hobo_Unleashed
 
         public static void RedrawBackground()
         {
-            SelectionBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
-            for (int i = 0; i < Console.WindowWidth; i++)
-                for (int j = 0; j < Console.WindowHeight; j++)
-                    SelectionBuffer.Draw(" ", i, j, Color.ColorsToAttribute(VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue, VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White));
+            SelectionBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth,
+                Console.WindowHeight);
+            for (var i = 0; i < Console.WindowWidth; i++)
+                for (var j = 0; j < Console.WindowHeight; j++)
+                    SelectionBuffer.Draw(" ", i, j,
+                        Color.ColorsToAttribute(
+                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue,
+                            VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].White));
         }
 
-        public static void Select(List<Options> list)
+        public static void Select(List<OptionsMenu> list)
         {
             if (list[_curSel].BiDirectional)
             {
-                for (int x = list.Count - 1; x >= 0; x--)
+                for (var x = list.Count - 1; x >= 0; x--)
                 {
                     list[x].Render(SelectionBuffer);
                 }
                 list[_curSel].RenderActive(SelectionBuffer);
             }
-            for (int x = 0; x < list[_curSel].ButtonList.Count + list[_curSel].TextBoxList.Count; x++)
+            for (var x = 0; x < list[_curSel].ButtonList.Count + list[_curSel].TextBoxList.Count; x++)
             {
                 if (x < list[_curSel].ButtonList.Count)
                 {
@@ -1218,7 +914,7 @@ namespace Confusing_Hobo_Unleashed
                 }
                 else if (list[_curSel].TextBoxList.Count > 0)
                 {
-                    int xtemp = x - list[_curSel].ButtonList.Count;
+                    var xtemp = x - list[_curSel].ButtonList.Count;
                     list[_curSel].TextBoxList[xtemp].Render(SelectionBuffer);
                 }
             }
@@ -1228,7 +924,7 @@ namespace Confusing_Hobo_Unleashed
             }
             else if (list[_curSel].TextBoxList.Count > 0)
             {
-                int xtemp = _buttonSel - list[_curSel].ButtonList.Count;
+                var xtemp = _buttonSel - list[_curSel].ButtonList.Count;
                 list[_curSel].TextBoxList[xtemp].RenderActive(SelectionBuffer);
             }
             if (list == StartMenu.Main)
@@ -1241,16 +937,17 @@ namespace Confusing_Hobo_Unleashed
             {
                 StartMenu.FireBuffer.SetDrawCord(0, Convert.ToInt16(Console.WindowHeight/6));
                 StartMenu.FireBuffer.Print();
-                StartMenu.FireBuffer2.SetDrawCord((Convert.ToInt16(Console.WindowWidth*10/15)), Convert.ToInt16(Console.WindowHeight/6));
+                StartMenu.FireBuffer2.SetDrawCord((Convert.ToInt16(Console.WindowWidth*10/15)),
+                    Convert.ToInt16(Console.WindowHeight/6));
                 StartMenu.FireBuffer2.Print();
             }
-            Buttons input = InputHandler.ControlInputHandling();
+            var input = InputHandler.ControlInputHandling();
             switch (input)
             {
                 case Buttons.A:
                     RedrawBackground();
-                    int tempsel = 0;
-                    int tempbut = 0;
+                    var tempsel = 0;
+                    var tempbut = 0;
                     if (list != StartMenu.Configuration && list != StartMenu.MapEditorNewMap)
                     {
                         tempsel = _curSel;
@@ -1296,8 +993,10 @@ namespace Confusing_Hobo_Unleashed
                                 Client.Start();
                                 break;
                             case 3:
-                                Console.ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-                                Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
+                                Console.ForegroundColor =
+                                    VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
+                                Console.BackgroundColor =
+                                    VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
                                 Console.Clear();
                                 Server.Start();
                                 break;
@@ -1321,26 +1020,27 @@ namespace Confusing_Hobo_Unleashed
                     {
                         if (_buttonSel <= 1)
                         {
-                            StartMenu.MapEditorNewMap[_curSel].ButtonList[_buttonSel].Value = !StartMenu.MapEditorNewMap[_curSel].ButtonList[_buttonSel].Value;
+                            StartMenu.MapEditorNewMap[_curSel].ButtonList[_buttonSel].Value =
+                                !StartMenu.MapEditorNewMap[_curSel].ButtonList[_buttonSel].Value;
                         }
                         else
                         {
-                            bool clouds = StartMenu.MapEditorNewMap[_curSel].ButtonList[0].Value;
-                            bool sky = StartMenu.MapEditorNewMap[_curSel].ButtonList[1].Value;
+                            var clouds = StartMenu.MapEditorNewMap[_curSel].ButtonList[0].Value;
+                            var sky = StartMenu.MapEditorNewMap[_curSel].ButtonList[1].Value;
                             MapEditor.CurrentMapInEditor = new CustomMap(35, 150, true, " ", clouds, sky);
                             MapEditor.WorkingSpace();
                         }
                     }
                     else if (list == StartMenu.MapsInFolder)
                     {
-                        string chosenFile = _files[tempsel];
+                        var chosenFile = _files[tempsel];
 
                         int mapwidth;
                         int mapheight;
                         bool dayNightEnabled;
                         bool cloudsEnabled;
 
-                        using (XmlReader reader = XmlReader.Create(chosenFile))
+                        using (var reader = XmlReader.Create(chosenFile))
                         {
                             reader.ReadToFollowing("Width");
                             mapwidth = reader.ReadElementContentAsInt("Width", "");
@@ -1350,19 +1050,22 @@ namespace Confusing_Hobo_Unleashed
                             reader.Close();
                         }
 
-                        string filename = Path.GetFileName(chosenFile);
+                        var filename = Path.GetFileName(chosenFile);
 
                         if (!_versus)
                         {
-                            MapEditor.CurrentMapInEditor = new CustomMap(mapheight, mapwidth, false, filename, cloudsEnabled, dayNightEnabled);
+                            MapEditor.CurrentMapInEditor = new CustomMap(mapheight, mapwidth, false, filename,
+                                cloudsEnabled, dayNightEnabled);
                             MapEditor.CurrentMapInEditor.LoadMap(chosenFile);
                             MapEditor.WorkingSpace();
                         }
                         else
                         {
-                            Game.CurrentLoadedMap = new CustomMap(mapheight, mapwidth, false, filename, cloudsEnabled, dayNightEnabled);
+                            Game.CurrentLoadedMap = new CustomMap(mapheight, mapwidth, false, filename, cloudsEnabled,
+                                dayNightEnabled);
                             Game.CurrentLoadedMap.LoadMap(chosenFile);
-                            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
+                            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp,
+                                Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
 
                             Game.Start_Versus();
                         }
@@ -1373,7 +1076,7 @@ namespace Confusing_Hobo_Unleashed
                             ResetValues(_curSel);
                         if (_buttonSel > StartMenu.Configuration[_curSel].ButtonList.Count - 1)
                         {
-                            int textLoc = _buttonSel - StartMenu.Configuration[_curSel].ButtonList.Count;
+                            var textLoc = _buttonSel - StartMenu.Configuration[_curSel].ButtonList.Count;
                             StartMenu.Configuration[_curSel].TextBoxList[textLoc].Insert();
                             StartMenu.Configuration[_curSel].TextBoxList[textLoc].Value = true;
                         }
@@ -1391,7 +1094,8 @@ namespace Confusing_Hobo_Unleashed
                     _versus = true;
                     _curSel = 0;
                     _buttonSel = 0;
-                    if (list == StartMenu.Versus || list == StartMenu.MapEditorMain || list == StartMenu.MapsInFolder || list == StartMenu.Configuration)
+                    if (list == StartMenu.Versus || list == StartMenu.MapEditorMain || list == StartMenu.MapsInFolder ||
+                        list == StartMenu.Configuration)
                     {
                         PostStart();
                         StartMenu.MainScreen();
@@ -1458,10 +1162,10 @@ namespace Confusing_Hobo_Unleashed
         public static void CreateMapSelection()
         {
             _files = Directory.GetFileSystemEntries("maps", "*.xml");
-            StartMenu.MapsInFolder = new List<Options>();
-            for (int x = 0; x < _files.Length; x++)
+            StartMenu.MapsInFolder = new List<OptionsMenu>();
+            for (var x = 0; x < _files.Length; x++)
             {
-                StartMenu.MapsInFolder.Add(new Options
+                StartMenu.MapsInFolder.Add(new OptionsMenu
                 {
                     Name = "Map " + x,
                     Content = _files[x],
@@ -1469,7 +1173,7 @@ namespace Confusing_Hobo_Unleashed
                     TextBoxList = new List<TextBox>(),
                     ButtonList = new List<Button>(),
                     XposMax = ContStopX,
-                    Ypos = Console.WindowHeight/6 + x*4 - 1,
+                    Ypos = Console.WindowHeight/6 + x*4 - 1
                 });
             }
             Select(StartMenu.MapsInFolder);
@@ -1488,12 +1192,12 @@ namespace Confusing_Hobo_Unleashed
         {
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
             Console.Clear();
-            for (int y = Console.WindowHeight; y > StartMenu.Credits.Count*-2; y--)
+            for (var y = Console.WindowHeight; y > StartMenu.Credits.Count*-2; y--)
             {
                 Console.Clear();
-                for (int i = 0; i < StartMenu.Credits.Count; i++)
+                for (var i = 0; i < StartMenu.Credits.Count; i++)
                 {
-                    int pos = y + i*2;
+                    var pos = y + i*2;
                     if (pos < Console.WindowHeight && pos > 0)
                     {
                         Console.SetCursorPosition(Console.WindowWidth/2 - StartMenu.Credits[i].Length/2, pos);
@@ -1506,45 +1210,70 @@ namespace Confusing_Hobo_Unleashed
 
         private static void ResetValues(int x)
         {
-            for (int a = 0; a < StartMenu.Configuration[x].ButtonList.Count + StartMenu.Configuration[x].TextBoxList.Count; a++)
+            for (var a = 0;
+                a < StartMenu.Configuration[x].ButtonList.Count + StartMenu.Configuration[x].TextBoxList.Count;
+                a++)
                 if (a > StartMenu.Configuration[x].ButtonList.Count - 1)
-                    StartMenu.Configuration[x].TextBoxList[a - StartMenu.Configuration[x].ButtonList.Count].Value = false;
+                    StartMenu.Configuration[x].TextBoxList[a - StartMenu.Configuration[x].ButtonList.Count].Value =
+                        false;
                 else StartMenu.Configuration[x].ButtonList[a].Value = false;
         }
 
         public static void DrawTitle(buffer buffer)
         {
-            
-                Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
-                int meslength =
-                    "   ______            ____           _                __  __      __             __  __      __                __             __"
-                        .Length/2;
-                buffer.Draw(@"   ______            ____           _                __  __      __             __  __      __                __             __", Console.WindowWidth/2 - meslength, 1, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-                buffer.Draw(@"  / ____/___  ____  / __/_  _______(_)___  ____ _   / / / /___  / /_  ____     / / / /___  / /__  ____ ______/ /_  ___  ____/ /", Console.WindowWidth/2 - meslength, 2, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-                buffer.Draw(@" / /   / __ \/ __ \/ /_/ / / / ___/ / __ \/ __ `/  / /_/ / __ \/ __ \/ __ \   / / / / __ \/ / _ \/ __ `/ ___/ __ \/ _ \/ __  / ", Console.WindowWidth/2 - meslength, 3, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-                buffer.Draw(@"/ /___/ /_/ / / / / __/ /_/ (__  ) / / / / /_/ /  / __  / /_/ / /_/ / /_/ /  / /_/ / / / / /  __/ /_/ (__  ) / / /  __/ /_/ / ", Console.WindowWidth/2 - meslength, 4, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-                buffer.Draw(@"\____/\____/_/ /_/_/  \__,_/____/_/_/ /_/\__, /  /_/ /_/\____/_.___/\____/   \____/_/ /_/_/\___/\__,_/____/_/ /_/\___/\__,_/ ", Console.WindowWidth/2 - meslength, 5, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-                buffer.Draw(@"                                        /____/", Console.WindowWidth/2 - meslength, 6, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            
+            Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Blue;
+            var meslength =
+                "   ______            ____           _                __  __      __             __  __      __                __             __"
+                    .Length/2;
+            buffer.Draw(
+                @"   ______            ____           _                __  __      __             __  __      __                __             __",
+                Console.WindowWidth/2 - meslength, 1,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            buffer.Draw(
+                @"  / ____/___  ____  / __/_  _______(_)___  ____ _   / / / /___  / /_  ____     / / / /___  / /__  ____ ______/ /_  ___  ____/ /",
+                Console.WindowWidth/2 - meslength, 2,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            buffer.Draw(
+                @" / /   / __ \/ __ \/ /_/ / / / ___/ / __ \/ __ `/  / /_/ / __ \/ __ \/ __ \   / / / / __ \/ / _ \/ __ `/ ___/ __ \/ _ \/ __  / ",
+                Console.WindowWidth/2 - meslength, 3,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            buffer.Draw(
+                @"/ /___/ /_/ / / / / __/ /_/ (__  ) / / / / /_/ /  / __  / /_/ / /_/ / /_/ /  / /_/ / / / / /  __/ /_/ (__  ) / / /  __/ /_/ / ",
+                Console.WindowWidth/2 - meslength, 4,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            buffer.Draw(
+                @"\____/\____/_/ /_/_/  \__,_/____/_/_/ /_/\__, /  /_/ /_/\____/_.___/\____/   \____/_/ /_/_/\___/\__,_/____/_/ /_/\___/\__,_/ ",
+                Console.WindowWidth/2 - meslength, 5,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            buffer.Draw(@"                                        /____/", Console.WindowWidth/2 - meslength, 6,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
         }
 
         public static void PostStart(bool color = true)
         {
-            foreach (Options t in StartMenu.Configuration)
+            foreach (var t in StartMenu.Configuration)
             {
                 switch (t.Name)
                 {
                     case "Map Size":
                         //Defining Block 1:MapSize
-                        for (int x = 0; x < t.ButtonList.Count + t.TextBoxList.Count - 1; x++)
+                        for (var x = 0; x < t.ButtonList.Count + t.TextBoxList.Count - 1; x++)
                         {
                             if (x > StartMenu.Configuration[0].ButtonList.Count - 1)
                             {
-                                if (StartMenu.Configuration[0].TextBoxList[x - StartMenu.Configuration[0].ButtonList.Count].Value)
+                                if (
+                                    StartMenu.Configuration[0].TextBoxList[
+                                        x - StartMenu.Configuration[0].ButtonList.Count].Value)
                                 {
-                                    MapGeneration.RoomsHorizontal = StartMenu.Configuration[0].TextBoxList[x - StartMenu.Configuration[0].ButtonList.Count].VarChanger[0];
-                                    MapGeneration.RoomsVertical = StartMenu.Configuration[0].TextBoxList[x - StartMenu.Configuration[0].ButtonList.Count].VarChanger[1];
-                                    MapGeneration.MaxDeadEnd = StartMenu.Configuration[0].TextBoxList[x - StartMenu.Configuration[0].ButtonList.Count].VarChanger[2];
+                                    MapGeneration.RoomsHorizontal =
+                                        StartMenu.Configuration[0].TextBoxList[
+                                            x - StartMenu.Configuration[0].ButtonList.Count].VarChanger[0];
+                                    MapGeneration.RoomsVertical =
+                                        StartMenu.Configuration[0].TextBoxList[
+                                            x - StartMenu.Configuration[0].ButtonList.Count].VarChanger[1];
+                                    MapGeneration.MaxDeadEnd =
+                                        StartMenu.Configuration[0].TextBoxList[
+                                            x - StartMenu.Configuration[0].ButtonList.Count].VarChanger[2];
                                     break;
                                 }
                             }
@@ -1556,26 +1285,35 @@ namespace Confusing_Hobo_Unleashed
                                 break;
                             }
                         }
-                        MapGeneration.Corridors = new bool[MapGeneration.RoomsHorizontal, MapGeneration.RoomsVertical, 5];
+                        MapGeneration.Corridors =
+                            new bool[MapGeneration.RoomsHorizontal, MapGeneration.RoomsVertical, 5];
                         MapGeneration.Counter = new bool[MapGeneration.RoomsHorizontal, MapGeneration.RoomsVertical, 5];
-                        MapGeneration.EnableMoreCorridors = new int[(MapGeneration.RoomsHorizontal + 1)*(MapGeneration.RoomsVertical + 1), 2];
+                        MapGeneration.EnableMoreCorridors =
+                            new int[(MapGeneration.RoomsHorizontal + 1)*(MapGeneration.RoomsVertical + 1), 2];
                         break;
                     case "Map Display Size":
                         //Defining Block 2: MapDrawing
-                        for (int x = 0; x < t.ButtonList.Count + t.TextBoxList.Count - 1; x++)
+                        for (var x = 0; x < t.ButtonList.Count + t.TextBoxList.Count - 1; x++)
                         {
                             if (x > StartMenu.Configuration[1].ButtonList.Count - 1)
                             {
-                                if (StartMenu.Configuration[1].TextBoxList[x - StartMenu.Configuration[1].ButtonList.Count].Value)
+                                if (
+                                    StartMenu.Configuration[1].TextBoxList[
+                                        x - StartMenu.Configuration[1].ButtonList.Count].Value)
                                 {
-                                    MapDrawing.HorizontalBlockLength = StartMenu.Configuration[1].TextBoxList[x - StartMenu.Configuration[1].ButtonList.Count].VarChanger[0];
-                                    MapDrawing.VerticalBlockLength = StartMenu.Configuration[1].TextBoxList[x - StartMenu.Configuration[1].ButtonList.Count].VarChanger[1];
+                                    MapDrawing.HorizontalBlockLength =
+                                        StartMenu.Configuration[1].TextBoxList[
+                                            x - StartMenu.Configuration[1].ButtonList.Count].VarChanger[0];
+                                    MapDrawing.VerticalBlockLength =
+                                        StartMenu.Configuration[1].TextBoxList[
+                                            x - StartMenu.Configuration[1].ButtonList.Count].VarChanger[1];
                                     break;
                                 }
                             }
                             if (StartMenu.Configuration[1].ButtonList[x].Value)
                             {
-                                MapDrawing.HorizontalBlockLength = StartMenu.Configuration[1].ButtonList[x].VarChanger[0];
+                                MapDrawing.HorizontalBlockLength =
+                                    StartMenu.Configuration[1].ButtonList[x].VarChanger[0];
                                 MapDrawing.VerticalBlockLength = StartMenu.Configuration[1].ButtonList[x].VarChanger[1];
                                 break;
                             }
@@ -1606,7 +1344,7 @@ namespace Confusing_Hobo_Unleashed
                     case "Debug Options":
                         //Defining Block 7: Debug Options
                         VarDatabase.Debug = false;
-                        foreach (Button but in t.ButtonList.Where(but => but.Value))
+                        foreach (var but in t.ButtonList.Where(but => but.Value))
                             VarDatabase.Debug = true;
                         VarDatabase.ShowDeadEnd = t.ButtonList[0].Value;
                         VarDatabase.ShowApprovementRate = StartMenu.Configuration[6].ButtonList[1].Value;
@@ -1617,7 +1355,7 @@ namespace Confusing_Hobo_Unleashed
                         //Defining Color Scheme usage
                         VarDatabase.Bw = t.ButtonList[1].Value;
                         VarDatabase.ColorScheme = new ColorSchemes();
-                        for (int b = 0; b < t.ButtonList.Count; b++)
+                        for (var b = 0; b < t.ButtonList.Count; b++)
                             if (t.ButtonList[b].Value)
                                 VarDatabase.ColorSchemenumber = b;
                         break;
@@ -1636,7 +1374,7 @@ namespace Confusing_Hobo_Unleashed
                         break;
                 }
             }
-            for (int x = 0; x < 20; x++)
+            for (var x = 0; x < 20; x++)
             {
                 if (x < StartMenu.Main.Count)
                     StartMenu.Main[x].Recolor();
@@ -1656,5 +1394,8 @@ namespace Confusing_Hobo_Unleashed
                     StartMenu.Versus[x].Recolor();
             }
         }
+
+        public static int ContStartX = Console.WindowWidth/6;
+        public static int ContStopY = ContStartX + 10;
     }
 }

@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed
 {
     internal class PauseMenu
     {
-        public static ConsoleColor Bg = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
-        public static ConsoleColor Border = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
-        public static ConsoleColor Fg = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
-
-        public static short BorderColors = Color.ColorsToAttribute(Bg, Border);
-        public static short TextColors = Color.ColorsToAttribute(Bg, Fg);
         public static List<Button> MenuItems { get; set; }
         public static byte ActiveItem { get; set; }
         public static byte ActiveSubItem { get; set; }
 
         public static void GenerateMenu()
         {
-            MenuItems = new List<Button> {new Button(1, 1, "Resume"), new Button(1, 6, "Inventory"), new Button(1, 11, "Options"), new Button(1, 16, "Quit")};
+            MenuItems = new List<Button>
+            {
+                new Button(1, 1, "Resume"),
+                new Button(1, 6, "Inventory"),
+                new Button(1, 11, "Options"),
+                new Button(1, 16, "Quit")
+            };
 
             ActiveItem = 0;
         }
@@ -45,7 +46,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void RenderMenu(buffer outputBuffer)
         {
-            foreach (Button button in MenuItems)
+            foreach (var button in MenuItems)
             {
                 if (MenuItems[ActiveItem] != button)
                 {
@@ -69,9 +70,11 @@ namespace Confusing_Hobo_Unleashed
 
             outputBuffer.Print();
         }
+
         public static void RenderOptions(buffer outputBuffer)
         {
         }
+
         public static void EnterCurrentOption()
         {
             if (MenuItems[ActiveItem].Message == "Resume")
@@ -83,6 +86,7 @@ namespace Confusing_Hobo_Unleashed
                 StartMenu.MainScreen();
             }
         }
+
         public static void ChangeSelect(bool next)
         {
             if (next)
@@ -108,5 +112,11 @@ namespace Confusing_Hobo_Unleashed
                 }
             }
         }
+
+        public static ConsoleColor Bg = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].DarkGreen;
+        public static ConsoleColor Border = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Red;
+        public static ConsoleColor Fg = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
+        public static short BorderColors = Color.ColorsToAttribute(Bg, Border);
+        public static short TextColors = Color.ColorsToAttribute(Bg, Fg);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Map;
 using Lidgren.Network;
 
 namespace Confusing_Hobo_Unleashed.Multiplayer
@@ -24,7 +23,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             outmsg.Write((byte) ar.GetLength(0));
             outmsg.Write((byte) ar.GetLength(1));
 
-            foreach (short variable in ar)
+            foreach (var variable in ar)
             {
                 outmsg.Write((byte) variable);
             }
@@ -34,7 +33,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             outmsg.Write((byte) ar.GetLength(0));
             outmsg.Write((byte) ar.GetLength(1));
-            foreach (ConsoleColor variable in ar)
+            foreach (var variable in ar)
             {
                 outmsg.Write((byte) variable);
             }
@@ -44,7 +43,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             outmsg.Write((byte) ar.GetLength(0));
             outmsg.Write((byte) ar.GetLength(1));
-            foreach (bool variable in ar)
+            foreach (var variable in ar)
             {
                 outmsg.Write(variable);
             }
@@ -75,10 +74,10 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             int i = inmsg.ReadByte();
             int j = inmsg.ReadByte();
-            for (int a = 0; a < i; a++)
-                for (int b = 0; b < j; b++)
+            for (var a = 0; a < i; a++)
+                for (var b = 0; b < j; b++)
                 {
-                    short charData = inmsg.ReadInt16();
+                    var charData = inmsg.ReadInt16();
                     if (charData < 256 && charData >= 0)
                         ar[a, b] = Convert.ToChar(charData);
                     else ar[a, b] = null;
@@ -89,8 +88,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             int i = inmsg.ReadByte();
             int j = inmsg.ReadByte();
-            for (int a = 0; a < i; a++)
-                for (int b = 0; b < j; b++)
+            for (var a = 0; a < i; a++)
+                for (var b = 0; b < j; b++)
                     ar[a, b] = Convert.ToInt16(inmsg.ReadByte());
         }
 
@@ -98,8 +97,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             int i = inmsg.ReadByte();
             int j = inmsg.ReadByte();
-            for (int a = 0; a < i; a++)
-                for (int b = 0; b < j; b++)
+            for (var a = 0; a < i; a++)
+                for (var b = 0; b < j; b++)
                     ar[a, b] = (ConsoleColor) Enum.Parse(typeof (ConsoleColor), inmsg.ReadByte().ToString());
         }
 
@@ -107,8 +106,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             int i = inmsg.ReadByte();
             int j = inmsg.ReadByte();
-            for (int a = 0; a < i; a++)
-                for (int b = 0; b < j; b++)
+            for (var a = 0; a < i; a++)
+                for (var b = 0; b < j; b++)
                     ar[a, b] = inmsg.ReadBoolean();
         }
 

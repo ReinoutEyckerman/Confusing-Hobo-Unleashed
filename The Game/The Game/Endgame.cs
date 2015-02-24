@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Media;
 using System.Threading;
 using Confusing_Hobo_Unleashed.Enemies;
-using Confusing_Hobo_Unleashed.Map;
 using Confusing_Hobo_Unleashed.TerrainGen;
-using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed
 {
@@ -22,7 +20,7 @@ namespace Confusing_Hobo_Unleashed
             {6, new SoundPlayer(@"Sound Files\Oh Susanna.wav")},
             {7, new SoundPlayer(@"Sound Files\Over The Rainbow.wav")},
             {8, new SoundPlayer(@"Sound Files\Rudolf.wav")},
-            {9, new SoundPlayer(@"Sound Files\Untitled.wav")},
+            {9, new SoundPlayer(@"Sound Files\Untitled.wav")}
         };
 
         private static SoundPlayer _gamesound = new SoundPlayer();
@@ -56,9 +54,9 @@ namespace Confusing_Hobo_Unleashed
                 {
                     Game.Entities.Clear();
                     Game.CurrentLoadedMap = new CustomMap(Game.CurrentLoadedMap.Mapheight, Console.WindowWidth, false);
-                    TerrainSelection.Redirect(Game.CurrentLoadedMap, 204);
+                    TerrainSelection.Redirect(Game.CurrentLoadedMap, 204 );
                     Gameplay.Push();
-                    foreach (Player player in Game.Players)
+                    foreach (var player in Game.Players)
                     {
                         player.SetSpawn();
                     }
@@ -108,14 +106,27 @@ namespace Confusing_Hobo_Unleashed
             Console.BackgroundColor = VarDatabase.ColorScheme.BackGroundList[VarDatabase.ColorSchemenumber].Black;
             Console.ForegroundColor = VarDatabase.ColorScheme.ForeGroundList[VarDatabase.ColorSchemenumber].White;
             Game.GameBuffer.Clear();
-            int meslength = "   ____                            _         _       _   _".Length / 2;
-            Game.GameBuffer.Draw(@"   ____                            _         _       _   _", Console.WindowWidth / 2 - meslength, Console.WindowHeight/2-3, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"  / ___|___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_(_) ___  _ __  ___", Console.WindowWidth / 2 - meslength, Console.WindowHeight / 2-2, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@" | |   / _ \| '_ \ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \| '_ \/ __|", Console.WindowWidth / 2 - meslength, Console.WindowHeight / 2-1, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@" | |__| (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \__ \ ", Console.WindowWidth / 2 - meslength, Console.WindowHeight / 2, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"  \____\___/|_| |_|\__, |_|  \__,_|\__|\__,_|_|\__,_|\__|_|\___/|_| |_|___/", Console.WindowWidth / 2 - meslength, Console.WindowHeight / 2+1, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"                   |___/                                                 ", Console.WindowWidth / 2 - meslength, Console.WindowHeight / 2+2, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"And now complete the game on a harder difficulty!", Console.WindowWidth / 2 - meslength, Console.WindowHeight / 2 + 4, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            var meslength = "   ____                            _         _       _   _".Length/2;
+            Game.GameBuffer.Draw(@"   ____                            _         _       _   _",
+                Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 3,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            Game.GameBuffer.Draw(@"  / ___|___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_(_) ___  _ __  ___",
+                Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 2,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            Game.GameBuffer.Draw(@" | |   / _ \| '_ \ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \| '_ \/ __|",
+                Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 1,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            Game.GameBuffer.Draw(@" | |__| (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \__ \ ",
+                Console.WindowWidth/2 - meslength, Console.WindowHeight/2,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            Game.GameBuffer.Draw(@"  \____\___/|_| |_|\__, |_|  \__,_|\__|\__,_|_|\__,_|\__|_|\___/|_| |_|___/",
+                Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 1,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            Game.GameBuffer.Draw(@"                   |___/                                                 ",
+                Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 2,
+                Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
+            Game.GameBuffer.Draw(@"And now complete the game on a harder difficulty!", Console.WindowWidth/2 - meslength,
+                Console.WindowHeight/2 + 4, Color.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
             Game.GameBuffer.Print();
         }
     }
