@@ -5,216 +5,42 @@ using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed
 {
-   
     public class ColorSchemes
     {
+        public Array Kleuren = Enum.GetValues(typeof (ConsoleColor));
+        public Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> ForeGroundList { get; set; }
+        public Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> BackGroundList { get; set; }
+
         public void Refresh()
         {
-            BackGroundList = new Dictionary<ColorScheme,Dictionary<ConsoleColor, ConsoleColor>>
-            {
-                {ColorScheme.Normal, new Dictionary<ConsoleColor, ConsoleColor> //Normal
-                {
-                    {ConsoleColor.Black , ConsoleColor.Black},
-                    {ConsoleColor.Green , ConsoleColor.Green},
-                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGreen},
-                    {ConsoleColor.Blue , ConsoleColor.Blue},
-                    {ConsoleColor.DarkBlue , ConsoleColor.DarkBlue},
-                    {ConsoleColor.Red , ConsoleColor.Red},
-                    {ConsoleColor.DarkRed , ConsoleColor.DarkRed},
-                    {ConsoleColor.Yellow , ConsoleColor.Yellow},
-                    {ConsoleColor.DarkYellow , ConsoleColor.DarkYellow},
-                    {ConsoleColor.Cyan, ConsoleColor.Cyan},
-                    {ConsoleColor.DarkCyan , ConsoleColor.DarkCyan},
-                    {ConsoleColor.Magenta , ConsoleColor.Magenta},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkMagenta},
-                    {ConsoleColor.Gray , ConsoleColor.Gray},
-                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
-                    {ConsoleColor.White , ConsoleColor.White}
-                }},
-                {ColorScheme.BlackWhite, new Dictionary<ConsoleColor, ConsoleColor>  // Black/White
-                {
-                    {ConsoleColor.Black , ConsoleColor.Black},
-                    {ConsoleColor.Green , ConsoleColor.Black},
-                    {ConsoleColor.DarkGreen , ConsoleColor.Black},
-                    {ConsoleColor.Blue , ConsoleColor.Black},
-                    {ConsoleColor.DarkBlue , ConsoleColor.Black},
-                    {ConsoleColor.Red , ConsoleColor.Black},
-                    {ConsoleColor.DarkRed , ConsoleColor.Black},
-                    {ConsoleColor.Yellow , ConsoleColor.Black},
-                    {ConsoleColor.DarkYellow , ConsoleColor.Black},
-                    {ConsoleColor.Cyan, ConsoleColor.Black},
-                    {ConsoleColor.DarkCyan , ConsoleColor.Black},
-                    {ConsoleColor.Magenta , ConsoleColor.Black},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.Black},
-                    {ConsoleColor.Gray , ConsoleColor.Black},
-                    {ConsoleColor.DarkGray , ConsoleColor.Black},
-                    {ConsoleColor.White , ConsoleColor.Black}
-                }},
-                {ColorScheme.Gray, new Dictionary<ConsoleColor, ConsoleColor>  //4 Shades of Gray
-                {
-                    {ConsoleColor.Black , ConsoleColor.Black},
-                    {ConsoleColor.Green , ConsoleColor.Gray},
-                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGray},
-                    {ConsoleColor.Blue , ConsoleColor.Gray},
-                    {ConsoleColor.DarkBlue , ConsoleColor.DarkGray},
-                    {ConsoleColor.Red , ConsoleColor.Gray},
-                    {ConsoleColor.DarkRed , ConsoleColor.Black},
-                    {ConsoleColor.Yellow , ConsoleColor.Gray},
-                    {ConsoleColor.DarkYellow , ConsoleColor.Gray},
-                    {ConsoleColor.Cyan, ConsoleColor.Gray},
-                    {ConsoleColor.DarkCyan , ConsoleColor.White},
-                    {ConsoleColor.Magenta , ConsoleColor.Gray},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkGray},
-                    {ConsoleColor.Gray , ConsoleColor.Gray},
-                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
-                    {ConsoleColor.White , ConsoleColor.White}
-                }},
+            BackGroundList = new Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> {{ColorScheme.Normal, new Dictionary<ConsoleColor, ConsoleColor> //Normal
+            {{ConsoleColor.Black, ConsoleColor.Black}, {ConsoleColor.Green, ConsoleColor.Green}, {ConsoleColor.DarkGreen, ConsoleColor.DarkGreen}, {ConsoleColor.Blue, ConsoleColor.Blue}, {ConsoleColor.DarkBlue, ConsoleColor.DarkBlue}, {ConsoleColor.Red, ConsoleColor.Red}, {ConsoleColor.DarkRed, ConsoleColor.DarkRed}, {ConsoleColor.Yellow, ConsoleColor.Yellow}, {ConsoleColor.DarkYellow, ConsoleColor.DarkYellow}, {ConsoleColor.Cyan, ConsoleColor.Cyan}, {ConsoleColor.DarkCyan, ConsoleColor.DarkCyan}, {ConsoleColor.Magenta, ConsoleColor.Magenta}, {ConsoleColor.DarkMagenta, ConsoleColor.DarkMagenta}, {ConsoleColor.Gray, ConsoleColor.Gray}, {ConsoleColor.DarkGray, ConsoleColor.DarkGray}, {ConsoleColor.White, ConsoleColor.White}}},
+                {ColorScheme.BlackWhite, new Dictionary<ConsoleColor, ConsoleColor> // Black/White
+                {{ConsoleColor.Black, ConsoleColor.Black}, {ConsoleColor.Green, ConsoleColor.Black}, {ConsoleColor.DarkGreen, ConsoleColor.Black}, {ConsoleColor.Blue, ConsoleColor.Black}, {ConsoleColor.DarkBlue, ConsoleColor.Black}, {ConsoleColor.Red, ConsoleColor.Black}, {ConsoleColor.DarkRed, ConsoleColor.Black}, {ConsoleColor.Yellow, ConsoleColor.Black}, {ConsoleColor.DarkYellow, ConsoleColor.Black}, {ConsoleColor.Cyan, ConsoleColor.Black}, {ConsoleColor.DarkCyan, ConsoleColor.Black}, {ConsoleColor.Magenta, ConsoleColor.Black}, {ConsoleColor.DarkMagenta, ConsoleColor.Black}, {ConsoleColor.Gray, ConsoleColor.Black}, {ConsoleColor.DarkGray, ConsoleColor.Black}, {ConsoleColor.White, ConsoleColor.Black}}},
+                {ColorScheme.Gray, new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray
+                {{ConsoleColor.Black, ConsoleColor.Black}, {ConsoleColor.Green, ConsoleColor.Gray}, {ConsoleColor.DarkGreen, ConsoleColor.DarkGray}, {ConsoleColor.Blue, ConsoleColor.Gray}, {ConsoleColor.DarkBlue, ConsoleColor.DarkGray}, {ConsoleColor.Red, ConsoleColor.Gray}, {ConsoleColor.DarkRed, ConsoleColor.Black}, {ConsoleColor.Yellow, ConsoleColor.Gray}, {ConsoleColor.DarkYellow, ConsoleColor.Gray}, {ConsoleColor.Cyan, ConsoleColor.Gray}, {ConsoleColor.DarkCyan, ConsoleColor.White}, {ConsoleColor.Magenta, ConsoleColor.Gray}, {ConsoleColor.DarkMagenta, ConsoleColor.DarkGray}, {ConsoleColor.Gray, ConsoleColor.Gray}, {ConsoleColor.DarkGray, ConsoleColor.DarkGray}, {ConsoleColor.White, ConsoleColor.White}}},
                 {ColorScheme.GrayInverted, new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray Inverted
-                {
-                    {ConsoleColor.Black , ConsoleColor.White},
-                    {ConsoleColor.Green , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkGreen , ConsoleColor.Gray},
-                    {ConsoleColor.Blue , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkBlue , ConsoleColor.Gray},
-                    {ConsoleColor.Red , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkRed , ConsoleColor.White},
-                    {ConsoleColor.Yellow , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkYellow , ConsoleColor.DarkGray},
-                    {ConsoleColor.Cyan, ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkCyan , ConsoleColor.Black},
-                    {ConsoleColor.Magenta , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.Gray},
-                    {ConsoleColor.Gray , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkGray , ConsoleColor.Gray},
-                    {ConsoleColor.White , ConsoleColor.Black}
-                }},
-                {ColorScheme.Random, new Dictionary<ConsoleColor, ConsoleColor>  //Random
-                {
-                    {ConsoleColor.Black , RandomColor()},
-                    {ConsoleColor.Green , RandomColor()},
-                    {ConsoleColor.DarkGreen , RandomColor()},
-                    {ConsoleColor.Blue , RandomColor()},
-                    {ConsoleColor.DarkBlue , RandomColor()},
-                    {ConsoleColor.Red , RandomColor()},
-                    {ConsoleColor.DarkRed , RandomColor()},
-                    {ConsoleColor.Yellow , RandomColor()},
-                    {ConsoleColor.DarkYellow , RandomColor()},
-                    {ConsoleColor.Cyan, RandomColor()},
-                    {ConsoleColor.DarkCyan , RandomColor()},
-                    {ConsoleColor.Magenta , RandomColor()},
-                    {ConsoleColor.DarkMagenta , RandomColor()},
-                    {ConsoleColor.Gray ,RandomColor()},
-                    {ConsoleColor.DarkGray , RandomColor()},
-                    {ConsoleColor.White , RandomColor()}
-                }}};
-            ForeGroundList = new Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>>
-            {
-                {ColorScheme.Normal,new Dictionary<ConsoleColor, ConsoleColor> //Normal
-                {
-                   {ConsoleColor.Black , ConsoleColor.Black},
-                    {ConsoleColor.Green , ConsoleColor.Green},
-                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGreen},
-                    {ConsoleColor.Blue , ConsoleColor.Blue},
-                    {ConsoleColor.DarkBlue , ConsoleColor.DarkBlue},
-                    {ConsoleColor.Red , ConsoleColor.Red},
-                    {ConsoleColor.DarkRed , ConsoleColor.DarkRed},
-                    {ConsoleColor.Yellow , ConsoleColor.Yellow},
-                    {ConsoleColor.DarkYellow , ConsoleColor.DarkYellow},
-                    {ConsoleColor.Cyan, ConsoleColor.Cyan},
-                    {ConsoleColor.DarkCyan , ConsoleColor.DarkCyan},
-                    {ConsoleColor.Magenta , ConsoleColor.Magenta},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkMagenta},
-                    {ConsoleColor.Gray , ConsoleColor.Gray},
-                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
-                    {ConsoleColor.White , ConsoleColor.White}
-                }},
-                {ColorScheme.BlackWhite,new Dictionary<ConsoleColor, ConsoleColor> // Black/White
-                {
-                     {ConsoleColor.Black , ConsoleColor.White},
-                    {ConsoleColor.Green , ConsoleColor.White},
-                    {ConsoleColor.DarkGreen , ConsoleColor.White},
-                    {ConsoleColor.Blue , ConsoleColor.White},
-                    {ConsoleColor.DarkBlue , ConsoleColor.White},
-                    {ConsoleColor.Red , ConsoleColor.White},
-                    {ConsoleColor.DarkRed , ConsoleColor.White},
-                    {ConsoleColor.Yellow , ConsoleColor.White},
-                    {ConsoleColor.DarkYellow , ConsoleColor.White},
-                    {ConsoleColor.Cyan, ConsoleColor.White},
-                    {ConsoleColor.DarkCyan , ConsoleColor.White},
-                    {ConsoleColor.Magenta , ConsoleColor.White},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.White},
-                    {ConsoleColor.Gray , ConsoleColor.White},
-                    {ConsoleColor.DarkGray , ConsoleColor.White},
-                    {ConsoleColor.White , ConsoleColor.White}
-                }},
-                {ColorScheme.Gray,new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray
-                {
-                 {ConsoleColor.Black , ConsoleColor.Black},
-                    {ConsoleColor.Green , ConsoleColor.Gray},
-                    {ConsoleColor.DarkGreen , ConsoleColor.DarkGray},
-                    {ConsoleColor.Blue , ConsoleColor.Gray},
-                    {ConsoleColor.DarkBlue , ConsoleColor.DarkGray},
-                    {ConsoleColor.Red , ConsoleColor.Gray},
-                    {ConsoleColor.DarkRed , ConsoleColor.Black},
-                    {ConsoleColor.Yellow , ConsoleColor.Gray},
-                    {ConsoleColor.DarkYellow , ConsoleColor.Gray},
-                    {ConsoleColor.Cyan, ConsoleColor.Gray},
-                    {ConsoleColor.DarkCyan , ConsoleColor.White},
-                    {ConsoleColor.Magenta , ConsoleColor.Gray},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.DarkGray},
-                    {ConsoleColor.Gray , ConsoleColor.Gray},
-                    {ConsoleColor.DarkGray , ConsoleColor.DarkGray},
-                    {ConsoleColor.White , ConsoleColor.White}
-                }},
-                {ColorScheme.GrayInverted,new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray Inverted
-                {
-                   {ConsoleColor.Black , ConsoleColor.White},
-                    {ConsoleColor.Green , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkGreen , ConsoleColor.Gray},
-                    {ConsoleColor.Blue , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkBlue , ConsoleColor.Gray},
-                    {ConsoleColor.Red , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkRed , ConsoleColor.White},
-                    {ConsoleColor.Yellow , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkYellow , ConsoleColor.DarkGray},
-                    {ConsoleColor.Cyan, ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkCyan , ConsoleColor.Black},
-                    {ConsoleColor.Magenta , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkMagenta , ConsoleColor.Gray},
-                    {ConsoleColor.Gray , ConsoleColor.DarkGray},
-                    {ConsoleColor.DarkGray , ConsoleColor.Gray},
-                    {ConsoleColor.White , ConsoleColor.Black}
-                }},
-                {ColorScheme.Random,new Dictionary<ConsoleColor, ConsoleColor> //Random
-                {
-                     {ConsoleColor.Black , RandomColor()},
-                    {ConsoleColor.Green , RandomColor()},
-                    {ConsoleColor.DarkGreen , RandomColor()},
-                    {ConsoleColor.Blue , RandomColor()},
-                    {ConsoleColor.DarkBlue , RandomColor()},
-                    {ConsoleColor.Red , RandomColor()},
-                    {ConsoleColor.DarkRed , RandomColor()},
-                    {ConsoleColor.Yellow , RandomColor()},
-                    {ConsoleColor.DarkYellow , RandomColor()},
-                    {ConsoleColor.Cyan, RandomColor()},
-                    {ConsoleColor.DarkCyan , RandomColor()},
-                    {ConsoleColor.Magenta , RandomColor()},
-                    {ConsoleColor.DarkMagenta , RandomColor()},
-                    {ConsoleColor.Gray ,RandomColor()},
-                    {ConsoleColor.DarkGray , RandomColor()},
-                    {ConsoleColor.White , RandomColor()}
-                }}
-            };
+                {{ConsoleColor.Black, ConsoleColor.White}, {ConsoleColor.Green, ConsoleColor.DarkGray}, {ConsoleColor.DarkGreen, ConsoleColor.Gray}, {ConsoleColor.Blue, ConsoleColor.DarkGray}, {ConsoleColor.DarkBlue, ConsoleColor.Gray}, {ConsoleColor.Red, ConsoleColor.DarkGray}, {ConsoleColor.DarkRed, ConsoleColor.White}, {ConsoleColor.Yellow, ConsoleColor.DarkGray}, {ConsoleColor.DarkYellow, ConsoleColor.DarkGray}, {ConsoleColor.Cyan, ConsoleColor.DarkGray}, {ConsoleColor.DarkCyan, ConsoleColor.Black}, {ConsoleColor.Magenta, ConsoleColor.DarkGray}, {ConsoleColor.DarkMagenta, ConsoleColor.Gray}, {ConsoleColor.Gray, ConsoleColor.DarkGray}, {ConsoleColor.DarkGray, ConsoleColor.Gray}, {ConsoleColor.White, ConsoleColor.Black}}},
+                {ColorScheme.Random, new Dictionary<ConsoleColor, ConsoleColor> //Random
+                {{ConsoleColor.Black, RandomColor()}, {ConsoleColor.Green, RandomColor()}, {ConsoleColor.DarkGreen, RandomColor()}, {ConsoleColor.Blue, RandomColor()}, {ConsoleColor.DarkBlue, RandomColor()}, {ConsoleColor.Red, RandomColor()}, {ConsoleColor.DarkRed, RandomColor()}, {ConsoleColor.Yellow, RandomColor()}, {ConsoleColor.DarkYellow, RandomColor()}, {ConsoleColor.Cyan, RandomColor()}, {ConsoleColor.DarkCyan, RandomColor()}, {ConsoleColor.Magenta, RandomColor()}, {ConsoleColor.DarkMagenta, RandomColor()}, {ConsoleColor.Gray, RandomColor()}, {ConsoleColor.DarkGray, RandomColor()}, {ConsoleColor.White, RandomColor()}}}};
+            ForeGroundList = new Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> {{ColorScheme.Normal, new Dictionary<ConsoleColor, ConsoleColor> //Normal
+            {{ConsoleColor.Black, ConsoleColor.Black}, {ConsoleColor.Green, ConsoleColor.Green}, {ConsoleColor.DarkGreen, ConsoleColor.DarkGreen}, {ConsoleColor.Blue, ConsoleColor.Blue}, {ConsoleColor.DarkBlue, ConsoleColor.DarkBlue}, {ConsoleColor.Red, ConsoleColor.Red}, {ConsoleColor.DarkRed, ConsoleColor.DarkRed}, {ConsoleColor.Yellow, ConsoleColor.Yellow}, {ConsoleColor.DarkYellow, ConsoleColor.DarkYellow}, {ConsoleColor.Cyan, ConsoleColor.Cyan}, {ConsoleColor.DarkCyan, ConsoleColor.DarkCyan}, {ConsoleColor.Magenta, ConsoleColor.Magenta}, {ConsoleColor.DarkMagenta, ConsoleColor.DarkMagenta}, {ConsoleColor.Gray, ConsoleColor.Gray}, {ConsoleColor.DarkGray, ConsoleColor.DarkGray}, {ConsoleColor.White, ConsoleColor.White}}},
+                {ColorScheme.BlackWhite, new Dictionary<ConsoleColor, ConsoleColor> // Black/White
+                {{ConsoleColor.Black, ConsoleColor.White}, {ConsoleColor.Green, ConsoleColor.White}, {ConsoleColor.DarkGreen, ConsoleColor.White}, {ConsoleColor.Blue, ConsoleColor.White}, {ConsoleColor.DarkBlue, ConsoleColor.White}, {ConsoleColor.Red, ConsoleColor.White}, {ConsoleColor.DarkRed, ConsoleColor.White}, {ConsoleColor.Yellow, ConsoleColor.White}, {ConsoleColor.DarkYellow, ConsoleColor.White}, {ConsoleColor.Cyan, ConsoleColor.White}, {ConsoleColor.DarkCyan, ConsoleColor.White}, {ConsoleColor.Magenta, ConsoleColor.White}, {ConsoleColor.DarkMagenta, ConsoleColor.White}, {ConsoleColor.Gray, ConsoleColor.White}, {ConsoleColor.DarkGray, ConsoleColor.White}, {ConsoleColor.White, ConsoleColor.White}}},
+                {ColorScheme.Gray, new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray
+                {{ConsoleColor.Black, ConsoleColor.Black}, {ConsoleColor.Green, ConsoleColor.Gray}, {ConsoleColor.DarkGreen, ConsoleColor.DarkGray}, {ConsoleColor.Blue, ConsoleColor.Gray}, {ConsoleColor.DarkBlue, ConsoleColor.DarkGray}, {ConsoleColor.Red, ConsoleColor.Gray}, {ConsoleColor.DarkRed, ConsoleColor.Black}, {ConsoleColor.Yellow, ConsoleColor.Gray}, {ConsoleColor.DarkYellow, ConsoleColor.Gray}, {ConsoleColor.Cyan, ConsoleColor.Gray}, {ConsoleColor.DarkCyan, ConsoleColor.White}, {ConsoleColor.Magenta, ConsoleColor.Gray}, {ConsoleColor.DarkMagenta, ConsoleColor.DarkGray}, {ConsoleColor.Gray, ConsoleColor.Gray}, {ConsoleColor.DarkGray, ConsoleColor.DarkGray}, {ConsoleColor.White, ConsoleColor.White}}},
+                {ColorScheme.GrayInverted, new Dictionary<ConsoleColor, ConsoleColor> //4 Shades of Gray Inverted
+                {{ConsoleColor.Black, ConsoleColor.White}, {ConsoleColor.Green, ConsoleColor.DarkGray}, {ConsoleColor.DarkGreen, ConsoleColor.Gray}, {ConsoleColor.Blue, ConsoleColor.DarkGray}, {ConsoleColor.DarkBlue, ConsoleColor.Gray}, {ConsoleColor.Red, ConsoleColor.DarkGray}, {ConsoleColor.DarkRed, ConsoleColor.White}, {ConsoleColor.Yellow, ConsoleColor.DarkGray}, {ConsoleColor.DarkYellow, ConsoleColor.DarkGray}, {ConsoleColor.Cyan, ConsoleColor.DarkGray}, {ConsoleColor.DarkCyan, ConsoleColor.Black}, {ConsoleColor.Magenta, ConsoleColor.DarkGray}, {ConsoleColor.DarkMagenta, ConsoleColor.Gray}, {ConsoleColor.Gray, ConsoleColor.DarkGray}, {ConsoleColor.DarkGray, ConsoleColor.Gray}, {ConsoleColor.White, ConsoleColor.Black}}},
+                {ColorScheme.Random, new Dictionary<ConsoleColor, ConsoleColor> //Random
+                {{ConsoleColor.Black, RandomColor()}, {ConsoleColor.Green, RandomColor()}, {ConsoleColor.DarkGreen, RandomColor()}, {ConsoleColor.Blue, RandomColor()}, {ConsoleColor.DarkBlue, RandomColor()}, {ConsoleColor.Red, RandomColor()}, {ConsoleColor.DarkRed, RandomColor()}, {ConsoleColor.Yellow, RandomColor()}, {ConsoleColor.DarkYellow, RandomColor()}, {ConsoleColor.Cyan, RandomColor()}, {ConsoleColor.DarkCyan, RandomColor()}, {ConsoleColor.Magenta, RandomColor()}, {ConsoleColor.DarkMagenta, RandomColor()}, {ConsoleColor.Gray, RandomColor()}, {ConsoleColor.DarkGray, RandomColor()}, {ConsoleColor.White, RandomColor()}}}};
         }
-       public Array Kleuren = Enum.GetValues(typeof(ConsoleColor));
-        private  ConsoleColor RandomColor()
+
+        private ConsoleColor RandomColor()
         {
             var random = new Random();
             var randomgetal = random.Next(0, Kleuren.Length);
             Thread.Sleep(4);
-            return (ConsoleColor)Kleuren.GetValue(randomgetal);
+            return (ConsoleColor) Kleuren.GetValue(randomgetal);
         }
-        public Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> ForeGroundList { get; set; }
-        public Dictionary<ColorScheme, Dictionary<ConsoleColor, ConsoleColor>> BackGroundList { get; set; }
     }
 }

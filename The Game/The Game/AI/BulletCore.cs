@@ -78,8 +78,7 @@ namespace Confusing_Hobo_Unleashed.AI
                             Server.Change = true;
                             if (map.Collision[Y, X + x*tempDirection])
                             {
-                                map.Layers[Maplayers.Destructible].Characters[Y, X + x*tempDirection] =
-                                    map.Layers[Maplayers.Collision].Characters[Y, X + x*tempDirection] = null;
+                                map.Layers[Maplayers.Destructible].Characters[Y, X + x*tempDirection] = map.Layers[Maplayers.Collision].Characters[Y, X + x*tempDirection] = null;
                                 map.Destructible[Y, X + x*tempDirection] = map.Collision[Y, X + x*tempDirection] = false;
                             }
                             else
@@ -117,10 +116,8 @@ namespace Confusing_Hobo_Unleashed.AI
                             Server.Change = true;
                             if (map.Collision[Y + y*tempDirection/2, X])
                             {
-                                map.Layers[Maplayers.Destructible].Characters[Y + y*tempDirection/2, X] =
-                                    map.Layers[Maplayers.Collision].Characters[Y + y*tempDirection/2, X] = null;
-                                map.Destructible[Y + y*tempDirection/2, X] =
-                                    map.Collision[Y + y*tempDirection/2, X] = false;
+                                map.Layers[Maplayers.Destructible].Characters[Y + y*tempDirection/2, X] = map.Layers[Maplayers.Collision].Characters[Y + y*tempDirection/2, X] = null;
+                                map.Destructible[Y + y*tempDirection/2, X] = map.Collision[Y + y*tempDirection/2, X] = false;
                             }
                             else
                             {

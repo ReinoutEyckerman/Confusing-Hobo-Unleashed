@@ -7,19 +7,10 @@ namespace Confusing_Hobo_Unleashed
     internal class GameUi
     {
         private const int UiLeftX = 2;
-
-        private static readonly short UiBoxColors =
-            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Black, true));
-
-        private static readonly short UiTextColors =
-            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Cyan, true));
-
-        private static readonly short HpBarColor =
-            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Green), Painter.Instance.Paint(ConsoleColor.Black, true));
-
-        private static readonly short HpBarLostColor =
-            Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Red), Painter.Instance.Paint(ConsoleColor.Black, true));
-
+        private static readonly short UiBoxColors = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Black, true));
+        private static readonly short UiTextColors = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Cyan, true));
+        private static readonly short HpBarColor = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Green), Painter.Instance.Paint(ConsoleColor.Black, true));
+        private static readonly short HpBarLostColor = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Red), Painter.Instance.Paint(ConsoleColor.Black, true));
         private static readonly int UiRightX = Game.CurrentLoadedMap.Background.GetLength(1) - 2;
         private static readonly int UiTopY = Game.CurrentLoadedMap.Background.GetLength(0) + 1;
         private static int _uiBotY = Console.WindowHeight - 2;
@@ -31,8 +22,7 @@ namespace Confusing_Hobo_Unleashed
             {
                 _uiBotY = UiTopY + 7;
             }
-            Draw.FillRectangle(UiBoxColors, 0, Console.WindowWidth - 1, UiTopY - 2, Console.WindowHeight - 1,
-                outputbuffer);
+            Draw.FillRectangle(UiBoxColors, 0, Console.WindowWidth - 1, UiTopY - 2, Console.WindowHeight - 1, outputbuffer);
             Draw.Box(UiLeftX, UiTopY, UiRightX, _uiBotY, UiBoxColors, outputbuffer);
             DrawPlayerHp(outputbuffer, player1, "player 1", UiLeftX + 2, UiTopY + 2);
         }

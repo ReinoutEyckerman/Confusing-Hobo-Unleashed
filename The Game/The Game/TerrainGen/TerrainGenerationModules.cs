@@ -40,7 +40,6 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 if (ywall < 10 && direction == -1 || ywall > map.Mapheight - 8 && direction == 1)
                     ywall -= direction + Random.Next(2);
 
-
                 else if ((_up == 3 || _up == 6 || _up == 12) && ywall < map.Mapheight - 1)
                 {
                     ywall += direction;
@@ -153,7 +152,6 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     xwall += direction;
                 }
 
-
                 if (direction == 1)
                     for (var x = xwallStart; x <= xwall; x++)
                         map.Collision[y, x] = true;
@@ -192,7 +190,6 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         }
                     }
 
-
                     if (_up == 7 && ywall > 0)
                     {
                         ywall--;
@@ -216,8 +213,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             return ywall;
         }
 
-        public static void Detach(int xBegin, int xend, int horizontalCutoff, int ytopBegin, int ytopEnd,
-            int verticalCutoff)
+        public static void Detach(int xBegin, int xend, int horizontalCutoff, int ytopBegin, int ytopEnd, int verticalCutoff)
         {
             double x1 = (xBegin);
             double x2 = (xend - horizontalCutoff - xBegin)/6 + xBegin;

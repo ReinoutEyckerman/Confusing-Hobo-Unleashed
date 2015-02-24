@@ -15,70 +15,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
     internal class TerrainSelection
     {
         private static TerrainGenerator terrain;
-
-        private static IDictionary<int, IDictionary<int, TerrainGenerator>> terrainDictionary = new Dictionary
-            <int, IDictionary<int, TerrainGenerator>>
-        {
-            {
-                0, new Dictionary<int, TerrainGenerator>
-                {
-                    {0, SpaceTerrain.AsteroidField}
-                }
-            },
-            {
-                1, new Dictionary<int, TerrainGenerator>
-                {
-                    {0, SkyTerrain.Island},
-                    {1, SkyTerrain.Islands},
-                    {2, SkyTerrain.RandomIslands},
-                    {3, SkyTerrain.Clouds}
-                }
-            },
-            {
-                2, new Dictionary<int, TerrainGenerator>
-                {
-                    {0, LandTerrain.Cliff},
-                    {1, LandTerrain.Flat},
-                    {2, LandTerrain.Forest},
-                    {3, LandTerrain.HillSide},
-                    {4, LandTerrain.HillSideInverted},
-                    {5, LandTerrain.Mountain},
-                    {6, LandTerrain.Valley}
-                }
-            },
-            {
-                3, new Dictionary<int, TerrainGenerator>
-                {
-                    {0, SeaTerrain.Beach},
-                    {1, SeaTerrain.BeachInverted},
-                    {2, SeaTerrain.Cliff},
-                    {3, SeaTerrain.HillSide},
-                    {4, SeaTerrain.HillSideInverted},
-                    {5, SeaTerrain.Lake},
-                    {6, SeaTerrain.Island},
-                    {7, SeaTerrain.Sea}
-                }
-            },
-            {
-                4, new Dictionary<int, TerrainGenerator>
-                {
-                    {0, CaveTerrain.DeadEndEastCave},
-                    {1, CaveTerrain.DeadEndNorthCave},
-                    {2, CaveTerrain.DeadEndSouthCave},
-                    {3, CaveTerrain.DeadEndWestCave},
-                    {4, CaveTerrain.DownLeftQuarterCave},
-                    {5, CaveTerrain.DownRightQuarterCave},
-                    {6, CaveTerrain.HLineCave},
-                    {7, CaveTerrain.InvertTCave},
-                    {8, CaveTerrain.TCave},
-                    {9, CaveTerrain.TLeftCave},
-                    {10, CaveTerrain.TRightCave},
-                    {11, CaveTerrain.UpLeftQuarterCave},
-                    {12, CaveTerrain.UpRightQuarterCave},
-                    {13, CaveTerrain.VLineCave}
-                }
-            }
-        };
+        private static readonly IDictionary<int, IDictionary<int, TerrainGenerator>> terrainDictionary = new Dictionary<int, IDictionary<int, TerrainGenerator>> {{0, new Dictionary<int, TerrainGenerator> {{0, SpaceTerrain.AsteroidField}}}, {1, new Dictionary<int, TerrainGenerator> {{0, SkyTerrain.Island}, {1, SkyTerrain.Islands}, {2, SkyTerrain.RandomIslands}, {3, SkyTerrain.Clouds}}}, {2, new Dictionary<int, TerrainGenerator> {{0, LandTerrain.Cliff}, {1, LandTerrain.Flat}, {2, LandTerrain.Forest}, {3, LandTerrain.HillSide}, {4, LandTerrain.HillSideInverted}, {5, LandTerrain.Mountain}, {6, LandTerrain.Valley}}}, {3, new Dictionary<int, TerrainGenerator> {{0, SeaTerrain.Beach}, {1, SeaTerrain.BeachInverted}, {2, SeaTerrain.Cliff}, {3, SeaTerrain.HillSide}, {4, SeaTerrain.HillSideInverted}, {5, SeaTerrain.Lake}, {6, SeaTerrain.Island}, {7, SeaTerrain.Sea}}}, {4, new Dictionary<int, TerrainGenerator> {{0, CaveTerrain.DeadEndEastCave}, {1, CaveTerrain.DeadEndNorthCave}, {2, CaveTerrain.DeadEndSouthCave}, {3, CaveTerrain.DeadEndWestCave}, {4, CaveTerrain.DownLeftQuarterCave}, {5, CaveTerrain.DownRightQuarterCave}, {6, CaveTerrain.HLineCave}, {7, CaveTerrain.InvertTCave}, {8, CaveTerrain.TCave}, {9, CaveTerrain.TLeftCave}, {10, CaveTerrain.TRightCave}, {11, CaveTerrain.UpLeftQuarterCave}, {12, CaveTerrain.UpRightQuarterCave}, {13, CaveTerrain.VLineCave}}}};
 
         public static void RoomDistribution()
         {
@@ -131,7 +68,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             }
         }
 
-        public static void Redirect(CustomMap map, int selector, bool invert=false)
+        public static void Redirect(CustomMap map, int selector, bool invert = false)
         {
             if (map.Invertrate == 2 && !invert)
                 Redirect(map, selector, true);

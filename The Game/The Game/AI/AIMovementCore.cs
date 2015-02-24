@@ -40,25 +40,8 @@ namespace Confusing_Hobo_Unleashed.AI
 
     abstract partial class AiCore
     {
-        private readonly Dictionary<Move, bool> _attackDict = new Dictionary<Move, bool>
-        {
-            {Move.Up, false}
-            ,
-            {Move.Left, false}
-            ,
-            {Move.Right, false}
-            ,
-            {Move.Down, false}
-        };
-
-        private readonly Dictionary<Move, DirectionBlocker> _blockers = new Dictionary<Move, DirectionBlocker>
-        {
-            {Move.Left, new DirectionBlocker()},
-            {Move.Right, new DirectionBlocker()},
-            {Move.Up, new DirectionBlocker()},
-            {Move.Down, new DirectionBlocker()}
-        };
-
+        private readonly Dictionary<Move, bool> _attackDict = new Dictionary<Move, bool> {{Move.Up, false}, {Move.Left, false}, {Move.Right, false}, {Move.Down, false}};
+        private readonly Dictionary<Move, DirectionBlocker> _blockers = new Dictionary<Move, DirectionBlocker> {{Move.Left, new DirectionBlocker()}, {Move.Right, new DirectionBlocker()}, {Move.Up, new DirectionBlocker()}, {Move.Down, new DirectionBlocker()}};
         private bool _downForced;
         private bool _hori;
         private Move _horizontal;
@@ -194,9 +177,7 @@ namespace Confusing_Hobo_Unleashed.AI
             {
                 _attackDict[(Move) Enum.Parse(typeof (Move), Convert.ToString(i))] = false;
             }
-            if (Random.Next(50) == 7 ||
-                !(Y - Target.Y > MinVerticalProximity && Y - Target.Y < MaxVerticalProximity ||
-                  Target.Y - Y > MinVerticalProximity && Target.Y - Y < MaxVerticalProximity))
+            if (Random.Next(50) == 7 || !(Y - Target.Y > MinVerticalProximity && Y - Target.Y < MaxVerticalProximity || Target.Y - Y > MinVerticalProximity && Target.Y - Y < MaxVerticalProximity))
 
                 if ((Target.Y - Y < MinVerticalProximity || Y - Target.Y > MaxVerticalProximity))
                 {
@@ -208,8 +189,7 @@ namespace Confusing_Hobo_Unleashed.AI
                     _vertical = Destructiblecheck(map, 3);
                     verti = true;
                 }
-            if ((X - Target.X > MinHorizontalProximity && X - Target.X < MaxHorizontalProximity ||
-                 Target.X - X > MinHorizontalProximity && Target.X - X < MaxHorizontalProximity))
+            if ((X - Target.X > MinHorizontalProximity && X - Target.X < MaxHorizontalProximity || Target.X - X > MinHorizontalProximity && Target.X - X < MaxHorizontalProximity))
             {
                 if (temprandom > 0)
                 {
@@ -220,19 +200,11 @@ namespace Confusing_Hobo_Unleashed.AI
                 hori = true;
             }
 
-            if (((Target.X - X <= MinHorizontalProximity && Target.X - X >= 0 ||
-                  X - Target.X >= MaxHorizontalProximity && X - Target.X >= 0)) ||
-                (hori &&
-                 (Target.X - X <= MinHorizontalProximity && Target.X - X >= 0 ||
-                  X - Target.X >= MaxHorizontalProximity && X - Target.X >= 0)))
+            if (((Target.X - X <= MinHorizontalProximity && Target.X - X >= 0 || X - Target.X >= MaxHorizontalProximity && X - Target.X >= 0)) || (hori && (Target.X - X <= MinHorizontalProximity && Target.X - X >= 0 || X - Target.X >= MaxHorizontalProximity && X - Target.X >= 0)))
             {
                 _horizontal = Destructiblecheck(map, 0);
             }
-            else if (((X - Target.X <= MinHorizontalProximity && X - Target.X >= 0 ||
-                       Target.X - X >= MaxHorizontalProximity && Target.X - X >= 0)) ||
-                     (hori &&
-                      ((X - Target.X <= MinHorizontalProximity && X - Target.X >= 0 ||
-                        Target.X - X >= MaxHorizontalProximity && Target.X - X >= 0))))
+            else if (((X - Target.X <= MinHorizontalProximity && X - Target.X >= 0 || Target.X - X >= MaxHorizontalProximity && Target.X - X >= 0)) || (hori && ((X - Target.X <= MinHorizontalProximity && X - Target.X >= 0 || Target.X - X >= MaxHorizontalProximity && Target.X - X >= 0))))
             {
                 _horizontal = Destructiblecheck(map, 1);
             }
@@ -246,25 +218,19 @@ namespace Confusing_Hobo_Unleashed.AI
 
         private void ThreeWayOverride()
         {
-            if ((!_leftAllowed || _blockers[Move.Left].Enabled) && (!_upForced || _blockers[Move.Up].Enabled) &&
-                (!_downForced || _blockers[Move.Down].Enabled))
+            if ((!_leftAllowed || _blockers[Move.Left].Enabled) && (!_upForced || _blockers[Move.Up].Enabled) && (!_downForced || _blockers[Move.Down].Enabled))
             {
                 _blockers[Move.Left].Set();
             }
-            else if ((!_rightAllowed || _blockers[Move.Right].Enabled) && (!_upForced || _blockers[Move.Up].Enabled) &&
-                     (!_downForced || _blockers[Move.Down].Enabled))
+            else if ((!_rightAllowed || _blockers[Move.Right].Enabled) && (!_upForced || _blockers[Move.Up].Enabled) && (!_downForced || _blockers[Move.Down].Enabled))
             {
                 _blockers[Move.Right].Set();
             }
-            else if ((!_leftAllowed || _blockers[Move.Left].Enabled) &&
-                     (!_rightAllowed || _blockers[Move.Right].Enabled) &&
-                     (!_downForced || _blockers[Move.Down].Enabled))
+            else if ((!_leftAllowed || _blockers[Move.Left].Enabled) && (!_rightAllowed || _blockers[Move.Right].Enabled) && (!_downForced || _blockers[Move.Down].Enabled))
             {
                 _blockers[Move.Down].Set();
             }
-            else if ((!_leftAllowed || _blockers[Move.Left].Enabled) &&
-                     (!_upForced || _blockers[Move.Up].Enabled) &&
-                     (!_rightAllowed || _blockers[Move.Right].Enabled))
+            else if ((!_leftAllowed || _blockers[Move.Left].Enabled) && (!_upForced || _blockers[Move.Up].Enabled) && (!_rightAllowed || _blockers[Move.Right].Enabled))
             {
                 _blockers[Move.Up].Set();
             }
@@ -413,8 +379,7 @@ namespace Confusing_Hobo_Unleashed.AI
 
         public void Jump(CustomMap map)
         {
-            if (!IsPossibleMove(map, Move.Down) && map.Grav[Y, X] > 0 ||
-                !IsPossibleMove(map, Move.Up) && map.Grav[Y, X] < 0)
+            if (!IsPossibleMove(map, Move.Down) && map.Grav[Y, X] > 0 || !IsPossibleMove(map, Move.Up) && map.Grav[Y, X] < 0)
             {
                 SpeedY = map.Grav[Y, X]/10;
             }
@@ -500,14 +465,12 @@ namespace Confusing_Hobo_Unleashed.AI
             switch (richting)
             {
                 case Move.Down:
-                    if (Y + Math.Abs(map.Grav[Y, X]%10) >= map.Mapheight || Y + Math.Abs(map.Grav[Y, X]%10) < 0 ||
-                        Y + 1 < map.Mapheight && map.Collision[Y + 1, X])
+                    if (Y + Math.Abs(map.Grav[Y, X]%10) >= map.Mapheight || Y + Math.Abs(map.Grav[Y, X]%10) < 0 || Y + 1 < map.Mapheight && map.Collision[Y + 1, X])
                         return false;
                     return true;
 
                 case Move.Up:
-                    if (Y - Math.Abs(map.Grav[Y, X]%10) < 0 || Y - Math.Abs(map.Grav[Y, X]%10) >= map.Mapheight ||
-                        (Y - 1 > 0 && map.Collision[Y - 1, X]))
+                    if (Y - Math.Abs(map.Grav[Y, X]%10) < 0 || Y - Math.Abs(map.Grav[Y, X]%10) >= map.Mapheight || (Y - 1 > 0 && map.Collision[Y - 1, X]))
                         return false;
                     return true;
 
@@ -517,8 +480,7 @@ namespace Confusing_Hobo_Unleashed.AI
                     return true;
 
                 case Move.Right:
-                    if (X + 1 >= map.Mapwidth ||
-                        X + 1 < map.Mapwidth && map.Collision[Y, X + 1] && Y < map.Mapheight && Y >= 0)
+                    if (X + 1 >= map.Mapwidth || X + 1 < map.Mapwidth && map.Collision[Y, X + 1] && Y < map.Mapheight && Y >= 0)
                         return false;
                     return true;
 

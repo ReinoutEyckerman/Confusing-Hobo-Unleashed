@@ -53,8 +53,7 @@ namespace Confusing_Hobo_Unleashed
         {
             if (width > wWidth || height > wHeight)
             {
-                throw new ArgumentException(
-                    "The buffer width and height can not be greater than the window width and height.");
+                throw new ArgumentException("The buffer width and height can not be greater than the window width and height.");
             }
             _h = CreateFile("CONOUT$", 0x40000000, 2, IntPtr.Zero, FileMode.Open, 0, IntPtr.Zero);
             _width = width;
@@ -69,22 +68,10 @@ namespace Confusing_Hobo_Unleashed
         }
 
         [DllImport("Kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern SafeFileHandle CreateFile(
-            string fileName,
-            [MarshalAs(UnmanagedType.U4)] uint fileAccess,
-            [MarshalAs(UnmanagedType.U4)] uint fileShare,
-            IntPtr securityAttributes,
-            [MarshalAs(UnmanagedType.U4)] FileMode creationDisposition,
-            [MarshalAs(UnmanagedType.U4)] int flags,
-            IntPtr template);
+        private static extern SafeFileHandle CreateFile(string fileName, [MarshalAs(UnmanagedType.U4)] uint fileAccess, [MarshalAs(UnmanagedType.U4)] uint fileShare, IntPtr securityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode creationDisposition, [MarshalAs(UnmanagedType.U4)] int flags, IntPtr template);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool WriteConsoleOutput(
-            SafeFileHandle hConsoleOutput,
-            CharInfo[] lpBuffer,
-            Coord dwBufferSize,
-            Coord dwBufferCoord,
-            ref SmallRect lpWriteRegion);
+        private static extern bool WriteConsoleOutput(SafeFileHandle hConsoleOutput, CharInfo[] lpBuffer, Coord dwBufferSize, Coord dwBufferCoord, ref SmallRect lpWriteRegion);
 
         /// <summary>
         ///     This method draws any text to the buffer with given color.
@@ -108,7 +95,7 @@ namespace Confusing_Hobo_Unleashed
                 foreach (var le in temp)
                 {
                     _buf[(width + tc) + (height*_width)].Char.AsciiChar = (byte) le;
-                        //Height * width is to get to the correct spot (since this array is not two dimensions).
+                    //Height * width is to get to the correct spot (since this array is not two dimensions).
                     if (attribute != 0)
                         _buf[(width + tc) + (height*_width)].Attributes = attribute;
                     tc++;
@@ -212,8 +199,7 @@ namespace Confusing_Hobo_Unleashed
             {
                 throw new ArgumentOutOfRangeException();
             }
-            return new KeyValuePair<byte, byte>(_buf[((y*_width + x))].Char.AsciiChar,
-                (byte) _buf[((y*_width + x))].Attributes);
+            return new KeyValuePair<byte, byte>(_buf[((y*_width + x))].Char.AsciiChar, (byte) _buf[((y*_width + x))].Attributes);
         }
 
         [StructLayout(LayoutKind.Explicit)]

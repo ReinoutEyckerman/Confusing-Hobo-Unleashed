@@ -24,8 +24,7 @@ namespace Confusing_Hobo_Unleashed
         public static extern IntPtr GetConsoleWindow();
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy,
-            int wFlags);
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
 
         [STAThread]
         public static void Main()
@@ -70,8 +69,7 @@ namespace Confusing_Hobo_Unleashed
             while (true)
             {
                 frameTimer.Restart();
-                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision,
-                    CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
+                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision, CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
                 UpdateGame();
                 if (CheckWin())
                     return;
@@ -120,8 +118,7 @@ namespace Confusing_Hobo_Unleashed
 
             for (var i = 0; i < Entities.Count; i++)
             {
-                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision,
-                    CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
+                Array.Copy(CurrentLoadedMap.CollisionBackUp, CurrentLoadedMap.Collision, CurrentLoadedMap.Mapheight*CurrentLoadedMap.Mapwidth);
                 for (var j = 0; j < Entities.Count; j++)
                     if (i != j && Entities[j].CurrentClass != Classes.Boss)
                         CurrentLoadedMap.Collision[Entities[j].Y, Entities[j].X] = true;
@@ -131,8 +128,7 @@ namespace Confusing_Hobo_Unleashed
                 Entities[i].CalculateAttack();
                 if (Entities[i].CurrentClass != Classes.Grave)
                     Entities[i].Special();
-                if (DamageArray != null && Entities[i].CurrentClass != Classes.Boss &&
-                    DamageArray[Entities[i].Y, Entities[i].X])
+                if (DamageArray != null && Entities[i].CurrentClass != Classes.Boss && DamageArray[Entities[i].Y, Entities[i].X])
                 {
                     Entities[i].HpCurrent--;
                 }
@@ -180,7 +176,6 @@ namespace Confusing_Hobo_Unleashed
 
             if (CurrentLoadedMap.Layers[Maplayers.Decor].IsEnabled)
                 CurrentLoadedMap.Layers[Maplayers.Decor].LayerToBuffer(GameBuffer);
-
 
             foreach (var entity in Entities)
             {

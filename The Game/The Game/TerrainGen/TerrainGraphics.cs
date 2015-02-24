@@ -6,70 +6,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
     public class TerrainGraphics
     {
         private static int _moonX;
-
-        private static readonly int[,] JungleTree1 =
-        {
-            {0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0},
-            {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0},
-            {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0},
-            {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0},
-            {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
-            {0, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0},
-            {2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 0, 1, 1, 1, 2, 2, 2, 2, 0},
-            {0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2},
-            {0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0},
-            {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-            {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}
-        };
-
-        private static readonly int[,] JungleTree2 =
-        {
-            {0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0},
-            {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0},
-            {0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0},
-            {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0},
-            {0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0},
-            {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0},
-            {0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 0, 2, 2, 2, 2, 0, 0},
-            {0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 2},
-            {0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 2},
-            {0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0},
-            {0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-            {2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
-            {2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 2, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 2, 2, 2, 0, 0, 0, 0},
-            {0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0},
-            {0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0},
-            {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 2, 1, 1, 0, 0, 0, 0},
-            {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0},
-            {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 0, 0, 0, 0, 0},
-            {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0},
-            {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0},
-            {0, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}
-        };
-
+        private static readonly int[,] JungleTree1 = {{0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0}, {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0}, {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0}, {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0}, {0, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0}, {2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 0, 1, 1, 1, 2, 2, 2, 2, 0}, {0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2}, {0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0}};
+        private static readonly int[,] JungleTree2 = {{0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0}, {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0}, {0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0}, {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0}, {0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0}, {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 0, 2, 2, 2, 2, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 2}, {0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 2}, {0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0}, {0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0}, {2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 2, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 2, 2, 2, 0, 0, 0, 0}, {0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0}, {0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0}, {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 2, 1, 1, 0, 0, 0, 0}, {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0, 0, 0, 0}, {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 1, 0, 0, 0, 0, 0}, {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0}, {0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0}, {0, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}};
         private static readonly Random Random = new Random();
         private static bool _copter;
         private static int _xCopter;
@@ -147,8 +85,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 for (var b = 0; b < map.Mapwidth; b++)
                 {
                     map.Layers[0].Characters[a, b] = ' ';
-                    map.Layers[0].Background[a, b] =
-                        Painter.Instance.Paint(ConsoleColor.Gray);
+                    map.Layers[0].Background[a, b] = Painter.Instance.Paint(ConsoleColor.Gray);
                 }
             map.PushtoArray(map.Layers[0].Background, map.Layers[0].Foreground, map.Layers[0].Colors);
             for (var a = 0; a < map.Mapheight; a++)
@@ -156,25 +93,20 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 {
                     if (map.Collision[a, b])
                         map.Layers[Maplayers.Collision].Characters[a, b] = ' ';
-                    map.Layers[Maplayers.Collision].Background[a, b] =
-                        Painter.Instance.Paint(ConsoleColor.DarkGray);
+                    map.Layers[Maplayers.Collision].Background[a, b] = Painter.Instance.Paint(ConsoleColor.DarkGray);
                 }
         }
 
         private static void GenerateDay(CustomMap map)
         {
-            Console.BackgroundColor = VarDatabase.Day
-                ? Painter.Instance.Paint(ConsoleColor.Cyan)
-                : Painter.Instance.Paint(ConsoleColor.DarkBlue);
+            Console.BackgroundColor = VarDatabase.Day ? Painter.Instance.Paint(ConsoleColor.Cyan) : Painter.Instance.Paint(ConsoleColor.DarkBlue);
             for (var xwall = 0; xwall < map.Mapwidth; xwall++)
             {
                 for (var ywall = 0; ywall < map.Mapheight; ywall++)
                 {
-                    if (map.Grav[ywall, xwall] == (short) GravFields.Sea ||
-                        map.Grav[ywall, xwall] == Convert.ToInt16((short) GravFields.Sea*-1))
+                    if (map.Grav[ywall, xwall] == (short) GravFields.Sea || map.Grav[ywall, xwall] == Convert.ToInt16((short) GravFields.Sea*-1))
                     {
-                        map.Layers[0].Background[ywall, xwall] =
-                            Painter.Instance.Paint(ConsoleColor.Blue);
+                        map.Layers[0].Background[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.Blue);
                         if (Painter.Instance.Bw)
                             map.Layers[0].Characters[ywall, xwall] = '.';
                         else map.Layers[0].Characters[ywall, xwall] = ' ';
@@ -196,24 +128,15 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             {
                 for (var ywall = 0; ywall < map.Mapheight; ywall++)
                 {
-                    if (ywall - 1 >= 0 && ywall + 1 < map.Mapheight && map.Collision[ywall, xwall] &&
-                        (!map.Collision[ywall - 1, xwall] && map.Grav[ywall - 1, xwall] > 0 &&
-                         map.Grav[ywall - 1, xwall] != (short) GravFields.Sea &&
-                         ((ywall + 1 < map.Mapheight && map.Collision[ywall + 1, xwall]) || ywall + 1 == map.Mapheight) ||
-                         (!map.Collision[ywall + 1, xwall] && map.Grav[ywall + 1, xwall] < 0 &&
-                          map.Grav[ywall + 1, xwall] != Convert.ToInt16((short) GravFields.Sea*-1) &&
-                          ((ywall - 1 > 0 && map.Collision[ywall - 1, xwall]) || ywall - 1 == 0))))
+                    if (ywall - 1 >= 0 && ywall + 1 < map.Mapheight && map.Collision[ywall, xwall] && (!map.Collision[ywall - 1, xwall] && map.Grav[ywall - 1, xwall] > 0 && map.Grav[ywall - 1, xwall] != (short) GravFields.Sea && ((ywall + 1 < map.Mapheight && map.Collision[ywall + 1, xwall]) || ywall + 1 == map.Mapheight) || (!map.Collision[ywall + 1, xwall] && map.Grav[ywall + 1, xwall] < 0 && map.Grav[ywall + 1, xwall] != Convert.ToInt16((short) GravFields.Sea*-1) && ((ywall - 1 > 0 && map.Collision[ywall - 1, xwall]) || ywall - 1 == 0))))
                     {
-                        map.Layers[Maplayers.Collision].Background[ywall, xwall] =
-                            Painter.Instance.Paint(ConsoleColor.DarkGreen);
-                        map.Layers[Maplayers.Collision].Foreground[ywall, xwall] =
-                            Painter.Instance.Paint(ConsoleColor.Green);
+                        map.Layers[Maplayers.Collision].Background[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.DarkGreen);
+                        map.Layers[Maplayers.Collision].Foreground[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.Green);
                         map.Layers[Maplayers.Collision].Characters[ywall, xwall] = '"';
                     }
                     else if (map.Collision[ywall, xwall])
                     {
-                        map.Layers[Maplayers.Collision].Background[ywall, xwall] =
-                            Painter.Instance.Paint(ConsoleColor.DarkRed);
+                        map.Layers[Maplayers.Collision].Background[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.DarkRed);
                         if (Painter.Instance.Bw)
                             map.Layers[Maplayers.Collision].Characters[ywall, xwall] = '#';
                         else map.Layers[Maplayers.Collision].Characters[ywall, xwall] = ' ';
@@ -232,24 +155,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 VarDatabase.Day = !VarDatabase.Day;
                 GenerateDay(map);
             }
-            int[,] moon =
-            {
-                {0, 0, 0, 0, 0, 1, 2, 1, 1, 0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 1, 2, 2, 1, 1, 1, 0, 0, 0},
-                {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0},
-                {0, 0, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 0, 0},
-                {0, 0, 1, 1, 2, 2, 2, 1, 2, 2, 2, 2, 0, 0},
-                {0, 1, 1, 2, 2, 2, 1, 1, 1, 2, 1, 2, 1, 0},
-                {0, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-                {0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0},
-                {0, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0},
-                {0, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 1, 0},
-                {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0},
-                {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0},
-                {0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0},
-                {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0}
-            };
+            int[,] moon = {{0, 0, 0, 0, 0, 1, 2, 1, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 1, 1, 1, 2, 2, 1, 1, 1, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0}, {0, 0, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 0, 0}, {0, 0, 1, 1, 2, 2, 2, 1, 2, 2, 2, 2, 0, 0}, {0, 1, 1, 2, 2, 2, 1, 1, 1, 2, 1, 2, 1, 0}, {0, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0}, {0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0}, {0, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0}, {0, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 1, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0}, {0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0}, {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0}};
             var mooncolor = new ConsoleColor[moon.GetLength(0), moon.GetLength(1)];
             var moonattribute = new short[Console.WindowWidth, Console.WindowHeight];
             var moonY = Convert.ToInt32((Math.Pow(_moonX - 93, 2)/190) + 2);
@@ -280,9 +186,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
             for (var i = 0; i < moon.GetLength(0); i++)
                 for (var j = 0; j < moon.GetLength(1); j++)
-                    if (i + _moonX < map.Mapwidth && i + _moonX > 0 && j + moonY < map.Mapheight && moonY + j > 0 &&
-                        map.Layers[Maplayers.Air].Background[moonY + j, _moonX + i] !=
-                        Painter.Instance.Paint(ConsoleColor.Blue))
+                    if (i + _moonX < map.Mapwidth && i + _moonX > 0 && j + moonY < map.Mapheight && moonY + j > 0 && map.Layers[Maplayers.Air].Background[moonY + j, _moonX + i] != Painter.Instance.Paint(ConsoleColor.Blue))
                     {
                         moonattribute[i + _moonX, j + moonY] = Painter.Instance.ColorsToAttribute(mooncolor[i, j], mooncolor[i, j]);
                         var charToString = Convert.ToString(' ');
@@ -294,8 +198,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         {
             for (var xwall = 8; xwall < Console.WindowWidth - 2; xwall += Random.Next(3, 18))
                 for (var ywal = 1; ywal < map.Mapheight; ywal++)
-                    if (map.Collision[ywal, xwall] && ywal - 6 >= 0 && !invert ||
-                        ywal - 1 >= 0 && ywal + 6 <= map.Mapheight && !map.Collision[ywal + 1, xwall] && invert)
+                    if (map.Collision[ywal, xwall] && ywal - 6 >= 0 && !invert || ywal - 1 >= 0 && ywal + 6 <= map.Mapheight && !map.Collision[ywal + 1, xwall] && invert)
                     {
                         DrawTree(map, xwall, ywal, invert);
                         break;
@@ -311,34 +214,24 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             var array = Random.Next(2) == 0 ? JungleTree1 : JungleTree2;
             for (var x = 0; x < array.GetLength(1); x++)
                 for (var y = 0; y < array.GetLength(0); y++)
-                    if (((ypos + (-array.GetLength(0) + 8 + y))*invert >= 0 &&
-                         ypos + (-array.GetLength(0) + 8 + y)*invert < map.Mapheight && xpos + x >= 0 &&
-                         xpos + x < Console.WindowWidth))
+                    if (((ypos + (-array.GetLength(0) + 8 + y))*invert >= 0 && ypos + (-array.GetLength(0) + 8 + y)*invert < map.Mapheight && xpos + x >= 0 && xpos + x < Console.WindowWidth))
                     {
                         if (array[y, x] == 1)
                         {
                             if (Painter.Instance.Bw)
-                                map.Layers[Maplayers.Destructible].Characters[
-                                    ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = 'I';
+                                map.Layers[Maplayers.Destructible].Characters[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = 'I';
                             else
-                                map.Layers[Maplayers.Destructible].Characters[
-                                    ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = ' ';
+                                map.Layers[Maplayers.Destructible].Characters[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = ' ';
                             map.Destructible[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = true;
-                            map.Layers[Maplayers.Destructible].Background[
-                                ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] =
-                                Painter.Instance.Paint(ConsoleColor.DarkRed);
+                            map.Layers[Maplayers.Destructible].Background[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = Painter.Instance.Paint(ConsoleColor.DarkRed);
                         }
                         else if (array[y, x] == 2)
                         {
                             if (Painter.Instance.Bw)
-                                map.Layers[Maplayers.Destructible].Characters[
-                                    ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = '*';
+                                map.Layers[Maplayers.Destructible].Characters[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = '*';
                             else
-                                map.Layers[Maplayers.Destructible].Characters[
-                                    ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = ' ';
-                            map.Layers[Maplayers.Destructible].Background[
-                                ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] =
-                                Painter.Instance.Paint(ConsoleColor.DarkGreen);
+                                map.Layers[Maplayers.Destructible].Characters[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = ' ';
+                            map.Layers[Maplayers.Destructible].Background[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = Painter.Instance.Paint(ConsoleColor.DarkGreen);
                             map.Destructible[ypos + (-array.GetLength(0) + 8 + y)*invert, xpos + x] = true;
                         }
                     }
@@ -349,8 +242,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             for (var xwall = Random.Next(3, 18); xwall < Console.WindowWidth - 2; xwall += Random.Next(8, 24))
                 for (var ywal = 0; ywal < map.Mapheight; ywal++)
 
-                    if (map.Collision[ywal, xwall] && !invert ||
-                        ywal + 1 < map.Mapheight && !map.Collision[ywal + 1, xwall] && invert)
+                    if (map.Collision[ywal, xwall] && !invert || ywal + 1 < map.Mapheight && !map.Collision[ywal + 1, xwall] && invert)
                     {
                         DrawJungleTree(map, xwall, ywal, invert);
                         break;
@@ -365,8 +257,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             for (var x = -1; x <= 1; x++)
             {
                 map.Destructible[ypos - 5*reverse, xpos + x] = true;
-                map.Layers[Maplayers.Destructible].Background[ypos - 5*reverse, xpos + x] =
-                    Painter.Instance.Paint(ConsoleColor.DarkGreen);
+                map.Layers[Maplayers.Destructible].Background[ypos - 5*reverse, xpos + x] = Painter.Instance.Paint(ConsoleColor.DarkGreen);
                 if (Painter.Instance.Bw)
                     map.Layers[Maplayers.Destructible].Characters[ypos - 5*reverse, xpos + x] = '*';
                 else map.Layers[Maplayers.Destructible].Characters[ypos - 5*reverse, xpos + x] = ' ';
@@ -375,8 +266,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             for (var x = -2; x <= 2; x++)
             {
                 map.Destructible[ypos - 4*reverse, xpos + x] = true;
-                map.Layers[Maplayers.Destructible].Background[ypos - 4*reverse, xpos + x] =
-                    Painter.Instance.Paint(ConsoleColor.DarkGreen);
+                map.Layers[Maplayers.Destructible].Background[ypos - 4*reverse, xpos + x] = Painter.Instance.Paint(ConsoleColor.DarkGreen);
                 if (Painter.Instance.Bw)
                     map.Layers[Maplayers.Destructible].Characters[ypos - 4*reverse, xpos + x] = '*';
                 else map.Layers[Maplayers.Destructible].Characters[ypos - 4*reverse, xpos + x] = ' ';
@@ -385,8 +275,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             for (var y = 1; y < 4; y++)
             {
                 map.Destructible[ypos - y*reverse, xpos] = true;
-                map.Layers[Maplayers.Destructible].Background[ypos - y*reverse, xpos] =
-                    Painter.Instance.Paint(ConsoleColor.DarkRed);
+                map.Layers[Maplayers.Destructible].Background[ypos - y*reverse, xpos] = Painter.Instance.Paint(ConsoleColor.DarkRed);
                 if (Painter.Instance.Bw)
                     map.Layers[Maplayers.Destructible].Characters[ypos - y*reverse, xpos] = 'I';
                 else map.Layers[Maplayers.Destructible].Characters[ypos - y*reverse, xpos] = ' ';
@@ -397,10 +286,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         {
             for (var xwall = 8; xwall < Console.WindowWidth - 2; xwall += Random.Next(3, 18))
                 for (var ywal = 1; ywal < map.Mapheight; ywal++)
-                    if ((ywal - 6 >= 0 && map.Grav[ywal - 6, xwall] == (short) GravFields.Sea &&
-                         map.Collision[ywal, xwall] && !invert) ||
-                        (ywal + 6 < map.Mapheight && map.Grav[ywal + 6, xwall] == (short) GravFields.Sea*-1 &&
-                         map.Collision[ywal, xwall] && invert))
+                    if ((ywal - 6 >= 0 && map.Grav[ywal - 6, xwall] == (short) GravFields.Sea && map.Collision[ywal, xwall] && !invert) || (ywal + 6 < map.Mapheight && map.Grav[ywal + 6, xwall] == (short) GravFields.Sea*-1 && map.Collision[ywal, xwall] && invert))
                     {
                         DrawWeed(map, xwall, ywal, invert);
                         break;
@@ -413,12 +299,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             if (Invert)
                 invert = -1;
 
-            bool[,] weed =
-            {
-                {false, true, true, true, true},
-                {true, true, false, false, false},
-                {false, true, true, false, false}
-            };
+            bool[,] weed = {{false, true, true, true, true}, {true, true, false, false, false}, {false, true, true, false, false}};
             var negater = Random.Next(2);
             for (var x = 0; x <= 2; x++)
                 for (var y = 4; y >= 0; y--)
@@ -433,8 +314,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                         if (!map.Collision[ypos - (y)*invert, xpos + negX])
                         {
                             map.Destructible[ypos - (y)*invert, xpos + negX] = true;
-                            map.Layers[Maplayers.Destructible].Background[ypos - (y)*invert, xpos + negX] =
-                                Painter.Instance.Paint(ConsoleColor.Green);
+                            map.Layers[Maplayers.Destructible].Background[ypos - (y)*invert, xpos + negX] = Painter.Instance.Paint(ConsoleColor.Green);
                             if (Painter.Instance.Bw)
                                 map.Layers[Maplayers.Destructible].Characters[ypos - (y)*invert, xpos + negX] = 'L';
                             else map.Layers[Maplayers.Destructible].Characters[ypos - (y)*invert, xpos + negX] = ' ';
@@ -444,36 +324,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
         private static void DrawCloud(CustomMap map, int xpos, int ypos, bool thunder)
         {
-            bool[,] cloud1 =
-            {
-                {false, false, true, false, false, false, false, false, false, false, false},
-                {false, true, true, true, true, true, true, true, true, false, false},
-                {true, true, true, true, true, true, true, true, true, true, true},
-                {true, true, true, true, true, true, false, false, false, false, false}
-            };
-            bool[,] cloud2 =
-            {
-                {
-                    false, false, false, true, true, true, true, true, false, false, false, false, false, false, false,
-                    false, false, false
-                },
-                {
-                    false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false,
-                    false, false
-                },
-                {
-                    true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-                    true
-                },
-                {
-                    true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-                    true
-                },
-                {
-                    false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false,
-                    false, false
-                }
-            };
+            bool[,] cloud1 = {{false, false, true, false, false, false, false, false, false, false, false}, {false, true, true, true, true, true, true, true, true, false, false}, {true, true, true, true, true, true, true, true, true, true, true}, {true, true, true, true, true, true, false, false, false, false, false}};
+            bool[,] cloud2 = {{false, false, false, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false}, {false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false}, {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true}, {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true}, {false, false, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false}};
 
             bool[,] cloudarray;
             var cloudcolor = Painter.Instance.Paint(ConsoleColor.White);
@@ -538,52 +390,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 CopterAnimation = false;
                 return;
             }
-            char[,] copter1 =
-            {
-                {'R', 'O', 'F', 'L', ':', 'R', 'O', 'F', 'L', ':', 'L', 'O', 'L', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '^', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', '/', '-', '-', '-', '-', '-', '-', '-', ' ', ' '},
-                {' ', 'L', 'O', 'L', '=', '=', '=', ' ', ' ', ' ', ' ', ' ', '[', ']', '\\', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\'},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', '_', '_', '_', '_', '_', '_', '_', ']'},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', 'I', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '/'}
-            };
-            char[,] copter2 =
-            {
-                {
-                    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'L', 'O', 'L', 'R', 'O', 'F', 'L', ':', 'R', 'O', 'F',
-                    'L'
-                },
-                {
-                    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '^', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                    ' '
-                },
-                {
-                    ' ', ' ', 'L', ' ', ' ', ' ', '/', '-', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                    ' '
-                },
-                {
-                    ' ', ' ', 'O', ' ', '=', '=', '=', ' ', ' ', ' ', ' ', ' ', '[', ']', '\\', ' ', ' ', ' ', ' ', ' ',
-                    ' ', ' '
-                },
-                {
-                    ' ', ' ', 'L', ' ', ' ', ' ', ' ', '\\', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', ' ', ' ', ' ', ' ',
-                    ' ', ' '
-                },
-                {
-                    ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', '_', '_', '_', '_', '_', '_', '_', ']', ' ', ' ', ' ', ' ',
-                    ' ', ' '
-                },
-                {
-                    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                    ' '
-                },
-                {
-                    ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '/', ' ', ' ', ' ', ' ', ' ',
-                    ' '
-                }
-            };
+            char[,] copter1 = {{'R', 'O', 'F', 'L', ':', 'R', 'O', 'F', 'L', ':', 'L', 'O', 'L', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '^', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', '/', '-', '-', '-', '-', '-', '-', '-', ' ', ' '}, {' ', 'L', 'O', 'L', '=', '=', '=', ' ', ' ', ' ', ' ', ' ', '[', ']', '\\', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\'}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', '_', '_', '_', '_', '_', '_', '_', ']'}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', 'I', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '/'}};
+            char[,] copter2 = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'L', 'O', 'L', 'R', 'O', 'F', 'L', ':', 'R', 'O', 'F', 'L'}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '^', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', 'L', ' ', ' ', ' ', '/', '-', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', 'O', ' ', '=', '=', '=', ' ', ' ', ' ', ' ', ' ', '[', ']', '\\', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', 'L', ' ', ' ', ' ', ' ', '\\', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', '\\', '_', '_', '_', '_', '_', '_', '_', ']', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '/', ' ', ' ', ' ', ' ', ' ', ' '}};
             char[,] copterArray;
             copterArray = !_copter ? copter1 : copter2;
             _copter = !_copter;

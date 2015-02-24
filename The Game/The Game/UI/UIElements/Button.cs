@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.UI
@@ -13,15 +10,15 @@ namespace Confusing_Hobo_Unleashed.UI
         {
             BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
             BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White,true);
+            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
             SelectedColor = Painter.Instance.Paint(ConsoleColor.Blue);
             SelectedColors = Painter.Instance.ColorsToAttribute(SelectedColor, ForegroundColor);
 
             BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
             BackgroundColors = Painter.Instance.ColorsToAttribute(BackgroundColor, ForegroundColor);
             Value = false;
-            Xpos = Console.WindowWidth * 2 / 5;
-            BlockLength = Console.WindowWidth / 5;
+            Xpos = Console.WindowWidth*2/5;
+            BlockLength = Console.WindowWidth/5;
         }
 
         public Button(int xpos, int ypos, string message, bool value = false, int blocklength = 20, int blockheight = 5)
@@ -35,7 +32,7 @@ namespace Confusing_Hobo_Unleashed.UI
 
             BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
             BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White,true);
+            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
 
             BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
             BackgroundColors = Painter.Instance.ColorsToAttribute(BackgroundColor, ForegroundColor);
@@ -61,15 +58,15 @@ namespace Confusing_Hobo_Unleashed.UI
 
         private void CenterMessage()
         {
-            XPosForCenteredMessage = (Xpos + (BlockLength / 2)) - Message.Length / 2;
-            YPosForCenteredMessage = (Ypos + (BlockHeight / 2));
+            XPosForCenteredMessage = (Xpos + (BlockLength/2)) - Message.Length/2;
+            YPosForCenteredMessage = (Ypos + (BlockHeight/2));
         }
 
         public void Recolor()
         {
             BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
             BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White,true);
+            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
             SelectedColor = Painter.Instance.Paint(ConsoleColor.Blue);
             SelectedColors = Painter.Instance.ColorsToAttribute(SelectedColor, ForegroundColor);
             BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
@@ -85,10 +82,8 @@ namespace Confusing_Hobo_Unleashed.UI
         {
             if (XPosForCenteredMessage == 0)
                 CenterMessage();
-            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, Value ? SelectedColors : BackgroundColors,
-                outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1,
-                outputbuffer);
+            Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, Value ? SelectedColors : BackgroundColors, outputbuffer);
+            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
             outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
         }
 
@@ -97,11 +92,9 @@ namespace Confusing_Hobo_Unleashed.UI
             if (XPosForCenteredMessage == 0)
                 CenterMessage();
             Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BorderColors, outputbuffer, true);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1,
-                outputbuffer);
+            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
 
             outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
         }
     }
-
 }

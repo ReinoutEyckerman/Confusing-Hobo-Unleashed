@@ -14,23 +14,16 @@ namespace Confusing_Hobo_Unleashed.User
             Name = "Joe";
             Target = null;
             WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5,
-                bulletBackground: Painter.Instance.Paint(ConsoleColor.Red,true),
-                bulletForeground: Painter.Instance.Paint(ConsoleColor.Red,true),
-                bulletCharacter: '*', speed: 2);
+            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5, bulletBackground: Painter.Instance.Paint(ConsoleColor.Red, true), bulletForeground: Painter.Instance.Paint(ConsoleColor.Red, true), bulletCharacter: '*', speed: 2);
             WeaponInv[1] = new Weapon("Fists", WeaponType.Fist, 10, 5);
         }
 
-        public Player(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter, ConsoleColor backGround,
-            ConsoleColor foreGround) : base(map, xpos, ypos, totalHp, playerCharacter, backGround, foreGround)
+        public Player(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter, ConsoleColor backGround, ConsoleColor foreGround) : base(map, xpos, ypos, totalHp, playerCharacter, backGround, foreGround)
         {
             Name = "Joe";
             Target = null;
             WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5,
-                bulletBackground: Painter.Instance.Paint(ConsoleColor.Red,true),
-                bulletForeground: Painter.Instance.Paint(ConsoleColor.Red,true),
-                bulletCharacter: '*', speed: 2);
+            WeaponInv[0] = new Weapon("Iron Gun", WeaponType.Gun, 10, 5, bulletBackground: Painter.Instance.Paint(ConsoleColor.Red, true), bulletForeground: Painter.Instance.Paint(ConsoleColor.Red, true), bulletCharacter: '*', speed: 2);
             WeaponInv[1] = new Weapon("Fists", WeaponType.Fist, 10, 5);
             CurrentClass = Classes.Player;
         }

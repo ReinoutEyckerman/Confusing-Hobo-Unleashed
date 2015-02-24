@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.User;
 using Lidgren.Network;
 
@@ -37,8 +36,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             Game.CurrentLoadedMap = new CustomMap(Game.CurrentLoadedMap.Mapheight, Console.WindowWidth, false);
             //TODO:LandTerrain.Redirect(Game.CurrentLoadedMap, 1);
             Gameplay.Push();
-            Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision,
-                Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
+            Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
             Console.WriteLine("Map generated");
             //
 
@@ -58,9 +56,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                 var player = new Player(Game.CurrentLoadedMap) {Connection = inc.SenderConnection};
                                 LidgrenAdaptions.DecompileCore(inc, player);
                                 Game.Players.Add(player);
-                                Console.WriteLine(
-                                    "Player data processed, Player joined the game. \nConnection details are : " +
-                                    player.Connection);
+                                Console.WriteLine("Player data processed, Player joined the game. \nConnection details are : " + player.Connection);
                                 Game.Entities.Clear();
                                 Game.FillEntities();
                                 NetOutgoingMessage outmsg;
@@ -70,8 +66,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                     outmsg.Write((byte) PacketTypes.Newplayer);
                                     outmsg.Write((byte) i);
                                     LidgrenAdaptions.CompileCore(outmsg, player);
-                                    _server.SendMessage(outmsg, Game.Players[i].Connection,
-                                        NetDeliveryMethod.ReliableOrdered, 0);
+                                    _server.SendMessage(outmsg, Game.Players[i].Connection, NetDeliveryMethod.ReliableOrdered, 0);
                                 }
                                 outmsg = _server.CreateMessage();
                                 outmsg.Write((byte) PacketTypes.Worldstate);
@@ -95,8 +90,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                             if (packetType == (byte) PacketTypes.Input)
                             {
                                 var playerNum = inc.ReadByte();
-                                Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision,
-                                    Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
+                                Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
                                 for (var j = 0; j < Game.Entities.Count; j++)
                                     if (playerNum != j)
                                         Game.CurrentLoadedMap.Collision[Game.Entities[j].Y, Game.Entities[j].X] = true;
@@ -107,10 +101,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                     if (k == 1)
                                     {
                                         var input = inc.ReadByte();
-                                        Console.WriteLine("Player " + playerNum + " sent " +
-                                                          (Key) Enum.Parse(typeof (Key), input.ToString()));
-                                        InputHandler.GameInputHandling(playerNum,
-                                            (Key) Enum.Parse(typeof (Key), input.ToString()));
+                                        Console.WriteLine("Player " + playerNum + " sent " + (Key) Enum.Parse(typeof (Key), input.ToString()));
+                                        InputHandler.GameInputHandling(playerNum, (Key) Enum.Parse(typeof (Key), input.ToString()));
                                     }
                                 } while (k != 0);
                             }
@@ -124,10 +116,8 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                             // NetConnectionStatus.Disconnecting;
                             // NetConnectionStatus.None;
 
-
                             Console.WriteLine(inc.SenderConnection + " status changed. " + inc.SenderConnection.Status);
-                            if (inc.SenderConnection.Status == NetConnectionStatus.Disconnected ||
-                                inc.SenderConnection.Status == NetConnectionStatus.Disconnecting)
+                            if (inc.SenderConnection.Status == NetConnectionStatus.Disconnected || inc.SenderConnection.Status == NetConnectionStatus.Disconnecting)
                             {
                                 // Find disconnected character and remove it
                                 foreach (var cha in Game.Players)
@@ -150,8 +140,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                     if (_server.ConnectionsCount != 0)
                     {
                         //CALCULATING 
-                        Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision,
-                            Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
+                        Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
                         foreach (var bullet in Game.Bullets)
                         {
                             bullet.Rendered = true;

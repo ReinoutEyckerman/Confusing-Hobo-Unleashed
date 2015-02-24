@@ -6,6 +6,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
     {
         private static readonly Random Random = new Random();
         public static int MapAmount = 4;
+
         public static void Island(CustomMap map, bool invert)
         {
             var ywall = 25;
@@ -24,15 +25,11 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             var ywallEnd = TerrainGenerationModules.Flat(map, ywall, 0, Console.WindowWidth/4, invert);
             TerrainGenerationModules.Detach(0, Console.WindowWidth/4, 4, ywall, ywallEnd, 8);
             ywall += 4;
-            ywallEnd = TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*3/5, Console.WindowWidth*4/5,
-                invert);
-            TerrainGenerationModules.Detach(Console.WindowWidth*3/5, Console.WindowWidth*4/5, 8, ywall, ywallEnd,
-                ywall + 8);
+            ywallEnd = TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*3/5, Console.WindowWidth*4/5, invert);
+            TerrainGenerationModules.Detach(Console.WindowWidth*3/5, Console.WindowWidth*4/5, 8, ywall, ywallEnd, ywall + 8);
             ywall = Console.WindowHeight*3/5;
-            ywallEnd = TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*2/5, Console.WindowWidth*4/5,
-                invert);
-            TerrainGenerationModules.Detach(Console.WindowWidth*2/5, Console.WindowWidth*4/5, 4, ywall, ywallEnd,
-                ywall + 8);
+            ywallEnd = TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*2/5, Console.WindowWidth*4/5, invert);
+            TerrainGenerationModules.Detach(Console.WindowWidth*2/5, Console.WindowWidth*4/5, 4, ywall, ywallEnd, ywall + 8);
             TerrainGraphics.Overlay(map, invert, map.Mapheight);
         }
 

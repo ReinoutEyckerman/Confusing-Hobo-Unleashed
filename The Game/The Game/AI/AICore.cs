@@ -29,8 +29,7 @@ namespace Confusing_Hobo_Unleashed.AI
             Map = map;
         }
 
-        protected AiCore(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter,
-            ConsoleColor backGround, ConsoleColor foreGround)
+        protected AiCore(CustomMap map, short xpos, short ypos, int totalHp, char playerCharacter, ConsoleColor backGround, ConsoleColor foreGround)
         {
             Map = map;
 

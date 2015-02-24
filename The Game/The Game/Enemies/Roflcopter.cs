@@ -27,9 +27,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             MaxVerticalProximity = 30;
             PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
             WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10,
-                bulletBackground: Painter.Instance.Paint(ConsoleColor.White),
-                bulletForeground: Painter.Instance.Paint(ConsoleColor.Black), speed: 1);
+            WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10, bulletBackground: Painter.Instance.Paint(ConsoleColor.White), bulletForeground: Painter.Instance.Paint(ConsoleColor.Black), speed: 1);
         }
 
         public override void CalculateAttack()

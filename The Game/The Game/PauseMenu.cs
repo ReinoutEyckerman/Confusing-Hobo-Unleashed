@@ -16,13 +16,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void GenerateMenu()
         {
-            MenuItems = new List<Button>
-            {
-                new Button(1, 1, "Resume"),
-                new Button(1, 6, "Inventory"),
-                new Button(1, 11, "Options"),
-                new Button(1, 16, "Quit")
-            };
+            MenuItems = new List<Button> {new Button(1, 1, "Resume"), new Button(1, 6, "Inventory"), new Button(1, 11, "Options"), new Button(1, 16, "Quit")};
 
             ActiveItem = 0;
         }
@@ -116,7 +110,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static ConsoleColor Bg = Painter.Instance.Paint(ConsoleColor.DarkGreen);
         public static ConsoleColor Border = Painter.Instance.Paint(ConsoleColor.Red);
-        public static ConsoleColor Fg = Painter.Instance.Paint(ConsoleColor.White,true);
+        public static ConsoleColor Fg = Painter.Instance.Paint(ConsoleColor.White, true);
         public static short BorderColors = Painter.Instance.ColorsToAttribute(Bg, Border);
         public static short TextColors = Painter.Instance.ColorsToAttribute(Bg, Fg);
     }

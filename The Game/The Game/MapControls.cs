@@ -29,28 +29,19 @@ namespace Confusing_Hobo_Unleashed
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkCyan);
             Console.SetCursorPosition(MapDrawing.Xposmin - 1, MapDrawing.Yposmin - 1);
 
-            for (var x = MapDrawing.Xposmin - 1;
-                x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1;
-                x++)
+            for (var x = MapDrawing.Xposmin - 1; x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1; x++)
             {
                 Console.Write("-");
             }
-            Console.SetCursorPosition(MapDrawing.Xposmin - 1,
-                MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical + 1);
-            for (var x = MapDrawing.Xposmin - 1;
-                x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1;
-                x++)
+            Console.SetCursorPosition(MapDrawing.Xposmin - 1, MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical + 1);
+            for (var x = MapDrawing.Xposmin - 1; x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal + 1; x++)
             {
                 Console.Write("-");
             }
-            for (var y = MapDrawing.Yposmin;
-                y <= MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical;
-                y++)
+            for (var y = MapDrawing.Yposmin; y <= MapDrawing.Yposmin + (MapDrawing.VerticalBlockLength + 2)*MapGeneration.RoomsVertical; y++)
             {
                 Console.SetCursorPosition(MapDrawing.Xposmin, y);
-                for (var x = MapDrawing.Xposmin;
-                    x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal;
-                    x++)
+                for (var x = MapDrawing.Xposmin; x <= MapDrawing.Xposmin + (MapDrawing.HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal; x++)
                 {
                     Console.Write(" ");
                 }
@@ -62,10 +53,8 @@ namespace Confusing_Hobo_Unleashed
             MapDrawing.ShowMap();
             var xpostemp = MapDrawing.Xposcurrent;
             var ypostemp = MapDrawing.Yposcurrent;
-            var preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) +
-                            MapDrawing.HorizontalBlockLength/2);
-            var preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) +
-                            MapDrawing.VerticalBlockLength/2);
+            var preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) + MapDrawing.HorizontalBlockLength/2);
+            var preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) + MapDrawing.VerticalBlockLength/2);
 
             Console.SetCursorPosition(preXCalc, preYCalc);
             DrawPerson();
@@ -110,10 +99,8 @@ namespace Confusing_Hobo_Unleashed
                     break;
             }
             MapDrawing.ShowMap();
-            preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) +
-                        MapDrawing.HorizontalBlockLength/2);
-            preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) +
-                        MapDrawing.VerticalBlockLength/2);
+            preXCalc = (MapDrawing.Xposmin + MapDrawing.Xposcurrent*(MapDrawing.HorizontalBlockLength + 2) + MapDrawing.HorizontalBlockLength/2);
+            preYCalc = (MapDrawing.Yposmin + MapDrawing.Yposcurrent*(MapDrawing.VerticalBlockLength + 2) + MapDrawing.VerticalBlockLength/2);
             Console.SetCursorPosition(preXCalc, preYCalc);
             DrawPerson();
             if (MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] != true)
@@ -131,8 +118,7 @@ namespace Confusing_Hobo_Unleashed
                             Console.Clear();
                             Game.GameBuffer.Clear();
                             corBut = true;
-                            TerrainSelection.Redirect(Game.CurrentLoadedMap,
-                                MapGeneration.Terrains[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]);
+                            TerrainSelection.Redirect(Game.CurrentLoadedMap, MapGeneration.Terrains[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]);
                             Gameplay.EnableTerrain();
                             MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] = true;
                             DrawMap();
@@ -156,9 +142,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void LeftoverPerson()
         {
-            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]
-                ? Painter.Instance.Paint(ConsoleColor.DarkGreen)
-                : Painter.Instance.Paint(ConsoleColor.DarkRed);
+            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] ? Painter.Instance.Paint(ConsoleColor.DarkGreen) : Painter.Instance.Paint(ConsoleColor.DarkRed);
 
             Console.Write("   ");
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
@@ -166,9 +150,7 @@ namespace Confusing_Hobo_Unleashed
 
         public static void DrawPerson()
         {
-            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]
-                ? Painter.Instance.Paint(ConsoleColor.DarkGreen)
-                : Painter.Instance.Paint(ConsoleColor.DarkRed);
+            Console.BackgroundColor = MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] ? Painter.Instance.Paint(ConsoleColor.DarkGreen) : Painter.Instance.Paint(ConsoleColor.DarkRed);
             Console.Write(MapDrawing.HorizontalBlockLength >= 7 ? "'-'" : "o");
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
         }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Confusing_Hobo_Unleashed.Colors;
 
 namespace Confusing_Hobo_Unleashed.UI
@@ -12,19 +9,18 @@ namespace Confusing_Hobo_Unleashed.UI
         public OptionsMenu()
         {
             BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White,true);
+            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
             BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
-            BlockLength = Console.WindowWidth * 5 / 7;
+            BlockLength = Console.WindowWidth*5/7;
             BlockHeight = 10;
-            Xpos = Console.WindowWidth / 6;
+            Xpos = Console.WindowWidth/6;
             TextBoxList = new List<TextBox>();
             ButtonList = new List<Button>();
             Content = "";
             BiDirectional = false;
         }
 
-        public OptionsMenu(string name, int xpos, int ypos, int xposmax, string content, bool state, int blocklength,
-            int blockheight)
+        public OptionsMenu(string name, int xpos, int ypos, int xposmax, string content, bool state, int blocklength, int blockheight)
         {
             Name = name;
             Xpos = xpos;
@@ -37,7 +33,7 @@ namespace Confusing_Hobo_Unleashed.UI
             BiDirectional = false;
 
             BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White,true);
+            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
             BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
 
             TextBoxList = new List<TextBox>();
@@ -82,15 +78,14 @@ namespace Confusing_Hobo_Unleashed.UI
         {
             if (Content != "")
             {
-                var tempx = XposMax - 5 - Console.WindowWidth / 6;
-                for (var x = Content.Length; x <= (tempx) * 7; x++)
+                var tempx = XposMax - 5 - Console.WindowWidth/6;
+                for (var x = Content.Length; x <= (tempx)*7; x++)
                 {
                     Content += " ";
                 }
                 for (var i = 0; i < 7; i++)
                 {
-                    outputbuffer.Draw(Content.Substring(tempx * i, tempx), Console.WindowWidth / 6 + 2, Ypos + i + 2,
-                        BackgroundColors);
+                    outputbuffer.Draw(Content.Substring(tempx*i, tempx), Console.WindowWidth/6 + 2, Ypos + i + 2, BackgroundColors);
                 }
             }
         }
@@ -98,30 +93,23 @@ namespace Confusing_Hobo_Unleashed.UI
         public void Render(buffer outputbuffer)
         {
             BackgroundColors = Painter.Instance.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight / 3, Xpos, Ypos + BlockHeight * 2 / 3 + 1, BackgroundColors,
-                outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos - Name.Length - 2, Xpos, Ypos + BlockHeight / 3 + 1,
-                Ypos + BlockHeight / 3 + 3, outputbuffer);
-            outputbuffer.Draw(Name, Xpos - Name.Length - 1, Ypos + BlockHeight / 2, BackgroundColors);
+            Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight/3, Xpos, Ypos + BlockHeight*2/3 + 1, BackgroundColors, outputbuffer);
+            Draw.FillRectangle(BackgroundColors, Xpos - Name.Length - 2, Xpos, Ypos + BlockHeight/3 + 1, Ypos + BlockHeight/3 + 3, outputbuffer);
+            outputbuffer.Draw(Name, Xpos - Name.Length - 1, Ypos + BlockHeight/2, BackgroundColors);
 
             Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BackgroundColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1,
-                outputbuffer);
+            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
         }
 
         public void RenderActive(buffer outputbuffer)
         {
             BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
-            Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight / 3, Xpos, Ypos + BlockHeight * 2 / 3 + 1, BorderColors,
-                outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos - Name.Length - 2, Xpos, Ypos + BlockHeight / 3 + 1,
-                Ypos + BlockHeight / 3 + 3, outputbuffer);
-            outputbuffer.Draw(Name, Xpos - Name.Length - 1, Ypos + BlockHeight / 2, BackgroundColors);
+            Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight/3, Xpos, Ypos + BlockHeight*2/3 + 1, BorderColors, outputbuffer);
+            Draw.FillRectangle(BackgroundColors, Xpos - Name.Length - 2, Xpos, Ypos + BlockHeight/3 + 1, Ypos + BlockHeight/3 + 3, outputbuffer);
+            outputbuffer.Draw(Name, Xpos - Name.Length - 1, Ypos + BlockHeight/2, BackgroundColors);
             Draw.Box(Xpos, Ypos, Xpos + BlockLength, Ypos + BlockHeight, BorderColors, outputbuffer);
-            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1,
-                outputbuffer);
+            Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
             WriteMessage(outputbuffer);
         }
     }
-
 }

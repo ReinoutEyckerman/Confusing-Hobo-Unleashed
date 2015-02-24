@@ -41,9 +41,7 @@ namespace Confusing_Hobo_Unleashed
                 {
                     Write(x, y);
                 }
-                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix;
-                    x < XThreeQuarter - XQuarter/2 + Calculatrix;
-                    x++)
+                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix; x < XThreeQuarter - XQuarter/2 + Calculatrix; x++)
                 {
                     Write(x, y);
                 }
@@ -69,9 +67,7 @@ namespace Confusing_Hobo_Unleashed
                 {
                     Write(x, y);
                 }
-                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix;
-                    x < XThreeQuarter - XQuarter/2 + Calculatrix;
-                    x++)
+                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix; x < XThreeQuarter - XQuarter/2 + Calculatrix; x++)
                 {
                     Write(x, y);
                 }

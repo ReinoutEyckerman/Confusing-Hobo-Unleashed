@@ -6,6 +6,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
     {
         private static readonly Random Random = new Random();
         public static int MapAmount = 8;
+
         public static void Sea(CustomMap map, bool invert)
         {
             var ywall = Game.CurrentLoadedMap.Mapheight - Random.Next(5, 15);
@@ -22,8 +23,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 ywall = map.Mapheight - ywall;
             ywall = TerrainGenerationModules.ExtremeY(map, ywall, 0, Console.WindowWidth/4, 1, invert);
             ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/4, Console.WindowWidth/2, 1, invert);
-            ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, -1,
-                invert);
+            ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, -1, invert);
             TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, -1, invert);
             TerrainGraphics.Overlay(map, invert);
         }
@@ -34,10 +34,8 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             if (invert)
                 ywall = map.Mapheight - ywall;
             ywall = TerrainGenerationModules.SlowY(map, ywall, 0, Console.WindowWidth/4, -1, invert);
-            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/4, Console.WindowWidth/2, -1,
-                invert);
-            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, 1,
-                invert);
+            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/4, Console.WindowWidth/2, -1, invert);
+            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, 1, invert);
             TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, 1, invert);
             TerrainGraphics.Overlay(map, invert);
         }
@@ -57,8 +55,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             var ywall = Game.CurrentLoadedMap.Mapheight*3/4 + Random.Next(-4, 4);
             ywall = TerrainGenerationModules.Flat(map, ywall, 0, Console.WindowWidth/4, invert);
             ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/4, Console.WindowWidth/2, -1, invert);
-            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, -1,
-                invert);
+            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, -1, invert);
             TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, invert);
             TerrainGraphics.Overlay(map, invert);
         }
@@ -67,8 +64,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         {
             var ywall = Game.CurrentLoadedMap.Mapheight/4 + Random.Next(8);
             ywall = TerrainGenerationModules.Flat(map, ywall, 0, Console.WindowWidth/4, invert);
-            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/4, Console.WindowWidth/2, 1,
-                invert);
+            ywall = TerrainGenerationModules.ExtremeY(map, ywall, Console.WindowWidth/4, Console.WindowWidth/2, 1, invert);
             ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/2, Console.WindowWidth*3/4, 1, invert);
             TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, invert);
             TerrainGraphics.Overlay(map, invert);
@@ -78,8 +74,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         {
             var ywall = Game.CurrentLoadedMap.Mapheight*2/4 + Random.Next(-4, 4);
             ywall = TerrainGenerationModules.Flat(map, ywall, 0, Console.WindowWidth/4, invert);
-            ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/4, Console.WindowWidth*3/4, -1,
-                invert);
+            ywall = TerrainGenerationModules.SlowY(map, ywall, Console.WindowWidth/4, Console.WindowWidth*3/4, -1, invert);
             TerrainGenerationModules.Flat(map, ywall, Console.WindowWidth*3/4, Console.WindowWidth, invert);
             TerrainGraphics.Overlay(map, invert);
         }

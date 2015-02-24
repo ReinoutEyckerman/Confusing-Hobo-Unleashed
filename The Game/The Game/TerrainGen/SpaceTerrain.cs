@@ -17,8 +17,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 {
                     if (Random.Next(12) == 7)
                     {
-                        Game.CurrentLoadedMap.Layers[Maplayers.Collision].Background[ywall, xwall] =
-                            Painter.Instance.Paint(ConsoleColor.DarkRed);
+                        Game.CurrentLoadedMap.Layers[Maplayers.Collision].Background[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.DarkRed);
                         Game.CurrentLoadedMap.Collision[ywall, xwall] = true;
                         Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ywall, xwall] = ' ';
                     }

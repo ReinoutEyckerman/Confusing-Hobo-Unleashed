@@ -49,8 +49,7 @@ namespace Confusing_Hobo_Unleashed
                 ShowDead();
             if (VarDatabase.ShowApprovementRate)
             {
-                Console.WriteLine(
-                    Convert.ToDouble((ApprovementReq)/(Convert.ToDouble(RoomsHorizontal*RoomsVertical))*100));
+                Console.WriteLine(Convert.ToDouble((ApprovementReq)/(Convert.ToDouble(RoomsHorizontal*RoomsVertical))*100));
             }
             if (VarDatabase.ShowSideMatrix)
             {
@@ -83,8 +82,7 @@ namespace Confusing_Hobo_Unleashed
                 if (FailureCounter >= 35)
                 {
                     Console.Clear();
-                    Console.WriteLine(
-                        "Error: Map generation took too long. Are you sure you configured it right? Rebooting in 5 seconds, please check the configuration.");
+                    Console.WriteLine("Error: Map generation took too long. Are you sure you configured it right? Rebooting in 5 seconds, please check the configuration.");
                     Thread.Sleep(5000);
                 }
                 GenerateCorridors();
@@ -169,8 +167,7 @@ namespace Confusing_Hobo_Unleashed
         //CHECKS IF GENERATED/FIXED MAP FULFILLS REQUIREMENTS BY TRACING THE AMOUNT OF ROOMS REACHABLE FROM STARTING POINT X Y
         public static void Tester(int xPos, int yPos, bool[,,] counter, int[,] enableMoreCorridors)
         {
-            if (counter[xPos, yPos, 0] != true && counter[xPos, yPos, 1] != true && counter[xPos, yPos, 2] != true &&
-                counter[xPos, yPos, 3] != true)
+            if (counter[xPos, yPos, 0] != true && counter[xPos, yPos, 1] != true && counter[xPos, yPos, 2] != true && counter[xPos, yPos, 3] != true)
             {
                 if (counter[xPos, yPos, 4] != true)
                 {
@@ -221,11 +218,7 @@ namespace Confusing_Hobo_Unleashed
                     }
                 }
                 counter[xPos, yPos, 4] = true;
-                if ((xPos != 0 && yPos != 0) || (xPos != 0 && yPos != RoomsVertical) ||
-                    (xPos != RoomsHorizontal && yPos != 0) ||
-                    (xPos != RoomsHorizontal && yPos != RoomsVertical) &&
-                    (y <=
-                     1))
+                if ((xPos != 0 && yPos != 0) || (xPos != 0 && yPos != RoomsVertical) || (xPos != RoomsHorizontal && yPos != 0) || (xPos != RoomsHorizontal && yPos != RoomsVertical) && (y <= 1))
                 {
                     enableMoreCorridors[DeadEndAmount, 0] = xPos;
                     enableMoreCorridors[DeadEndAmount, 1] = yPos;

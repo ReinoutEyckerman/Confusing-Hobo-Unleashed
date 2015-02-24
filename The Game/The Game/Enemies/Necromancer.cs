@@ -14,7 +14,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
         public Necromancer(CustomMap map) : base(map)
         {
             Background = Painter.Instance.Paint(ConsoleColor.Green);
-            Foreground = Painter.Instance.Paint(ConsoleColor.Black,true);
+            Foreground = Painter.Instance.Paint(ConsoleColor.Black, true);
             DrawChar = Encoding.GetEncoding(437).GetChars(new byte[] {127})[0];
             HpTotal = 40;
             HpCurrent = (int) HpTotal;

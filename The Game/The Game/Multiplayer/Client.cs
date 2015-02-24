@@ -50,10 +50,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             var outmsg = _client.CreateMessage();
             _client.Start();
             outmsg.Write((byte) PacketTypes.Login);
-            var user = new Player(Game.CurrentLoadedMap, 3, 3, 100,
-                Encoding.GetEncoding(437).GetChars(new byte[] {001})[0],
-                Painter.Instance.Paint(ConsoleColor.Black),
-                Painter.Instance.Paint(ConsoleColor.White,true));
+            var user = new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], Painter.Instance.Paint(ConsoleColor.Black), Painter.Instance.Paint(ConsoleColor.White, true));
             LidgrenAdaptions.CompileCore(outmsg, user);
             _client.Connect(hostip, 22401, outmsg);
             Console.WriteLine("Client Started");

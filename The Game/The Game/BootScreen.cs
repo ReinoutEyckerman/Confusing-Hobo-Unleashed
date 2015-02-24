@@ -38,12 +38,7 @@ namespace Confusing_Hobo_Unleashed
             MapDrawing.RoomFound = new bool[MapGeneration.RoomsHorizontal, MapGeneration.RoomsVertical];
             TerrainSelection.RoomDistribution();
             MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] = true;
-            Game.Players = new List<Player>
-            {
-                new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0],
-                    Painter.Instance.Paint(ConsoleColor.Black),
-                    Painter.Instance.Paint(ConsoleColor.White,true))
-            };
+            Game.Players = new List<Player> {new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], Painter.Instance.Paint(ConsoleColor.Black), Painter.Instance.Paint(ConsoleColor.White, true))};
         }
 
         public static void LoadScreen()
@@ -66,9 +61,7 @@ namespace Confusing_Hobo_Unleashed
                 StartMenu.DrawFirePits();
                 StartMenu.Fire = new Thread(StartMenu.DrawFire);
                 StartMenu.Fire.Start();
-                Draw.Box(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth*3/5,
-                    Console.WindowHeight*5/6 + 4,
-                    Painter.Instance.Paint(ConsoleColor.Blue));
+                Draw.Box(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth*3/5, Console.WindowHeight*5/6 + 4, Painter.Instance.Paint(ConsoleColor.Blue));
                 foreach (var item in LoadMessages)
                 {
                     Loadbar(item.Key);
@@ -119,13 +112,6 @@ namespace Confusing_Hobo_Unleashed
         public static Stopwatch GameTimer = new Stopwatch();
         private static int _barCount = 1;
         private static int _prevMessage;
-
-        private static readonly Dictionary<string, TempDelegate> LoadMessages = new Dictionary<string, TempDelegate>
-        {
-            {"Clearing Variables...", MapGeneration.Clearvars},
-            {"Map Generation Started...", MapGeneration.GenerateCorridors},
-            {"Advanced Map Generation Initiated...", MapFixVars},
-            {"Defining Variables...", Definevars}
-        };
+        private static readonly Dictionary<string, TempDelegate> LoadMessages = new Dictionary<string, TempDelegate> {{"Clearing Variables...", MapGeneration.Clearvars}, {"Map Generation Started...", MapGeneration.GenerateCorridors}, {"Advanced Map Generation Initiated...", MapFixVars}, {"Defining Variables...", Definevars}};
     }
 }

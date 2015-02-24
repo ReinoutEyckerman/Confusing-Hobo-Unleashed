@@ -67,7 +67,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                 }
             }
 
-            PaintBgColor = (ConsoleColor)Painter.Instance.Kleuren.GetValue(currentindex);
+            PaintBgColor = (ConsoleColor) Painter.Instance.Kleuren.GetValue(currentindex);
         }
 
         public void ToggleFgColor(bool up)
@@ -98,7 +98,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
                 }
             }
 
-            PaintFgColor = (ConsoleColor)Painter.Instance.Kleuren.GetValue(currentindex);
+            PaintFgColor = (ConsoleColor) Painter.Instance.Kleuren.GetValue(currentindex);
         }
 
         public void ToggleChar()
@@ -128,14 +128,9 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public void UpdateCursorValues(CustomMap map, int layerindex)
         {
-            CurrentPosChar =
-                Convert.ToChar(
-                    map.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Characters[Y, X
-                        ]);
-            CurrentPosBgColor =
-                map.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Background[Y, X];
-            CurrentPosFgColor =
-                map.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Foreground[Y, X];
+            CurrentPosChar = Convert.ToChar(map.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Characters[Y, X]);
+            CurrentPosBgColor = map.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Background[Y, X];
+            CurrentPosFgColor = map.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Foreground[Y, X];
             CurrentPosColl = map.Collision[Y, X];
             CurrentPosDestr = map.Destructible[Y, X];
         }

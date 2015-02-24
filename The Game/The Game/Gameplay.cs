@@ -15,8 +15,7 @@ namespace Confusing_Hobo_Unleashed
             {
                 Game.CurrentLoadedMap.PushtoArray(layer.Value.Background, layer.Value.Foreground, layer.Value.Colors);
             }
-            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp,
-                Game.CurrentLoadedMap.Mapheight*Console.WindowWidth);
+            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Mapheight*Console.WindowWidth);
         }
 
         private static void Enemies()

@@ -14,7 +14,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
         public Harpy(CustomMap map) : base(map)
         {
             Background = Painter.Instance.Paint(ConsoleColor.White);
-            Foreground = Painter.Instance.Paint(ConsoleColor.Black,true);
+            Foreground = Painter.Instance.Paint(ConsoleColor.Black, true);
             DrawChar = 'F';
             HpTotal = 5;
             HpCurrent = (int) HpTotal;
@@ -35,8 +35,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             set
             {
                 if (Target != null)
-                    if ((X - Target.X > _originalmaxhorizontalproximity + 10 ||
-                         Target.X - X > _originalmaxhorizontalproximity + 10))
+                    if ((X - Target.X > _originalmaxhorizontalproximity + 10 || Target.X - X > _originalmaxhorizontalproximity + 10))
                     {
                         if (Y - 10 > 0)
                             MinVerticalProximity = 10;

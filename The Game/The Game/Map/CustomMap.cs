@@ -40,14 +40,7 @@ namespace Confusing_Hobo_Unleashed
             Invertrate = VarDatabase.Invertrate;
             Mapheight = mapheight;
             Mapwidth = mapwidth;
-            Layers = new Dictionary<Maplayers, Layer>
-            {
-                {Maplayers.Air, new Layer(daynight, mapwidth, mapheight)},
-                {Maplayers.Collision, new Layer(true, mapwidth, mapheight)},
-                {Maplayers.Destructible, new Layer(true, mapwidth, mapheight)},
-                {Maplayers.Decor, new Layer(true, mapwidth, mapheight)},
-                {Maplayers.Clouds, new Layer(clouds, mapwidth, mapheight)}
-            };
+            Layers = new Dictionary<Maplayers, Layer> {{Maplayers.Air, new Layer(daynight, mapwidth, mapheight)}, {Maplayers.Collision, new Layer(true, mapwidth, mapheight)}, {Maplayers.Destructible, new Layer(true, mapwidth, mapheight)}, {Maplayers.Decor, new Layer(true, mapwidth, mapheight)}, {Maplayers.Clouds, new Layer(clouds, mapwidth, mapheight)}};
 
             Grav = new short[mapheight, mapwidth];
             Collision = new bool[mapheight, mapwidth];
@@ -157,8 +150,7 @@ namespace Confusing_Hobo_Unleashed
                         for (var j = 0; j < Background.GetLength(1); j++)
                         {
                             writer.WriteStartElement("X" + j);
-                            writer.WriteAttributeString("Char",
-                                layer.Value.Characters[i, j] == null ? "niks" : layer.Value.Characters[i, j].ToString());
+                            writer.WriteAttributeString("Char", layer.Value.Characters[i, j] == null ? "niks" : layer.Value.Characters[i, j].ToString());
                             writer.WriteAttributeString("Color", layer.Value.Colors[i, j].ToString());
                             writer.WriteEndElement(); //X
                         }

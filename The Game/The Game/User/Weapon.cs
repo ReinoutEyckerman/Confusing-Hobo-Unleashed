@@ -8,8 +8,7 @@ namespace Confusing_Hobo_Unleashed.User
     internal enum WeaponType
     {
         Fist,
-        Sword
-        ,
+        Sword,
         Gun,
         Bomb
     }
@@ -20,9 +19,7 @@ namespace Confusing_Hobo_Unleashed.User
         private readonly short _bulletColor;
         private int _speed;
 
-        public Weapon(string weaponName, WeaponType type, int damage, byte cooldown,
-            ConsoleColor color = ConsoleColor.Black, ConsoleColor bulletBackground = ConsoleColor.Black,
-            ConsoleColor bulletForeground = ConsoleColor.Black, char bulletCharacter = 'o', int speed = 0)
+        public Weapon(string weaponName, WeaponType type, int damage, byte cooldown, ConsoleColor color = ConsoleColor.Black, ConsoleColor bulletBackground = ConsoleColor.Black, ConsoleColor bulletForeground = ConsoleColor.Black, char bulletCharacter = 'o', int speed = 0)
         {
             Speed = speed;
             Name = weaponName;
