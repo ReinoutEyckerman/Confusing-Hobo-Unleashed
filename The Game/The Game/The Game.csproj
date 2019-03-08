@@ -93,6 +93,9 @@
     <Compile Include="Game.cs" />
     <Compile Include="Gameplay.cs" />
     <Compile Include="GameUI.cs" />
+    <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\Fire.cs" />
+    <Compile Include="Shapes\FirePit.cs" />
     <Compile Include="TerrainGen\LandTerrain.cs" />
     <Compile Include="Multiplayer\LidgrenAdaptions.cs" />
     <Compile Include="TerrainGen\SeaTerrain.cs" />
@@ -100,10 +103,16 @@
     <Compile Include="TerrainGen\SkyTerrain.cs" />
     <Compile Include="TerrainGen\SpaceTerrain.cs" />
     <Compile Include="TerrainGen\CaveTerrain.cs" />
+    <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="UI\OptionsMenu.cs" />
+    <Compile Include="UI\Position.cs" />
+    <Compile Include="UI\RelativePosition.cs" />
     <Compile Include="UI\UIElements\Button.cs" />
     <Compile Include="UI\UIElements\InsertBox.cs" />
     <Compile Include="UI\UIElements\TextBox.cs" />
+    <Compile Include="UI\Windows\DrawColor.cs" />
+    <Compile Include="UI\Windows\Window.cs" />
+    <Compile Include="UI\Windows\MicrosoftWindow.cs" />
     <Compile Include="User\InputHandler.cs" />
     <Compile Include="MapEdit\MapEditCursor.cs" />
     <Compile Include="PauseMenu.cs" />

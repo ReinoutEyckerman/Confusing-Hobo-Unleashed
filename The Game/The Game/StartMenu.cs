@@ -7,6 +7,7 @@ using System.Xml;
 using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.MapEdit;
 using Confusing_Hobo_Unleashed.Multiplayer;
+using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.TerrainGen;
 using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.User;
@@ -25,118 +26,11 @@ namespace Confusing_Hobo_Unleashed
         public static List<OptionsMenu> ControlsMain = new List<OptionsMenu>();
         public static List<string> Credits = new List<string>();
         public static Thread Fire;
-        public static buffer FireBuffer = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
-        public static buffer FireBuffer2 = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
+        public static Buffer FireBuffer = new Buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
+        public static Buffer FireBuffer2 = new Buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
         private static short[,] _firepits;
         public static List<OptionsMenu> Versus = new List<OptionsMenu>();
 
-        public static void DrawFirePits()
-        {
-            _firepits = new short[Console.WindowWidth*2/5 - 10, Console.WindowHeight/6];
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGray);
-            var rico = Convert.ToDouble((Console.WindowHeight - 1 - Console.WindowHeight*5/6))/((Console.WindowWidth*2/15 - 5) - 5);
-
-            var x1 = (short) (Console.WindowWidth*2/15 - 5);
-            short w = 1;
-            for (short x = 0; x < Console.WindowWidth*2/5 - 10; x++)
-            {
-                if (x == (short) (Console.WindowWidth*2/15 - 5))
-                {
-                    w = 0;
-                }
-                else if (x == (short) (Console.WindowWidth*4/15 - 5))
-                {
-                    w = -1;
-                    x1 = (short) (Console.WindowWidth*4/15 - 5);
-                }
-                var ypos = Convert.ToInt16(w*rico*(x - x1) + Console.WindowHeight/6 - 1);
-                for (short y = 0; y <= ypos; y++)
-                {
-                    _firepits[x, y] = y == ypos ? (short) 2 : (short) 1;
-                }
-            }
-        }
-
-        public static void DrawFire()
-        {
-            var fire1 = new ConsoleColor[_firepits.GetLength(0) - 20, Console.WindowHeight*4/6];
-            var fireattribute = new short[_firepits.GetLength(0) - 20, Console.WindowHeight*4/6];
-            var firepitattribute = new short[_firepits.GetLength(0), _firepits.GetLength(1)];
-            FireBuffer = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
-            FireBuffer2 = new buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
-            for (var i = 0; i < Console.WindowWidth*2/5; i++)
-                for (var j = 0; j < Console.WindowHeight*5/6; j++)
-                {
-                    var charToString = Convert.ToString(' ');
-                    FireBuffer.Draw(charToString, i, j, Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Blue), Painter.Instance.Paint(ConsoleColor.Blue)));
-                    FireBuffer2.Draw(charToString, i, j, Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Blue), Painter.Instance.Paint(ConsoleColor.Blue)));
-                }
-
-            var ycur = fire1.GetLength(1);
-            var random = new Random();
-            for (var x = 0; x < fire1.GetLength(0); x++)
-            {
-                int direction;
-                if (x < fire1.GetLength(0)/6)
-                    direction = -2;
-                else if (x < fire1.GetLength(0)/3)
-                    direction = 1;
-                else if (x < fire1.GetLength(0)*1/2)
-                    direction = -3;
-                else if (x < fire1.GetLength(0)*2/3)
-                    direction = 3;
-                else if (x < fire1.GetLength(0)*5/6)
-                    direction = -1;
-                else
-                    direction = 2;
-                if (ycur >= Console.WindowHeight*4/6)
-                    direction = -2;
-                ycur += random.Next(-1, 2) + direction;
-                if (ycur < 0)
-                    ycur = 0;
-                for (var y = ycur; y < fire1.GetLength(1); y++)
-                {
-                    fire1[x, y] = Painter.Instance.Paint(ConsoleColor.Yellow);
-                }
-            }
-            for (var i = 0; i < fire1.GetLength(0); i++)
-            {
-                for (var j = 0; j < fire1.GetLength(1); j++)
-                {
-                    if (fire1[i, j] == Painter.Instance.Paint(ConsoleColor.Yellow) && ((i - 1 >= 0 && fire1[i - 1, j] != Painter.Instance.Paint(ConsoleColor.Red) && fire1[i - 1, j] != Painter.Instance.Paint(ConsoleColor.Yellow) || i + 1 < fire1.GetLength(0) && fire1[i + 1, j] != Painter.Instance.Paint(ConsoleColor.Red) && fire1[i + 1, j] != Painter.Instance.Paint(ConsoleColor.Yellow)) || i == 0 || i == fire1.GetLength(0) - 1))
-                        fire1[i, j] = Painter.Instance.Paint(ConsoleColor.Red);
-                    fireattribute[i, j] = Painter.Instance.ColorsToAttribute(fire1[i, j], fire1[i, j]);
-                    var charToString = Convert.ToString(' ');
-                    FireBuffer.Draw(charToString, i + 10, j, fireattribute[i, j]);
-                    FireBuffer2.Draw(charToString, i + 10, j, fireattribute[i, j]);
-                }
-            }
-            var color = Painter.Instance.Paint(ConsoleColor.Gray);
-            for (var i = 0; i < firepitattribute.GetLength(0); i++)
-            {
-                for (var j = 0; j < firepitattribute.GetLength(1); j++)
-                {
-                    if (_firepits[i, j] == 0)
-                        break;
-                    if (_firepits[i, j] == 1)
-                        color = Painter.Instance.Paint(ConsoleColor.Gray);
-                    else if (_firepits[i, j] == 2)
-                        color = Painter.Instance.Paint(ConsoleColor.DarkGray);
-
-                    firepitattribute[i, j] = Painter.Instance.ColorsToAttribute(color, color);
-                    var charToString = Convert.ToString(' ');
-                    FireBuffer.Draw(charToString, i, j + fire1.GetLength(1), firepitattribute[i, j]);
-                    FireBuffer2.Draw(charToString, i, j + fire1.GetLength(1), firepitattribute[i, j]);
-                }
-            }
-
-            FireBuffer.SetDrawCord(0, Convert.ToInt16(Console.WindowHeight/6));
-            FireBuffer.Print();
-            FireBuffer2.SetDrawCord((Convert.ToInt16(Console.WindowWidth*10/15)), Convert.ToInt16(Console.WindowHeight/6));
-            FireBuffer2.Print();
-            Thread.Sleep(1000);
-            DrawFire();
-        }
 
         public static void GenList()
         {
@@ -175,11 +69,14 @@ namespace Confusing_Hobo_Unleashed
         }
 
         //Bling bling llama bloodbath//Rocket powered samurai detective// Confusing hobo unleashed/ Flamboyant Hitman Fiasco/Cosmic Mexican Uprising/Alberto 'Pasta Sauce' Pennewalnuts/Askldite, Goddess of Genital Warts and Sewage //Divine Unicorn Conquest/M.C. Escher's Spelling with Friends//Illegal Toast Rampage Redux/Gothic Monkey Havoc/Advanced Pinball Spatula
-        public static void MainScreen()
+        public static void MainScreen(Window window)
         {
-            DrawFirePits();
-            Fire = new Thread(DrawFire);
-            Fire.Start();
+            //DrawFirePits();
+            //Fire = new Thread(DrawFire);
+            //Fire.Start();
+            Fire fire = new Fire(window, new Position(10, 30), 29, 59);
+            fire.DrawFire();
+            window.Paint();
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White);
             DrawUi.RedrawBackground();
@@ -197,13 +94,13 @@ namespace Confusing_Hobo_Unleashed
         public static int ContLength = 9;
         private static string[] _files;
         private static bool _versus = true;
-        public static buffer SelectionBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
+        public static Buffer SelectionBuffer = new Buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
         private static readonly string[] SplashText = {"Insane in the Membrane!", "No midgets were harmed during the creation of this game", "Team Alpha for President!", "We aren't part of the Illuminati, I promise!", "Oliver is a potato", "Did you know the main character's name originally was 'Joe Pottoe'?", "Habla Espanol?", "The panflute is magical", "Reinout is an omnipotent composer!", "I punched a raccoon today!", "Did you know Oliver is 'Average'?", "Be nice, or Oliver will wreck you", "Shrek is Love", "Shrek is Life", "(Don't tell anyone, but the boss's weak point is his big toe!)", "Go play Sandcastle Builder!", "Go outside, or the sun is gonna burn your shit", "Did you know Reinout was harmed during the development of this game?", "Did you know I still don't know what gender the winner of Eurosong is?", "You can play this game with an xbox controller!", "More pixels than Mario!", "Lag? I don't see any lag! Shut up!", "Blame the hairy armpit!", "Runs 60fps smoothly on native!", "More popular than League of Legends!", "Go buy Oliver a coffee! I'm poor, and if we don't, he'll get cranky.", "Habemus Cancer", "We found a witch! May we burn her?", "Have you accepted Raptor Jesus as your lord and saviour?", "She's after my piano!", "Baby, do you wanna bump?", "He's after my diode!", "I saw a deer once. Shit was whack.", "I saw a leprechaun once. It stole a kidney for drug money.", "I'LL SWALLOW YOUR SOUL", "WALUIGI TIME", "Huehuehuehuehuehuehuehuehuehuehuehue", "Hahehe...huheare...huahehrerharah..HUERHUERHUAUREHEHR", "Unfinished/10", "Have you tried 4 shades of gray mode yet?"};
         private static int? _r;
 
         public static void RedrawBackground()
         {
-            SelectionBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
+            SelectionBuffer = new Buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
             for (var i = 0; i < Console.WindowWidth; i++)
                 for (var j = 0; j < Console.WindowHeight; j++)
                     SelectionBuffer.Draw(" ", i, j, Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Blue), Painter.Instance.Paint(ConsoleColor.White)));
@@ -403,7 +300,7 @@ namespace Confusing_Hobo_Unleashed
                     if (list == StartMenu.Versus || list == StartMenu.MapEditorMain || list == StartMenu.MapsInFolder || list == StartMenu.Configuration)
                     {
                         PostStart();
-                        StartMenu.MainScreen();
+                       // StartMenu.MainScreen();
                     }
                     else if (list == StartMenu.MapEditorNewMap)
                         Select(StartMenu.MapEditorMain);
@@ -512,7 +409,7 @@ namespace Confusing_Hobo_Unleashed
                 else StartMenu.Configuration[x].ButtonList[a].Value = false;
         }
 
-        public static void DrawTitle(buffer buffer)
+        public static void DrawTitle(Buffer buffer)
         {
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
             var meslength = "   ______            ____           _                __  __      __             __  __      __                __             __".Length/2;

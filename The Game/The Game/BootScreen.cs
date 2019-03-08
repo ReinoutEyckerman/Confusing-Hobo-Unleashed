@@ -58,9 +58,9 @@ namespace Confusing_Hobo_Unleashed
             {
                 Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
                 Console.Clear();
-                StartMenu.DrawFirePits();
-                StartMenu.Fire = new Thread(StartMenu.DrawFire);
-                StartMenu.Fire.Start();
+                //StartMenu.DrawFirePits();
+             //   StartMenu.Fire = new Thread(StartMenu.DrawFire);
+               // StartMenu.Fire.Start();
                 Draw.Box(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth*3/5, Console.WindowHeight*5/6 + 4, Painter.Instance.Paint(ConsoleColor.Blue));
                 foreach (var item in LoadMessages)
                 {
@@ -69,7 +69,7 @@ namespace Confusing_Hobo_Unleashed
                 }
                 GameDuration(0);
                 _barCount = 1;
-                StartMenu.Fire.Abort();
+              //  StartMenu.Fire.Abort();
                 MapControls.DrawMap();
             }
         }

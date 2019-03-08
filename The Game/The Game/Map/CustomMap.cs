@@ -94,7 +94,7 @@ namespace Confusing_Hobo_Unleashed
         public bool LowGravity { get; set; }
         public Dictionary<Maplayers, Layer> Layers { get; set; }
 
-        public void RedrawPixel(int xpos, int ypos, buffer outputbuffer)
+        public void RedrawPixel(int xpos, int ypos, Buffer outputbuffer)
         {
             var mapchar = Convert.ToString(Characters[ypos, xpos]);
             outputbuffer.Draw(mapchar, xpos, ypos, Colors[ypos, xpos]);
@@ -215,7 +215,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public void MapToBuffer(buffer outputbuffer, char?[,] chararray, short[,] colorarray)
+        public void MapToBuffer(Buffer outputbuffer, char?[,] chararray, short[,] colorarray)
         {
             for (var i = 0; i < chararray.GetLength(0); i++)
             {

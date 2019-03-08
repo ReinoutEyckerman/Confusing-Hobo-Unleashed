@@ -52,7 +52,7 @@ namespace Confusing_Hobo_Unleashed.UI
             YPosForCenteredMessage = (Ypos + (BlockHeight/3));
         }
 
-        private void DrawBox(buffer outputbuffer)
+        private void DrawBox(Buffer outputbuffer)
         {
             for (var a = 0; a < Box.Count; a++)
             {
@@ -118,7 +118,7 @@ namespace Confusing_Hobo_Unleashed.UI
             BoxColors = Painter.Instance.ColorsToAttribute(BoxBackgroundColor, BoxForegroundColor);
         }
 
-        public void Render(buffer outputbuffer)
+        public void Render(Buffer outputbuffer)
         {
             if (XPosForCenteredMessage == 0)
                 CenterMessage();
@@ -128,7 +128,7 @@ namespace Confusing_Hobo_Unleashed.UI
             DrawBox(outputbuffer);
         }
 
-        public void RenderActive(buffer outputbuffer)
+        public void RenderActive(Buffer outputbuffer)
         {
             if (XPosForCenteredMessage == 0)
                 CenterMessage();

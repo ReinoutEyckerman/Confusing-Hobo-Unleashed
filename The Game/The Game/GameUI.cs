@@ -15,7 +15,7 @@ namespace Confusing_Hobo_Unleashed
         private static readonly int UiTopY = Game.CurrentLoadedMap.Background.GetLength(0) + 1;
         private static int _uiBotY = Console.WindowHeight - 2;
 
-        public static void DrawUi(buffer outputbuffer, Player player1 /*Player player2*/)
+        public static void DrawUi(Buffer outputbuffer, Player player1 /*Player player2*/)
         {
             //This IF sets the maximum height of the UI to 5
             if (_uiBotY - UiTopY > 7)
@@ -27,7 +27,7 @@ namespace Confusing_Hobo_Unleashed
             DrawPlayerHp(outputbuffer, player1, "player 1", UiLeftX + 2, UiTopY + 2);
         }
 
-        private static void DrawPlayerHp(buffer outputbuffer, Player player, string playername, int xpos, int ypos)
+        private static void DrawPlayerHp(Buffer outputbuffer, Player player, string playername, int xpos, int ypos)
         {
             outputbuffer.Draw(playername + " HP:", xpos, ypos, UiTextColors);
             //Draw a 10-block wide hp-bar in red, this will be partially covered up by the green current hp.

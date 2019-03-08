@@ -8,48 +8,36 @@ using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Enemies;
 using Confusing_Hobo_Unleashed.TerrainGen;
+using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed
 {
     internal class Game
     {
-        public const int SWP_NOSIZE = 0x0001;
         public static CustomMap CurrentLoadedMap { get; set; }
-        public static buffer GameBuffer { get; set; }
+        public static Buffer GameBuffer { get; set; }
         public static List<Player> Players { get; set; }
         public static Encoding OutputEncoding { get; set; }
-
-        [DllImport("kernel32.dll", ExactSpelling = true)]
-        public static extern IntPtr GetConsoleWindow();
-
-        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
 
         [STAThread]
         public static void Main()
         {
+            Window window = new MicrosoftWindow();
             Init();
-            AlphaBootScreen.DrawAlpha();
-            StartMenu.MainScreen();
+            AlphaBootScreen.DrawAlphaSymbol(window);
+            Thread.Sleep(5000);
+            window.Clear();
+            StartMenu.MainScreen(window);
         }
 
         private static void Init()
         {
-            Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
-            Console.CursorVisible = false;
-            //Setting Window Size
-            const int xpos = 0;
-            const int ypos = 0;
-            SetWindowPos(MyConsole, 0, xpos, ypos, 0, 0, SWP_NOSIZE);
-            Console.WindowHeight = Console.LargestWindowHeight - 1;
-            Console.WindowWidth = Console.LargestWindowWidth - 2;
-            Console.Title = "Confusing Hobo Unleashed";
             CurrentLoadedMap = new CustomMap(55);
             //Setting Lists
             StartMenu.GenList();
             DrawUi.PostStart();
-            GameBuffer = new buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
+            GameBuffer = new Buffer(Console.WindowWidth, Console.WindowHeight, Console.WindowWidth, Console.WindowHeight);
             Players = new List<Player>();
             Endgame.PlayMusic();
         }
@@ -218,9 +206,6 @@ namespace Confusing_Hobo_Unleashed
             GameLoop();
         }
 
-        //Used for Window Size
-
-        public static IntPtr MyConsole = GetConsoleWindow();
         public static bool Versus = false;
         public static bool BotsEnabled = true;
         public static int MoonCount;

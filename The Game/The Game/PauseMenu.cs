@@ -21,7 +21,7 @@ namespace Confusing_Hobo_Unleashed
             ActiveItem = 0;
         }
 
-        public static void ShowStartMenu(buffer outputbuffer)
+        public static void ShowStartMenu(Buffer outputbuffer)
         {
             GenerateMenu();
             var frameTimer = new Stopwatch();
@@ -39,7 +39,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void RenderMenu(buffer outputBuffer)
+        public static void RenderMenu(Buffer outputBuffer)
         {
             foreach (var button in MenuItems)
             {
@@ -66,7 +66,7 @@ namespace Confusing_Hobo_Unleashed
             outputBuffer.Print();
         }
 
-        public static void RenderOptions(buffer outputBuffer)
+        public static void RenderOptions(Buffer outputBuffer)
         {
         }
 
@@ -78,7 +78,7 @@ namespace Confusing_Hobo_Unleashed
             }
             else if (MenuItems[ActiveItem].Message == "Quit")
             {
-                StartMenu.MainScreen();
+           //     StartMenu.MainScreen();
             }
         }
 

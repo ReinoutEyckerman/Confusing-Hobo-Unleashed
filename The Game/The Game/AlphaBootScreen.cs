@@ -1,105 +1,84 @@
 ﻿using System;
 using System.Threading;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.UI;
+using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed
 {
     internal class AlphaBootScreen
     {
-        private static readonly int YQuarter = Console.WindowHeight/4;
-        private static readonly int XHalf = Console.WindowWidth/2;
-        private static readonly int XThreeQuarter = Console.WindowWidth*3/4;
-
-        private static void Write(int x, int y)
+        public static void DrawAlphaSymbol(Window window)
         {
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine(" ");
+            BaseColor color = BaseColor.White;
+
+            Position topleft = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.25));
+            Position bottomright = new Position(window.getWidthPosFromPercentage(0.5), window.getHeightPosFromPercentage(0.35));
+            Rectangle rectangle = new Rectangle(topleft, bottomright);
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.625));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.75));
+            window.DrawRectangle(rectangle, color);
+
+            topleft = new Position(window.getWidthPosFromPercentage(0.15), window.getHeightPosFromPercentage(0.35));
+            bottomright = new Position(window.getWidthPosFromPercentage(0.35), window.getHeightPosFromPercentage(0.45));
+            rectangle = new Rectangle(topleft, bottomright);
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.4));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.6));
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.525));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.725));
+            window.DrawRectangle(rectangle, color);
+
+            topleft = new Position(window.getWidthPosFromPercentage(0.05), window.getHeightPosFromPercentage(0.45));
+            bottomright = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.55));
+            rectangle = new Rectangle(topleft, bottomright);
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.5));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.625));
+            window.DrawRectangle(rectangle, color);
+
+            topleft = new Position(window.getWidthPosFromPercentage(0.15), window.getHeightPosFromPercentage(0.55));
+            bottomright = new Position(window.getWidthPosFromPercentage(0.35), window.getHeightPosFromPercentage(0.65));
+            rectangle = new Rectangle(topleft, bottomright);
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.4));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.6));
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.525));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.725));
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.425));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.625));
+            window.DrawRectangle(rectangle, color);
+
+            topleft = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.65));
+            bottomright = new Position(window.getWidthPosFromPercentage(0.5), window.getHeightPosFromPercentage(0.75));
+            rectangle = new Rectangle(topleft, bottomright);
+            window.DrawRectangle(rectangle, color);
+
+            rectangle.setTopX(window.getWidthPosFromPercentage(0.625));
+            rectangle.setBottomX(window.getWidthPosFromPercentage(0.55));
+            window.DrawRectangle(rectangle, color);
+
+            BaseColor BackgroundColor = BaseColor.Black;
+            BaseColor ForegroundColor = BaseColor.White;
+            int y = window.getHeightPosFromPercentage(0.85);
+            Position position = new Position(0, y);
+            window.Draw(position, BackgroundColor, ForegroundColor, "Confusing Hobo Unleashed".PadLeft(window.getWidthPosFromPercentage(0.5) + 12));
+            position = new Position(0, y + 1);
+            window.Draw(position, BackgroundColor, ForegroundColor, "By Oliver Hofkens & Reinout Eyckerman".PadLeft(window.getWidthPosFromPercentage(0.5) + 18));
+            position = new Position(0, y + 3);
+            window.Draw(position, BackgroundColor, ForegroundColor, "A Team Alpha Production".PadLeft(window.getWidthPosFromPercentage(0.5) + 11));
+            window.Paint();
         }
-
-        public static void DrawAlpha()
-
-        {
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.White);
-            for (var y = YQuarter; y < YQuarter + Calculatrix; y++)
-            {
-                for (var x = XQuarter; x < XHalf; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XThreeQuarter - XQuarter/2; x < XThreeQuarter - Calculatrix*2; x++)
-                {
-                    Write(x, y);
-                }
-            }
-            for (var y = YQuarter + Calculatrix; y < YQuarter + Calculatrix*2; y++)
-            {
-                for (var x = XQuarter - Calculatrix; x < XQuarter + Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XHalf - Calculatrix; x < XHalf + Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix; x < XThreeQuarter - XQuarter/2 + Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-            }
-            for (var y = YQuarter + Calculatrix*2; y < YQuarter + Calculatrix*3; y++)
-            {
-                for (var x = XQuarter - Calculatrix*2; x < XQuarter; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XHalf; x < XThreeQuarter - XQuarter/2; x++)
-                {
-                    Write(x, y);
-                }
-            }
-            for (var y = YQuarter + Calculatrix*3; y < YQuarter + Calculatrix*4; y++)
-            {
-                for (var x = XQuarter - Calculatrix; x < XQuarter + Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XHalf - Calculatrix; x < XHalf + Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XThreeQuarter - XQuarter/2 - Calculatrix; x < XThreeQuarter - XQuarter/2 + Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XThreeQuarter - Calculatrix*3; x < XThreeQuarter - Calculatrix; x++)
-                {
-                    Write(x, y);
-                }
-            }
-            for (var y = YQuarter + Calculatrix*4; y < YQuarter + Calculatrix*5; y++)
-            {
-                for (var x = XQuarter; x < XHalf; x++)
-                {
-                    Write(x, y);
-                }
-                for (var x = XThreeQuarter - XQuarter/2; x < XThreeQuarter - Calculatrix*2; x++)
-                {
-                    Write(x, y);
-                }
-            }
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
-            Console.SetCursorPosition(0, YQuarter + Calculatrix*6);
-            Console.Write("Confusing Hobo Unleashed".PadLeft(XHalf + 12));
-            Console.SetCursorPosition(0, YQuarter + Calculatrix*6 + 1);
-            Console.Write("By Oliver Hofkens & Reinout Eyckerman".PadLeft(XHalf + 18));
-            Console.SetCursorPosition(0, YQuarter + Calculatrix*6 + 3);
-            Console.Write("A Team Alpha Production".PadLeft(XHalf + 11));
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
-            Thread.Sleep(5000);
-            Console.Clear();
-        }
-
-        private static readonly int Calculatrix = Console.WindowHeight/10;
-        private static readonly int XQuarter = Console.WindowWidth/4 + Calculatrix*3;
     }
 }

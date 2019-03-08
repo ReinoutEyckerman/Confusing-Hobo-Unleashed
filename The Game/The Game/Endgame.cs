@@ -17,7 +17,9 @@ namespace Confusing_Hobo_Unleashed
         {
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
-            short i =x = y= 0;
+            short x =0 ;
+            short y =0 ;
+            short i = 0;
             short vx = 1;
             Game.Boss = true;
             Game.DamageArray = new bool[Game.CurrentLoadedMap.Mapheight, Game.CurrentLoadedMap.Mapwidth];
@@ -76,7 +78,7 @@ namespace Confusing_Hobo_Unleashed
             Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 3);
             Console.Write(@"  \__|_||_\___| |_.__/\___/\__/__/(_) ");
             Thread.Sleep(7000);
-            StartMenu.MainScreen();
+            //StartMenu.MainScreen();
         }
 
         public static void PlayMusic()

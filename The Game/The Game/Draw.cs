@@ -11,7 +11,7 @@ namespace Confusing_Hobo_Unleashed
 
     internal class Draw
     {
-        public static void Line(CustomMap mapToDraw, int layerindex, buffer outputbuffer, MapEditCursor paintBrush, int x1, int x2, int y1, int y2)
+        public static void Line(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, MapEditCursor paintBrush, int x1, int x2, int y1, int y2)
         {
             var smallestX = 0;
             var largestX = 0;
@@ -69,7 +69,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void CircleCenterRadius(CustomMap mapToDraw, int layerindex, buffer outputbuffer, MapEditCursor paintBrush, int centerX, int centerY, int radiusX, int radiusY)
+        public static void CircleCenterRadius(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, MapEditCursor paintBrush, int centerX, int centerY, int radiusX, int radiusY)
         {
             var radius = Math.Sqrt(Math.Pow(centerX - radiusX, 2) + Math.Pow(centerY - radiusY, 2));
 
@@ -91,7 +91,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void FillRectangle(CustomMap mapToDraw, int layerindex, buffer outputbuffer, MapEditCursor paintBrush, int x1, int x2, int y1, int y2)
+        public static void FillRectangle(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, MapEditCursor paintBrush, int x1, int x2, int y1, int y2)
         {
             var smallestX = 0;
             var smallestY = 0;
@@ -133,7 +133,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void FillRectangle(short colors, int x1, int x2, int y1, int y2, buffer outputbuffer, char drawChar = ' ')
+        public static void FillRectangle(short colors, int x1, int x2, int y1, int y2, Buffer outputbuffer, char drawChar = ' ')
         {
             var smallestX = 0;
             var largestX = 0;
@@ -212,7 +212,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void Box(int leftX, int topY, int rightX, int botY, short colors, buffer outputbuffer, bool selected = false)
+        public static void Box(int leftX, int topY, int rightX, int botY, short colors, Buffer outputbuffer, bool selected = false)
         {
             //Top Border
             var hori = "-";

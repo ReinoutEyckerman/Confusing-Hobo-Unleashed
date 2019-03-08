@@ -30,7 +30,7 @@ namespace Confusing_Hobo_Unleashed
     ///     This class allows for a double buffer in Visual C# cmd promt.
     ///     The buffer is persistent between frames.
     /// </summary>
-    public class buffer
+    public class Buffer
     {
         private readonly SafeFileHandle _h;
         private readonly int _height;
@@ -48,7 +48,7 @@ namespace Confusing_Hobo_Unleashed
         /// ///
         /// <param name="wWidth"></param>
         /// <param name="wHeight"></param>
-        public buffer(int width, int height, int wWidth, int wHeight)
+        public Buffer(int width, int height, int wWidth, int wHeight)
             // Create and fill in a multideminsional list with blank spaces.
         {
             if (width > wWidth || height > wHeight)

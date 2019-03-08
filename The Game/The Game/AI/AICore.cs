@@ -99,7 +99,7 @@ namespace Confusing_Hobo_Unleashed.AI
         public byte AnimHitFrame { get; set; }
         public int Proximity { get; set; }
 
-        public void Render(buffer outputbuffer, CustomMap map)
+        public void Render(Buffer outputbuffer, CustomMap map)
         {
             var playerchar = Convert.ToString(DrawChar);
             outputbuffer.Draw(playerchar, X, Y, PlayerColor);

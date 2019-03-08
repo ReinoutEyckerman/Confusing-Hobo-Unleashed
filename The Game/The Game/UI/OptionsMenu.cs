@@ -74,7 +74,7 @@ namespace Confusing_Hobo_Unleashed.UI
             }
         }
 
-        private void WriteMessage(buffer outputbuffer)
+        private void WriteMessage(Buffer outputbuffer)
         {
             if (Content != "")
             {
@@ -90,7 +90,7 @@ namespace Confusing_Hobo_Unleashed.UI
             }
         }
 
-        public void Render(buffer outputbuffer)
+        public void Render(Buffer outputbuffer)
         {
             BackgroundColors = Painter.Instance.ColorsToAttribute(BackgroundColor, ForegroundColor);
             Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight/3, Xpos, Ypos + BlockHeight*2/3 + 1, BackgroundColors, outputbuffer);
@@ -101,7 +101,7 @@ namespace Confusing_Hobo_Unleashed.UI
             Draw.FillRectangle(BackgroundColors, Xpos + 1, Xpos + BlockLength - 1, Ypos + 1, Ypos + BlockHeight - 1, outputbuffer);
         }
 
-        public void RenderActive(buffer outputbuffer)
+        public void RenderActive(Buffer outputbuffer)
         {
             BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
             Draw.Box(Xpos - Name.Length - 3, Ypos + BlockHeight/3, Xpos, Ypos + BlockHeight*2/3 + 1, BorderColors, outputbuffer);

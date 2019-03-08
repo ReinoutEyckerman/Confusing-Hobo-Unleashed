@@ -19,7 +19,7 @@ namespace Confusing_Hobo_Unleashed.Map
         public char?[,] Characters { get; set; }
         public short[,] Colors { get; set; }
 
-        public void LayerToBuffer(buffer outputbuffer)
+        public void LayerToBuffer(Buffer outputbuffer)
         {
             for (var i = 0; i < Background.GetLength(0); i++)
             {

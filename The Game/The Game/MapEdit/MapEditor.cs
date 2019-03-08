@@ -22,7 +22,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         public static TaskCompletionSource<object> ContinueCommand { get; set; }
         public static CustomMap CurrentMapInEditor { get; set; }
         public static MapEditCursor HuidigeCursor { get; set; }
-        public static buffer MapBuffer { get; set; }
+        public static Buffer MapBuffer { get; set; }
         private static int ActiveLayer { get; set; }
 
         public static void WorkingSpace()
@@ -44,7 +44,7 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public static void Init()
         {
-            MapBuffer = new buffer(Ww, Wh, Ww, Wh);
+            MapBuffer = new Buffer(Ww, Wh, Ww, Wh);
             HuidigeCursor = new MapEditCursor(0, 0);
             ContinueCommand = new TaskCompletionSource<object>();
             ActiveLayer = 1;

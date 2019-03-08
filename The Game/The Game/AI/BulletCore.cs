@@ -31,7 +31,7 @@ namespace Confusing_Hobo_Unleashed.AI
             BulletColor = bulletcolor;
         }
 
-        public void Render(buffer outputbuffer, CustomMap map)
+        public void Render(Buffer outputbuffer, CustomMap map)
         {
             var bulletchar = Convert.ToString(Character);
             outputbuffer.Draw(bulletchar, X, Y, BulletColor);
