@@ -1,48 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Shapes;
+using Confusing_Hobo_Unleashed.UI.UIElements;
 using Confusing_Hobo_Unleashed.User;
 using Microsoft.Xna.Framework.Input;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public class TextBox
+    //TODO: Make this a simplistic textbox with a set amount of characters and arrows pointing up and downward for char selection
+    public class TextBox:UIObject
     {
-        public TextBox()
+        
+        private Shape inactiveShape;
+        private Shape activeShape;
+        private Window _window; //todo
+        
+        protected TextBox( Shape activeShape, Shape inactiveShape, string text): base()
         {
-            BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
-            BoxBackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
-            BoxForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
-            BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
-            SelectedColor = Painter.Instance.Paint(ConsoleColor.Blue);
-            BoxColors = Painter.Instance.ColorsToAttribute(BoxBackgroundColor, BoxForegroundColor);
-            BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Painter.Instance.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            SelectedColors = Painter.Instance.ColorsToAttribute(SelectedColor, ForegroundColor);
-            Value = false;
-            Xpos = Console.WindowWidth*2/5;
-            BlockLength = Console.WindowWidth/5;
+            this.activeShape = activeShape;
+            this.inactiveShape = inactiveShape;
+            this.text = new CenteredText(text, shape.getPosition(), shape);
         }
 
-        public ConsoleColor ForegroundColor { get; set; }
-        public ConsoleColor BorderColor { get; set; }
-        public bool Value { get; set; }
-        public int Xpos { get; set; }
-        public int Ypos { get; set; }
-        public int XPosForCenteredMessage { get; set; }
-        public int YPosForCenteredMessage { get; set; }
-        public int BlockLength { get; set; }
-        public int BlockHeight { get; set; }
         public string Message { get; set; }
-        public ConsoleColor BoxBackgroundColor { get; set; }
-        public ConsoleColor BoxForegroundColor { get; set; }
-        public ConsoleColor BackgroundColor { get; set; }
-        public ConsoleColor SelectedColor { get; set; }
-        public short BorderColors { get; set; }
-        public short BackgroundColors { get; set; }
-        public short BoxColors { get; set; }
-        public short SelectedColors { get; set; }
         public List<InsertBox> Box { get; set; }
         public List<int> VarChanger { get; set; }
 
@@ -103,21 +84,6 @@ namespace Confusing_Hobo_Unleashed.UI
                 } while (!input);
             }
         }
-
-        public void Recolor()
-        {
-            BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
-            ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
-            BoxBackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
-            BoxForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
-            BorderColor = Painter.Instance.Paint(ConsoleColor.Red);
-            SelectedColor = Painter.Instance.Paint(ConsoleColor.Blue);
-            SelectedColors = Painter.Instance.ColorsToAttribute(SelectedColor, ForegroundColor);
-            BorderColors = Painter.Instance.ColorsToAttribute(BorderColor, ForegroundColor);
-            BackgroundColors = Painter.Instance.ColorsToAttribute(BackgroundColor, ForegroundColor);
-            BoxColors = Painter.Instance.ColorsToAttribute(BoxBackgroundColor, BoxForegroundColor);
-        }
-
         public void Render(Buffer outputbuffer)
         {
             if (XPosForCenteredMessage == 0)
@@ -137,6 +103,28 @@ namespace Confusing_Hobo_Unleashed.UI
 
             outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
             DrawBox(outputbuffer);
+        }
+
+        public override bool IsActive()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void HandleAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Draw()
+        {
+            if (IsActive())
+            {
+                activeShape.Draw();
+            }
+            else
+            {
+                inactiveShape.Draw();
+            }
         }
     }
 }

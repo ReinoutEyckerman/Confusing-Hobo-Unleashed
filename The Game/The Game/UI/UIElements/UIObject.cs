@@ -7,21 +7,11 @@ using Confusing_Hobo_Unleashed.Shapes;
 
 namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
-    abstract class UIObject
+    public abstract class UIObject : Drawable
     {
-        private Shape shape;
-
-        UIObject(Shape shape)
-        {
-            this.shape = shape;
-        }
-
         public abstract bool IsActive();
         public abstract void HandleAction();
 
-        public void Draw()
-        {
-            shape.Draw();
-        }
+        public abstract void Draw();
     }
 }

@@ -1,15 +1,19 @@
-﻿using Confusing_Hobo_Unleashed.UI.Windows;
+﻿using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    interface Window
+    public interface Window
     {
-        void Draw(Position position, BaseColor backgroundColor, BaseColor foregroundColor, string text);
-        void DrawTile(Position position, BaseColor tileColor);
-        void DrawRectangle(Rectangle rectangle, BaseColor tileColor);
+        
+         void Draw(Position position, Pixel pixel);
+        void DrawText(Position position, ColorPoint color, string text);
+         
         void Clear();
         void Paint();
         int getWidthPosFromPercentage(double percentage);
         int getHeightPosFromPercentage(double percentage);
+        void setColorScheme(ColorSchemes colorScheme);
     }
 }

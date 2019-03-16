@@ -6,20 +6,22 @@ using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    internal abstract class Button : UIObject
+    internal class VerticalList : UIObject
     {
         private Shape inactiveShape;
         private Shape activeShape;
-        private Text inactiveText;
-        private Text activeText;
+        private Text inactiveTitle;
+        private Text activeTitle;
         private Window _window; //todo
 
-        protected Button( Shape activeShape, Shape inactiveShape, string text): base()
+        private List<UIObject> items;
+
+        protected VerticalList( Shape activeShape, Shape inactiveShape, string text): base()
         {
             this.activeShape = activeShape;
             this.inactiveShape = inactiveShape;
-            this.activeText = new Text(text, activeShape.getPosition(), activeShape.);
-            this.inactiveText = new Text(text, inactiveShape.getPosition(), inactiveShape);
+            this.activeTitle = new Text(text, activeShape.getPosition(), activeShape.);
+            this.inactiveTitle = new Text(text, inactiveShape.getPosition(), inactiveShape);
         }
 
         public bool Value { get; set; }
@@ -36,6 +38,16 @@ namespace Confusing_Hobo_Unleashed.UI
             Value = !Value;
         }
 
+        public override bool IsActive()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void HandleAction()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Draw()
         {
             if (IsActive())
@@ -45,6 +57,15 @@ namespace Confusing_Hobo_Unleashed.UI
             else
             {
                 inactiveShape.Draw();
+            }
+            DrawItems();
+        }
+
+        private void DrawItems()
+        {
+            foreach (UIObject uiObject in items)
+            {
+                uiObject.Draw();
             }
         }
     }

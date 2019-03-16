@@ -1,8 +1,8 @@
 ﻿namespace Confusing_Hobo_Unleashed.Colors
 {
-    public enum ColorScheme
+    public enum ColorSchemes
     {
-        Normal,
+        Default,
         BlackWhite,
         Gray,
         GrayInverted,

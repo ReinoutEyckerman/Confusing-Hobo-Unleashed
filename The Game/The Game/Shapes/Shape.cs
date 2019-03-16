@@ -1,8 +1,8 @@
-﻿using Confusing_Hobo_Unleashed.UI;
+using Confusing_Hobo_Unleashed.UI;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    public abstract class Shape
+    public abstract class Shape: Drawable
     {
         protected Position position;
         protected Rectangle boundingBox;
@@ -22,6 +22,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
         {
             return this.boundingBox;
         }
+
 
         public abstract void Draw();
     }

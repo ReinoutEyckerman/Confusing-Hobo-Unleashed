@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Confusing_Hobo_Unleashed.UI.Windows
 {
-    enum BaseColor
+    public enum BaseColor
     {
         Black = 0,
         DarkBlue = 1,
