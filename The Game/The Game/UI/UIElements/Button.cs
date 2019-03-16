@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    internal class Button
+    internal abstract class Button : UIObject
     {
         private Rectangle rectangle;
+
         public Button()
         {
             BackgroundColor = Painter.Instance.Paint(ConsoleColor.DarkGreen);
@@ -79,6 +81,7 @@ namespace Confusing_Hobo_Unleashed.UI
             Value = !Value;
         }
 
+        /*
         public void Render(Buffer outputbuffer)
         {
             if (XPosForCenteredMessage == 0)
@@ -97,5 +100,6 @@ namespace Confusing_Hobo_Unleashed.UI
 
             outputbuffer.Draw(Message, XPosForCenteredMessage, YPosForCenteredMessage, BackgroundColors);
         }
+        */
     }
 }

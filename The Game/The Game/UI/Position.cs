@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    class Position
+    public class Position
     {
         public int x { get; private set; }
         public int y { get; private set; }

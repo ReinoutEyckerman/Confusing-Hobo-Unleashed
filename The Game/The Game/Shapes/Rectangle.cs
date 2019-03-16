@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    class Rectangle 
+    public class Rectangle 
     {
         public Position topleft { get; }
         public Position bottomright { get; }

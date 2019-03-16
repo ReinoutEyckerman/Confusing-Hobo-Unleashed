@@ -25,7 +25,7 @@ namespace Confusing_Hobo_Unleashed
         public static List<OptionsMenu> Debug = new List<OptionsMenu>();
         public static List<OptionsMenu> ControlsMain = new List<OptionsMenu>();
         public static List<string> Credits = new List<string>();
-        public static Thread Fire;
+       // public static Thread Fire;
         public static Buffer FireBuffer = new Buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
         public static Buffer FireBuffer2 = new Buffer(Console.WindowWidth*2/5, Console.WindowHeight*5/6, Console.WindowWidth, Console.WindowHeight);
         private static short[,] _firepits;
@@ -166,7 +166,7 @@ namespace Confusing_Hobo_Unleashed
                     }
                     if (list == StartMenu.Main)
                     {
-                        StartMenu.Fire.Abort();
+                       // StartMenu.Fire.Abort();
                         switch (tempbut)
                         {
                             case 0:
