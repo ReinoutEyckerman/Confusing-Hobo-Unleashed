@@ -119,6 +119,7 @@
     <Compile Include="UI\Menu\Menu.cs" />
     <Compile Include="UI\OptionsMenu.cs" />
     <Compile Include="UI\Position.cs" />
+    <Compile Include="UI\UIElements\ActivateableUI.cs" />
     <Compile Include="UI\UIElements\Button.cs" />
     <Compile Include="UI\UIElements\InsertBox.cs" />
     <Compile Include="UI\UIElements\Text.cs" />

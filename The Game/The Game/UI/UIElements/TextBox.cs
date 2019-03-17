@@ -9,14 +9,14 @@ using Microsoft.Xna.Framework.Input;
 namespace Confusing_Hobo_Unleashed.UI
 {
     //TODO: Make this a simplistic textbox with a set amount of characters and arrows pointing up and downward for char selection
-    public class TextBox:UIObject
+    public class TextBox:ActivateableUI
     {
         
         private Shape inactiveShape;
         private Shape activeShape;
         private Window _window; //todo
         
-        protected TextBox( Shape activeShape, Shape inactiveShape, string text): base()
+        protected TextBox( Shape activeShape, Shape inactiveShape, string text): base(activeShape,inactiveShape)
         {
             this.activeShape = activeShape;
             this.inactiveShape = inactiveShape;

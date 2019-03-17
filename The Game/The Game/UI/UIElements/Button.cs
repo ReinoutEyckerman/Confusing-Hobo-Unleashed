@@ -6,18 +6,14 @@ using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    internal abstract class Button : UIObject
+    internal abstract class Button : ActivateableUI
     {
-        private Shape inactiveShape;
-        private Shape activeShape;
         private Text inactiveText;
         private Text activeText;
         private Window _window; //todo
 
-        protected Button( Shape activeShape, Shape inactiveShape, string text): base()
+        protected Button( Shape activeShape, Shape inactiveShape, string text): base(activeShape,inactiveShape)
         {
-            this.activeShape = activeShape;
-            this.inactiveShape = inactiveShape;
             this.activeText = new Text(text, activeShape.getPosition(), activeShape.);
             this.inactiveText = new Text(text, inactiveShape.getPosition(), inactiveShape);
         }
@@ -34,18 +30,6 @@ namespace Confusing_Hobo_Unleashed.UI
         public void ChangeValue()
         {
             Value = !Value;
-        }
-
-        public override void Draw()
-        {
-            if (IsActive())
-            {
-                activeShape.Draw();
-            }
-            else
-            {
-                inactiveShape.Draw();
-            }
         }
     }
 }
