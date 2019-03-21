@@ -7,6 +7,11 @@ namespace Confusing_Hobo_Unleashed.UI
     {
         private Window window;//TODO
         private Pixel pixel;
+
+        public BoxBounds(BoxBounds copy)
+        {
+            
+        }
         
         public BoxBounds(Shape decoratedShape, Position position, Rectangle boundingBox, Pixel pixel) : base(decoratedShape, position, boundingBox)
         {

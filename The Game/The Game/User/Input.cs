@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Confusing_Hobo_Unleashed.User
 {
-    enum Input
+    public enum Input
     {
         LEFT,
         RIGHT,

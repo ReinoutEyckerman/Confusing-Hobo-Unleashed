@@ -92,6 +92,11 @@
     <Compile Include="Game.cs" />
     <Compile Include="Gameplay.cs" />
     <Compile Include="GameUI.cs" />
+    <Compile Include="Overview\Chamber.cs" />
+    <Compile Include="Overview\MapControls.cs" />
+    <Compile Include="Overview\MapDrawing.cs" />
+    <Compile Include="Overview\MapGeneration.cs" />
+    <Compile Include="Overview\Overview.cs" />
     <Compile Include="Shapes\Ellips\Ellips.cs" />
     <Compile Include="Shapes\Ellips\EllipsBounds.cs" />
     <Compile Include="Shapes\Fire\Fire.cs" />
@@ -102,6 +107,8 @@
     <Compile Include="Shapes\Rectangle\BoxBounds.cs" />
     <Compile Include="Shapes\Shape.cs" />
     <Compile Include="Shapes\ShapeDecorator.cs" />
+    <Compile Include="Shapes\ShapeFactory.cs" />
+    <Compile Include="Shapes\Text\Text.cs" />
     <Compile Include="TerrainGen\LandTerrain.cs" />
     <Compile Include="Multiplayer\LidgrenAdaptions.cs" />
     <Compile Include="TerrainGen\SeaTerrain.cs" />
@@ -109,6 +116,7 @@
     <Compile Include="TerrainGen\SkyTerrain.cs" />
     <Compile Include="TerrainGen\SpaceTerrain.cs" />
     <Compile Include="TerrainGen\CaveTerrain.cs" />
+    <Compile Include="Tools\CircularList.cs" />
     <Compile Include="UI\Colors\BaseColor.cs" />
     <Compile Include="UI\Colors\ColorPoint.cs" />
     <Compile Include="UI\Colors\Pixel.cs" />
@@ -119,11 +127,13 @@
     <Compile Include="UI\Menu\Menu.cs" />
     <Compile Include="UI\OptionsMenu.cs" />
     <Compile Include="UI\Position.cs" />
-    <Compile Include="UI\UIElements\ActivateableUI.cs" />
     <Compile Include="UI\UIElements\Button.cs" />
+    <Compile Include="UI\UIElements\ButtonBuilder.cs" />
     <Compile Include="UI\UIElements\InsertBox.cs" />
-    <Compile Include="UI\UIElements\Text.cs" />
+    <Compile Include="UI\UIElements\TextBlock.cs" />
+    <Compile Include="UI\UIElements\TriggerHandler.cs" />
     <Compile Include="UI\UIElements\TextBox.cs" />
+    <Compile Include="UI\UIElements\UIFactory.cs" />
     <Compile Include="UI\UIElements\UIObject.cs" />
     <Compile Include="UI\Windows\Window.cs" />
     <Compile Include="UI\Windows\MicrosoftWindow.cs" />
@@ -136,10 +146,7 @@
     <Compile Include="TerrainGen\TerrainGenerationModules.cs" />
     <Compile Include="TerrainGen\TerrainSelection.cs" />
     <Compile Include="VarDatabase.cs" />
-    <Compile Include="MapControls.cs" />
-    <Compile Include="MapDrawing.cs" />
     <Compile Include="MapEdit\MapEditor.cs" />
-    <Compile Include="MapGeneration.cs" />
     <Compile Include="TerrainGen\TerrainGraphics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\Weapon.cs" />

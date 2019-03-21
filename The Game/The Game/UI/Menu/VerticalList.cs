@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Shapes;
+using Confusing_Hobo_Unleashed.Tools;
 using Confusing_Hobo_Unleashed.UI.UIElements;
+using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
     internal class VerticalList : UIObject
     {
-        private Shape inactiveShape;
-        private Shape activeShape;
         private Text inactiveTitle;
         private Text activeTitle;
         private Window _window; //todo
 
-        private List<UIObject> items;
+        private CircularList<UIObject> items;
 
-        protected VerticalList( Shape activeShape, Shape inactiveShape, string text): base()
+        private int ringIndex = 0;
+        
+        protected VerticalList( Shape activeShape, Shape inactiveShape, string title): base(activeShape, inactiveShape)
         {
-            this.activeShape = activeShape;
-            this.inactiveShape = inactiveShape;
-            this.activeTitle = new Text(text, activeShape.getPosition(), activeShape.);
-            this.inactiveTitle = new Text(text, inactiveShape.getPosition(), inactiveShape);
+            this.activeTitle = new Text(title, activeShape.getPosition(), activeShape.);
+            this.inactiveTitle = new Text(title, inactiveShape.getPosition(), inactiveShape);
         }
 
         public bool Value { get; set; }
@@ -43,9 +43,50 @@ namespace Confusing_Hobo_Unleashed.UI
             throw new NotImplementedException();
         }
 
-        public override void HandleAction()
+        public override void HandleAction(Input action)
         {
-            throw new NotImplementedException();
+            if (isActive)
+            {
+                HandleActiveAction(action);
+            }
+            else
+            {
+                HandleInactiveAction(action);
+            }
+        }
+
+        private void HandleActiveAction(Input action)
+        {
+            switch (action)
+            {
+                case Input.BACK:
+                    this.isActive = false;
+                    break;
+                case Input.UP:
+                     items.decrement();
+                     break;
+                case Input.DOWN:
+                     items.increment();
+                     break;
+                default:
+                     items.currentItem().HandleAction(action);
+                     break;
+            }
+        }
+
+        private void HandleInactiveAction(Input action)
+        {
+            switch (action)
+            {
+                case Input.A:
+                    this.isActive = true;
+                    break;
+            }
+        }
+        
+        private void switchActive()
+        {
+            this.isActive = !isActive;
         }
 
         public override void Draw()

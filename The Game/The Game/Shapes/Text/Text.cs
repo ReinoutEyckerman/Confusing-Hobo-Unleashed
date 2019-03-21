@@ -1,17 +1,28 @@
 using System;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
-    public class Text: UIObject
+    public class Text:ShapeDecorator
     {
-        protected Position position;
-        protected readonly string text;
-        protected ColorPoint color;
-        protected Window window;//TODO
+        private readonly string text;
+        private ColorPoint color;
+        private Window window;//TODO
+
+        public Text(Text copy):this(copy.text,copy)
+        {
+        }
         
-        public Text(string text, Position position, ColorPoint color)
+        private Text(string text, Text baseText):base(baseText.decoratedShape,baseText.position, baseText.boundingBox)
+        {
+            this.position = baseText.position;
+            this.text = text;
+            this.color = baseText.color;
+        }
+        
+        public Text(string text,  Position position, ColorPoint color, Shape decoratedShape):base(decoratedShape, position, new Rectangle(position,text.Length,1))
         {
             this.position = position;
             this.text = text;
@@ -20,10 +31,10 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
 
         public virtual Text setText(string text)
         {
-            return new Text(text, position, color);
+            return new Text(text,this);
         }
         
-        public void centerText(Rectangle bounds)
+        public void centerText(Rectangle bounds)//TODO
         {
             if (bounds.getWidth() < text.Length)
             {
@@ -33,15 +44,6 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
             int x = position.x + (bounds.getWidth() - text.Length) / 2;
             int y = position.y + bounds.getHeight() / 2;
             this.position = new Position(x, y);
-        }
-        
-        public override bool IsActive()
-        {
-            return false;
-        }
-
-        public override void HandleAction()
-        {
         }
 
         public override void Draw()
