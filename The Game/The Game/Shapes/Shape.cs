@@ -18,12 +18,6 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return this.position;
         }
 
-        public Rectangle getBoundingBox()
-        {
-            return this.boundingBox;
-        }
-
-
         public abstract void Draw();
     }
 }

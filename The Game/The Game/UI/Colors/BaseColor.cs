@@ -8,21 +8,22 @@ namespace Confusing_Hobo_Unleashed.UI.Windows
 {
     public enum BaseColor
     {
-        Black = 0,
-        DarkBlue = 1,
-        DarkGreen = 2,
-        DarkCyan = 3,
-        DarkRed = 4,
-        DarkMagenta = 5,
-        DarkYellow = 6,
-        Gray = 7,
-        DarkGray = 8,
-        Blue = 9,
-        Green = 10,
-        Cyan = 11,
-        Red = 12,
-        Magenta = 13,
-        Yellow = 14,
-        White = 15
+        Void = 0,
+        Black = 1,
+        DarkBlue = 2,
+        DarkGreen = 3,
+        DarkCyan = 4,
+        DarkRed = 5,
+        DarkMagenta = 6,
+        DarkYellow = 7,
+        Gray = 8,
+        DarkGray = 9,
+        Blue = 10,
+        Green = 11,
+        Cyan = 12,
+        Red = 13,
+        Magenta = 14,
+        Yellow = 15,
+        White = 16
     }
 }

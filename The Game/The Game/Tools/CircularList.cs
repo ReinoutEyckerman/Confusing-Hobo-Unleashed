@@ -20,6 +20,18 @@ namespace Confusing_Hobo_Unleashed.Tools
         {
             index = 1 - index % this.Count;
         }
+        
+        public void increment(int amount)
+        {
+            amount = amount % this.Count;
+            index = amount + index % this.Count;
+        }
+
+        public void decrement(int amount)
+        {
+            amount = amount % this.Count;
+            index = amount - index % this.Count;
+        }
 
         public T currentItem()
         {

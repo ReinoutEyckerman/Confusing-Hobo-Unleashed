@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.Tools;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 using Confusing_Hobo_Unleashed.User;
 
-namespace Confusing_Hobo_Unleashed.UI
+namespace Confusing_Hobo_Unleashed.UI.Menu
 {
-    internal class VerticalList : AbstractList
+    public class GridMenu : AbstractList
     {
-        public VerticalList( CircularList<UIObject> items, Shape shape): base(items,shape)
+        private int width;
+        private int height;
+        
+        public GridMenu(int width, int height, CircularList<UIObject> items, Shape shape) : this(width, height,items, shape, shape)
         {
-        }
-
-        public VerticalList(CircularList<UIObject> items, Shape activeShape, Shape inactiveShape): base(items,activeShape,inactiveShape)
+        } 
+        
+        public GridMenu(int width, int height,CircularList<UIObject> items, Shape activeShape, Shape inactiveShape) : base(items, activeShape, inactiveShape)
         {
+            this.width = width;
+            this.height = height;
         }
-
-        public override bool IsActive()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override void HandleAction(Input action)
         {
             if (isActive)
@@ -42,12 +39,18 @@ namespace Confusing_Hobo_Unleashed.UI
                 case Input.BACK:
                     this.isActive = false;
                     break;
-                case Input.UP:
+                case Input.LEFT:
                      items.decrement();
                      break;
-                case Input.DOWN:
+                case Input.RIGHT:
                      items.increment();
                      break;
+                case Input.DOWN:
+                    items.increment(width);
+                    break;
+                case Input.UP:
+                    items.decrement(width);
+                    break;
                 default:
                      items.currentItem().HandleAction(action);
                      break;

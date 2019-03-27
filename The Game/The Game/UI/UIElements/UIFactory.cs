@@ -4,7 +4,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
     public class UIFactory
     {
-        public static UIObject createButton(TriggerEventHandler triggerEventHandler, Shape shape)
+        public static Button createButton(TriggerEventHandler triggerEventHandler, Shape shape)
         {
             return new  Button(shape,triggerEventHandler);
         }

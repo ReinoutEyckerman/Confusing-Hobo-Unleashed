@@ -45,14 +45,14 @@ namespace Confusing_Hobo_Unleashed.UI
 
         public void DrawText(Position position, ColorPoint color, string text)
         {
-            short encodedColor = ColorsToAttribute(color);
-            buffer.Draw(text, position.x, position.y, encodedColor);
+            ColorPoint translatedColor = colorScheme.translateColor(color);
+            buffer.Draw(text, position.x, position.y, color);
         }
         
         public void Draw(Position position, Pixel pixel)
         {
-            short encodedColor = ColorsToAttribute(pixel);
-            buffer.Draw(pixel.getCharacter().ToString(), position.x, position.y, encodedColor);
+            ColorPoint translatedColor = colorScheme.translateColor(pixel);
+            buffer.Draw(pixel.getCharacter().ToString(), position.x, position.y, translatedColor);
         }
 
         public void Clear()
@@ -85,23 +85,6 @@ namespace Confusing_Hobo_Unleashed.UI
             percentage = Math.Min(Math.Max(0, percentage), 1);
             int x = Convert.ToInt32(Convert.ToDouble(baseNumber) * percentage);
             return x;
-        }
-
-        private ConsoleColor getConsoleColor(BaseColor drawColor)
-        {
-            ConsoleColor consoleColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), drawColor.ToString());
-            return consoleColor;
-        }
-
-        private short ColorsToAttribute(ColorPoint colorPoint)
-        {
-            ColorPoint translatedColor = colorScheme.translateColor(colorPoint);
-            ConsoleColor backgroundColor = getConsoleColor(translatedColor.GetBackgroundColor());
-            ConsoleColor foregroundColor = getConsoleColor(translatedColor.GetForegroundColor());
-            var bgValue = (byte)(backgroundColor);
-            var fgValue = (byte)(foregroundColor);
-            var attribute = Convert.ToInt16((bgValue) * 16 + fgValue);
-            return attribute;
         }
     }
 }

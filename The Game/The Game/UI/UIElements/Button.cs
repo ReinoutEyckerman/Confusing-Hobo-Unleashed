@@ -7,8 +7,7 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    
-    internal class Button : UIObject
+    public class Button : UIObject
     {
         private TriggerHandler triggerHandler;
 

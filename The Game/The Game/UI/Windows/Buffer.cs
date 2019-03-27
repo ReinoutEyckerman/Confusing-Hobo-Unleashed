@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.UI.Windows;
 using Microsoft.Win32.SafeHandles;
 
 namespace Confusing_Hobo_Unleashed
@@ -40,26 +42,18 @@ namespace Confusing_Hobo_Unleashed
         private CharInfo[] _buf;
         private SmallRect _rect;
 
-        /// <summary>
-        ///     Consctructor class for the buffer. Pass in the width and height you want the buffer to be.
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// ///
-        /// <param name="wWidth"></param>
-        /// <param name="wHeight"></param>
-        public Buffer(int width, int height, int wWidth, int wHeight)
-            // Create and fill in a multideminsional list with blank spaces.
+        public Buffer(int width, int height, int windowWidth, int windowHeight)
         {
-            if (width > wWidth || height > wHeight)
+            if (width > windowWidth || height > windowHeight)
             {
                 throw new ArgumentException("The buffer width and height can not be greater than the window width and height.");
             }
+            
             _h = CreateFile("CONOUT$", 0x40000000, 2, IntPtr.Zero, FileMode.Open, 0, IntPtr.Zero);
             _width = width;
             _height = height;
-            _windowWidth = wWidth;
-            _windowHeight = wHeight;
+            _windowWidth = windowWidth;
+            _windowHeight = windowHeight;
             _buf = new CharInfo[_width*_height];
             _rect = new SmallRect();
             _rect.SetDrawCord(0, 0);
@@ -73,40 +67,33 @@ namespace Confusing_Hobo_Unleashed
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool WriteConsoleOutput(SafeFileHandle hConsoleOutput, CharInfo[] lpBuffer, Coord dwBufferSize, Coord dwBufferCoord, ref SmallRect lpWriteRegion);
 
-        /// <summary>
-        ///     This method draws any text to the buffer with given color.
-        ///     To chance the color, pass in a value above 0. (0 being black text, 15 being white text).
-        ///     Put in the starting width and height you want the input string to be.
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="attribute"></param>
-        public void Draw(String str, int width, int height, short attribute) //Draws the image to the buffer
+        public void Draw(String str, int width, int height, ColorPoint color) //Draws the image to the buffer
         {
             if (width > _windowWidth - 1 || height > _windowHeight - 1)
             {
                 throw new ArgumentOutOfRangeException();
             }
+            
             if (str != null)
             {
-                var temp = str.ToCharArray();
-                var tc = 0;
-                foreach (var le in temp)
+                char[] charArray = str.ToCharArray();
+                int letterPos = 0;
+                
+                
+                foreach (char letter in charArray)
                 {
-                    _buf[(width + tc) + (height*_width)].Char.AsciiChar = (byte) le;
-                    //Height * width is to get to the correct spot (since this array is not two dimensions).
-                    if (attribute != 0)
-                        _buf[(width + tc) + (height*_width)].Attributes = attribute;
-                    tc++;
+                    _buf[(width + letterPos) + (height*_width)].Char.AsciiChar = (byte) letter;
+                    //Height * width is to get to the correct spot (1D Array).
+//                    if (attribute != 0)
+                    {
+                        _buf[(width + letterPos) + (height*_width)].Attributes = ColorsToAttribute(color,(width + letterPos) , (height*_width));//TODO
+                    }
+                    letterPos++;
                 }
             }
         }
 
-        /// <summary>
-        ///     Prints the buffer to the screen.
-        /// </summary>
-        public void Print() //Paint the image
+        public void Print() 
         {
             if (!_h.IsInvalid)
             {
@@ -114,9 +101,6 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        /// <summary>
-        ///     Clears the buffer and resets all character values back to 32, and attribute values to 1.
-        /// </summary>
         public void Clear()
         {
             for (var i = 0; i < _buf.Length; i++)
@@ -126,10 +110,6 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        /// <summary>
-        ///     Pass in a buffer to change the current buffer.
-        /// </summary>
-        /// <param name="b"></param>
         public void SetBuf(CharInfo[] b)
         {
             if (b == null)
@@ -140,20 +120,11 @@ namespace Confusing_Hobo_Unleashed
             _buf = b;
         }
 
-        /// <summary>
-        ///     Set the x and y cordnants where you wish to draw your buffered image.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
         public void SetDrawCord(short x, short y)
         {
             _rect.SetDrawCord(x, y);
         }
 
-        /// <summary>
-        ///     Clear the designated row and make all attribues = 1.
-        /// </summary>
-        /// <param name="row"></param>
         public void ClearRow(int row)
         {
             for (var i = (row*_width); i < ((row*_width + _width)); i++)
@@ -167,11 +138,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        /// <summary>
-        ///     Clear the designated column and make all attribues = 1.
-        /// </summary>
-        /// <param name="col"></param>
-        public void ClearColumn(int col)
+        public void ClearColumn(int col)//TODO fun times?
         {
             if (col > _windowWidth - 1)
             {
@@ -230,7 +197,7 @@ namespace Confusing_Hobo_Unleashed
         };
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SmallRect
+        public struct SmallRect//TODO ?
         {
             private short Left;
             private short Top;
@@ -248,6 +215,39 @@ namespace Confusing_Hobo_Unleashed
                 Right = r;
                 Bottom = b;
             }
+        }
+        
+        private short ColorsToAttribute(ColorPoint color, int x, int y)
+        {
+            ConsoleColor backgroundColor;
+            ConsoleColor foregroundColor; 
+            if (color.GetBackgroundColor() == BaseColor.Void)
+            {
+                backgroundColor = getConsoleColor((BaseColor)(GetCharAt(x, y).Value/16));
+            }
+            else
+            {
+                backgroundColor = getConsoleColor(color.GetBackgroundColor());
+            }
+            if (color.GetForegroundColor() == BaseColor.Void)
+            {
+                foregroundColor = getConsoleColor((BaseColor)(GetCharAt(x, y).Value%16));
+            }
+            else
+            {
+                foregroundColor = getConsoleColor(color.GetForegroundColor());
+            }
+            
+            var bgValue = (byte)(backgroundColor);
+            var fgValue = (byte)(foregroundColor);
+            var attribute = Convert.ToInt16((bgValue) * 16 + fgValue);
+            return attribute;
+        }
+        
+        private ConsoleColor getConsoleColor(BaseColor drawColor)
+        {
+            ConsoleColor consoleColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), drawColor.ToString());
+            return consoleColor;
         }
     }
 }

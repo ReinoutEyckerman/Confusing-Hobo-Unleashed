@@ -8,19 +8,14 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    internal class VerticalList : AbstractList
+    public class HorizonalList : AbstractList 
     {
-        public VerticalList( CircularList<UIObject> items, Shape shape): base(items,shape)
+        public HorizonalList( CircularList<UIObject> items, Shape shape): base(items,shape)
         {
         }
 
-        public VerticalList(CircularList<UIObject> items, Shape activeShape, Shape inactiveShape): base(items,activeShape,inactiveShape)
+        public HorizonalList(CircularList<UIObject> items, Shape activeShape, Shape inactiveShape): base(items,activeShape,inactiveShape)
         {
-        }
-
-        public override bool IsActive()
-        {
-            throw new NotImplementedException();
         }
 
         public override void HandleAction(Input action)
@@ -42,10 +37,10 @@ namespace Confusing_Hobo_Unleashed.UI
                 case Input.BACK:
                     this.isActive = false;
                     break;
-                case Input.UP:
+                case Input.LEFT:
                      items.decrement();
                      break;
-                case Input.DOWN:
+                case Input.RIGHT:
                      items.increment();
                      break;
                 default:
