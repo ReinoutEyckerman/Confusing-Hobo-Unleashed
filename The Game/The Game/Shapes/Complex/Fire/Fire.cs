@@ -20,6 +20,14 @@ namespace Confusing_Hobo_Unleashed.Shapes
         private Pixel middleFire;
         private Pixel coreFire;
 
+        public Fire(Fire copy) : base(copy)
+        {
+            this.outerFire = new Pixel(copy.outerFire);
+            this.middleFire = new Pixel(copy.middleFire);
+            this.coreFire = new Pixel(copy.coreFire);
+            this.fireRandomizer = new Random();
+            
+        }
         public Fire(Shape decoratedShape, Position position, Rectangle boundingBox, Pixel outerFire, Pixel middleFire, Pixel coreFire) : base(decoratedShape, position, boundingBox)
         {
             this.outerFire = outerFire;
@@ -67,6 +75,11 @@ namespace Confusing_Hobo_Unleashed.Shapes
                     window.DrawTile(new Position(i+10, j), fire1[i, j]);
                 }
             }
+        }
+
+        public override Shape Clone()
+        {
+            return new Fire(this);
         }
 
         private int getRandomDirection(int x)

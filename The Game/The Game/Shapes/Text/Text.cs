@@ -5,40 +5,27 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
-    public class Text:ShapeDecorator
+    public class Text : ShapeDecorator
     {
         private readonly string text;
-        private ColorPoint color;
-        private Window window;//TODO
 
-        public Text(Text copy):this(copy.text,copy)
+        public Text(Text copy) : base(copy)
         {
+            this.text = copy.text;
         }
-        
-        private Text(string text, Text baseText):base(baseText.decoratedShape,baseText.position, baseText.boundingBox)
-        {
-            this.position = baseText.position;
-            this.text = text;
-            this.color = baseText.color;
-        }
-        
-        public Text(string text,  Position position, ColorPoint color, Shape decoratedShape):base(decoratedShape, position, new Rectangle(position,text.Length,1))
+
+        public Text(string text,  Shape decoratedShape, Pixel pixel, Position position, Window window) : base(
+            decoratedShape,pixel, position, new Rectangle(position, text.Length, 1), window)
         {
             this.position = position;
             this.text = text;
-            this.color = color;
         }
 
-        public virtual Text setText(string text)
-        {
-            return new Text(text,this);
-        }
-        
-        public void centerText(Rectangle bounds)//TODO
+        public void centerText(Rectangle bounds) //TODO
         {
             if (bounds.getWidth() < text.Length)
             {
-                throw new Exception();//TODO
+                throw new Exception(); //TODO
             }
 
             int x = position.x + (bounds.getWidth() - text.Length) / 2;
@@ -48,7 +35,15 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
 
         public override void Draw()
         {
-            window.DrawText(this.position,  this.color, this.text);
+            for (int x = 0; x < text.Length; x++)
+            {
+                drawToWindow(new Position(x, 0), this.pixel);
+            }
+        }
+
+        public override Shape Clone()
+        {
+            return new Text(this);
         }
     }
 }

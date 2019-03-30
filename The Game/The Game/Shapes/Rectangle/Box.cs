@@ -5,27 +5,28 @@ namespace Confusing_Hobo_Unleashed.UI
 {
     public class Box : ShapeDecorator
     {
-        private Rectangle rectangle;
-        private Window window; //todo
-        private readonly Pixel pixel;
-        
-        public Box(Shape decoratedShape, Position position, Rectangle boundingBox, Pixel pixel) : base(decoratedShape, position, boundingBox)
+        public Box(Box copy) : base(copy)
         {
-            this.rectangle = boundingBox;
-            this.pixel = pixel;
+        }
+
+        public Box(Shape shape, Pixel pixel, Position position, Rectangle boundingBox, Window window) : base(shape, pixel, position, boundingBox, window)
+        {
         }
 
         public override void Draw()
         {
-            base.Draw();
-            for (int x = position.x; x < rectangle.getWidth(); x++)
+            for (int x = 0; x < boundingBox.getWidth(); x++)
             {
-                for (int y = position.y; y < rectangle.getHeight(); y++)
+                for (int y = 0; y < boundingBox.getHeight(); y++)
                 {
-                    window.Draw(new Position(x,y), pixel);
+                    drawToWindow(new Position(x, y), pixel);
                 }
-                
             }
+        }
+
+        public override Shape Clone()
+        {
+            return new Box(this);
         }
     }
 }

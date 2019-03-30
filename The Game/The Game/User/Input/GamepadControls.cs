@@ -1,6 +1,6 @@
 ﻿namespace Confusing_Hobo_Unleashed
 {
-    internal class Controls
+    internal class GamepadControls
     {
         public static int A = 0x0D; //ENTER
         public static int B = 0x42; //B

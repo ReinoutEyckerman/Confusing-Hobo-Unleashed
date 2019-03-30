@@ -62,6 +62,10 @@
       <HintPath>.\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MonoGame.Framework.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,6 +77,7 @@
     <Compile Include="AI\AICore.cs" />
     <Compile Include="AI\AIMovementCore.cs" />
     <Compile Include="AI\BulletCore.cs" />
+    <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Enemies\Entity.cs" />
     <Compile Include="Enemies\Godzilla.cs" />
     <Compile Include="Enemies\Harpy.cs" />
@@ -83,10 +88,7 @@
     <Compile Include="Map\Layer.cs" />
     <Compile Include="AlphaBootScreen.cs" />
     <Compile Include="BootScreen.cs" />
-    <Compile Include="Menu\AbstractMenu.cs" />
-    <Compile Include="Menu\NestedMenu.cs" />
     <Compile Include="Multiplayer\Client.cs" />
-    <Compile Include="Controls.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Endgame.cs" />
     <Compile Include="Game.cs" />
@@ -99,26 +101,43 @@
     <Compile Include="Overview\MST\Prim.cs" />
     <Compile Include="Overview\Overview.cs" />
     <Compile Include="Overview\Wall.cs" />
+    <Compile Include="Shapes\Complex\Fire\Fire.cs" />
+    <Compile Include="Shapes\Complex\JungleTree.cs" />
+    <Compile Include="Shapes\Ellips\AbstractEllips.cs" />
+    <Compile Include="Shapes\Ellips\EllipsBoundsBuilder.cs" />
+    <Compile Include="Shapes\Ellips\EllipsBuilder.cs" />
     <Compile Include="Shapes\Ellips\Ellips.cs" />
     <Compile Include="Shapes\Ellips\EllipsBounds.cs" />
-    <Compile Include="Shapes\Fire\Fire.cs" />
-    <Compile Include="Shapes\Fire\FirePit.cs" />
-    <Compile Include="Shapes\Fire\FirePitBorder.cs" />
+    <Compile Include="Shapes\Orientation.cs" />
+    <Compile Include="Shapes\OrientationTransformation.cs" />
+    <Compile Include="Shapes\Rectangle\BoxBoundsBuilder.cs" />
+    <Compile Include="Shapes\Rectangle\BoxBuilder.cs" />
+    <Compile Include="Shapes\Text\TextBuilder.cs" />
+    <Compile Include="Shapes\Trapeze\Trapeze.cs" />
+    <Compile Include="Shapes\Trapeze\TrapezeBorder.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="Shapes\Rectangle\Box.cs" />
     <Compile Include="Shapes\Rectangle\BoxBounds.cs" />
     <Compile Include="Shapes\Shape.cs" />
+    <Compile Include="Shapes\ShapeBuilder.cs" />
     <Compile Include="Shapes\ShapeDecorator.cs" />
-    <Compile Include="Shapes\ShapeFactory.cs" />
     <Compile Include="Shapes\Text\Text.cs" />
+    <Compile Include="Shapes\Triangle\AbstractTriangle.cs" />
+    <Compile Include="Shapes\Triangle\Triangle.cs" />
+    <Compile Include="Shapes\Triangle\TriangleBorder.cs" />
+    <Compile Include="TerrainGen\AbstractMap.cs" />
+    <Compile Include="TerrainGen\GravField.cs" />
     <Compile Include="TerrainGen\LandTerrain.cs" />
     <Compile Include="Multiplayer\LidgrenAdaptions.cs" />
+    <Compile Include="TerrainGen\Scenery.cs" />
     <Compile Include="TerrainGen\SeaTerrain.cs" />
     <Compile Include="Multiplayer\Server.cs" />
     <Compile Include="TerrainGen\SkyTerrain.cs" />
     <Compile Include="TerrainGen\SpaceTerrain.cs" />
     <Compile Include="TerrainGen\CaveTerrain.cs" />
+    <Compile Include="TerrainGen\Terrain.cs" />
     <Compile Include="Tools\CircularList.cs" />
+    <Compile Include="Tools\Matrix.cs" />
     <Compile Include="UI\Colors\BaseColor.cs" />
     <Compile Include="UI\Colors\ColorPoint.cs" />
     <Compile Include="UI\Colors\Pixel.cs" />
@@ -130,6 +149,7 @@
     <Compile Include="UI\Menu\HorizonalList.cs" />
     <Compile Include="UI\Menu\MenuFactory.cs" />
     <Compile Include="UI\Menu\MenuImpl\ConfigurationMenu.cs" />
+    <Compile Include="UI\Menu\MenuImpl\Credits.cs" />
     <Compile Include="UI\Menu\MenuImpl\MainMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\MapEditorMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\MapEditorNewMapMenu.cs" />
@@ -148,12 +168,15 @@
     <Compile Include="UI\UIElements\TextBox.cs" />
     <Compile Include="UI\UIElements\UIFactory.cs" />
     <Compile Include="UI\UIElements\UIObject.cs" />
-    <Compile Include="UI\Windows\Buffer.cs" />
+    <Compile Include="UI\Windows\MSConsoleBuffer.cs" />
     <Compile Include="UI\Windows\Window.cs" />
     <Compile Include="UI\Windows\MicrosoftWindow.cs" />
-    <Compile Include="User\Input.cs" />
-    <Compile Include="User\InputHandler.cs" />
     <Compile Include="MapEdit\MapEditCursor.cs" />
+    <Compile Include="User\Input\GamepadControls.cs" />
+    <Compile Include="User\Input\GamepadInputHandler.cs" />
+    <Compile Include="User\Input\Input.cs" />
+    <Compile Include="User\Input\InputHandler.cs" />
+    <Compile Include="User\Input\KeyboardInputHandler.cs" />
     <Compile Include="User\Player.cs" />
     <Compile Include="StartMenu.cs" />
     <Compile Include="TerrainGen\TerrainGenerationModules.cs" />
@@ -166,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="8979.ico" />

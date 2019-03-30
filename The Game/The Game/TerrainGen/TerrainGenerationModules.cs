@@ -2,7 +2,7 @@
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
-    internal class TerrainGenerationModules
+    internal class TerrainGenerationModules//TODO: Wiskundige formules, implementeer naar < /\ > \/
     {
         private static readonly Random Random = new Random();
         private static int _up;

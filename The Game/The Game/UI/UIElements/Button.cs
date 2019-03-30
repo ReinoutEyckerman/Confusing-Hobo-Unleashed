@@ -11,7 +11,7 @@ namespace Confusing_Hobo_Unleashed.UI
     {
         private TriggerHandler triggerHandler;
 
-        public Button(Shape shape, TriggerEventHandler triggerEventHandler):base(shape)
+        public Button(TriggerEventHandler triggerEventHandler,Shape shape):base(shape)
         {
             this.triggerHandler = new TriggerHandler();
             triggerHandler.addTrigger(triggerEventHandler);

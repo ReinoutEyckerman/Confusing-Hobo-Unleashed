@@ -5,36 +5,37 @@ namespace Confusing_Hobo_Unleashed.UI
 {
     public class BoxBounds : ShapeDecorator
     {
-        private Window window;//TODO
-        private Pixel pixel;
-
-        public BoxBounds(BoxBounds copy)
+        public BoxBounds(BoxBounds copy) : base(copy)
         {
-            
         }
-        
-        public BoxBounds(Shape decoratedShape, Position position, Rectangle boundingBox, Pixel pixel) : base(decoratedShape, position, boundingBox)
+
+        public BoxBounds(Shape shape, Pixel pixel, Position position, Rectangle boundingBox, Window window)
+            : base(shape, pixel, position, boundingBox, window)
         {
-            this.pixel = pixel;
         }
 
         public override void Draw()
         {
-            base.Draw();
-            for (int x = position.x; x < boundingBox.getWidth(); x++)
+            for (int x = 0; x < boundingBox.getWidth(); x++)
             {
-                for (int y = position.y; y < boundingBox.getHeight(); y += boundingBox.getHeight() - 1)
+                for (int y = 0; y < boundingBox.getHeight(); y += boundingBox.getHeight() - 1)
                 {
-                    window.Draw(new Position(x,y),this.pixel ); 
+                    drawToWindow(new Position(x, y), pixel);
                 }
             }
-            for (int y = position.y; y < boundingBox.getHeight(); y++)
+
+            for (int y = 0; y < boundingBox.getHeight(); y++)
             {
-                for (int x = position.x; x < boundingBox.getWidth(); x += boundingBox.getWidth() - 1)
+                for (int x = 0; x < boundingBox.getWidth(); x += boundingBox.getWidth() - 1)
                 {
-                    window.Draw(new Position(x,y),this.pixel ); 
+                    drawToWindow(new Position(x, y), pixel);
                 }
             }
+        }
+
+        public override Shape Clone()
+        {
+            return new BoxBounds(this);
         }
     }
 }

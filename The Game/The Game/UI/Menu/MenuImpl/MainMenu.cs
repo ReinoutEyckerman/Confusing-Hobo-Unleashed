@@ -12,11 +12,11 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
         public MainMenu() 
         {
             CircularList<UIObject> mainMenuList = new CircularList<UIObject>();
-            UIObject startButton = UIFactory.createButton(new TriggerEventHandler(startGame), );
-            UIObject versusButton = UIFactory.createButton(new TriggerEventHandler(versusScreen), );
-            UIObject mapEditorButton = UIFactory.createButton(new TriggerEventHandler(mapEditorScreen), );
-            UIObject configScreenButton = UIFactory.createButton(new TriggerEventHandler(configScreen), );
-            UIObject creditsButton = UIFactory.createButton(new TriggerEventHandler(creditsScreen), );
+            UIObject startButton = UIFactory.createDefaultButton(new TriggerEventHandler(startGame), );
+            UIObject versusButton = UIFactory.createDefaultButton(new TriggerEventHandler(versusScreen), );
+            UIObject mapEditorButton = UIFactory.createDefaultButton(new TriggerEventHandler(mapEditorScreen), );
+            UIObject configScreenButton = UIFactory.createDefaultButton(new TriggerEventHandler(configScreen), );
+            UIObject creditsButton = UIFactory.createDefaultButton(new TriggerEventHandler(creditsScreen), );
             mainMenuList.Add(startButton);
             mainMenuList.Add(versusButton);
             mainMenuList.Add(mapEditorButton);

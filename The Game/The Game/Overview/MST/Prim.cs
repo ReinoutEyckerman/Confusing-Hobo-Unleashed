@@ -7,19 +7,17 @@ namespace Confusing_Hobo_Unleashed.MST
 {
     public class Prim
     {
-
-        
         private bool[,] isVisited;
-        
+
         private void Plan(Chamber[,] chambers)
         {
             int width = chambers.GetLength(0);
             int height = chambers.GetLength(1);
-            isVisited= new bool[width, height];
+            isVisited = new bool[width, height];
             Random random = new Random();
             Chamber startPosition = chambers[random.Next(width), random.Next(height)];
             List<Wall> walls = getNeighbors(startPosition, chambers);
-            
+
             while (walls.Count > 0)
             {
                 int wallIndex = random.Next(walls.Count);
@@ -27,7 +25,6 @@ namespace Confusing_Hobo_Unleashed.MST
                 walls.Remove(randomWall);
                 if (!(randomWall.getChamber1().IsDiscovered && randomWall.getChamber2().IsDiscovered))
                 {
-                     
                 }
             }
         }
@@ -36,23 +33,26 @@ namespace Confusing_Hobo_Unleashed.MST
         {
             List<Wall> walls = new List<Wall>();
             chamber.setDiscovered();
-            int x = chamber.getPosition().x; 
-            int y = chamber.getPosition().y; 
+            int x = chamber.getPosition().x;
+            int y = chamber.getPosition().y;
             if (x > 0 && !chamber.northOpen)
             {
-                walls.Add(new Wall(chamber, chambers[x-1,y] ));
+                walls.Add(new Wall(chamber, chambers[x - 1, y]));
             }
-            if (x < chambers.GetLength(0)-1 && !chamber.southOpen)
+
+            if (x < chambers.GetLength(0) - 1 && !chamber.southOpen)
             {
-                walls.Add(new Wall(chamber, chambers[x+1,y] ));
+                walls.Add(new Wall(chamber, chambers[x + 1, y]));
             }
+
             if (y > 0 && !chamber.westOpen)
             {
-                walls.Add(new Wall(chamber, chambers[x,y-1] ));
+                walls.Add(new Wall(chamber, chambers[x, y - 1]));
             }
-            if (y < chambers.GetLength(1)-1 && !chamber.eastOpen)
+
+            if (y < chambers.GetLength(1) - 1 && !chamber.eastOpen)
             {
-                walls.Add(new Wall(chamber, chambers[x,y+1] ));
+                walls.Add(new Wall(chamber, chambers[x, y + 1]));
             }
 
             return walls;
@@ -64,7 +64,7 @@ namespace Confusing_Hobo_Unleashed.MST
             {
                 for (int y = 0; y < chambers.GetLength(1); y++)
                 {
-                    chambers[x,y].resetWalls();
+                    chambers[x, y].resetWalls();
                 }
             }
         }
