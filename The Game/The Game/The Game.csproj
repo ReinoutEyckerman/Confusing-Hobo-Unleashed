@@ -97,7 +97,6 @@
     <Compile Include="Overview\Chamber.cs" />
     <Compile Include="Overview\MapControls.cs" />
     <Compile Include="Overview\MapDrawing.cs" />
-    <Compile Include="Overview\MapGeneration.cs" />
     <Compile Include="Overview\MST\Prim.cs" />
     <Compile Include="Overview\Overview.cs" />
     <Compile Include="Overview\Wall.cs" />
@@ -139,6 +138,9 @@
     <Compile Include="TerrainGen\Terrain.cs" />
     <Compile Include="Tools\CircularList.cs" />
     <Compile Include="Tools\Matrix.cs" />
+    <Compile Include="UI\Banners\CongratulationsBanner.cs" />
+    <Compile Include="UI\Banners\LostBanner.cs" />
+    <Compile Include="UI\Banners\Title.cs" />
     <Compile Include="UI\Colors\BaseColor.cs" />
     <Compile Include="UI\Colors\ColorPoint.cs" />
     <Compile Include="UI\Colors\Pixel.cs" />
@@ -160,7 +162,6 @@
     <Compile Include="UI\Menu\VerticalList.cs" />
     <Compile Include="UI\Menu\Menu.cs" />
     <Compile Include="UI\Position.cs" />
-    <Compile Include="UI\Title.cs" />
     <Compile Include="UI\UIElements\Button.cs" />
     <Compile Include="UI\UIElements\ButtonBuilder.cs" />
     <Compile Include="UI\UIElements\InsertBox.cs" />

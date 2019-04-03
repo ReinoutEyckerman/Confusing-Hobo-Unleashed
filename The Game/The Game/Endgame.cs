@@ -57,29 +57,6 @@ namespace Confusing_Hobo_Unleashed
             Game.GameBuffer.SetDrawCord(0, 0);
         }
 
-        public static void Losebots()
-        {
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
-            Console.Clear();
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 10);
-            Console.Write("    _                                _    _      _ _     _                 _ _     ");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 9);
-            Console.Write(@"   /_\__ __ ____ __ __   __ ___ _  _| |__| |_ _ ( ) |_  | |_  __ _ _ _  __| | |___ ");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 8);
-            Console.Write(@"  / _ \ V  V /\ V  V /  / _/ _ \ || | / _` | ' \|/|  _| | ' \/ _` | ' \/ _` | / -_)");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 7);
-            Console.Write(@" /_/ \_\_/\_/  \_/\_( ) \__\___/\_,_|_\__,_|_||_|  \__| |_||_\__,_|_||_\__,_|_\___|");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 6);
-            Console.Write(@"  _   _          _  |/     _      ___ ");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 5);
-            Console.Write(@" | |_| |_  ___  | |__  ___| |_ __|__ \ ");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 4);
-            Console.Write(@" |  _| ' \/ -_) | '_ \/ _ \  _(_-< /_/");
-            Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2 - 3);
-            Console.Write(@"  \__|_||_\___| |_.__/\___/\__/__/(_) ");
-            Thread.Sleep(7000);
-            //StartMenu.MainScreen();
-        }
 
         public static void PlayMusic()
         {
@@ -87,22 +64,6 @@ namespace Confusing_Hobo_Unleashed
             _gamesound = SoundTracks[random.Next(SoundTracks.Count)];
             _gamesound.Stop();
             _gamesound.PlayLooping();
-        }
-
-        public static void Win()
-        {
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
-            Console.ForegroundColor = Painter.Instance.Paint(ConsoleColor.White, true);
-            Game.GameBuffer.Clear();
-            var meslength = "   ____                            _         _       _   _".Length/2;
-            Game.GameBuffer.Draw(@"   ____                            _         _       _   _", Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 3, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"  / ___|___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_(_) ___  _ __  ___", Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 2, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@" | |   / _ \| '_ \ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \| '_ \/ __|", Console.WindowWidth/2 - meslength, Console.WindowHeight/2 - 1, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@" | |__| (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \__ \ ", Console.WindowWidth/2 - meslength, Console.WindowHeight/2, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"  \____\___/|_| |_|\__, |_|  \__,_|\__|\__,_|_|\__,_|\__|_|\___/|_| |_|___/", Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 1, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"                   |___/                                                 ", Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 2, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Draw(@"And now complete the game on a harder difficulty!", Console.WindowWidth/2 - meslength, Console.WindowHeight/2 + 4, Painter.Instance.ColorsToAttribute(Console.BackgroundColor, Console.ForegroundColor));
-            Game.GameBuffer.Print();
         }
     }
 }

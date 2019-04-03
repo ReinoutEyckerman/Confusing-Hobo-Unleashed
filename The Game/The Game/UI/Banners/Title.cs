@@ -18,17 +18,17 @@ namespace Confusing_Hobo_Unleashed.UI
             string e = @"\____/\____/_/ /_/_/  \__,_/____/_/_/ /_/\__, /  /_/ /_/\____/_.___/\____/   \____/_/ /_/_/\___/\__,_/____/_/ /_/\___/\__,_/ ";
             string f = @"                                        /____/";
             
-            Text aText= new Text(a,position,colorPoint,null);//TODO
+            Text aText= new Text(a,null, colorPoint,null, position);//TODO
             position.setX(position.x + 1);
-            Text bText= new Text(b,position,colorPoint,aText);//TODO
+            Text bText= new Text(b,aText,colorPoint,null, position);//TODO
             position.setX(position.x + 1);
-            Text cText= new Text(c,position,colorPoint,bText);//TODO
+            Text cText= new Text(c,bText,colorPoint,null,position);//TODO
             position.setX(position.x + 1);
-            Text dText= new Text(d,position,colorPoint,cText);//TODO
+            Text dText= new Text(d,cText,colorPoint,null,position);//TODO
             position.setX(position.x + 1);
-            Text eText= new Text(e,position,colorPoint,dText);//TODO
+            Text eText= new Text(e,dText,colorPoint,null,position);//TODO
             position.setX(position.x + 1);
-            Text fText= new Text(f,position,colorPoint,eText);//TODO
+            Text fText= new Text(f,eText,colorPoint,null,position);//TODO
             
             this.title = fText;
 

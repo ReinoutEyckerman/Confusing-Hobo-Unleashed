@@ -15,7 +15,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         }
 
 
-        public Text(string text, Shape decoratedShape, Pixel pixel, Window window, Position position) : base(decoratedShape, pixel, window, position, text.Length, 1)
+        public Text(string text, Shape decoratedShape, ColorPoint colorPoint, Window window, Position position) : base(decoratedShape, new Pixel(colorPoint.GetBackgroundColor(), colorPoint.GetForegroundColor(), ' '), window, position, text.Length, 1)
         {
             this.position = position;
             this.text = text;
@@ -37,7 +37,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         {
             for (int x = 0; x < text.Length; x++)
             {
-                drawToWindow(new Position(x, 0), this.pixel);
+                drawToWindow(new Position(x, 0), new Pixel(this.pixel.GetBackgroundColor(), this.pixel.GetForegroundColor(), text[x]));
             }
         }
 
