@@ -9,7 +9,7 @@ namespace Confusing_Hobo_Unleashed.Shapes.Triangle
         {
         }
 
-        protected AbstractTriangle(Shape decoratedShape, Pixel pixel, Position position, Rectangle boundingBox, Window window) : base(decoratedShape, pixel, position, boundingBox, window)
+        protected AbstractTriangle(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
         {
         }
     }

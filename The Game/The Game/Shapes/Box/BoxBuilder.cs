@@ -6,7 +6,7 @@ namespace Confusing_Hobo_Unleashed.UI
     {
         public override Shape Build()
         {
-            Box box =  new Box(this.rootShape, this.pixel, this.position, new Rectangle(this.width, this.height), this.window);
+            Box box =  new Box(this.rootShape, this.pixel,this.window, this.position,this.width, this.height);
             box.setOrientation(orientation);
             return box;
         }

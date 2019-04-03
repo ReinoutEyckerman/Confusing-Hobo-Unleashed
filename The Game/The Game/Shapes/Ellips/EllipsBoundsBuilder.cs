@@ -6,7 +6,7 @@ namespace Confusing_Hobo_Unleashed.UI
     {
         public override Shape Build()
         {
-            EllipsBounds ellipsBounds =  new EllipsBounds(this.rootShape, this.pixel, this.position, new Rectangle(this.width, this.height), this.window);
+            EllipsBounds ellipsBounds =  new EllipsBounds(this.rootShape, this.pixel,this.window, this.position, this.width, this.height);
             ellipsBounds.setOrientation(orientation);
             return ellipsBounds;
         }

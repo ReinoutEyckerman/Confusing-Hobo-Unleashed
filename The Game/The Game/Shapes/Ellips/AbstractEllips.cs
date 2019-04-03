@@ -15,10 +15,10 @@ namespace Confusing_Hobo_Unleashed.Shapes
             double yradius = copy.yradius;
         }
 
-        public AbstractEllips(Shape decoratedShape, Pixel pixel, Position position, Rectangle boundingBox, Window window) : base(decoratedShape, pixel, position, boundingBox, window)
+        protected AbstractEllips(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
         {
-            this.xradius = (int) Math.Floor(Math.Pow(boundingBox.getWidth(), 2));
-            this.yradius = (int) Math.Floor(Math.Pow(boundingBox.getHeight(), 2));
+            this.xradius = (int) Math.Floor(Math.Pow(getWidth(), 2));
+            this.yradius = (int) Math.Floor(Math.Pow(getHeight(), 2));
         }
 
         protected bool isBorderPoint(int x, int y)

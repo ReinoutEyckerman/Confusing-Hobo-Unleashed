@@ -1,23 +1,30 @@
+using System.Collections.Generic;
+using System.Linq;
+using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI;
 
 namespace Confusing_Hobo_Unleashed
 {
-    public class Chamber:Drawable
+    public class Chamber : Drawable
     {
         private Position _position;
 
-        public bool northOpen { get;private set;  }
-        public bool eastOpen{ get; private set; }
-        public bool southOpen{ get;private set;  }
-        public bool westOpen{ get; private set; }
+        private Dictionary<Orientation, bool> directions;
 
         public Chamber(Position position)
         {
             this._position = position;
+            this.directions = new Dictionary<Orientation, bool>()
+            {
+                {Orientation.NORTH, false},
+                {Orientation.EAST, false},
+                {Orientation.SOUTH, false},
+                {Orientation.WEST, false}
+            };
         }
 
 
-        public void Draw()//TODO
+        public void Draw() //TODO
         {
             throw new System.NotImplementedException();
         }
@@ -36,15 +43,20 @@ namespace Confusing_Hobo_Unleashed
 
         public void resetWalls()
         {
-            northOpen = false;
-            eastOpen = false;
-            southOpen = false;
-            westOpen = false;
+            foreach (Orientation key in this.directions.Keys.ToList())
+            {
+                this.directions[key] = false;
+            }
         }
 
-        public void unlockWall(Position position)
+        public void unlockWall(Orientation orientation)
         {
-            
+            this.directions[orientation] = true;
+        }
+
+        public bool isCorridorUnlocked(Orientation orientation)
+        {
+            return this.directions[orientation];
         }
     }
 }

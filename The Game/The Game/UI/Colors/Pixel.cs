@@ -4,8 +4,12 @@ namespace Confusing_Hobo_Unleashed.UI.Colors
 {
     public class Pixel : ColorPoint //TODO Flyweight
     {
-        private readonly char character;
+        private char character;
 
+        public Pixel():base()
+        {
+            this.character = ' ';
+        }
         public Pixel(Pixel copy) : base(copy)
         {
             this.character = copy.character;
@@ -20,6 +24,12 @@ namespace Confusing_Hobo_Unleashed.UI.Colors
         public char getCharacter()
         {
             return character;
+        }
+
+        public Pixel add(Pixel pixel)
+        {
+            ColorPoint c = base.add(pixel);
+            return new Pixel(c.GetBackgroundColor(), c.GetForegroundColor(), pixel.character);
         }
     }
 }

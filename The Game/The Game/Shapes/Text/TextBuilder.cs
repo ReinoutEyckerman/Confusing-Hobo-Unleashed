@@ -20,7 +20,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         
         public override Shape Build()
         {
-            Text textString =  new Text(text,this.rootShape, this.pixel, this.position, this.window);
+            Text textString =  new Text(text,this.rootShape, this.pixel, this.window,this.position);
             textString.setOrientation(this.orientation);
             return textString;
         }

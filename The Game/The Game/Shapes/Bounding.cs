@@ -7,13 +7,13 @@ using Confusing_Hobo_Unleashed.Shapes;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public class Rectangle
+    public class Bounding
     {
-        private Position position;
-        private int width;
-        private int height;
+        protected Position position;
+        protected int width;
+        protected int height;
 
-        public Rectangle(Rectangle copy)
+        public Bounding(Bounding copy)
         {
             if (copy.position != null)
             {
@@ -24,14 +24,14 @@ namespace Confusing_Hobo_Unleashed.UI
             this.height = copy.height;
         }
 
-        public Rectangle(Position position, int width, int height)
+        public Bounding(Position position, int width, int height)
         {
             this.position = position;
             this.width = width;
             this.height = height;
         }
 
-        public Rectangle(int width, int height)
+        public Bounding(int width, int height)
         {
             this.position = null;
             this.width = width;
@@ -66,6 +66,31 @@ namespace Confusing_Hobo_Unleashed.UI
         public int getHeight()
         {
             return height;
+        }
+
+        public bool isPointInside(Position position)
+        {
+            if (position.x < this.position.x)
+            {
+                return false;
+            }
+
+            if (position.y < this.position.y)
+            {
+                return false;
+            }
+
+            if (position.x > this.position.x + this.width)
+            {
+                return false;
+            }
+
+            if (position.y > this.position.y + this.height)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

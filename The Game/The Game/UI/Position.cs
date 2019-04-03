@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Confusing_Hobo_Unleashed.Shapes;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
@@ -47,8 +48,50 @@ namespace Confusing_Hobo_Unleashed.UI
         {
             int x = this.x + position.x;
             int y = this.y + position.y;
-            return new Position(x,y);
-            
+            return new Position(x, y);
+        }
+
+        public Position substract(Position position)
+        {
+            int x = this.x - position.x;
+            int y = this.y - position.y;
+            return new Position(x, y);
+        }
+
+        public static Position getMinPosition(Position a, Position b)
+        {
+            return new Position(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
+        }
+
+        public static Position getMaxPosition(Position a, Position b)
+        {
+            return new Position(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
+        }
+
+        public Orientation orientationTo(Position position)
+        {
+            if (Math.Abs(x - position.x) > Math.Abs(y - position.y))
+            {
+                if (x < position.x)
+                {
+                    return Orientation.EAST;
+                }
+                else
+                {
+                    return Orientation.WEST;
+                }
+            }
+            else
+            {
+                if (y < position.y)
+                {
+                    return Orientation.SOUTH;
+                }
+                else
+                {
+                    return Orientation.NORTH;
+                }
+            }
         }
     }
 }

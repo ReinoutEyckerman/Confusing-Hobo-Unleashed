@@ -14,60 +14,60 @@ namespace Confusing_Hobo_Unleashed
 
             Position topleft = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.25));
             Position bottomright = new Position(window.getWidthPosFromPercentage(0.5), window.getHeightPosFromPercentage(0.35));
-            Rectangle rectangle = new Rectangle(topleft, bottomright);
-            window.DrawRectangle(rectangle, color);
+            Bounding bounding = new Bounding(topleft, bottomright);
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.625));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.75));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.625));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.75));
+            window.DrawRectangle(bounding, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.15), window.getHeightPosFromPercentage(0.35));
             bottomright = new Position(window.getWidthPosFromPercentage(0.35), window.getHeightPosFromPercentage(0.45));
-            rectangle = new Rectangle(topleft, bottomright);
-            window.DrawRectangle(rectangle, color);
+            bounding = new Bounding(topleft, bottomright);
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.4));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.6));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.4));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.6));
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.525));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.725));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.525));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.725));
+            window.DrawRectangle(bounding, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.05), window.getHeightPosFromPercentage(0.45));
             bottomright = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.55));
-            rectangle = new Rectangle(topleft, bottomright);
-            window.DrawRectangle(rectangle, color);
+            bounding = new Bounding(topleft, bottomright);
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.5));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.625));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.5));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.625));
+            window.DrawRectangle(bounding, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.15), window.getHeightPosFromPercentage(0.55));
             bottomright = new Position(window.getWidthPosFromPercentage(0.35), window.getHeightPosFromPercentage(0.65));
-            rectangle = new Rectangle(topleft, bottomright);
-            window.DrawRectangle(rectangle, color);
+            bounding = new Bounding(topleft, bottomright);
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.4));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.6));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.4));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.6));
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.525));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.725));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.525));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.725));
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.425));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.625));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.425));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.625));
+            window.DrawRectangle(bounding, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.65));
             bottomright = new Position(window.getWidthPosFromPercentage(0.5), window.getHeightPosFromPercentage(0.75));
-            rectangle = new Rectangle(topleft, bottomright);
-            window.DrawRectangle(rectangle, color);
+            bounding = new Bounding(topleft, bottomright);
+            window.DrawRectangle(bounding, color);
 
-            rectangle.setTopX(window.getWidthPosFromPercentage(0.625));
-            rectangle.setBottomX(window.getWidthPosFromPercentage(0.55));
-            window.DrawRectangle(rectangle, color);
+            bounding.setTopX(window.getWidthPosFromPercentage(0.625));
+            bounding.setBottomX(window.getWidthPosFromPercentage(0.55));
+            window.DrawRectangle(bounding, color);
 
             BaseColor BackgroundColor = BaseColor.Black;
             BaseColor ForegroundColor = BaseColor.White;

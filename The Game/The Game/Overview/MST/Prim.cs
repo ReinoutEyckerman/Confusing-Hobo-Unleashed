@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI;
 
 namespace Confusing_Hobo_Unleashed.MST
@@ -23,8 +24,10 @@ namespace Confusing_Hobo_Unleashed.MST
                 int wallIndex = random.Next(walls.Count);
                 Wall randomWall = walls[wallIndex];
                 walls.Remove(randomWall);
-                if (!(randomWall.getChamber1().IsDiscovered && randomWall.getChamber2().IsDiscovered))
+                if (!randomWall.isChamberDiscovered())
                 {
+                    randomWall.deleteWall();
+                    walls.AddRange(getNeighbors(randomWall.getUndiscoveredChamber(), chambers));
                 }
             }
         }
@@ -35,22 +38,22 @@ namespace Confusing_Hobo_Unleashed.MST
             chamber.setDiscovered();
             int x = chamber.getPosition().x;
             int y = chamber.getPosition().y;
-            if (x > 0 && !chamber.northOpen)
+            if (x > 0 && !chamber.isCorridorUnlocked(Orientation.NORTH))
             {
                 walls.Add(new Wall(chamber, chambers[x - 1, y]));
             }
 
-            if (x < chambers.GetLength(0) - 1 && !chamber.southOpen)
+            if (x < chambers.GetLength(0) - 1 && !chamber.isCorridorUnlocked(Orientation.SOUTH))
             {
                 walls.Add(new Wall(chamber, chambers[x + 1, y]));
             }
 
-            if (y > 0 && !chamber.westOpen)
+            if (y > 0 && !chamber.isCorridorUnlocked(Orientation.WEST))
             {
                 walls.Add(new Wall(chamber, chambers[x, y - 1]));
             }
 
-            if (y < chambers.GetLength(1) - 1 && !chamber.eastOpen)
+            if (y < chambers.GetLength(1) - 1 && !chamber.isCorridorUnlocked(Orientation.EAST))
             {
                 walls.Add(new Wall(chamber, chambers[x, y + 1]));
             }

@@ -14,14 +14,14 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
             this.text = copy.text;
         }
 
-        public Text(string text,  Shape decoratedShape, Pixel pixel, Position position, Window window) : base(
-            decoratedShape,pixel, position, new Rectangle(position, text.Length, 1), window)
+
+        public Text(string text, Shape decoratedShape, Pixel pixel, Window window, Position position) : base(decoratedShape, pixel, window, position, text.Length, 1)
         {
             this.position = position;
             this.text = text;
         }
 
-        public void centerText(Rectangle bounds) //TODO
+        public void centerText(Bounding bounds) //TODO
         {
             if (bounds.getWidth() < text.Length)
             {

@@ -14,18 +14,18 @@ namespace Confusing_Hobo_Unleashed.Shapes
         {
         }
 
-        public Ellips(Shape decoratedShape, Pixel pixel, Position position, Rectangle boundingBox,
-            Window window) : base(decoratedShape, pixel, position, boundingBox, window)
+
+        public Ellips(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
         {
         }
 
         public override void Draw()
         {
             base.Draw();
-            Position center = boundingBox.getGeometricCenter();
-            for (int x = 0; x < boundingBox.getWidth(); x++)
+            Position center = getGeometricCenter();
+            for (int x = 0; x < getWidth(); x++)
             {
-                for (int y = 0; y < boundingBox.getHeight(); y++)
+                for (int y = 0; y < getHeight(); y++)
                 {
                     if (isPointInEllips(x, y))
                     {

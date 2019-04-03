@@ -28,7 +28,8 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.fireRandomizer = new Random();
             
         }
-        public Fire(Shape decoratedShape, Position position, Rectangle boundingBox, Pixel outerFire, Pixel middleFire, Pixel coreFire) : base(decoratedShape, position, boundingBox)
+        
+        public Fire(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
         {
             this.outerFire = outerFire;
             this.middleFire = middleFire;

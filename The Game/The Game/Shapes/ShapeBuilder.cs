@@ -33,8 +33,8 @@ namespace Confusing_Hobo_Unleashed.Shapes
                 return;
             }
 
-            this.width = this.rootShape.getBoundingBox().getWidth();
-            this.height = this.rootShape.getBoundingBox().getHeight();
+            this.width = this.rootShape.getWidth();
+            this.height = this.rootShape.getHeight();
             this.position = this.rootShape.getPosition();
             this.pixel = this.rootShape.getPixel();
             this.orientation = this.rootShape.getOrientation();

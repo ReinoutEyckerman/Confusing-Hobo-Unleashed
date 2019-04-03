@@ -1,3 +1,5 @@
+using Confusing_Hobo_Unleashed.Shapes;
+
 namespace Confusing_Hobo_Unleashed
 {
     public class Wall
@@ -19,6 +21,35 @@ namespace Confusing_Hobo_Unleashed
         public Chamber getChamber2()
         {
             return chamber2;
+        }
+
+        public bool isChamberDiscovered()
+        {
+            return this.chamber1.IsDiscovered != this.chamber2.IsDiscovered;
+        }
+
+        public void deleteWall()
+        {
+            Orientation firstOrientation = this.chamber1.getPosition().orientationTo(this.chamber2.getPosition());
+            this.chamber1.unlockWall(firstOrientation);
+            Orientation secondOrientation = this.chamber2.getPosition().orientationTo(this.chamber1.getPosition());
+            this.chamber2.unlockWall(firstOrientation);
+        }
+
+        public Chamber getUndiscoveredChamber()
+        {
+            if (!this.chamber1.IsDiscovered)
+            {
+                return this.chamber1;
+            }
+            else if (!this.chamber2.IsDiscovered)
+            {
+                return this.chamber2;
+            }
+            else
+            {
+                return null;//TODO
+            }
         }
     }
 }
