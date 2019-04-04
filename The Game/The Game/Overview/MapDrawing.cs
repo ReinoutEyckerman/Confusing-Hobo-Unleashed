@@ -162,6 +162,6 @@ namespace Confusing_Hobo_Unleashed
         public static int HorizontalBlockLength = 11;
         public static int VerticalBlockLength = 7;
         public static int Xposmin = (Console.WindowWidth - ((HorizontalBlockLength + 2)*MapGeneration.RoomsHorizontal))/2;
-        public static int Yposmin = (Game.CurrentLoadedMap.Mapheight - (VerticalBlockLength + 2)*MapGeneration.RoomsVertical)/2;
+        public static int Yposmin = (MainGame.CurrentLoadedMap.Mapheight - (VerticalBlockLength + 2)*MapGeneration.RoomsVertical)/2;
     }
 }

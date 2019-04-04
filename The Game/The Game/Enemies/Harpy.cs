@@ -81,7 +81,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public override void SelectTarget()
         {
-            Target = Game.Players[Random.Next(Game.Players.Count)];
+            Target = MainGame.Players[Random.Next(MainGame.Players.Count)];
         }
 
         public override void Special()

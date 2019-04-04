@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.UIElements;
@@ -11,13 +12,13 @@ namespace Confusing_Hobo_Unleashed.UI
     {
         private TriggerHandler triggerHandler;
 
-        public Button(TriggerEventHandler triggerEventHandler,Shape shape):base(shape)
+        public Button(TriggerEventHandler triggerEventHandler, Image image) : base(image)
         {
             this.triggerHandler = new TriggerHandler();
             triggerHandler.addTrigger(triggerEventHandler);
         }
 
-        public bool Value { get; set; }
+        private bool Value { get; set; }
         public List<int> VarChanger { get; set; }
 
         public void ChangeValue()

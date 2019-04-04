@@ -94,7 +94,7 @@ namespace Confusing_Hobo_Unleashed.User
                     direction = 3*100 + direction%100;
             }
             direction += Speed;
-            Game.Bullets.Add(new BulletCore(_bulletColor, _bulletChar, (short) Damage, direction, (short) x, (short) y));
+            MainGame.Bullets.Add(new BulletCore(_bulletColor, _bulletChar, (short) Damage, direction, (short) x, (short) y));
         }
     }
 }

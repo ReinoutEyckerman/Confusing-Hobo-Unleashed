@@ -4,7 +4,7 @@ using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    public abstract class Shape :Bounding, Drawable
+    public abstract class Shape :Bounding
     {
         private Window window;
         protected Pixel pixel;
@@ -32,19 +32,13 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return this.orientation;
         }
 
-        public abstract void Draw();
+        public abstract Image toImage();
 
         public abstract Shape Clone();
 
         public void setOrientation(Orientation orientation)
         {
             this.orientation = orientation;
-        }
-
-        protected void drawToWindow(Position position, Pixel pixel)
-        {
-            position = OrientationTransformation.transform(this.position, getWidth(),getHeight(), orientation);
-            window.Draw(position.add(this.position), pixel);
         }
     }
 }

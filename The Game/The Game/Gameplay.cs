@@ -11,11 +11,11 @@ namespace Confusing_Hobo_Unleashed
 
         public static void Push()
         {
-            foreach (var layer in Game.CurrentLoadedMap.Layers)
+            foreach (var layer in MainGame.CurrentLoadedMap.Layers)
             {
-                Game.CurrentLoadedMap.PushtoArray(layer.Value.Background, layer.Value.Foreground, layer.Value.Colors);
+                MainGame.CurrentLoadedMap.PushtoArray(layer.Value.Background, layer.Value.Foreground, layer.Value.Colors);
             }
-            Array.Copy(Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Mapheight*Console.WindowWidth);
+            Array.Copy(MainGame.CurrentLoadedMap.Collision, MainGame.CurrentLoadedMap.CollisionBackUp, MainGame.CurrentLoadedMap.Mapheight*Console.WindowWidth);
         }
 
         private static void Enemies()
@@ -27,26 +27,26 @@ namespace Confusing_Hobo_Unleashed
                 switch (number)
                 {
                     case 0:
-                        Game.Entities.Add(new Zerg(Game.CurrentLoadedMap));
+                        MainGame.Entities.Add(new Zerg(MainGame.CurrentLoadedMap));
                         break;
                     case 1:
-                        Game.Entities.Add(new Harpy(Game.CurrentLoadedMap));
+                        MainGame.Entities.Add(new Harpy(MainGame.CurrentLoadedMap));
                         break;
                     case 2:
-                        Game.Entities.Add(new Necromancer(Game.CurrentLoadedMap));
+                        MainGame.Entities.Add(new Necromancer(MainGame.CurrentLoadedMap));
                         break;
                     case 3:
-                        Game.Entities.Add(new Roflcopter(Game.CurrentLoadedMap));
+                        MainGame.Entities.Add(new Roflcopter(MainGame.CurrentLoadedMap));
                         break;
                 }
             }
-            foreach (var player in Game.Players)
+            foreach (var player in MainGame.Players)
             {
                 if (player.HpTotal != null) player.HpCurrent = (int) player.HpTotal;
-                player.Map = Game.CurrentLoadedMap;
+                player.Map = MainGame.CurrentLoadedMap;
             }
-            Game.FillEntities();
-            foreach (var entity in Game.Entities)
+            MainGame.FillEntities();
+            foreach (var entity in MainGame.Entities)
             {
                 entity.SetSpawn();
             }
@@ -55,9 +55,7 @@ namespace Confusing_Hobo_Unleashed
         public static void EnableTerrain()
         {
             Push();
-            Game.Entities = new List<AiCore>();
             Enemies();
-            Game.GameLoop();
             RoomsVisited++;
             MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] = true;
             Console.Clear();

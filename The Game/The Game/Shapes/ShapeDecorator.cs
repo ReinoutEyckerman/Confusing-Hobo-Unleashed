@@ -1,4 +1,5 @@
-﻿using Confusing_Hobo_Unleashed.UI;
+﻿using System.Net.Mime;
+using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.Shapes
@@ -17,9 +18,9 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.decoratedShape = decoratedShape;
         }
 
-        public override void Draw()
+        public override Image toImage()
         {
-            decoratedShape.Draw();
+            return decoratedShape.toImage();
         }
     }
 }

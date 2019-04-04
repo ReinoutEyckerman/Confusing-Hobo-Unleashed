@@ -11,8 +11,8 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         {
             Shape box = createDefaultBox(position);
             Shape bounds = createDefaultBoxBounds(position, box);
-            Shape textShape = createDefaultText(text, position, box);
-            return new Button(triggerEventHandler, textShape);
+            Shape textShape = createDefaultText(text, position, bounds);
+            return new Button(triggerEventHandler, textShape.toImage());
         }
 
         public static Shape createDefaultBox(Position position, Shape rootShape = null)

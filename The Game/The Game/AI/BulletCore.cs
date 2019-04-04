@@ -65,7 +65,7 @@ namespace Confusing_Hobo_Unleashed.AI
                     {
                         if (X + x*tempDirection >= map.Mapwidth || X + x*tempDirection < 0)
                             return true;
-                        foreach (var entity in Game.Entities)
+                        foreach (var entity in MainGame.Entities)
                         {
                             if (entity.X == X + x*tempDirection && entity.Y == Y)
                             {
@@ -103,7 +103,7 @@ namespace Confusing_Hobo_Unleashed.AI
                     {
                         if (Y + y*tempDirection/2 >= map.Mapheight || Y + y*tempDirection/2 < 0)
                             return true;
-                        foreach (var entity in Game.Entities)
+                        foreach (var entity in MainGame.Entities)
                         {
                             if (entity.X == X && entity.Y == Y + y*tempDirection/2)
                             {

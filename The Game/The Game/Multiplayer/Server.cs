@@ -27,16 +27,16 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             Console.WriteLine("Server Started");
             Console.WriteLine("Map Height : " + Console.WindowHeight);
             Console.WriteLine("Map Width : " + Console.WindowWidth);
-            Game.Players = new List<Player>();
+            MainGame.Players = new List<Player>();
             var time = DateTime.Now;
             var timetopass = new TimeSpan(0, 0, 0, 0, 30);
 
             //CODE DIFFERENT FROM EXAMPLE
             Console.WriteLine("Generating map.");
-            Game.CurrentLoadedMap = new CustomMap(Game.CurrentLoadedMap.Mapheight, Console.WindowWidth, false);
+            MainGame.CurrentLoadedMap = new CustomMap(MainGame.CurrentLoadedMap.Mapheight, Console.WindowWidth, false);
             //TODO:LandTerrain.Redirect(Game.CurrentLoadedMap, 1);
             Gameplay.Push();
-            Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
+            Array.Copy(MainGame.CurrentLoadedMap.CollisionBackUp, MainGame.CurrentLoadedMap.Collision, MainGame.CurrentLoadedMap.Mapheight*MainGame.CurrentLoadedMap.Mapwidth);
             Console.WriteLine("Map generated");
             //
 
@@ -53,30 +53,30 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                             {
                                 Console.WriteLine("Incoming LOGIN");
                                 inc.SenderConnection.Approve();
-                                var player = new Player(Game.CurrentLoadedMap) {Connection = inc.SenderConnection};
+                                var player = new Player(MainGame.CurrentLoadedMap) {Connection = inc.SenderConnection};
                                 LidgrenAdaptions.DecompileCore(inc, player);
-                                Game.Players.Add(player);
+                                MainGame.Players.Add(player);
                                 Console.WriteLine("Player data processed, Player joined the game. \nConnection details are : " + player.Connection);
-                                Game.Entities.Clear();
-                                Game.FillEntities();
+                                MainGame.Entities.Clear();
+                                MainGame.FillEntities();
                                 NetOutgoingMessage outmsg;
-                                for (short i = 0; i < Game.Players.Count - 1; i++)
+                                for (short i = 0; i < MainGame.Players.Count - 1; i++)
                                 {
                                     outmsg = _server.CreateMessage();
                                     outmsg.Write((byte) PacketTypes.Newplayer);
                                     outmsg.Write((byte) i);
                                     LidgrenAdaptions.CompileCore(outmsg, player);
-                                    _server.SendMessage(outmsg, Game.Players[i].Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                                    _server.SendMessage(outmsg, MainGame.Players[i].Connection, NetDeliveryMethod.ReliableOrdered, 0);
                                 }
                                 outmsg = _server.CreateMessage();
                                 outmsg.Write((byte) PacketTypes.Worldstate);
                                 //WRITING MAP
-                                outmsg.Write((short) Game.CurrentLoadedMap.Mapheight);
-                                outmsg.Write((short) Game.CurrentLoadedMap.Mapwidth);
-                                LidgrenAdaptions.OneSendList(outmsg, Game.CurrentLoadedMap);
+                                outmsg.Write((short) MainGame.CurrentLoadedMap.Mapheight);
+                                outmsg.Write((short) MainGame.CurrentLoadedMap.Mapwidth);
+                                LidgrenAdaptions.OneSendList(outmsg, MainGame.CurrentLoadedMap);
                                 //
-                                outmsg.Write(Convert.ToInt16(Game.Players.Count - 1));
-                                foreach (var ch in Game.Players)
+                                outmsg.Write(Convert.ToInt16(MainGame.Players.Count - 1));
+                                foreach (var ch in MainGame.Players)
                                 {
                                     LidgrenAdaptions.CompileCore(outmsg, ch);
                                 }
@@ -90,10 +90,10 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                             if (packetType == (byte) PacketTypes.Input)
                             {
                                 var playerNum = inc.ReadByte();
-                                Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
-                                for (var j = 0; j < Game.Entities.Count; j++)
+                                Array.Copy(MainGame.CurrentLoadedMap.CollisionBackUp, MainGame.CurrentLoadedMap.Collision, MainGame.CurrentLoadedMap.Mapheight*MainGame.CurrentLoadedMap.Mapwidth);
+                                for (var j = 0; j < MainGame.Entities.Count; j++)
                                     if (playerNum != j)
-                                        Game.CurrentLoadedMap.Collision[Game.Entities[j].Y, Game.Entities[j].X] = true;
+                                        MainGame.CurrentLoadedMap.Collision[MainGame.Entities[j].Y, MainGame.Entities[j].X] = true;
                                 int k;
                                 do
                                 {
@@ -120,11 +120,11 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                             if (inc.SenderConnection.Status == NetConnectionStatus.Disconnected || inc.SenderConnection.Status == NetConnectionStatus.Disconnecting)
                             {
                                 // Find disconnected character and remove it
-                                foreach (var cha in Game.Players)
+                                foreach (var cha in MainGame.Players)
                                 {
                                     if (cha.Connection == inc.SenderConnection)
                                     {
-                                        Game.Players.Remove(cha);
+                                        MainGame.Players.Remove(cha);
                                         break;
                                     }
                                 }
@@ -140,12 +140,12 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                     if (_server.ConnectionsCount != 0)
                     {
                         //CALCULATING 
-                        Array.Copy(Game.CurrentLoadedMap.CollisionBackUp, Game.CurrentLoadedMap.Collision, Game.CurrentLoadedMap.Mapheight*Game.CurrentLoadedMap.Mapwidth);
-                        foreach (var bullet in Game.Bullets)
+                        Array.Copy(MainGame.CurrentLoadedMap.CollisionBackUp, MainGame.CurrentLoadedMap.Collision, MainGame.CurrentLoadedMap.Mapheight*MainGame.CurrentLoadedMap.Mapwidth);
+                        foreach (var bullet in MainGame.Bullets)
                         {
                             bullet.Rendered = true;
                         }
-                        Game.UpdateGame();
+                        MainGame.UpdateGame();
                         //
                         var outmsg = SendData();
                         _server.SendMessage(outmsg, _server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
@@ -162,11 +162,11 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             _count++;
             var outmsg = _server.CreateMessage();
             outmsg.Write((byte) PacketTypes.Worldstate2);
-            outmsg.Write((short) Game.Players.Count);
-            foreach (var ch2 in Game.Players)
+            outmsg.Write((short) MainGame.Players.Count);
+            foreach (var ch2 in MainGame.Players)
                 LidgrenAdaptions.CompileCore(outmsg, ch2);
-            outmsg.Write((short) Game.Bullets.Count);
-            foreach (var bullet in Game.Bullets)
+            outmsg.Write((short) MainGame.Bullets.Count);
+            foreach (var bullet in MainGame.Bullets)
                 LidgrenAdaptions.CompileBullet(outmsg, bullet);
 
             if (_count == 300 || Change)

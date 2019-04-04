@@ -50,18 +50,18 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             var outmsg = _client.CreateMessage();
             _client.Start();
             outmsg.Write((byte) PacketTypes.Login);
-            var user = new Player(Game.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], Painter.Instance.Paint(ConsoleColor.Black), Painter.Instance.Paint(ConsoleColor.White, true));
+            var user = new Player(MainGame.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], Painter.Instance.Paint(ConsoleColor.Black), Painter.Instance.Paint(ConsoleColor.White, true));
             LidgrenAdaptions.CompileCore(outmsg, user);
             _client.Connect(hostip, 22401, outmsg);
             Console.WriteLine("Client Started");
-            Game.Players = new List<Player>();
+            MainGame.Players = new List<Player>();
             _update = new Timer(50);
             _update.Elapsed += update_Elapsed;
             WaitForStartingInfo();
             _update.Start();
             while (true)
             {
-                Game.Render();
+                MainGame.Render();
                 GetInput();
             }
         }
@@ -88,7 +88,7 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                 //READING MAP
                                 int mapheight = inc.ReadInt16();
                                 int mapwidth = inc.ReadInt16();
-                                Game.CurrentLoadedMap = new CustomMap(mapheight, mapwidth, false);
+                                MainGame.CurrentLoadedMap = new CustomMap(mapheight, mapwidth, false);
                                 LidgrenAdaptions.OneReadList(inc);
                                 //
                                 PlayerNumber = inc.ReadInt16();
@@ -96,13 +96,13 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                 for (var i = 0; i < count; i++)
                                 {
                                     // Create new character to hold the data
-                                    var ch = new Player(Game.CurrentLoadedMap);
+                                    var ch = new Player(MainGame.CurrentLoadedMap);
                                     // Read all properties ( Server writes characters all props, so now we can read em here. Easy )
                                     LidgrenAdaptions.DecompileCore(inc, ch);
                                     // Add it to list
-                                    Game.Players.Add(ch);
+                                    MainGame.Players.Add(ch);
                                 }
-                                Game.FillEntities();
+                                MainGame.FillEntities();
                                 canStart = true;
                             }
                             break;
@@ -128,15 +128,15 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                         var count = inc.ReadInt16();
                         for (var i = 0; i < count; i++)
                         {
-                            LidgrenAdaptions.DecompileCore(inc, Game.Players[i]);
+                            LidgrenAdaptions.DecompileCore(inc, MainGame.Players[i]);
                         }
                         count = inc.ReadInt16();
-                        Game.Bullets = new List<BulletCore>();
+                        MainGame.Bullets = new List<BulletCore>();
                         for (var i = 0; i < count; i++)
                         {
                             var bullet = new BulletCore();
                             LidgrenAdaptions.DeCompileBullet(inc, bullet);
-                            Game.Bullets.Add(bullet);
+                            MainGame.Bullets.Add(bullet);
                         }
                         var change = inc.ReadBoolean();
                         if (change)
@@ -145,10 +145,10 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                     else if (packet == (byte) PacketTypes.Newplayer)
                     {
                         PlayerNumber = inc.ReadByte();
-                        Game.Players.Add(new Player(Game.CurrentLoadedMap));
-                        Game.Entities.Clear();
-                        Game.FillEntities();
-                        LidgrenAdaptions.DecompileCore(inc, Game.Players[Game.Players.Count - 1]);
+                        MainGame.Players.Add(new Player(MainGame.CurrentLoadedMap));
+                        MainGame.Entities.Clear();
+                        MainGame.FillEntities();
+                        LidgrenAdaptions.DecompileCore(inc, MainGame.Players[MainGame.Players.Count - 1]);
                     }
                 }
             }

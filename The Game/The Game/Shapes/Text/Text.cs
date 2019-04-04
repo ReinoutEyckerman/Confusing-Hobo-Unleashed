@@ -33,12 +33,14 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
             this.position = new Position(x, y);
         }
 
-        public override void Draw()
+        public override Image toImage()
         {
+            Pixel[,] grid = new Pixel[this.getWidth(),this.getHeight()];
             for (int x = 0; x < text.Length; x++)
             {
-                drawToWindow(new Position(x, 0), new Pixel(this.pixel.GetBackgroundColor(), this.pixel.GetForegroundColor(), text[x]));
+                grid[x,0] = new Pixel(this.pixel.GetBackgroundColor(), this.pixel.GetForegroundColor(), text[x]);
             }
+            return base.toImage().addTopLayer(new Image(grid,this.position));
         }
 
         public override Shape Clone()

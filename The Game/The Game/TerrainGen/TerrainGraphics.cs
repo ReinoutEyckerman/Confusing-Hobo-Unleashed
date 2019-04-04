@@ -190,7 +190,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                     {
                         moonattribute[i + _moonX, j + moonY] = Painter.Instance.ColorsToAttribute(mooncolor[i, j], mooncolor[i, j]);
                         var charToString = Convert.ToString(' ');
-                        Game.GameBuffer.Draw(charToString, i + _moonX, j + moonY, moonattribute[i + _moonX, j + moonY]);
+                        MainGame.GameBuffer.Draw(charToString, i + _moonX, j + moonY, moonattribute[i + _moonX, j + moonY]);
                     }
         }
 
@@ -399,7 +399,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
                 for (var j = 0; j < copterArray.GetLength(0); j++)
                     if (copterArray[j, i] != ' ')
                         if (_xCopter + i < map.Mapwidth && _xCopter + i >= 0)
-                            Game.GameBuffer.Draw(Convert.ToString(copterArray[j, i]), _xCopter + i, 5 + j, 0);
+                            MainGame.GameBuffer.Draw(Convert.ToString(copterArray[j, i]), _xCopter + i, 5 + j, 0);
         }
     }
 }

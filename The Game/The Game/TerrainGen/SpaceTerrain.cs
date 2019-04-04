@@ -13,13 +13,13 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         {
             for (var xwall = 0; xwall < Console.WindowWidth; xwall++)
             {
-                for (var ywall = 0; ywall <= Game.CurrentLoadedMap.Mapheight - 1; ywall++)
+                for (var ywall = 0; ywall <= MainGame.CurrentLoadedMap.Mapheight - 1; ywall++)
                 {
                     if (Random.Next(12) == 7)
                     {
-                        Game.CurrentLoadedMap.Layers[Maplayers.Collision].Background[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.DarkRed);
-                        Game.CurrentLoadedMap.Collision[ywall, xwall] = true;
-                        Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ywall, xwall] = ' ';
+                        MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Background[ywall, xwall] = Painter.Instance.Paint(ConsoleColor.DarkRed);
+                        MainGame.CurrentLoadedMap.Collision[ywall, xwall] = true;
+                        MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ywall, xwall] = ' ';
                     }
                 }
             }

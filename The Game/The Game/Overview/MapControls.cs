@@ -12,13 +12,13 @@ namespace Confusing_Hobo_Unleashed
         {
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Black);
             Console.Clear();
-            Game.CurrentLoadedMap = new CustomMap(Console.WindowHeight, Console.WindowWidth, false);
-            TerrainSelection.Redirect(Game.CurrentLoadedMap, 202, false);
+            MainGame.CurrentLoadedMap = new CustomMap(Console.WindowHeight, Console.WindowWidth, false);
+            TerrainSelection.Redirect(MainGame.CurrentLoadedMap, 202, false);
             Gameplay.Push();
-            Game.CurrentLoadedMap.Layers[Maplayers.Air].LayerToBuffer(Game.GameBuffer);
-            Game.CurrentLoadedMap.Layers[Maplayers.Collision].LayerToBuffer(Game.GameBuffer);
-            Game.CurrentLoadedMap.Layers[Maplayers.Destructible].LayerToBuffer(Game.GameBuffer);
-            Game.GameBuffer.Print();
+            MainGame.CurrentLoadedMap.Layers[Maplayers.Air].LayerToBuffer(MainGame.GameBuffer);
+            MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].LayerToBuffer(MainGame.GameBuffer);
+            MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].LayerToBuffer(MainGame.GameBuffer);
+            MainGame.GameBuffer.Print();
             Endgame.PlayMusic();
             DrawMapBg();
             MoveUser();
@@ -113,12 +113,12 @@ namespace Confusing_Hobo_Unleashed
                     switch (input)
                     {
                         case Buttons.A:
-                            Game.CurrentLoadedMap = new CustomMap(Console.WindowHeight - 10, Console.WindowWidth, false);
+                            MainGame.CurrentLoadedMap = new CustomMap(Console.WindowHeight - 10, Console.WindowWidth, false);
 
                             Console.Clear();
-                            Game.GameBuffer.Clear();
+                            MainGame.GameBuffer.Clear();
                             corBut = true;
-                            TerrainSelection.Redirect(Game.CurrentLoadedMap, MapGeneration.Terrains[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]);
+                            TerrainSelection.Redirect(MainGame.CurrentLoadedMap, MapGeneration.Terrains[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent]);
                             Gameplay.EnableTerrain();
                             MapDrawing.RoomFound[MapDrawing.Xposcurrent, MapDrawing.Yposcurrent] = true;
                             DrawMap();

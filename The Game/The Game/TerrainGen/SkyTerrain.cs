@@ -36,18 +36,18 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         public static void RandomIslands(CustomMap map, bool invert)
         {
             var detach = 0;
-            for (var y = 8; y < Game.CurrentLoadedMap.Mapheight; y++)
+            for (var y = 8; y < MainGame.CurrentLoadedMap.Mapheight; y++)
             {
                 var xend = 0;
                 if (y >= detach + 3)
-                    for (var x = -10; x < Game.CurrentLoadedMap.Mapwidth; x += 3)
+                    for (var x = -10; x < MainGame.CurrentLoadedMap.Mapwidth; x += 3)
                     {
                         if (Random.Next(20) == 0 && x > xend + 5)
                         {
-                            var d = y + Random.Next(6, Game.CurrentLoadedMap.Mapheight/5);
+                            var d = y + Random.Next(6, MainGame.CurrentLoadedMap.Mapheight/5);
                             if (d > detach)
                                 detach = d;
-                            xend = x + Random.Next(Game.CurrentLoadedMap.Mapwidth/6, Game.CurrentLoadedMap.Mapwidth/3);
+                            xend = x + Random.Next(MainGame.CurrentLoadedMap.Mapwidth/6, MainGame.CurrentLoadedMap.Mapwidth/3);
                             var horizontalCutoff = Random.Next(7);
                             if (x - ((xend - horizontalCutoff - x)/6 + x) == 0)
                                 break;

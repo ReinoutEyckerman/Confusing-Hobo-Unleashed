@@ -10,11 +10,11 @@ namespace Confusing_Hobo_Unleashed.UI
 {
     internal class VerticalList : AbstractList
     {
-        public VerticalList( CircularList<UIObject> items, Shape shape): base(items,shape)
+        public VerticalList(CircularList<UIObject> items, Image image) : base(items, image)
         {
         }
 
-        public VerticalList(CircularList<UIObject> items, Shape activeShape, Shape inactiveShape): base(items,activeShape,inactiveShape)
+        public VerticalList(CircularList<UIObject> items, Image activeImage, Image inactiveImage) : base(items, activeImage, inactiveImage)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Confusing_Hobo_Unleashed.UI
 
         public override void HandleAction(Input action)
         {
-            if (isActive)
+            if (this.isActive)
             {
                 HandleActiveAction(action);
             }
@@ -43,14 +43,14 @@ namespace Confusing_Hobo_Unleashed.UI
                     this.isActive = false;
                     break;
                 case Input.UP:
-                     items.decrement();
-                     break;
+                    items.decrement();
+                    break;
                 case Input.DOWN:
-                     items.increment();
-                     break;
+                    items.increment();
+                    break;
                 default:
-                     items.currentItem().HandleAction(action);
-                     break;
+                    items.currentItem().HandleAction(action);
+                    break;
             }
         }
 

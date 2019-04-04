@@ -76,6 +76,12 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return this;
         }
 
+        public ShapeBuilder setPositionPercentageOfScreen(double x, double y)
+        {
+            this.position = new Position(this.window.getWidthPosFromPercentage(x), this.window.getHeightPosFromPercentage(y));
+            return this;
+        }
+
         public ShapeBuilder setPositionRelative(Position position, Shape shape)
         {
             this.position = position.add(shape.getPosition());

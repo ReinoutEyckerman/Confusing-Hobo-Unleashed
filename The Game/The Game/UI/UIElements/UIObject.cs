@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Confusing_Hobo_Unleashed.Shapes;
@@ -8,22 +9,22 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
-
     public abstract class UIObject : Drawable
     {
         protected bool isActive;
-        private Shape activeShape;
-        protected Shape inactiveShape;
+        private Image activeImage;
+        protected Image inactiveImage;
 
 
-        protected UIObject(Shape shape):this(shape,shape)
+        protected UIObject(Image image) : this(image, image)
         {
         }
-        
-        protected UIObject(Shape  activeShape, Shape inactiveShape)
+
+
+        protected UIObject(Image activeImage, Image inactiveImage)
         {
-            this.activeShape = activeShape;
-            this.inactiveShape = inactiveShape;
+            this.activeImage = activeImage;
+            this.inactiveImage = inactiveImage;
         }
 
         public virtual bool IsActive()
@@ -35,11 +36,11 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         {
             if (IsActive())
             {
-                activeShape.Draw();
+                this.activeImage.Draw();
             }
             else
             {
-                inactiveShape.Draw();
+                inactiveImage.Draw();
             }
         }
 

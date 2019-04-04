@@ -21,8 +21,8 @@ namespace Confusing_Hobo_Unleashed
             short y =0 ;
             short i = 0;
             short vx = 1;
-            Game.Boss = true;
-            Game.DamageArray = new bool[Game.CurrentLoadedMap.Mapheight, Game.CurrentLoadedMap.Mapwidth];
+            MainGame.Boss = true;
+            MainGame.DamageArray = new bool[MainGame.CurrentLoadedMap.Mapheight, MainGame.CurrentLoadedMap.Mapwidth];
             while (i < 500)
             {
                 if (x > 1 || x < -1)
@@ -34,27 +34,27 @@ namespace Confusing_Hobo_Unleashed
                         y = 0;
 
                 x += vx;
-                Game.GameBuffer.SetDrawCord(x, y);
-                Game.GameBuffer.Print();
+                MainGame.GameBuffer.SetDrawCord(x, y);
+                MainGame.GameBuffer.Print();
                 i++;
                 Thread.Sleep(20);
                 if (i == 250)
                 {
-                    Game.Entities.Clear();
-                    Game.CurrentLoadedMap = new CustomMap(Game.CurrentLoadedMap.Mapheight, Console.WindowWidth, false);
-                    TerrainSelection.Redirect(Game.CurrentLoadedMap, 204);
+                    MainGame.Entities.Clear();
+                    MainGame.CurrentLoadedMap = new CustomMap(MainGame.CurrentLoadedMap.Mapheight, Console.WindowWidth, false);
+                    TerrainSelection.Redirect(MainGame.CurrentLoadedMap, 204);
                     Gameplay.Push();
-                    foreach (var player in Game.Players)
+                    foreach (var player in MainGame.Players)
                     {
                         player.SetSpawn();
                     }
-                    Game.Entities.Add(new Godzilla(Game.CurrentLoadedMap));
-                    Game.FillEntities();
-                    Game.Render();
+                    MainGame.Entities.Add(new Godzilla(MainGame.CurrentLoadedMap));
+                    MainGame.FillEntities();
+                    MainGame.Render();
                 }
             }
             Console.Clear();
-            Game.GameBuffer.SetDrawCord(0, 0);
+            MainGame.GameBuffer.SetDrawCord(0, 0);
         }
 
 

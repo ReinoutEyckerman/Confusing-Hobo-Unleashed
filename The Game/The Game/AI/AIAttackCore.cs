@@ -21,7 +21,7 @@ namespace Confusing_Hobo_Unleashed.AI
 
         public virtual void MeleeCheck(AiCore source, int xpos, int ypos)
         {
-            foreach (var t in Game.Entities)
+            foreach (var t in MainGame.Entities)
             {
                 if (t.X == xpos && t.Y == ypos)
                     t.HpCurrent -= source.WeaponInv[0].Damage;
@@ -68,16 +68,16 @@ namespace Confusing_Hobo_Unleashed.AI
 
         private void DestructibleCheck(int xpos, int ypos)
         {
-            if (Game.CurrentLoadedMap.Destructible[ypos, xpos])
+            if (MainGame.CurrentLoadedMap.Destructible[ypos, xpos])
             {
                 Server.Change = true;
-                if (Game.CurrentLoadedMap.Collision[ypos, xpos])
+                if (MainGame.CurrentLoadedMap.Collision[ypos, xpos])
                 {
-                    Game.CurrentLoadedMap.CollisionBackUp[ypos, xpos] = false;
-                    Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ypos, xpos] = null;
+                    MainGame.CurrentLoadedMap.CollisionBackUp[ypos, xpos] = false;
+                    MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ypos, xpos] = null;
                 }
-                Game.CurrentLoadedMap.Destructible[ypos, xpos] = false;
-                Game.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters[ypos, xpos] = null;
+                MainGame.CurrentLoadedMap.Destructible[ypos, xpos] = false;
+                MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters[ypos, xpos] = null;
             }
         }
     }

@@ -213,7 +213,7 @@ namespace Confusing_Hobo_Unleashed.AI
 
         private void Error()
         {
-            Game.BotErrorCount++;
+            MainGame.BotErrorCount++;
         }
 
         private void ThreeWayOverride()

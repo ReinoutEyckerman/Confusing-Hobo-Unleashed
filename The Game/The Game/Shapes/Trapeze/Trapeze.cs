@@ -21,8 +21,9 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.pixel = pixel;
         }
 
-        public override void Draw()
+        public override Image toImage()
         {
+            Pixel[,] grid = new Pixel[this.getWidth(), this.getHeight()];
             var rico = Convert.ToDouble(height) / (width - 5);
 
             var x1 = width;
@@ -46,9 +47,10 @@ namespace Confusing_Hobo_Unleashed.Shapes
             {
                 for (int y = 0; y < height; y++)
                 {
-                    drawToWindow(new Position(x, y), this.pixel);
+                    grid[x, y] = this.pixel;
                 }
             }
+            return base.toImage().addTopLayer(new Image(grid,this.position));
         }
 
         public override Shape Clone()

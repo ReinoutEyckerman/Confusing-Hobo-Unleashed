@@ -11,12 +11,12 @@ namespace Confusing_Hobo_Unleashed.Shapes
         private Window window;
 
 
-        public Image(int width, int height) : base(new Position(0, 0), width, height)
+        public Image(int width, int height, Position position) : base(position, width, height)
         {
             this.imageGrid = new Pixel[width, height];
         }
 
-        public Image(Pixel[,] imageGrid) : base(new Position(0, 0), imageGrid.GetLength(0), imageGrid.GetLength(1)) //TODO new pos
+        public Image(Pixel[,] imageGrid, Position position) : base(position, imageGrid.GetLength(0), imageGrid.GetLength(1)) //TODO new pos
         {
             this.imageGrid = imageGrid;
         }
@@ -50,7 +50,8 @@ namespace Confusing_Hobo_Unleashed.Shapes
                     imagegrid[i, j] = pixel;
                 }
             }
-            return new Image(imagegrid);
+
+            return new Image(imagegrid,topLeft);
         }
 
         public void Draw()

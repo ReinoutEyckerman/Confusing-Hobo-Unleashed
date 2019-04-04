@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.Tools;
@@ -8,13 +7,13 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public class HorizonalList : AbstractList 
+    public class HorizonalList : AbstractList
     {
-        public HorizonalList( CircularList<UIObject> items, Shape shape): base(items,shape)
+        public HorizonalList(CircularList<UIObject> items, Image image) : base(items, image)
         {
         }
 
-        public HorizonalList(CircularList<UIObject> items, Shape activeShape, Shape inactiveShape): base(items,activeShape,inactiveShape)
+        public HorizonalList(CircularList<UIObject> items, Image activeImage, Image inactiveImage) : base(items, activeImage, inactiveImage)
         {
         }
 
@@ -38,14 +37,14 @@ namespace Confusing_Hobo_Unleashed.UI
                     this.isActive = false;
                     break;
                 case Input.LEFT:
-                     items.decrement();
-                     break;
+                    items.decrement();
+                    break;
                 case Input.RIGHT:
-                     items.increment();
-                     break;
+                    items.increment();
+                    break;
                 default:
-                     items.currentItem().HandleAction(action);
-                     break;
+                    items.currentItem().HandleAction(action);
+                    break;
             }
         }
 

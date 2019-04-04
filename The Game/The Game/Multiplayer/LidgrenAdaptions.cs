@@ -52,22 +52,22 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         public static void OneSendList(NetOutgoingMessage outmsg, CustomMap map)
         {
             outmsg.WriteAllProperties(map);
-            Write2DArray(Game.CurrentLoadedMap.Grav, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Air].Characters, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Air].Colors, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Collision].Colors, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Clouds].Characters, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Clouds].Colors, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Grav, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Air].Characters, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Air].Colors, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Characters, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Colors, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Clouds].Characters, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Clouds].Colors, outmsg);
             VarSendList(outmsg);
         }
 
         public static void VarSendList(NetOutgoingMessage outmsg)
         {
-            Write2DArray(Game.CurrentLoadedMap.Collision, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Destructible].Colors, outmsg);
-            Write2DArray(Game.CurrentLoadedMap.Destructible, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Collision, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].Colors, outmsg);
+            Write2DArray(MainGame.CurrentLoadedMap.Destructible, outmsg);
         }
 
         public static void Read2DArray(char?[,] ar, NetIncomingMessage inmsg)
@@ -113,23 +113,23 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
 
         public static void OneReadList(NetIncomingMessage inmsg)
         {
-            inmsg.ReadAllProperties(Game.CurrentLoadedMap);
-            Read2DArray(Game.CurrentLoadedMap.Grav, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Air].Characters, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Air].Colors, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Collision].Characters, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Collision].Colors, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Clouds].Characters, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Clouds].Colors, inmsg);
+            inmsg.ReadAllProperties(MainGame.CurrentLoadedMap);
+            Read2DArray(MainGame.CurrentLoadedMap.Grav, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Air].Characters, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Air].Colors, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Characters, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Colors, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Clouds].Characters, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Clouds].Colors, inmsg);
             VarReadList(inmsg);
         }
 
         public static void VarReadList(NetIncomingMessage inmsg)
         {
-            Read2DArray(Game.CurrentLoadedMap.Collision, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Layers[Maplayers.Destructible].Colors, inmsg);
-            Read2DArray(Game.CurrentLoadedMap.Destructible, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Collision, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].Colors, inmsg);
+            Read2DArray(MainGame.CurrentLoadedMap.Destructible, inmsg);
         }
 
         public static void DeCompileBullet(NetIncomingMessage inc, BulletCore bullet)

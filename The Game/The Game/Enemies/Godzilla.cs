@@ -13,7 +13,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public static void Draw(CustomMap map)
         {
-            if (!Game.Boss)
+            if (!MainGame.Boss)
             {
                 _count++;
                 if (_count > 3)
@@ -23,13 +23,13 @@ namespace Confusing_Hobo_Unleashed.Enemies
                 }
                 if (_pos < 0)
                 {
-                    _pos = Game.CurrentLoadedMap.Mapwidth;
+                    _pos = MainGame.CurrentLoadedMap.Mapwidth;
                     // return;
                 }
             }
             else
             {
-                foreach (var entity in Game.Entities)
+                foreach (var entity in MainGame.Entities)
                 {
                     if (entity.CurrentClass == Classes.Boss)
                     {
@@ -38,7 +38,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
                     }
                 }
             }
-            Game.DamageArray = new bool[map.Mapheight, map.Mapwidth];
+            MainGame.DamageArray = new bool[map.Mapheight, map.Mapwidth];
             for (var i = 0; i < Zilla.GetLength(1); i++)
                 for (var j = 0; j < Zilla.GetLength(0); j++)
                     if (Zilla[j, i] != 0 && _pos + i < map.Mapwidth && _pos + i >= 0 && j < map.Mapheight && j >= 0)
@@ -51,9 +51,9 @@ namespace Confusing_Hobo_Unleashed.Enemies
                         else if (Zilla[j, i] == 4)
                             color = Painter.Instance.Paint(ConsoleColor.Black);
                         var num = Painter.Instance.ColorsToAttribute(color, color + 1);
-                        Game.GameBuffer.Draw(" ", _pos + i, map.Mapheight - Zilla.GetLength(0) - 8 + j, num);
-                        if (Game.Boss)
-                            Game.DamageArray[map.Mapheight - Zilla.GetLength(0) - 8 + j, _pos + i] = true;
+                        MainGame.GameBuffer.Draw(" ", _pos + i, map.Mapheight - Zilla.GetLength(0) - 8 + j, num);
+                        if (MainGame.Boss)
+                            MainGame.DamageArray[map.Mapheight - Zilla.GetLength(0) - 8 + j, _pos + i] = true;
                     }
         }
     }
@@ -75,7 +75,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public override void SelectTarget()
         {
-            Target = Game.Players[Random.Next(Game.Players.Count)];
+            Target = MainGame.Players[Random.Next(MainGame.Players.Count)];
         }
 
         public override void Special()

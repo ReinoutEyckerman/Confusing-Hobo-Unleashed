@@ -55,15 +55,15 @@ namespace Confusing_Hobo_Unleashed.Enemies
 
         public override void SelectTarget()
         {
-            Target = Game.Players[Random.Next(Game.Players.Count)];
+            Target = MainGame.Players[Random.Next(MainGame.Players.Count)];
         }
 
         public override void Special()
         {
             if (Mana - 350 > 0)
             {
-                Game.Entities.Add(new Zerg(Map));
-                Game.Entities[Game.Entities.Count - 1].SetSpawn();
+                MainGame.Entities.Add(new Zerg(Map));
+                MainGame.Entities[MainGame.Entities.Count - 1].SetSpawn();
                 Mana -= 350 + Random.Next(-50, 50);
             }
         }
