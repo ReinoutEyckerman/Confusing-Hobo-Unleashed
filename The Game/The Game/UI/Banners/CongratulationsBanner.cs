@@ -5,9 +5,9 @@ using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public class CongratulationsBanner:Drawable//TODO Large letter generator?
+    public class CongratulationsBanner : Drawable //TODO Large letter generator?
     {
-        private Text congratulationsBanner;
+        private Image congratulationsBanner;
 
         public CongratulationsBanner(Position position, ColorPoint colorPoint)
         {
@@ -18,24 +18,30 @@ namespace Confusing_Hobo_Unleashed.UI
             string e = @"  \____\___/|_| |_|\__, |_|  \__,_|\__|\__,_|_|\__,_|\__|_|\___/|_| |_|___/";
             string f = @"                   |___/                                                 ";
             string g = @"And now complete the game on a harder difficulty!";
-            
-            Text aText= new Text(a,null, colorPoint,null, position);//TODO
-            position.setX(position.x + 1);
-            Text bText= new Text(b,aText,colorPoint,null, position);//TODO
-            position.setX(position.x + 1);
-            Text cText= new Text(c,bText,colorPoint,null,position);//TODO
-            position.setX(position.x + 1);
-            Text dText= new Text(d,cText,colorPoint,null,position);//TODO
-            position.setX(position.x + 1);
-            Text eText= new Text(e,dText,colorPoint,null,position);//TODO
-            position.setX(position.x + 1);
-            Text fText= new Text(f,eText,colorPoint,null,position);//TODO
-            position.setX(position.x + 1);
-            Text gText= new Text(g,fText,colorPoint,null,position);//TODO
-            
-            this.congratulationsBanner = gText;
 
+            Text aText = new Text(a, colorPoint, position); //TODO
+            position.setX(position.x + 1);
+            Text bText = new Text(b, colorPoint, position); //TODO
+            position.setX(position.x + 1);
+            Text cText = new Text(c, colorPoint, position); //TODO
+            position.setX(position.x + 1);
+            Text dText = new Text(d, colorPoint, position); //TODO
+            position.setX(position.x + 1);
+            Text eText = new Text(e, colorPoint, position); //TODO
+            position.setX(position.x + 1);
+            Text fText = new Text(f, colorPoint, position); //TODO
+            position.setX(position.x + 1);
+            Text gText = new Text(g, colorPoint, position); //TODO
+
+            this.congratulationsBanner = aText.toImage()
+                .addTopLayer(bText)
+                .addTopLayer(cText)
+                .addTopLayer(dText)
+                .addTopLayer(eText)
+                .addTopLayer(fText)
+                .addTopLayer(gText);
         }
+
         public void Draw()
         {
             this.congratulationsBanner.Draw();

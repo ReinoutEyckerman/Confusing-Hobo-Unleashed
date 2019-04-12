@@ -1,3 +1,4 @@
+using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.Colors;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 
@@ -5,8 +6,7 @@ namespace Confusing_Hobo_Unleashed.UI
 {
     public class LostBanner
     {
-
-        private Text lostBanner;
+        private Image lostBanner;
 
         public LostBanner(Position position, ColorPoint colorPoint)
         {
@@ -18,23 +18,30 @@ namespace Confusing_Hobo_Unleashed.UI
             string f = @" | |_| |_  ___  | |__  ___| |_ __|__ \ ";
             string g = @" |  _| ' \/ -_) | '_ \/ _ \  _(_-< /_/";
             string h = @"  \__|_||_\___| |_.__/\___/\__/__/(_) ";
-            Text aText= new Text(a,null, colorPoint,null, position);//TODO
+            Text aText = new Text(a, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text bText= new Text(b,aText,colorPoint,null, position);//TODO
+            Text bText = new Text(b, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text cText= new Text(c,bText,colorPoint,null,position);//TODO
+            Text cText = new Text(c, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text dText= new Text(d,cText,colorPoint,null,position);//TODO
+            Text dText = new Text(d, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text eText= new Text(e,dText,colorPoint,null,position);//TODO
+            Text eText = new Text(e, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text fText= new Text(f,eText,colorPoint,null,position);//TODO
+            Text fText = new Text(f, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text gText= new Text(g,fText,colorPoint,null,position);//TODO
+            Text gText = new Text(g, colorPoint, position); //TODO
             position.setX(position.x + 1);
-            Text hText= new Text(h,gText,colorPoint,null,position);//TODO
-            
-            this.lostBanner = gText;
+            Text hText = new Text(h, colorPoint, position); //TODO check object copy shit
+
+            this.lostBanner = aText.toImage()
+                .addTopLayer(bText)
+                .addTopLayer(cText)
+                .addTopLayer(dText)
+                .addTopLayer(eText)
+                .addTopLayer(fText)
+                .addTopLayer(gText)
+                .addTopLayer(hText);
         }
     }
 }

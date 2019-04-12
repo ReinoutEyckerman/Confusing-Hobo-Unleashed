@@ -1,43 +1,42 @@
 using System;
+using System.Reflection;
 using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.UI.Colors;
 using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    public abstract class ShapeBuilder
+    public class ShapeBuilder
     {
         protected Window window;
 
         protected int width;
         protected int height; //TODO Bounding box
-        protected Shape rootShape;
         protected Position position;
-        protected Pixel pixel;
         protected Orientation orientation;
+        protected Type type;
 
         public ShapeBuilder()
         {
             this.width = 0;
             this.height = 0;
-            this.rootShape = null;
             this.position = new Position(0, 0);
-            this.pixel = new Pixel(BaseColor.Void, BaseColor.Void, '');
             this.orientation = Orientation.NORTH;
+            this.type = typeof(RegularRectangle);
         }
 
-        public void inheritFromRoot()
+        public void inheritFrom(RegularShape regularShape)
         {
-            if (this.rootShape == null)
+            if (regularShape == null)
             {
                 return;
             }
 
-            this.width = this.rootShape.getWidth();
-            this.height = this.rootShape.getHeight();
-            this.position = this.rootShape.getPosition();
-            this.pixel = this.rootShape.getPixel();
-            this.orientation = this.rootShape.getOrientation();
+            this.width = regularShape.getWidth();
+            this.height = regularShape.getHeight();
+            this.position = regularShape.getPosition();
+            this.orientation = regularShape.getOrientation();
+            this.type = typeof(RegularShape);
         }
 
         public ShapeBuilder setWidth(int width)
@@ -64,12 +63,6 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return this;
         }
 
-        public ShapeBuilder setRootShape(Shape shape)
-        {
-            this.rootShape = shape;
-            return this;
-        }
-
         public ShapeBuilder setPosition(Position position)
         {
             this.position = position;
@@ -82,9 +75,9 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return this;
         }
 
-        public ShapeBuilder setPositionRelative(Position position, Shape shape)
+        public ShapeBuilder setPositionRelative(Position position, BoundingBox boundingBox) //Todo ?
         {
-            this.position = position.add(shape.getPosition());
+            this.position = position.add(boundingBox.getPosition());
             return this;
         }
 
@@ -94,12 +87,16 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return this;
         }
 
-        public ShapeBuilder setPixel(Pixel pixel)
+        public ShapeBuilder setType(Type type)
         {
-            this.pixel = pixel;
+            this.type = type;
             return this;
         }
 
-        public abstract Shape Build();
+        public RegularShape Build()
+        {
+            ConstructorInfo ctor = type.GetConstructor(new[] {typeof(Orientation), typeof(Position), typeof(int), typeof(int)});
+            return (RegularShape) ctor.Invoke(new object[] {this.orientation, this.position, this.width, this.height});
+        }
     }
 }

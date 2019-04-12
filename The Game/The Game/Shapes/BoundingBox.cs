@@ -7,13 +7,13 @@ using Confusing_Hobo_Unleashed.Shapes;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public class Bounding
+    public class BoundingBox
     {
         protected Position position;
         protected int width;
         protected int height;
 
-        public Bounding(Bounding copy)
+        public BoundingBox(BoundingBox copy)
         {
             if (copy.position != null)
             {
@@ -24,14 +24,14 @@ namespace Confusing_Hobo_Unleashed.UI
             this.height = copy.height;
         }
 
-        public Bounding(Position position, int width, int height)
+        public BoundingBox(Position position, int width, int height)
         {
             this.position = position;
             this.width = width;
             this.height = height;
         }
 
-        public Bounding(int width, int height)
+        public BoundingBox(int width, int height)
         {
             this.position = null;
             this.width = width;
@@ -70,22 +70,27 @@ namespace Confusing_Hobo_Unleashed.UI
 
         public bool isPointInside(Position position)
         {
-            if (position.x < this.position.x)
+            return this.isPointInside(position.x, position.y);
+        }
+
+        public bool isPointInside(int x, int y)
+        {
+            if (x < this.position.x)
             {
                 return false;
             }
 
-            if (position.y < this.position.y)
+            if (y < this.position.y)
             {
                 return false;
             }
 
-            if (position.x > this.position.x + this.width)
+            if (x > this.position.x + this.width)
             {
                 return false;
             }
 
-            if (position.y > this.position.y + this.height)
+            if (y > this.position.y + this.height)
             {
                 return false;
             }

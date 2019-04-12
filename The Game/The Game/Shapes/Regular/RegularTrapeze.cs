@@ -9,23 +9,22 @@ using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    class Trapeze : ShapeDecorator
+    class RegularTrapeze : RegularShape
     {
-        public Trapeze(Trapeze copy) : base(copy)
+        private double rico;
+        public RegularTrapeze(RegularTrapeze copy) : base(copy)
         {
+            this.rico = copy.rico;
         }
 
 
-        public Trapeze(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
+        public RegularTrapeze(Position position, int width, int height) : base(position, width, height)
         {
-            this.pixel = pixel;
+            rico = Convert.ToDouble(height) / (width - 5);
         }
 
-        public override Image toImage()
+        public override bool IsInsideShape(int x, int y)
         {
-            Pixel[,] grid = new Pixel[this.getWidth(), this.getHeight()];
-            var rico = Convert.ToDouble(height) / (width - 5);
-
             var x1 = width;
             short w = 1;
             for (short x = 0; x < width; x++)
@@ -53,9 +52,14 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return base.toImage().addTopLayer(new Image(grid,this.position));
         }
 
-        public override Shape Clone()
+        public override bool IsOnBorder(int x, int y)
         {
-            return new Trapeze(this);
+            throw new NotImplementedException();
+        }
+
+        public override RegularShape Clone()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mime;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.Colors;
 using Confusing_Hobo_Unleashed.UI.Windows;
@@ -9,50 +10,53 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
     {
         public static Button createDefaultButton(string text, TriggerEventHandler triggerEventHandler, Position position)
         {
-            Shape box = createDefaultBox(position);
-            Shape bounds = createDefaultBoxBounds(position, box);
-            Shape textShape = createDefaultText(text, position, bounds);
-            return new Button(triggerEventHandler, textShape.toImage());
+            Image image = createDefaultBox(position);
+            image = createDefaultBoxBounds(position, image);
+            image = createDefaultText(text, position, image);
+            return new Button(triggerEventHandler, image);
         }
 
-        public static Shape createDefaultBox(Position position, Shape rootShape = null)
+        public static Image createDefaultBox(Position position, Image rootImage = null)
         {
             Pixel pixel = new Pixel(BaseColor.DarkGreen, BaseColor.White, ' ');
-            Shape shape = new BoxBuilder()
+            RegularShape shape = new ShapeBuilder()
                 .setWidthPercentageOfScreen(10)
                 .setHeigthPercentageOfScreen(10)
                 .setPosition(position)
-                .setPixel(pixel)
-                .setRootShape(rootShape)
+                .setType(typeof(RegularRectangle))
                 .Build();
-            return shape;
+            FilledShapeDrawer drawer = new FilledShapeDrawer(shape, pixel);
+            if (rootImage != null)
+            {
+                return rootImage.addTopLayer(drawer);
+            }
+
+            return drawer.toImage();
         }
 
-        public static Shape createDefaultBoxBounds(Position position, Shape rootShape = null)
+        public static Image createDefaultBoxBounds(Position position, Image rootImage = null)
         {
             Pixel pixel = new Pixel(BaseColor.Green, BaseColor.White, ' ');
-            Shape shape = new BoxBuilder()
+            RegularShape shape = new ShapeBuilder()
                 .setWidthPercentageOfScreen(10)
                 .setHeigthPercentageOfScreen(10)
                 .setPosition(position)
-                .setPixel(pixel)
-                .setRootShape(rootShape)
+                .setType(typeof(RegularRectangle))
                 .Build();
-            return shape;
+            ContouredShapeDrawer drawer = new ContouredShapeDrawer(shape, pixel);
+            if (rootImage != null)
+            {
+                return rootImage.addTopLayer(drawer);
+            }
+
+            return drawer.toImage();
         }
 
-        public static Shape createDefaultText(string text, Position position, Shape rootShape = null)
+        public static Image createDefaultText(string text, Position position, Image rootImage = null)
         {
             Pixel pixel = new Pixel(BaseColor.Green, BaseColor.White, ' ');
-            Shape shape = new TextBuilder()
-                .setText(text)
-                .setWidthPercentageOfScreen(10)
-                .setHeigthPercentageOfScreen(10)
-                .setPosition(position)
-                .setPixel(pixel)
-                .setRootShape(rootShape)
-                .Build();
-            return shape;
+            Image textImage = new Text(text, pixel, position).toImage();
+            return textImage;
         }
     }
 }

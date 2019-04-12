@@ -5,7 +5,7 @@ using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    public class Image : Bounding, Drawable
+    public class Image : BoundingBox, Drawable
     {
         private Pixel[,] imageGrid;
         private Window window;
@@ -19,6 +19,11 @@ namespace Confusing_Hobo_Unleashed.Shapes
         public Image(Pixel[,] imageGrid, Position position) : base(position, imageGrid.GetLength(0), imageGrid.GetLength(1)) //TODO new pos
         {
             this.imageGrid = imageGrid;
+        }
+
+        public Image addTopLayer(GeneratedImage image)
+        {
+            return this.addTopLayer(image.toImage());
         }
 
         public Image addTopLayer(Image topLayer)

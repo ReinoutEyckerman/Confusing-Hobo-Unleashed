@@ -14,60 +14,60 @@ namespace Confusing_Hobo_Unleashed
 
             Position topleft = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.25));
             Position bottomright = new Position(window.getWidthPosFromPercentage(0.5), window.getHeightPosFromPercentage(0.35));
-            Bounding bounding = new Bounding(topleft, bottomright);
-            window.DrawRectangle(bounding, color);
+            BoundingBox boundingBox = new BoundingBox(topleft, bottomright);
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.625));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.75));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.625));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.75));
+            window.DrawRectangle(boundingBox, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.15), window.getHeightPosFromPercentage(0.35));
             bottomright = new Position(window.getWidthPosFromPercentage(0.35), window.getHeightPosFromPercentage(0.45));
-            bounding = new Bounding(topleft, bottomright);
-            window.DrawRectangle(bounding, color);
+            boundingBox = new BoundingBox(topleft, bottomright);
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.4));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.6));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.4));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.6));
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.525));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.725));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.525));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.725));
+            window.DrawRectangle(boundingBox, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.05), window.getHeightPosFromPercentage(0.45));
             bottomright = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.55));
-            bounding = new Bounding(topleft, bottomright);
-            window.DrawRectangle(bounding, color);
+            boundingBox = new BoundingBox(topleft, bottomright);
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.5));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.625));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.5));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.625));
+            window.DrawRectangle(boundingBox, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.15), window.getHeightPosFromPercentage(0.55));
             bottomright = new Position(window.getWidthPosFromPercentage(0.35), window.getHeightPosFromPercentage(0.65));
-            bounding = new Bounding(topleft, bottomright);
-            window.DrawRectangle(bounding, color);
+            boundingBox = new BoundingBox(topleft, bottomright);
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.4));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.6));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.4));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.6));
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.525));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.725));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.525));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.725));
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.425));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.625));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.425));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.625));
+            window.DrawRectangle(boundingBox, color);
 
             topleft = new Position(window.getWidthPosFromPercentage(0.25), window.getHeightPosFromPercentage(0.65));
             bottomright = new Position(window.getWidthPosFromPercentage(0.5), window.getHeightPosFromPercentage(0.75));
-            bounding = new Bounding(topleft, bottomright);
-            window.DrawRectangle(bounding, color);
+            boundingBox = new BoundingBox(topleft, bottomright);
+            window.DrawRectangle(boundingBox, color);
 
-            bounding.setTopX(window.getWidthPosFromPercentage(0.625));
-            bounding.setBottomX(window.getWidthPosFromPercentage(0.55));
-            window.DrawRectangle(bounding, color);
+            boundingBox.setTopX(window.getWidthPosFromPercentage(0.625));
+            boundingBox.setBottomX(window.getWidthPosFromPercentage(0.55));
+            window.DrawRectangle(boundingBox, color);
 
             BaseColor BackgroundColor = BaseColor.Black;
             BaseColor ForegroundColor = BaseColor.White;

@@ -3,7 +3,7 @@ using Confusing_Hobo_Unleashed.UI;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
-    public abstract class Entity:Bounding,Drawable
+    public abstract class Entity:BoundingBox,Drawable
     {
         protected Shape shape;
         protected Position position;
@@ -22,7 +22,7 @@ namespace Confusing_Hobo_Unleashed.Enemies
             }
         }
 
-        protected Entity(Bounding copy) : base(copy)
+        protected Entity(BoundingBox copy) : base(copy)
         {
         }
 

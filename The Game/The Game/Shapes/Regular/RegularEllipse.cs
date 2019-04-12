@@ -4,32 +4,38 @@ using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    public abstract class AbstractEllips : ShapeDecorator
+    public class RegularEllipse : RegularShape
     {
         private int xradius;
         private int yradius;
 
-        public AbstractEllips(AbstractEllips copy) : base(copy)
+        public RegularEllipse(RegularEllipse copy) : base(copy)
         {
-            double xradius = copy.xradius;
-            double yradius = copy.yradius;
+            this.xradius = copy.xradius;
+            this.yradius = copy.yradius;
         }
 
-        protected AbstractEllips(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
+        protected RegularEllipse(Position position, int width, int height) : base(position, width, height)
         {
             this.xradius = (int) Math.Floor(Math.Pow(getWidth(), 2));
             this.yradius = (int) Math.Floor(Math.Pow(getHeight(), 2));
         }
 
-        protected bool isBorderPoint(int x, int y)
+        protected RegularEllipse(Orientation orientation, Position position, int width, int height) : base(orientation, position, width, height)
         {
-            if (isPointInEllips(x, y))
+            this.xradius = (int) Math.Floor(Math.Pow(getWidth(), 2));
+            this.yradius = (int) Math.Floor(Math.Pow(getHeight(), 2));
+        }
+
+        public override bool IsOnBorder(int x, int y)
+        {
+            if (this.IsInsideShape(x, y))
             {
                 for (int i = x - 1; i <= x + 1; i += 2)
                 {
                     for (int j = y - 1; i <= y + 1; i += 2)
                     {
-                        if (isPointInEllips(x - 1, y))
+                        if (this.IsInsideShape(x, y))
                         {
                             return true;
                         }
@@ -40,12 +46,17 @@ namespace Confusing_Hobo_Unleashed.Shapes
             return false;
         }
 
-        protected bool isPointInEllips(int x, int y)
+        public override bool IsInsideShape(int x, int y)
         {
             double xx = Math.Pow(x, 2);
             double yy = Math.Pow(y, 2);
             double a = xx / xradius + yy / yradius;
             return a <= 1 ? true : false;
+        }
+
+        public override RegularShape Clone()
+        {
+            return new RegularEllipse(this);
         }
     }
 }

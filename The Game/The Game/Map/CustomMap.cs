@@ -30,11 +30,6 @@ namespace Confusing_Hobo_Unleashed
         public int Mapheight;
         public int Mapwidth;
 
-        public CustomMap(int mapheight)
-        {
-            Mapheight = mapheight;
-        }
-
         public CustomMap(int mapheight, int mapwidth, bool newfile, string filename = " ", bool clouds = true, bool daynight = true)
         {
             Invertrate = VarDatabase.Invertrate;

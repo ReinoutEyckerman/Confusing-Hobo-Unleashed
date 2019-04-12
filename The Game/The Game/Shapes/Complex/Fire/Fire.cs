@@ -9,9 +9,8 @@ using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    class Fire: ShapeDecorator
+    class Fire : ShapeDecorator
     {
-
         private Window window; //TODO
 
         private Random fireRandomizer;
@@ -26,9 +25,8 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.middleFire = new Pixel(copy.middleFire);
             this.coreFire = new Pixel(copy.coreFire);
             this.fireRandomizer = new Random();
-            
         }
-        
+
         public Fire(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
         {
             this.outerFire = outerFire;
@@ -37,19 +35,18 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.fireRandomizer = new Random();
         }
 
-        public void Draw()
+        public override Image toImage()
         {
-            int width = boundingBox.getHeight();
-            int height = boundingBox.getHeight();
-            
-            Pixel[,] fire = new Pixel[width, height];
-            
+            int width = this.getWidth();
+            int height = getHeight();
+
+            Pixel[,] grid = new Pixel[width, height];
+
             var ycur = height;
             for (var x = 0; x < width; x++)
             {
                 int verticalDirection = getRandomDirection(x);
-                
-       
+
 
                 if (ycur >= height)
                 {
@@ -64,18 +61,20 @@ namespace Confusing_Hobo_Unleashed.Shapes
 
                 for (var y = ycur; y < height; y++)
                 {
-                    fire[x,y]=coreFire ;
+                    grid[x, y] = coreFire;
                 }
             }
+
             for (var i = 0; i < width; i++)
             {
                 for (var j = 0; j < height; j++)
                 {
-                    if (fire[i, j] == BaseColor.Yellow && ((i - 1 >= 0 && fire1[i - 1, j] != BaseColor.Red && fire1[i - 1, j] != BaseColor.Yellow || i + 1 < fire1.GetLength(0) && fire1[i + 1, j] != BaseColor.Red && fire1[i + 1, j] != BaseColor.Yellow) || i == 0 || i == fire1.GetLength(0) - 1))
-                        fire[i, j] = BaseColor.Red;
-                    window.DrawTile(new Position(i+10, j), fire1[i, j]);
+                    if (grid[i, j].GetBackgroundColor() == BaseColor.Yellow && ((i - 1 >= 0 && grid[i - 1, j].GetBackgroundColor() != BaseColor.Red && grid[i - 1, j].GetBackgroundColor() != BaseColor.Yellow || i + 1 < grid.GetLength(0) && grid[i + 1, j].GetBackgroundColor() != BaseColor.Red && grid[i + 1, j].GetBackgroundColor() != BaseColor.Yellow) || i == 0 || i == grid.GetLength(0) - 1))
+                        grid[i, j] = new Pixel(BaseColor.Red, grid[i, j].GetForegroundColor(), this.pixel.getCharacter());
                 }
             }
+
+            return base.toImage().addTopLayer(new Image(grid, this.position));
         }
 
         public override Shape Clone()
@@ -90,7 +89,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
             if (division > layers)
             {
                 direction *= -1;
-                division = layers+1 - (division-1) % layers ;
+                division = layers + 1 - (division - 1) % layers;
             }
 
             return direction * fireRandomizer.Next(-1, division);
@@ -100,7 +99,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
         {
             for (int division = 1; division <= layers * 2; division++)
             {
-                int largerNumber = boundingBox.getWidth() / division;
+                int largerNumber = getWidth() / division;
                 if (x <= largerNumber)
                 {
                     return division;
