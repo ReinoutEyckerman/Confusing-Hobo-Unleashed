@@ -14,12 +14,21 @@ namespace Confusing_Hobo_Unleashed.UI
 
         private int ringIndex = 0;
 
-        protected AbstractList(CircularList<UIObject> items, Image image) : base(image)
+        public AbstractList(CircularList<UIObject> items, int padding=0) : this(items, UIFactory.generateImage(items,padding))
+        {
+        }
+        
+        protected AbstractList(CircularList<UIObject> items, Image image) : base(image.getPosition(),image)
+        {
+            this.items = items;
+        }
+        
+        protected AbstractList(CircularList<UIObject> items,Position position, Image image) : base(position,image)
         {
             this.items = items;
         }
 
-        protected AbstractList(CircularList<UIObject> items, Image activeImage, Image inactiveImage) : base(activeImage, inactiveImage)
+        protected AbstractList(CircularList<UIObject> items,Position position, Image activeImage, Image inactiveImage) : base(position, activeImage, inactiveImage)
         {
             this.items = items;
         }

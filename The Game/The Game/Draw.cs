@@ -11,7 +11,7 @@ namespace Confusing_Hobo_Unleashed
 
     internal class Draw
     {
-        public static void Line(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, MapEditCursor paintBrush, int x1, int x2, int y1, int y2)
+        public static void Line(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, PaintBrush paintBrush, int x1, int x2, int y1, int y2)
         {
             var smallestX = 0;
             var largestX = 0;
@@ -69,7 +69,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void CircleCenterRadius(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, MapEditCursor paintBrush, int centerX, int centerY, int radiusX, int radiusY)
+        public static void CircleCenterRadius(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, PaintBrush paintBrush, int centerX, int centerY, int radiusX, int radiusY)
         {
             var radius = Math.Sqrt(Math.Pow(centerX - radiusX, 2) + Math.Pow(centerY - radiusY, 2));
 
@@ -91,7 +91,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void FillRectangle(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, MapEditCursor paintBrush, int x1, int x2, int y1, int y2)
+        public static void FillRectangle(CustomMap mapToDraw, int layerindex, Buffer outputbuffer, PaintBrush paintBrush, int x1, int x2, int y1, int y2)
         {
             var smallestX = 0;
             var smallestY = 0;
@@ -171,7 +171,7 @@ namespace Confusing_Hobo_Unleashed
             }
         }
 
-        public static void PaintPixel(CustomMap mapToDraw, MapEditCursor paintBrush, int layerindex)
+        public static void PaintPixel(CustomMap mapToDraw, PaintBrush paintBrush, int layerindex)
         {
             mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Background[paintBrush.Y, paintBrush.X] = paintBrush.PaintBgColor;
             mapToDraw.Layers[(Maplayers) Enum.Parse(typeof (Maplayers), Convert.ToString(layerindex))].Foreground[paintBrush.Y, paintBrush.X] = paintBrush.PaintFgColor;

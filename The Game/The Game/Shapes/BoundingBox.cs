@@ -10,8 +10,8 @@ namespace Confusing_Hobo_Unleashed.UI
     public class BoundingBox
     {
         protected Position position;
-        protected int width;
-        protected int height;
+        protected readonly int width;
+        protected readonly int height;
 
         public BoundingBox(BoundingBox copy)
         {
@@ -96,6 +96,20 @@ namespace Confusing_Hobo_Unleashed.UI
             }
 
             return true;
+        }
+
+        public BoundingBox grow(BoundingBox boundingBox)
+        {
+            int minX = Math.Min(this.position.x, boundingBox.position.x);
+            int minY = Math.Min(this.position.y, boundingBox.position.y);
+            int maxX = Math.Max(this.position.x + this.width, boundingBox.position.x + boundingBox.width);
+            int maxY = Math.Max(this.position.y + this.height, boundingBox.position.y + boundingBox.height);
+            return new BoundingBox(new Position(minX, minY), maxX - minX, maxY - minY);
+        }
+
+        public BoundingBox grow(int padding)
+        {
+            return new BoundingBox(new Position(this.position.x-padding, this.position.y-padding),this.width+padding, this.height+padding);
         }
     }
 }

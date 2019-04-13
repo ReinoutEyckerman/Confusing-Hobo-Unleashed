@@ -106,7 +106,6 @@
     <Compile Include="Shapes\Drawer\ShapeDrawer.cs" />
     <Compile Include="Shapes\Complex\Cloud\LargeCloud.cs" />
     <Compile Include="Shapes\Complex\Cloud\SmallCloud.cs" />
-    <Compile Include="Shapes\Complex\StaticComplexShape.cs" />
     <Compile Include="Shapes\Complex\Fire\Fire.cs" />
     <Compile Include="Shapes\Complex\JungleTree.cs" />
     <Compile Include="Shapes\GeneratedImage.cs" />
@@ -135,7 +134,12 @@
     <Compile Include="TerrainGen\SpaceTerrain.cs" />
     <Compile Include="TerrainGen\CaveTerrain.cs" />
     <Compile Include="TerrainGen\Terrain.cs" />
+    <Compile Include="Terrain\Block.cs" />
+    <Compile Include="Terrain\Dirt.cs" />
+    <Compile Include="Terrain\Grass.cs" />
+    <Compile Include="Terrain\Rock.cs" />
     <Compile Include="Tools\CircularList.cs" />
+    <Compile Include="Tools\EnumExtensions.cs" />
     <Compile Include="Tools\Matrix.cs" />
     <Compile Include="UI\Banners\CongratulationsBanner.cs" />
     <Compile Include="UI\Banners\LostBanner.cs" />
@@ -172,7 +176,7 @@
     <Compile Include="UI\Windows\MSConsoleBuffer.cs" />
     <Compile Include="UI\Windows\Window.cs" />
     <Compile Include="UI\Windows\MicrosoftWindow.cs" />
-    <Compile Include="MapEdit\MapEditCursor.cs" />
+    <Compile Include="MapEdit\PaintBrush.cs" />
     <Compile Include="User\Input\GamepadControls.cs" />
     <Compile Include="User\Input\GamepadInputHandler.cs" />
     <Compile Include="User\Input\Input.cs" />

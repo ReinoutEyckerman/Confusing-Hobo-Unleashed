@@ -1,5 +1,7 @@
 ﻿using System;
 using Confusing_Hobo_Unleashed.Geometry;
+using Confusing_Hobo_Unleashed.Shapes;
+using Confusing_Hobo_Unleashed.UI;
 
 namespace Confusing_Hobo_Unleashed.TerrainGen
 {
@@ -10,7 +12,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         private static int _vertiCounter;
         private static int _horiCounter;
 
-        public static bool[,] straight(bool[,] terrain, int startY, int endY, bool topDown)
+        public static bool[,] line(bool[,] terrain, int startY, int endY, bool topDown)
         {
             int width = terrain.GetLength(0);
             int height = terrain.GetLength(1);
@@ -43,17 +45,15 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             int width = terrain.GetLength(0);
             int height = terrain.GetLength(1) - centerY;
 
-            int xradius = Ellips.radiusFromDimensionSize(width);
-            int yradius = Ellips.radiusFromDimensionSize(height);
-
+            RegularEllipse ellipse = new RegularEllipse(new Position(0, 0), width, height);
 
             for (int borderX = 0; borderX < width; borderX++)
             {
                 for (int borderY = 0; borderY < height; borderY++) //TODO Coordinatenstelsels nakijken
                 {
-                    if (!Ellips.isPointInEllips(borderX, borderY, xradius, yradius)) ;
+                    if (!ellipse.IsInsideShape(borderX, borderY)) ;
                     {
-                        if (topDown && Ellips.isPointInEllips(borderX, borderY + 1, xradius, yradius))
+                        if (topDown && ellipse.IsInsideShape(borderX, borderY + 1))
                         {
                             for (int y = borderY; y >= 0; y--)
                             {
@@ -62,7 +62,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
 
                             break;
                         }
-                        else if (!topDown && Ellips.isPointInEllips(borderX, borderY - 1, xradius, yradius))
+                        else if (!topDown && ellipse.IsInsideShape(borderX, borderY - 1))
                         {
                             for (int y = borderY; y <= height - 1; y++)
                             {
@@ -81,15 +81,13 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
             int width = terrain.GetLength(0);
             int height = terrain.GetLength(1) - centerY;
 
-            int xradius = Ellips.radiusFromDimensionSize(width);
-            int yradius = Ellips.radiusFromDimensionSize(height);
-
+            RegularEllipse ellipse = new RegularEllipse(new Position(0, 0), width, height);
 
             for (int borderX = 0; borderX < width; borderX++)
             {
                 for (int borderY = 0; borderY < height; borderY++) //TODO Coordinatenstelsels nakijken
                 {
-                    if (Ellips.isPointInEllips(borderX, borderY, xradius, yradius)) ;
+                    if (ellipse.IsInsideShape(borderX, borderY)) ;
                     {
                         terrain[borderX, borderY] = true;
                     }

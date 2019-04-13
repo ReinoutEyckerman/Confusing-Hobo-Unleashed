@@ -10,7 +10,7 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
         public VersusMenu()
         {
             CircularList<UIObject> versusMenuList = new CircularList<UIObject>();
-            UIObject singlePlayerButton = UIFactory.createButton();
+            UIObject singlePlayerButton = UIFactory.createDefaultButton("Single Player", this.singlePlayer,);
             UIObject splitScreenButton = UIFactory.createButton();
             UIObject lanButton = UIFactory.createButton();
             UIObject lanServerButton = UIFactory.createButton();

@@ -1,25 +1,28 @@
 using System;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Tools;
+using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.MapEdit
 {
-    internal class MapEditCursor
+    internal class PaintBrush
     {
         public bool CurrentPosDestr;
-
-        public MapEditCursor(int xcoord, int ycoord)
+        
+        public PaintBrush(int xcoord, int ycoord)
         {
             X = xcoord;
             Y = ycoord;
 
             CurrentPosChar = ' ';
-            CurrentPosBgColor = ConsoleColor.Black;
-            CurrentPosFgColor = ConsoleColor.White;
+            CurrentPosBgColor = BaseColor.Black;
+            CurrentPosFgColor = BaseColor.White;
             CurrentPosColl = false;
             CurrentPosDestr = true;
 
-            PaintBgColor = ConsoleColor.Black;
-            PaintFgColor = ConsoleColor.White;
+            PaintBgColor = BaseColor.Black;
+            PaintFgColor = BaseColor.White;
             PaintChar = null;
         }
 
@@ -27,12 +30,12 @@ namespace Confusing_Hobo_Unleashed.MapEdit
         public int Y { get; set; }
         //Properties of the current block the cursor is on.
         public char CurrentPosChar { get; set; }
-        public ConsoleColor CurrentPosBgColor { get; set; }
-        public ConsoleColor CurrentPosFgColor { get; set; }
+        public BaseColor CurrentPosBgColor { get; set; }
+        public BaseColor CurrentPosFgColor { get; set; }
         public bool CurrentPosColl { get; set; }
         //Selected paint options.
-        public ConsoleColor PaintFgColor { get; set; }
-        public ConsoleColor PaintBgColor { get; set; }
+        public BaseColor PaintFgColor { get; set; }
+        public BaseColor PaintBgColor { get; set; }
         public char? PaintChar { get; set; }
         public bool PaintCollision { get; set; }
         public bool PaintDestruct { get; set; }
@@ -40,65 +43,26 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public void ToggleBgColor(bool up)
         {
-            //create an array of all possible ConsoleColors and find the index of the currently selected color.
-            var currentindex = Array.IndexOf(Painter.Instance.Kleuren, PaintBgColor);
-
-            //add or subtract 1 of the index of the current color.
             if (up)
             {
-                if (currentindex + 1 >= Painter.Instance.Kleuren.Length)
-                {
-                    currentindex = 0;
-                }
-                else
-                {
-                    currentindex++;
-                }
+                PaintBgColor.Next();
             }
             else
             {
-                if (currentindex - 1 < 0)
-                {
-                    currentindex = Painter.Instance.Kleuren.Length - 1;
-                }
-                else
-                {
-                    currentindex--;
-                }
+                PaintBgColor.Previous();
             }
-
-            PaintBgColor = (ConsoleColor) Painter.Instance.Kleuren.GetValue(currentindex);
         }
 
         public void ToggleFgColor(bool up)
         {
-            //See ToggleBgColor for explanation.
-            var currentindex = Array.IndexOf(Painter.Instance.Kleuren, PaintFgColor);
-
             if (up)
             {
-                if (currentindex + 1 >= Painter.Instance.Kleuren.Length)
-                {
-                    currentindex = 0;
-                }
-                else
-                {
-                    currentindex++;
-                }
+                PaintFgColor.Next();
             }
             else
             {
-                if (currentindex - 1 < 0)
-                {
-                    currentindex = Painter.Instance.Kleuren.Length - 1;
-                }
-                else
-                {
-                    currentindex--;
-                }
+                PaintFgColor.Previous();
             }
-
-            PaintFgColor = (ConsoleColor) Painter.Instance.Kleuren.GetValue(currentindex);
         }
 
         public void ToggleChar()

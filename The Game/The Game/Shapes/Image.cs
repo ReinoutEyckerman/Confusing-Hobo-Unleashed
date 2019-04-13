@@ -11,7 +11,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
         private Window window;
 
 
-        public Image(int width, int height, Position position) : base(position, width, height)
+        public Image(Position position, int width, int height) : base(position, width, height)
         {
             this.imageGrid = new Pixel[width, height];
         }

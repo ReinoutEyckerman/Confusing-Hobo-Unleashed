@@ -12,19 +12,24 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
     public abstract class UIObject : Drawable
     {
         protected bool isActive;
+        protected BoundingBox boundingBox;
         private Image activeImage;
         protected Image inactiveImage;
 
 
-        protected UIObject(Image image) : this(image, image)
+        protected UIObject(Position position, Image image) : this(position, image, image)
         {
         }
 
 
-        protected UIObject(Image activeImage, Image inactiveImage)
+        protected UIObject(Position position, Image activeImage, Image inactiveImage)
         {
             this.activeImage = activeImage;
             this.inactiveImage = inactiveImage;
+
+            int maxWidth = Math.Max(activeImage.getWidth(), inactiveImage.getWidth());
+            int maxHeight = Math.Max(activeImage.getHeight(), inactiveImage.getHeight());
+            this.boundingBox=new BoundingBox(position, maxWidth,maxHeight );
         }
 
         public virtual bool IsActive()
@@ -45,5 +50,10 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         }
 
         public abstract void HandleAction(Input action);
+
+        public BoundingBox getBoundingBox()
+        {
+            return this.boundingBox;
+        }
     }
 }

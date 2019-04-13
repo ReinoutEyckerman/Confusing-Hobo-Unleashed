@@ -9,17 +9,31 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
     {
         private int width;
         private int height;
-        
-        public GridMenu(int width, int height, CircularList<UIObject> items, Image image) : this(width, height,items, image, image)
-        {
-        } 
-        
-        public GridMenu(int width, int height,CircularList<UIObject> items, Image activeImage, Image inactiveImage) : base(items, activeImage, inactiveImage)
+
+        public GridMenu(int width, int height, CircularList<UIObject> items, int padding = 0) : base(items, padding)
         {
             this.width = width;
             this.height = height;
         }
-        
+
+        public GridMenu(CircularList<UIObject> items, Image image, int width, int height) : base(items, image)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
+        public GridMenu(CircularList<UIObject> items, Position position, Image image, int width, int height) : base(items, position, image)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
+        public GridMenu(CircularList<UIObject> items, Position position, Image activeImage, Image inactiveImage, int width, int height) : base(items, position, activeImage, inactiveImage)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
         public override void HandleAction(Input action)
         {
             if (isActive)
@@ -40,11 +54,11 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
                     this.isActive = false;
                     break;
                 case Input.LEFT:
-                     items.decrement();
-                     break;
+                    items.decrement();
+                    break;
                 case Input.RIGHT:
-                     items.increment();
-                     break;
+                    items.increment();
+                    break;
                 case Input.DOWN:
                     items.increment(width);
                     break;
@@ -52,8 +66,8 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
                     items.decrement(width);
                     break;
                 default:
-                     items.currentItem().HandleAction(action);
-                     break;
+                    items.currentItem().HandleAction(action);
+                    break;
             }
         }
 

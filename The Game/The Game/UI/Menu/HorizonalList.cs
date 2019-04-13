@@ -9,13 +9,6 @@ namespace Confusing_Hobo_Unleashed.UI
 {
     public class HorizonalList : AbstractList
     {
-        public HorizonalList(CircularList<UIObject> items, Image image) : base(items, image)
-        {
-        }
-
-        public HorizonalList(CircularList<UIObject> items, Image activeImage, Image inactiveImage) : base(items, activeImage, inactiveImage)
-        {
-        }
 
         public override void HandleAction(Input action)
         {
@@ -56,6 +49,22 @@ namespace Confusing_Hobo_Unleashed.UI
                     this.isActive = true;
                     break;
             }
+        }
+
+        public HorizonalList(CircularList<UIObject> items, int padding = 0) : base(items, padding)
+        {
+        }
+
+        public HorizonalList(CircularList<UIObject> items, Image image) : base(items, image)
+        {
+        }
+
+        public HorizonalList(CircularList<UIObject> items, Position position, Image image) : base(items, position, image)
+        {
+        }
+
+        public HorizonalList(CircularList<UIObject> items, Position position, Image activeImage, Image inactiveImage) : base(items, position, activeImage, inactiveImage)
+        {
         }
     }
 }

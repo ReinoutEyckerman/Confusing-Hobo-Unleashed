@@ -42,14 +42,6 @@ namespace Confusing_Hobo_Unleashed.Shapes
                 var ypos = Convert.ToInt16(w * rico * (x - x1) + height - 1);
             }
 
-            for (int x = 0; x < width; x++) //TODO
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    grid[x, y] = this.pixel;
-                }
-            }
-            return base.toImage().addTopLayer(new Image(grid,this.position));
         }
 
         public override bool IsOnBorder(int x, int y)

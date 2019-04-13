@@ -1,20 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.Tools;
+using Confusing_Hobo_Unleashed.UI.Colors;
 using Confusing_Hobo_Unleashed.UI.UIElements;
+using Confusing_Hobo_Unleashed.UI.Windows;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
     internal class VerticalList : AbstractList
     {
+        public VerticalList(CircularList<UIObject> items, int padding = 0) : base(items, padding)
+        {
+        }
+
         public VerticalList(CircularList<UIObject> items, Image image) : base(items, image)
         {
         }
 
-        public VerticalList(CircularList<UIObject> items, Image activeImage, Image inactiveImage) : base(items, activeImage, inactiveImage)
+        public VerticalList(CircularList<UIObject> items, Position position, Image image) : base(items, position, image)
+        {
+        }
+
+        public VerticalList(CircularList<UIObject> items, Position position, Image activeImage, Image inactiveImage) : base(items, position, activeImage, inactiveImage)
         {
         }
 

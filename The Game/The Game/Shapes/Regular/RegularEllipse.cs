@@ -15,13 +15,13 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.yradius = copy.yradius;
         }
 
-        protected RegularEllipse(Position position, int width, int height) : base(position, width, height)
+        public RegularEllipse(Position position, int width, int height) : base(position, width, height)
         {
             this.xradius = (int) Math.Floor(Math.Pow(getWidth(), 2));
             this.yradius = (int) Math.Floor(Math.Pow(getHeight(), 2));
         }
 
-        protected RegularEllipse(Orientation orientation, Position position, int width, int height) : base(orientation, position, width, height)
+        public RegularEllipse(Orientation orientation, Position position, int width, int height) : base(orientation, position, width, height)
         {
             this.xradius = (int) Math.Floor(Math.Pow(getWidth(), 2));
             this.yradius = (int) Math.Floor(Math.Pow(getHeight(), 2));
