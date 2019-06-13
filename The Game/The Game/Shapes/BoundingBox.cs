@@ -1,27 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Confusing_Hobo_Unleashed.Shapes;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
     public class BoundingBox
     {
-        protected Position position;
-        protected readonly int width;
         protected readonly int height;
+        protected readonly int width;
+        protected Position position;
 
         public BoundingBox(BoundingBox copy)
         {
-            if (copy.position != null)
-            {
-                this.position = new Position(copy.position);
-            }
+            if (copy.position != null) position = new Position(copy.position);
 
-            this.width = copy.width;
-            this.height = copy.height;
+            width = copy.width;
+            height = copy.height;
         }
 
         public BoundingBox(Position position, int width, int height)
@@ -31,30 +23,28 @@ namespace Confusing_Hobo_Unleashed.UI
             this.height = height;
         }
 
-        public BoundingBox(int width, int height)
+        public BoundingBox(int width, int height) //TODO legitness nakijken
         {
-            this.position = null;
+            position = null;
             this.width = width;
             this.height = height;
         }
 
         public Position getGeometricCenter()
         {
-            return new Position(this.width / 2, this.height / 2);
+            return new Position(width / 2, height / 2);
         }
 
         public Position getPositionalCenter()
         {
-            if (position == null)
-            {
-                throw new NullReferenceException();
-            }
+            if (position == null) throw new NullReferenceException();
 
-            return new Position(this.position.x + this.width / 2, this.position.y + this.height / 2);
+            return new Position(position.x + width / 2, position.y + height / 2);
         }
 
         public Position getPosition()
         {
+            if (position == null) throw new NullReferenceException();
             return position;
         }
 
@@ -70,46 +60,50 @@ namespace Confusing_Hobo_Unleashed.UI
 
         public bool isPointInside(Position position)
         {
-            return this.isPointInside(position.x, position.y);
+            return isPointInside(position.x, position.y);
         }
 
         public bool isPointInside(int x, int y)
         {
-            if (x < this.position.x)
-            {
-                return false;
-            }
+            if (x < getPosition().x) return false;
 
-            if (y < this.position.y)
-            {
-                return false;
-            }
+            if (y < getPosition().y) return false;
 
-            if (x > this.position.x + this.width)
-            {
-                return false;
-            }
+            if (x > getPosition().x + width) return false;
 
-            if (y > this.position.y + this.height)
-            {
-                return false;
-            }
+            if (y > getPosition().y + height) return false;
 
             return true;
         }
 
+        public BoundingBox reposition(int x, int y)
+        {
+            return reposition(new Position(x, y));
+        }
+
+        public BoundingBox reposition(Position newPosition)
+        {
+            return new BoundingBox(newPosition, width, height);
+        }
+
+        public BoundingBox enlarge(int width, int height)
+        {
+            return new BoundingBox(position, this.width + width, this.height + height);
+        }
+
         public BoundingBox grow(BoundingBox boundingBox)
         {
-            int minX = Math.Min(this.position.x, boundingBox.position.x);
-            int minY = Math.Min(this.position.y, boundingBox.position.y);
-            int maxX = Math.Max(this.position.x + this.width, boundingBox.position.x + boundingBox.width);
-            int maxY = Math.Max(this.position.y + this.height, boundingBox.position.y + boundingBox.height);
+            var minX = Math.Min(position.x, boundingBox.position.x);
+            var minY = Math.Min(position.y, boundingBox.position.y);
+            var maxX = Math.Max(position.x + width, boundingBox.position.x + boundingBox.width);
+            var maxY = Math.Max(position.y + height, boundingBox.position.y + boundingBox.height);
             return new BoundingBox(new Position(minX, minY), maxX - minX, maxY - minY);
         }
 
         public BoundingBox grow(int padding)
         {
-            return new BoundingBox(new Position(this.position.x-padding, this.position.y-padding),this.width+padding, this.height+padding);
+            return new BoundingBox(new Position(position.x - padding, position.y - padding), width + padding,
+                height + padding);
         }
     }
 }

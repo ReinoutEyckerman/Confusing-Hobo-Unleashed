@@ -1,52 +1,47 @@
+using System;
 using Confusing_Hobo_Unleashed.Multiplayer;
-using Confusing_Hobo_Unleashed.Tools;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 {
-    public class VersusMenu
+    public class VersusMenu : Menu
     {
         private bool versus = true;
+
         public VersusMenu()
         {
-            CircularList<UIObject> versusMenuList = new CircularList<UIObject>();
-            UIObject singlePlayerButton = UIFactory.createDefaultButton("Single Player", this.singlePlayer,);
-            UIObject splitScreenButton = UIFactory.createButton();
-            UIObject lanButton = UIFactory.createButton();
-            UIObject lanServerButton = UIFactory.createButton();
-            versusMenuList.Add(singlePlayerButton);
-            versusMenuList.Add(splitScreenButton);
-            versusMenuList.Add(lanButton);
-            versusMenuList.Add(lanServerButton);
-            Menu versusMenu = new Menu(versusMenuList,null);//TODO
-            return versusMenu;
-            /*
-            new Button {Message = "Single-Player", Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*0, BlockHeight = Console.WindowHeight/9},
-             new Button {Message = "Split-Screen", Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*1, BlockHeight = Console.WindowHeight/9},
-              new Button {Message = "LAN", Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*2, BlockHeight = Console.WindowHeight/9},
-               new Button {Message = "New LAN Server", Ypos = Console.WindowHeight/6 + (Console.WindowHeight/5)*3, BlockHeight = Console.WindowHeight/9}},
-                TextBoxList = new List<TextBox>()}};
-                */
+            var versusMenuList = new AbstractListBuilder()
+                .addUIObject(UIFactory.createDefaultRelativeButton("Single Player", singlePlayer))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Split-Screen", splitScreen))
+                .addUIObject(UIFactory.createDefaultRelativeButton("LAN", lan))
+                .addUIObject(UIFactory.createDefaultRelativeButton("New LAN Server", lanServer))
+                .buildVertical();
+
+            root = versusMenuList;
         }
 
         private void singlePlayer()
         {
-          //  MapSelectionMenu//TODO
+            //  MapSelectionMenu//TODO
+            throw new NotImplementedException();
         }
 
         private void splitScreen()
         {
-          //  MapSelectionMenu//TODO
+            //  MapSelectionMenu//TODO
+            throw new NotImplementedException();
         }
 
         private void lan()
         {
-            Client.Start();//TODO
+            throw new NotImplementedException();
+            Client.Start(); //TODO
         }
 
         private void lanServer()
         {
-            Server.Start();//TODO
+            throw new NotImplementedException();
+            Server.Start(); //TODO
         }
     }
 }

@@ -1,5 +1,4 @@
-using Confusing_Hobo_Unleashed.Shapes;
-using Confusing_Hobo_Unleashed.Tools;
+using System;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
@@ -11,45 +10,39 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 
         public MainMenu()
         {
-            CircularList<UIObject> mainMenuList = new CircularList<UIObject>();
-            UIObject startButton = UIFactory.createDefaultButton("Start the Game!", new TriggerEventHandler(startGame),);
-            UIObject versusButton = UIFactory.createDefaultButton("Versus Mode", new TriggerEventHandler(versusScreen),);
-            UIObject mapEditorButton = UIFactory.createDefaultButton("Map Editor", new TriggerEventHandler(mapEditorScreen),);
-            UIObject configScreenButton = UIFactory.createDefaultButton("Configuration Screen", new TriggerEventHandler(configScreen),);
-            UIObject creditsButton = UIFactory.createDefaultButton("Credits", new TriggerEventHandler(creditsScreen),);
-            mainMenuList.Add(startButton);
-            mainMenuList.Add(versusButton);
-            mainMenuList.Add(mapEditorButton);
-            mainMenuList.Add(configScreenButton);
-            mainMenuList.Add(creditsButton);
-            this.root = new GridMenu(4, mainMenuList.Count / 4, mainMenuList,); //TODO
-            /*
-             new Button {Message = "Start the Game!", Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*0, BlockHeight = Console.WindowHeight/9},
-             new Button {Message = "Versus Mode", Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*1, BlockHeight = Console.WindowHeight/9},
-             new Button {Message = "Map Editor", Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*2, BlockHeight = Console.WindowHeight/9},
-             new Button {Message = "Configuration Screen", Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*3, BlockHeight = Console.WindowHeight/9},
-             new Button {Message = "Credits", Ypos = Console.WindowHeight/5 + (Console.WindowHeight/6)*4, BlockHeight = Console.WindowHeight/9}
-             */
+            var verticalList = new AbstractListBuilder(5)
+                .addUIObject(UIFactory.createDefaultRelativeButton("Start the Game!", startGame))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Versus Mode", versusScreen))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Map Editor", mapEditorScreen))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Configuration Screen", configScreen))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Credits", creditsScreen))
+                .buildVertical();
+            root = verticalList;
         }
 
         private void startGame()
         {
+            throw new NotImplementedException();
         }
 
         private void versusScreen()
         {
+            throw new NotImplementedException();
         }
 
         private void mapEditorScreen()
         {
+            throw new NotImplementedException();
         }
 
         private void configScreen()
         {
+            throw new NotImplementedException();
         }
 
         private void creditsScreen()
         {
+            throw new NotImplementedException();
         }
     }
 }
