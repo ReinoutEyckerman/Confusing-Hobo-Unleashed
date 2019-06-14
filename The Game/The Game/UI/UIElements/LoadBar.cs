@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Confusing_Hobo_Unleashed.Extensions;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.Colors;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
-    public class LoadBar : UIObject// TODO Better Observer Pattern
-    //TODO Regenerate image
+    public class LoadBar : UIObject
     {
         private Pixel loadColor;
-
-        public LoadBar(Dictionary<string, TriggerEventHandler> loadTasks, Pixel loadColor, Position position, Image image) : base(position, image)
+        private int progress;
+        private int previousProgress;
+        
+        public LoadBar( Pixel loadColor, Position position, Image image) : base(position, image)
         {
             this.loadColor = loadColor;
         }
@@ -22,41 +24,36 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
             this.loadColor = loadColor;
         }
 
-        public void Update()
+        public void setProgress(int progress)
         {
-            for (var a = 1; a <= 3; a++)
-            {
-                Console.SetCursorPosition(Console.WindowWidth * 2 / 5 + 1, Console.WindowHeight * 5 / 6 + a);
-                for (var b = Console.WindowWidth * 2 / 5 + 1; b < Console.WindowWidth * 2 / 5 + _barCount * barLength; b++)
-                {
-                    Console.Write(" ");
-                }
-            }
-
-            _barCount++;
-            Thread.Sleep(20);
-            Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
-            int w;
-            if (_prevMessage > Console.WindowWidth / 5)
-                w = (_prevMessage - Console.WindowWidth / 5) / 2;
-            else w = 0;
-            Console.SetCursorPosition(Console.WindowWidth * 4 / 10 - w, Console.WindowHeight * 5 / 6 - 1);
-            for (var a = 0; a < _prevMessage; a++)
-            {
-                Console.Write(" ");
-            }
-
-            if (message.Length > Console.WindowWidth / 5)
-                w = (message.Length - Console.WindowWidth / 5) / 2;
-            else w = 0;
-            Console.SetCursorPosition(Console.WindowWidth * 2 / 5 - w, Console.WindowHeight * 5 / 6 - 1);
-            Console.Write(message);
-            _prevMessage = message.Length;
+            this.progress = progress.Clamp(0, 100);
         }
 
         public override void HandleAction(Input action)
         {
             throw new System.NotImplementedException();
+        }
+
+        private void regenerateImage()
+        {
+            if (progress != previousProgress)
+            {
+                previousProgress = progress;
+                throw new NotImplementedException();
+                //TODO recreate image
+            }
+        }
+
+        public override void Draw()
+        {
+            regenerateImage();
+            base.Draw();
+        }
+
+        public override void DrawRelative(Position relativePosition)
+        {
+            regenerateImage();
+            base.DrawRelative(relativePosition);
         }
 
     }

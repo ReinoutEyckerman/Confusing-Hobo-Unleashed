@@ -33,7 +33,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
                 inactiveImage.Draw();
         }
 
-        public void DrawRelative(Position relativeTo)
+        public virtual void DrawRelative(Position relativeTo)
         {
             if (IsActive())
                 activeImage.DrawRelative(relativeTo);

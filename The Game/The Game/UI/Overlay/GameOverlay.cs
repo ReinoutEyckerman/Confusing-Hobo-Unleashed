@@ -1,21 +1,18 @@
 ﻿using System;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed
 {
-    internal class GameUi
+    internal class GameOverlay:Drawable
     {
-        private const int UiLeftX = 2;
-        private static readonly short UiBoxColors = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Black, true));
-        private static readonly short UiTextColors = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.DarkGray), Painter.Instance.Paint(ConsoleColor.Cyan, true));
-        private static readonly short HpBarColor = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Green), Painter.Instance.Paint(ConsoleColor.Black, true));
-        private static readonly short HpBarLostColor = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Red), Painter.Instance.Paint(ConsoleColor.Black, true));
-        private static readonly int UiRightX = MainGame.CurrentLoadedMap.Background.GetLength(1) - 2;
-        private static readonly int UiTopY = MainGame.CurrentLoadedMap.Background.GetLength(0) + 1;
-        private static int _uiBotY = Console.WindowHeight - 2;
+        public GameOverlay()
+        {
+            
+        }
 
-        public static void DrawUi(Buffer outputbuffer, Player player1 /*Player player2*/)
+        public static void DrawOverlay(Buffer outputbuffer, Player player1 /*Player player2*/)
         {
             //This IF sets the maximum height of the UI to 5
             if (_uiBotY - UiTopY > 7)
@@ -37,6 +34,16 @@ namespace Confusing_Hobo_Unleashed
             {
                 outputbuffer.Draw(" ", xpos + i, ypos + 1, HpBarColor);
             }
+        }
+
+        public void Draw()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DrawRelative(Position relativeTo)
+        {
+            throw new NotImplementedException();
         }
     }
 }

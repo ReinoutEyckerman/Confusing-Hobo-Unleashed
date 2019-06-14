@@ -27,7 +27,6 @@ namespace Confusing_Hobo_Unleashed.MapEdit
 
         public static void WorkingSpace()
         {
-            Endgame.PlayMusic();
             Init();
             Console.CursorVisible = true;
             Console.CursorSize = 100;

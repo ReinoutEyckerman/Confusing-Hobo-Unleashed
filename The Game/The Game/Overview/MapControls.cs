@@ -19,7 +19,6 @@ namespace Confusing_Hobo_Unleashed
             MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].LayerToBuffer(MainGame.GameBuffer);
             MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].LayerToBuffer(MainGame.GameBuffer);
             MainGame.GameBuffer.Print();
-            Endgame.PlayMusic();
             DrawMapBg();
             MoveUser();
         }
