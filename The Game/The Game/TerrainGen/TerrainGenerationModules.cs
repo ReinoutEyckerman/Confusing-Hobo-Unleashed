@@ -12,27 +12,27 @@ namespace Confusing_Hobo_Unleashed.TerrainGen
         private static int _vertiCounter;
         private static int _horiCounter;
 
-        public static bool[,] line(bool[,] terrain, int startY, int endY, bool topDown)
+        public static bool[,] line(bool[,] terrain,BoundingBox boundingBox, int startY, int endY, bool topDown)
         {
-            int width = terrain.GetLength(0);
-            int height = terrain.GetLength(1);
+            int width = boundingBox.getWidth();
+            int height = boundingBox.getHeight();
 
             double differential = (endY - startY) / (double) width;
 
-            for (int borderX = 0; borderX < width; borderX++)
+            for (int borderX = boundingBox.getPosition().x; borderX < boundingBox.getPosition().x+width; borderX++)
             {
                 int borderY = (int) Math.Floor(borderX * differential);
 
                 if (topDown)
                 {
-                    for (int y = borderY; y >= 0; y--)
+                    for (int y = borderY; y >= boundingBox.getPosition().y; y--)
                     {
                         terrain[borderX, borderY] = true;
                     }
                 }
                 else
                 {
-                    for (int y = borderY; y <= height - 1; y++)
+                    for (int y = borderY; y <= boundingBox.getPosition().y+height - 1; y++)
                     {
                         terrain[borderX, borderY] = true;
                     }

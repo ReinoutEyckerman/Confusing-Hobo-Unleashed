@@ -84,7 +84,8 @@
     <Compile Include="Enemies\Necromancer.cs" />
     <Compile Include="Enemies\Roflcopter.cs" />
     <Compile Include="Enemies\Zerg.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="Level\Background.cs" />
+    <Compile Include="Level\Level.cs" />
     <Compile Include="Map\CustomMap.cs" />
     <Compile Include="Map\Layer.cs" />
     <Compile Include="AlphaBootScreen.cs" />
@@ -116,7 +117,6 @@
     <Compile Include="Shapes\Regular\RegularEllipse.cs" />
     <Compile Include="Shapes\Regular\RegularRectangle.cs" />
     <Compile Include="Shapes\Regular\RegularShape.cs" />
-    <Compile Include="Shapes\Regular\RegularTrapeze.cs" />
     <Compile Include="Shapes\BoundingBox.cs" />
     <Compile Include="Shapes\Drawer\FilledShapeDrawer.cs" />
     <Compile Include="Shapes\ShapeBuilder.cs" />
