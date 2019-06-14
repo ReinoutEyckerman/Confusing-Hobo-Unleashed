@@ -1,76 +1,71 @@
-using System;
 using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.UI.Colors;
-using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
     public class Image : BoundingBox, Drawable
     {
-        private Pixel[,] imageGrid;
+        private readonly Pixel[,] imageGrid;
         private Window window;
 
 
         public Image(Position position, int width, int height) : base(position, width, height)
         {
-            this.imageGrid = new Pixel[width, height];
+            imageGrid = new Pixel[width, height];
         }
 
-        public Image(Pixel[,] imageGrid, Position position) : base(position, imageGrid.GetLength(0), imageGrid.GetLength(1)) //TODO new pos
+        public Image(Pixel[,] imageGrid, Position position) : base(position, imageGrid.GetLength(0),
+            imageGrid.GetLength(1)) //TODO new pos
         {
             this.imageGrid = imageGrid;
         }
 
+        public void Draw()
+        {
+            for (var i = 0; i < getWidth(); i++)
+            for (var j = 0; j < getHeight(); j++)
+                if (imageGrid[i, j] != null)
+                    window.Draw(position.add(new Position(i, j)), imageGrid[i, j]);
+        }
+
+        public void DrawRelative(Position relativeTo)
+        {
+            var relativePosition = position.add(relativeTo);
+            for (var i = 0; i < getWidth(); i++)
+            for (var j = 0; j < getHeight(); j++)
+                if (imageGrid[i, j] != null)
+                    window.Draw(relativePosition.add(new Position(i, j)), imageGrid[i, j]);
+        }
+
         public Image addTopLayer(GeneratedImage image)
         {
-            return this.addTopLayer(image.toImage());
+            return addTopLayer(image.toImage());
         }
 
         public Image addTopLayer(Image topLayer)
         {
-            Position topLeft = Position.getMinPosition(this.position, topLayer.position);
-            Position bottomRight = Position.getMaxPosition(this.position.add(new Position(this.getWidth(), this.getHeight())), topLayer.position.add(new Position(topLayer.getWidth(), topLayer.getHeight())));
-            Position dimensions = bottomRight.substract(topLeft);
-            int width = dimensions.x;
-            int height = dimensions.y;
-            Pixel[,] imagegrid = new Pixel[width, height];
+            var topLeft = Position.getMinPosition(position, topLayer.position);
+            var bottomRight = Position.getMaxPosition(position.add(new Position(getWidth(), getHeight())),
+                topLayer.position.add(new Position(topLayer.getWidth(), topLayer.getHeight())));
+            var dimensions = bottomRight.substract(topLeft);
+            var width = dimensions.x;
+            var height = dimensions.y;
+            var imagegrid = new Pixel[width, height];
 
-            for (int i = 0; i < width; i++)
+            for (var i = 0; i < width; i++)
+            for (var j = 0; j < height; j++)
             {
-                for (int j = 0; j < height; j++)
-                {
-                    Pixel pixel = new Pixel();
+                var pixel = new Pixel();
 
-                    Position currentPosition = topLeft.add(new Position(i, j));
-                    if (this.isPointInside(currentPosition))
-                    {
-                        pixel.add(this.imageGrid[i, j]);
-                    }
+                var currentPosition = topLeft.add(new Position(i, j));
+                if (isPointInside(currentPosition)) pixel.add(imageGrid[i, j]);
 
-                    if (topLayer.isPointInside(currentPosition))
-                    {
-                        pixel.add(topLayer.imageGrid[i, j]);
-                    }
+                if (topLayer.isPointInside(currentPosition)) pixel.add(topLayer.imageGrid[i, j]);
 
-                    imagegrid[i, j] = pixel;
-                }
+                imagegrid[i, j] = pixel;
             }
 
-            return new Image(imagegrid,topLeft);
-        }
-
-        public void Draw()
-        {
-            for (int i = 0; i < this.getWidth(); i++)
-            {
-                for (int j = 0; j < this.getHeight(); j++)
-                {
-                    if (this.imageGrid[i, j] != null)
-                    {
-                        this.window.Draw(this.position.add(new Position(i, j)), this.imageGrid[i, j]);
-                    }
-                }
-            }
+            return new Image(imagegrid, topLeft);
         }
     }
 }

@@ -151,6 +151,7 @@
     <Compile Include="UI\Colors\ColorSchemes.cs" />
     <Compile Include="UI\Drawable.cs" />
     <Compile Include="UI\Menu\AbstractList.cs" />
+    <Compile Include="UI\Menu\AbstractListBuilder.cs" />
     <Compile Include="UI\Menu\GridMenu.cs" />
     <Compile Include="UI\Menu\HorizonalList.cs" />
     <Compile Include="UI\Menu\MenuImpl\ConfigurationMenu.cs" />
