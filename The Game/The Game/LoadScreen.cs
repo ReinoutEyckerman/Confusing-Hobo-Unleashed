@@ -37,7 +37,7 @@ namespace Confusing_Hobo_Unleashed
                     item.Value.Invoke();
                 }
 
-                _barCount = 1;
+                barCount = 1;
                 //  StartMenu.Fire.Abort();
                 MapControls.DrawMap();
             }
@@ -50,21 +50,21 @@ namespace Confusing_Hobo_Unleashed
             for (var a = 1; a <= 3; a++)
             {
                 Console.SetCursorPosition(Console.WindowWidth * 2 / 5 + 1, Console.WindowHeight * 5 / 6 + a);
-                for (var b = Console.WindowWidth * 2 / 5 + 1; b < Console.WindowWidth * 2 / 5 + _barCount * barLength; b++)
+                for (var b = Console.WindowWidth * 2 / 5 + 1; b < Console.WindowWidth * 2 / 5 + barCount * barLength; b++)
                 {
                     Console.Write(" ");
                 }
             }
 
-            _barCount++;
+            barCount++;
             Thread.Sleep(20);
             Console.BackgroundColor = Painter.Instance.Paint(ConsoleColor.Blue);
             int w;
-            if (_prevMessage > Console.WindowWidth / 5)
-                w = (_prevMessage - Console.WindowWidth / 5) / 2;
+            if (prevMessage > Console.WindowWidth / 5)
+                w = (prevMessage - Console.WindowWidth / 5) / 2;
             else w = 0;
             Console.SetCursorPosition(Console.WindowWidth * 4 / 10 - w, Console.WindowHeight * 5 / 6 - 1);
-            for (var a = 0; a < _prevMessage; a++)
+            for (var a = 0; a < prevMessage; a++)
             {
                 Console.Write(" ");
             }
@@ -74,13 +74,20 @@ namespace Confusing_Hobo_Unleashed
             else w = 0;
             Console.SetCursorPosition(Console.WindowWidth * 2 / 5 - w, Console.WindowHeight * 5 / 6 - 1);
             Console.Write(message);
-            _prevMessage = message.Length;
+            prevMessage = message.Length;
         }
 
         private delegate void TempDelegate();
 
-        private static int _barCount = 1;
-        private static int _prevMessage;
-        private static readonly Dictionary<string, TempDelegate> LoadMessages = new Dictionary<string, TempDelegate> {{"Clearing Variables...", MapGeneration.Clearvars}, {"Map Generation Started...", MapGeneration.GenerateCorridors}, {"Advanced Map Generation Initiated...", MapFixVars}, {"Defining Variables...", Definevars}};
+        private static int barCount = 1;
+        private static int prevMessage;
+        private static readonly Dictionary<string, TempDelegate> LoadMessages = new Dictionary<string, TempDelegate>
+        {
+            {"Clearing Variables...", MapGeneration.Clearvars},
+            {"Map Generation Started...", MapGeneration.GenerateCorridors},
+            {"Advanced Map Generation Initiated...", MapFixVars},
+            {"Defining Variables...", Definevars}
+        };
+        
     }
 }

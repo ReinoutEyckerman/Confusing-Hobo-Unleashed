@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.Tools;
 using Confusing_Hobo_Unleashed.UI.Colors;
@@ -62,36 +63,105 @@ namespace Confusing_Hobo_Unleashed.UI
 
         private static BoundingBox growBoundsHorizontal(List<UIObject> uiObjects, int padding)
         {
-            var bounds = new BoundingBox(padding, padding);
-            foreach (var uiObject in uiObjects)
+            int width = getTotalWidth(uiObjects)+padding*(uiObjects.Count+1);
+            int height = getLargestHeight(uiObjects);
+            int x = padding;
+            foreach (UIObject uiObject in uiObjects)
             {
-                uiObject.Reposition(new Position(bounds.getWidth(), padding));
-                var uiHeight = uiObject.getBoundingBox().getHeight();
-                var height = bounds.getHeight() - padding * 2 > uiHeight ? 0 : uiHeight;
-                bounds = bounds.enlarge(uiObject.getBoundingBox().getWidth() + padding, height);
-            }
+                int y = (height - uiObject.getBoundingBox().getHeight()) / 2;
+                uiObject.Reposition(new Position(x,y));
+                x += padding + uiObject.getBoundingBox().getWidth();
 
-            return bounds;
+            }
+            return new BoundingBox(width, height);
         }
 
         private static BoundingBox growBoundsVertical(List<UIObject> uiObjects, int padding)
         {
-            var bounds = new BoundingBox(padding * 2, padding * 2);
-            foreach (var uiObject in uiObjects)
+            int width = getLargestWidth(uiObjects);
+            int height = getTotalHeight(uiObjects) + padding * (uiObjects.Count + 1);
+            int y = padding;
+            foreach (UIObject uiObject in uiObjects)
             {
-                uiObject.Reposition(new Position(bounds.getWidth(), padding));
-                var uiWidth = uiObject.getBoundingBox().getWidth();
-                var width = bounds.getWidth() - padding * 2 > uiWidth ? 0 : uiWidth;
-                bounds = bounds.enlarge(width, uiObject.getBoundingBox().getHeight() + padding);
-            }
+                int x = (width - uiObject.getBoundingBox().getWidth()) / 2;
+                uiObject.Reposition(new Position(x,y));
+                y += padding + uiObject.getBoundingBox().getHeight();
 
-            return bounds;
+            }
+            return new BoundingBox(width, height);
         }
+        
 
         private static BoundingBox growBounds2D(List<UIObject> uiObjects, int padding, int maxWidth)
         {
             throw new NotImplementedException();
-            return null;
+            int width = 0;
+            int height = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                if (uiObject.getBoundingBox().getWidth() + width > maxWidth)
+                {
+                       
+                }
+                else
+                {
+                    width += uiObject.getBoundingBox().getWidth();
+                }
+            }
+        }
+        
+        private static void AllocateHorizontal(List<UIObject> uiObjects, Int32 maxWidth=Int32.MaxValue;)
+        {
+            int totalWidth = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                totalWidth += uiObject.getBoundingBox().getWidth();
+            }
+            
+        }
+        
+        private static int getTotalWidth(List<UIObject> uiObjects, Int32 maxWidth = Int32.MaxValue)
+        {
+            int totalWidth = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                totalWidth += uiObject.getBoundingBox().getWidth();
+            }
+            return totalWidth;
+        }
+        private static int getTotalHeight(List<UIObject> uiObjects)
+        {
+            int totalHeight = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                totalHeight += uiObject.getBoundingBox().getHeight();
+            }
+            return totalHeight;
+        }
+
+        private static int getLargestWidth(List<UIObject> uiObjects) //TODO Can we mmerge this with largestHeight?
+        {
+            //TODO LINQ?
+            int maxWidth = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                if (uiObject.getBoundingBox().getWidth() > maxWidth)
+                    maxWidth = uiObject.getBoundingBox().getWidth();
+            }
+
+            return maxWidth;
+        }
+
+        private static int getLargestHeight(List<UIObject> uiObjects)
+        {
+            int maxHeight = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                if (uiObject.getBoundingBox().getHeight() > maxHeight)
+                    maxHeight = uiObject.getBoundingBox().getHeight();
+            }
+
+            return maxHeight;
         }
     }
 }

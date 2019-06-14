@@ -20,5 +20,13 @@ namespace Confusing_Hobo_Unleashed
                 chamber.Draw();
             }
         }
+
+        public void DrawRelative(Position relativeTo)
+        {
+            foreach (Chamber chamber in _chamberGrid)
+            {
+                chamber.DrawRelative(relativeTo);
+            }
+        }
     }
 }

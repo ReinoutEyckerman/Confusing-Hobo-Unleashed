@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Confusing_Hobo_Unleashed.UI
 {
     //TODO: Make this a simplistic textbox with a set amount of characters and arrows pointing up and downward for char selection
-    public class TextBox:ActivateableUI
+    public class TextBox:UIObject
     {
         
         private Shape inactiveShape;
@@ -106,6 +106,11 @@ namespace Confusing_Hobo_Unleashed.UI
         }
 
         public override bool IsActive()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void HandleAction(Input action)
         {
             throw new NotImplementedException();
         }

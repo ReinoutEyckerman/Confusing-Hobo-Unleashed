@@ -29,6 +29,11 @@ namespace Confusing_Hobo_Unleashed
             throw new System.NotImplementedException();
         }
 
+        public void DrawRelative(Position relativeTo)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public bool IsDiscovered { get; private set; }
 
         public Position getPosition()

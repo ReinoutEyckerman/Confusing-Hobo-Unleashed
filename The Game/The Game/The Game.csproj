@@ -77,6 +77,8 @@
     <Compile Include="AI\AICore.cs" />
     <Compile Include="AI\AIMovementCore.cs" />
     <Compile Include="AI\BulletCore.cs" />
+    <Compile Include="Audio\SoundEngine.cs" />
+    <Compile Include="Audio\SoundPack.cs" />
     <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Enemies\Entity.cs" />
     <Compile Include="Enemies\Godzilla.cs" />
@@ -121,7 +123,6 @@
     <Compile Include="Shapes\Drawer\FilledShapeDrawer.cs" />
     <Compile Include="Shapes\ShapeBuilder.cs" />
     <Compile Include="Shapes\Text\Text.cs" />
-    <Compile Include="SoundEngine.cs" />
     <Compile Include="TerrainGen\AbstractMap.cs" />
     <Compile Include="TerrainGen\Components\DownwardsDiagonal.cs" />
     <Compile Include="TerrainGen\GravField.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Tools\CircularList.cs" />
     <Compile Include="Tools\EnumExtensions.cs" />
     <Compile Include="Tools\Matrix.cs" />
+    <Compile Include="UI\Banners\AbstractBanner.cs" />
     <Compile Include="UI\Banners\CongratulationsBanner.cs" />
     <Compile Include="UI\Banners\LostBanner.cs" />
     <Compile Include="UI\Banners\TitleBanner.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="UI\Menu\AbstractListBuilder.cs" />
     <Compile Include="UI\Menu\GridMenu.cs" />
     <Compile Include="UI\Menu\HorizonalList.cs" />
+    <Compile Include="UI\Menu\MenuImpl\Configuration.cs" />
     <Compile Include="UI\Menu\MenuImpl\ConfigurationMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\Credits.cs" />
     <Compile Include="UI\Menu\MenuImpl\MainMenu.cs" />
@@ -165,10 +168,11 @@
     <Compile Include="UI\Menu\VerticalList.cs" />
     <Compile Include="UI\Menu\Menu.cs" />
     <Compile Include="UI\Position.cs" />
-    <Compile Include="UI\Screen\Screen.cs" />
     <Compile Include="UI\UIElements\Button.cs" />
     <Compile Include="UI\UIElements\ButtonBuilder.cs" />
     <Compile Include="UI\UIElements\InsertBox.cs" />
+    <Compile Include="UI\UIElements\LoadBar.cs" />
+    <Compile Include="UI\UIElements\LoadBarBuilder.cs" />
     <Compile Include="UI\UIElements\TextBlock.cs" />
     <Compile Include="UI\UIElements\TriggerHandler.cs" />
     <Compile Include="UI\UIElements\TextBox.cs" />
@@ -187,6 +191,7 @@
     <Compile Include="StartMenu.cs" />
     <Compile Include="TerrainGen\TerrainGenerationModules.cs" />
     <Compile Include="TerrainGen\TerrainSelection.cs" />
+    <Compile Include="User\WeaponOptimized.cs" />
     <Compile Include="VarDatabase.cs" />
     <Compile Include="MapEdit\MapEditor.cs" />
     <Compile Include="TerrainGen\TerrainGraphics.cs" />

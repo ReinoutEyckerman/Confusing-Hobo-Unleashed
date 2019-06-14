@@ -4,14 +4,15 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 {
     public class ConfigurationMenu : Menu
     {
+        private Configuration configuration;
         public ConfigurationMenu()
-        {
+        {//TODO Name tags
             var mapSize = createMapsizeList();
-            AbstractList mapDisplaySize = new HorizonalList(createMapDisplayList(), null); //TODO
-            AbstractList difficulties = new HorizonalList(createDifficultyList()(), null); //TODO
-            AbstractList worldTypes = new HorizonalList(createWorldTypeList()(), null); //TODO
-            AbstractList colorScheme = new HorizonalList(createColorSchemeList()(), null); //TODO
-            AbstractList extras = new HorizonalList(createExtraList(), null); //TODO
+            AbstractList mapDisplaySize = this.createMapsizeList();
+            AbstractList difficulties = this.createDifficultyList();
+            AbstractList worldTypes = this.createWorldTypeList();
+            AbstractList colorScheme = this.createColorSchemeList();
+            AbstractList extras = this.createExtraList();
             var configMenuList = new AbstractListBuilder()
                 .addUIObject(mapSize)
                 .addUIObject(mapDisplaySize)

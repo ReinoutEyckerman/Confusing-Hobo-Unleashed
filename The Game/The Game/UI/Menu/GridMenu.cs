@@ -10,12 +10,6 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
         private int width;
         private int height;
 
-        public GridMenu(int width, int height, CircularList<UIObject> items, int padding = 0) : base(items, padding)
-        {
-            this.width = width;
-            this.height = height;
-        }
-
         public GridMenu(CircularList<UIObject> items, Image image, int width, int height) : base(items, image)
         {
             this.width = width;

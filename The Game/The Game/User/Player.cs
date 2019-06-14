@@ -74,6 +74,7 @@ namespace Confusing_Hobo_Unleashed.User
                             break;
                         }
                 }
+
                 if (X != 0 || Y != 0)
                     break;
             }

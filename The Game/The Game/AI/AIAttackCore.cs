@@ -26,6 +26,7 @@ namespace Confusing_Hobo_Unleashed.AI
                 if (t.X == xpos && t.Y == ypos)
                     t.HpCurrent -= source.WeaponInv[0].Damage;
             }
+
             DestructibleCheck(xpos, ypos);
         }
 
@@ -63,7 +64,7 @@ namespace Confusing_Hobo_Unleashed.AI
             if (WeaponInv[0].IsMelee)
                 MeleeCheck(this, x, y);
             else
-                WeaponInv[0].Shoot((byte) _attackDirection*100, x, y);
+                WeaponInv[0].Shoot((byte) _attackDirection * 100, x, y);
         }
 
         private void DestructibleCheck(int xpos, int ypos)
@@ -76,6 +77,7 @@ namespace Confusing_Hobo_Unleashed.AI
                     MainGame.CurrentLoadedMap.CollisionBackUp[ypos, xpos] = false;
                     MainGame.CurrentLoadedMap.Layers[Maplayers.Collision].Characters[ypos, xpos] = null;
                 }
+
                 MainGame.CurrentLoadedMap.Destructible[ypos, xpos] = false;
                 MainGame.CurrentLoadedMap.Layers[Maplayers.Destructible].Characters[ypos, xpos] = null;
             }
