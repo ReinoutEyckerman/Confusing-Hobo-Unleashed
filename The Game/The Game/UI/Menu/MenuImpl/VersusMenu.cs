@@ -10,35 +10,35 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 
         public VersusMenu()
         {
-            var versusMenuList = new AbstractListBuilder()
+            AbstractList versusMenuList = new VerticalListBuilder()
                 .addUIObject(UIFactory.createDefaultRelativeButton("Single Player", singlePlayer))
                 .addUIObject(UIFactory.createDefaultRelativeButton("Split-Screen", splitScreen))
                 .addUIObject(UIFactory.createDefaultRelativeButton("LAN", lan))
                 .addUIObject(UIFactory.createDefaultRelativeButton("New LAN Server", lanServer))
-                .buildVertical();
+                .build();
 
             root = versusMenuList;
         }
 
-        private void singlePlayer()
+        private void singlePlayer(object parameter)
         {
             //  MapSelectionMenu//TODO
             throw new NotImplementedException();
         }
 
-        private void splitScreen()
+        private void splitScreen(object parameter)
         {
             //  MapSelectionMenu//TODO
             throw new NotImplementedException();
         }
 
-        private void lan()
+        private void lan(object parameter)
         {
             throw new NotImplementedException();
             Client.Start(); //TODO
         }
 
-        private void lanServer()
+        private void lanServer(object parameter)
         {
             throw new NotImplementedException();
             Server.Start(); //TODO

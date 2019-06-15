@@ -7,25 +7,25 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
     {
         public MapEditorNewMapMenu()
         {
-            var mapEditorNewMapList = new AbstractListBuilder()
+            AbstractList mapEditorNewMapList = new VerticalListBuilder()
                 .addUIObject(UIFactory.createDefaultRelativeButton("Gen Clouds InGame", setCloudGeneration))
                 .addUIObject(UIFactory.createDefaultRelativeButton("Gen Sky Ingame", setSkyGeneration))
                 .addUIObject(UIFactory.createDefaultRelativeButton("Continue", Continue))
-                .buildVertical();
+                .build();
             root = mapEditorNewMapList;
         }
 
-        private void setCloudGeneration()
+        private void setCloudGeneration(object parameter)
         {
             throw new NotImplementedException();
         }
 
-        private void setSkyGeneration()
+        private void setSkyGeneration(object parameter)
         {
             throw new NotImplementedException();
         }
 
-        private void Continue()
+        private void Continue(object parameter)
         {
             throw new NotImplementedException();
         }

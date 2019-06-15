@@ -7,25 +7,25 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
     public class UIFactory
     {
         public static Button
-            createDefaultRelativeButton(string text, TriggerEventHandler triggerEventHandler) //TODO Check positioning
+            createDefaultRelativeButton(string text, ButtonTrigger buttonTrigger) //TODO Check positioning
         {
-            var position = new Position(0, 0);
-            var image = createDefaultBox(position);
+            Position position = new Position(0, 0);
+            Image image = createDefaultBox(position);
             image = createDefaultBoxBounds(position, image);
             image = createDefaultText(text, position, image);
-            return new Button(triggerEventHandler, position, image);
+            return new Button(buttonTrigger, position, image);
         }
 
         public static Image createDefaultBox(Position position, Image rootImage = null)
         {
-            var pixel = new Pixel(BaseColor.DarkGreen, BaseColor.White, ' ');
-            var shape = new ShapeBuilder()
+            Pixel pixel = new Pixel(BaseColor.DarkGreen, BaseColor.White, ' ');
+            RegularShape shape = new ShapeBuilder()
                 .setWidthPercentageOfScreen(10)
                 .setHeigthPercentageOfScreen(10)
                 .setPosition(position)
                 .setType(typeof(RegularRectangle))
                 .Build();
-            var drawer = new FilledShapeDrawer(shape, pixel);
+            FilledShapeDrawer drawer = new FilledShapeDrawer(shape, pixel);
             if (rootImage != null) return rootImage.addTopLayer(drawer);
 
             return drawer.toImage();
@@ -33,14 +33,14 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
 
         public static Image createDefaultBoxBounds(Position position, Image rootImage = null)
         {
-            var pixel = new Pixel(BaseColor.Green, BaseColor.White, ' ');
-            var shape = new ShapeBuilder()
+            Pixel pixel = new Pixel(BaseColor.Green, BaseColor.White, ' ');
+            RegularShape shape = new ShapeBuilder()
                 .setWidthPercentageOfScreen(10)
                 .setHeigthPercentageOfScreen(10)
                 .setPosition(position)
                 .setType(typeof(RegularRectangle))
                 .Build();
-            var drawer = new ContouredShapeDrawer(shape, pixel);
+            ContouredShapeDrawer drawer = new ContouredShapeDrawer(shape, pixel);
             if (rootImage != null) return rootImage.addTopLayer(drawer);
 
             return drawer.toImage();
@@ -48,8 +48,8 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
 
         public static Image createDefaultText(string text, Position position, Image rootImage = null)
         {
-            var pixel = new Pixel(BaseColor.Green, BaseColor.White, ' ');
-            var textImage = new Text(text, pixel, position).toImage();
+            Pixel pixel = new Pixel(BaseColor.Green, BaseColor.White, ' ');
+            Image textImage = new Text(text, pixel, position).toImage();
             return textImage;
         }
     }

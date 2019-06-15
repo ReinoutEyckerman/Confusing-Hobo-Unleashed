@@ -7,19 +7,19 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
     {
         public MapEditorMenu()
         {
-            var mapEditorList = new AbstractListBuilder()
+            AbstractList mapEditorList = new VerticalListBuilder()
                 .addUIObject(UIFactory.createDefaultRelativeButton("Start New Map", StartNewMap))
                 .addUIObject(UIFactory.createDefaultRelativeButton("Load Map From File", LoadMap))
-                .buildVertical();
+                .build();
             root = mapEditorList;
         }
 
-        private void StartNewMap()
+        private void StartNewMap(object parameter)
         {
             throw new NotImplementedException();
         }
 
-        private void LoadMap()
+        private void LoadMap(object parameter)
         {
             throw new NotImplementedException();
         }

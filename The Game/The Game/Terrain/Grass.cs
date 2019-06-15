@@ -6,18 +6,14 @@ namespace Confusing_Hobo_Unleashed.Enemies
 {
     public class Grass : Block
     {
-        private static Pixel pixel = new Pixel(BaseColor.DarkGreen, BaseColor.Green, '\'');
-        private static int hp = 2;
+        private static readonly Pixel pixel = new Pixel(BaseColor.DarkGreen, BaseColor.Green, '\'');
+        private static readonly int maxHp = 2;
 
         public Grass(Block copy) : base(copy)
         {
         }
 
-        public Grass( Position position) : base(pixel, false, hp, position)
-        {
-        }
-        
-        public Grass(bool invincible, Position position) : base(pixel, invincible, hp, position)
+        public Grass(Position position) : base(pixel, maxHp, new BoundingBox(position, 1, 1))
         {
         }
     }

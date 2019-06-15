@@ -1,3 +1,4 @@
+using Confusing_Hobo_Unleashed.Tools;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
@@ -5,87 +6,89 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
     public class ConfigurationMenu : Menu
     {
         private Configuration configuration;
+
         public ConfigurationMenu()
-        {//TODO Name tags
-            var mapSize = createMapsizeList();
-            AbstractList mapDisplaySize = this.createMapsizeList();
-            AbstractList difficulties = this.createDifficultyList();
-            AbstractList worldTypes = this.createWorldTypeList();
-            AbstractList colorScheme = this.createColorSchemeList();
-            AbstractList extras = this.createExtraList();
-            var configMenuList = new AbstractListBuilder()
+        {
+            //TODO Name tags
+            AbstractList mapSize = createMapsizeList();
+            AbstractList mapDisplaySize = createMapsizeList();
+            AbstractList difficulties = createDifficultyList();
+            AbstractList worldTypes = createWorldTypeList();
+            AbstractList colorScheme = createColorSchemeList();
+            AbstractList extras = createExtraList();
+            AbstractList configMenuList = new HorizontalListBuilder()
                 .addUIObject(mapSize)
                 .addUIObject(mapDisplaySize)
                 .addUIObject(difficulties)
                 .addUIObject(worldTypes)
                 .addUIObject(colorScheme)
                 .addUIObject(extras)
-                .buildHorizontal();
+                .build();
             root = configMenuList;
         }
 
         private AbstractList createMapsizeList()
         {
-            var mapSizeList = new AbstractListBuilder()
-                .addUIObject(UIFactory.createDefaultRelativeButton("Small", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Medium", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Large", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Custom", new TriggerEventHandler()))
-                .buildHorizontal();
-            return mapSizeList;
+            AbstractListBuilder mapSizeList = new VerticalListBuilder();
+
+            foreach (MapSize mapSize in EnumExtensions.GetValues<MapSize>())
+                mapSizeList.addUIObject(
+                    UIFactory.createDefaultRelativeButton(mapSize.ToString(), configuration.setMapSize));
+
+            mapSizeList.addUIObject(UIFactory.createDefaultRelativeButton("Custom", new ButtonTrigger()));
+
+            return mapSizeList.build();
         }
 
         private AbstractList createMapDisplayList()
         {
-            var mapDisplayList = new AbstractListBuilder()
-                .addUIObject(UIFactory.createDefaultRelativeButton("Small", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Medium", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Large", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Custom", new TriggerEventHandler()))
-                .buildHorizontal();
-            return mapDisplayList;
+            VerticalListBuilder mapDisplayList = new VerticalListBuilder();
+            foreach (MapDisplay mapDisplay in EnumExtensions.GetValues<MapDisplay>())
+                mapDisplayList.addUIObject(
+                    UIFactory.createDefaultRelativeButton(mapDisplay.ToString(), configuration.setMapDisplay));
+
+            mapDisplayList.addUIObject(UIFactory.createDefaultRelativeButton("Custom", new ButtonTrigger()));
+
+            return mapDisplayList.build();
         }
 
         private AbstractList createDifficultyList()
         {
-            var mapDifficultyList = new AbstractListBuilder()
-                .addUIObject(UIFactory.createDefaultRelativeButton("Very Easy", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Easy", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Medium", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Hard", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Very Hard", new TriggerEventHandler()))
-                .buildHorizontal();
-            return mapDifficultyList;
+            VerticalListBuilder mapDifficultyList = new VerticalListBuilder();
+            foreach (Difficulty difficulty in EnumExtensions.GetValues<Difficulty>())
+                mapDifficultyList.addUIObject(
+                    UIFactory.createDefaultRelativeButton(difficulty.ToString(), configuration.setDifficulty));
+            return mapDifficultyList.build();
         }
 
         private AbstractList createColorSchemeList()
         {
-            var colorSchemeList = new AbstractListBuilder()
-                .addUIObject(UIFactory.createDefaultRelativeButton("Normal", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Black/White", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("4 Shades of Gray", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("yarG fo sedahS 4", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Random", new TriggerEventHandler()))
-                .buildHorizontal();
+            AbstractList colorSchemeList = new VerticalListBuilder()
+                .addUIObject(UIFactory.createDefaultRelativeButton("Normal", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Black/White", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("4 Shades of Gray", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("yarG fo sedahS 4", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Random", new ButtonTrigger()))
+                .build();
             return colorSchemeList;
         }
 
         private AbstractList createWorldTypeList()
         {
-            var colorSchemeList = new AbstractListBuilder()
-                .addUIObject(UIFactory.createDefaultRelativeButton("Asteroid", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Air", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Normal", new TriggerEventHandler()))
-                .addUIObject(UIFactory.createDefaultRelativeButton("Underground", new TriggerEventHandler()))
-                .buildHorizontal();
+            AbstractList colorSchemeList = new VerticalListBuilder()
+                .addUIObject(UIFactory.createDefaultRelativeButton("Asteroid", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Air", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Normal", new ButtonTrigger()))
+                .addUIObject(UIFactory.createDefaultRelativeButton("Underground", new ButtonTrigger()))
+                .build();
             return colorSchemeList;
         }
 
         private AbstractList createExtraList()
         {
-            var ExtraList = new AbstractListBuilder()
-                .addUIObject(UIFactory.createDefaultRelativeButton("Invert", new TriggerEventHandler()))
-                .buildHorizontal();
+            AbstractList ExtraList = new VerticalListBuilder()
+                .addUIObject(UIFactory.createDefaultRelativeButton("Invert", new ButtonTrigger()))
+                .build();
             return ExtraList;
         }
 
