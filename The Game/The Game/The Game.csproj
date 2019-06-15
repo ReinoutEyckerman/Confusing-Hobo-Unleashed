@@ -86,7 +86,6 @@
     <Compile Include="Enemies\Necromancer.cs" />
     <Compile Include="Enemies\Roflcopter.cs" />
     <Compile Include="Enemies\Zerg.cs" />
-    <Compile Include="Extensions\Clamp.cs" />
     <Compile Include="Level\Background.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Map\CustomMap.cs" />
@@ -102,6 +101,8 @@
     <Compile Include="Overview\MST\Prim.cs" />
     <Compile Include="Overview\Overview.cs" />
     <Compile Include="Overview\Wall.cs" />
+      <Compile Include="Shapes\Animations\Animation.cs"/>
+      <Compile Include="Shapes\Animations\Frame.cs"/>
     <Compile Include="Shapes\Drawer\ComplexDrawer.cs" />
     <Compile Include="Shapes\Drawer\ContouredShapeDrawer.cs" />
     <Compile Include="Shapes\Drawer\ShapeDrawer.cs" />
@@ -138,8 +139,10 @@
     <Compile Include="Terrain\Grass.cs" />
     <Compile Include="Terrain\Rock.cs" />
     <Compile Include="Tools\CircularList.cs" />
-    <Compile Include="Tools\EnumExtensions.cs" />
+      <Compile Include="Tools\Extensions\ClampExtensions.cs"/>
+      <Compile Include="Tools\Extensions\EnumExtensions.cs"/>
     <Compile Include="Tools\Matrix.cs" />
+      <Compile Include="UI\Align.cs"/>
     <Compile Include="UI\Banners\AbstractBanner.cs" />
     <Compile Include="UI\Banners\CongratulationsBanner.cs" />
     <Compile Include="UI\Banners\LostBanner.cs" />
@@ -150,10 +153,14 @@
     <Compile Include="UI\Colors\ColorScheme.cs" />
     <Compile Include="UI\Colors\ColorSchemes.cs" />
     <Compile Include="UI\Drawable.cs" />
-    <Compile Include="UI\Menu\AbstractList.cs" />
-    <Compile Include="UI\Menu\AbstractListBuilder.cs" />
-    <Compile Include="UI\Menu\GridMenu.cs" />
-    <Compile Include="UI\Menu\HorizonalList.cs" />
+      <Compile Include="UI\Menu\Lists\AbstractList.cs"/>
+      <Compile Include="UI\Menu\Lists\Builder\AbstractListBuilder.cs"/>
+      <Compile Include="UI\Menu\Lists\Builder\GridBuilder.cs"/>
+      <Compile Include="UI\Menu\Lists\Builder\HorizontalListBuilder.cs"/>
+      <Compile Include="UI\Menu\Lists\Builder\VerticalListBuilder.cs"/>
+      <Compile Include="UI\Menu\Lists\GridMenu.cs"/>
+      <Compile Include="UI\Menu\Lists\HorizonalList.cs"/>
+      <Compile Include="UI\Menu\Lists\VerticalList.cs"/>
     <Compile Include="UI\Menu\MenuImpl\Configuration.cs" />
     <Compile Include="UI\Menu\MenuImpl\ConfigurationMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\Credits.cs" />
@@ -164,7 +171,6 @@
     <Compile Include="UI\Menu\MenuImpl\MapSelectionMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\PauseMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\VersusMenu.cs" />
-    <Compile Include="UI\Menu\VerticalList.cs" />
     <Compile Include="UI\Menu\Menu.cs" />
     <Compile Include="UI\Overlay\GameOverlay.cs" />
     <Compile Include="UI\Position.cs" />

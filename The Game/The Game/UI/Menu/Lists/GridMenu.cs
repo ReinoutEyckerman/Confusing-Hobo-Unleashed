@@ -7,8 +7,8 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
 {
     public class GridMenu : AbstractList
     {
-        private int width;
         private int height;
+        private readonly int width;
 
         public GridMenu(CircularList<UIObject> items, Image image, int width, int height) : base(items, image)
         {
@@ -16,13 +16,15 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
             this.height = height;
         }
 
-        public GridMenu(CircularList<UIObject> items, Position position, Image image, int width, int height) : base(items, position, image)
+        public GridMenu(CircularList<UIObject> items, Position position, Image image, int width, int height) : base(
+            items, position, image)
         {
             this.width = width;
             this.height = height;
         }
 
-        public GridMenu(CircularList<UIObject> items, Position position, Image activeImage, Image inactiveImage, int width, int height) : base(items, position, activeImage, inactiveImage)
+        public GridMenu(CircularList<UIObject> items, Position position, Image activeImage, Image inactiveImage,
+            int width, int height) : base(items, position, activeImage, inactiveImage)
         {
             this.width = width;
             this.height = height;
@@ -31,13 +33,9 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
         public override void HandleAction(Input action)
         {
             if (isActive)
-            {
                 HandleActiveAction(action);
-            }
             else
-            {
                 HandleInactiveAction(action);
-            }
         }
 
         private void HandleActiveAction(Input action)
@@ -45,7 +43,7 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
             switch (action)
             {
                 case Input.BACK:
-                    this.isActive = false;
+                    isActive = false;
                     break;
                 case Input.LEFT:
                     items.decrement();
@@ -70,7 +68,7 @@ namespace Confusing_Hobo_Unleashed.UI.Menu
             switch (action)
             {
                 case Input.A:
-                    this.isActive = true;
+                    isActive = true;
                     break;
             }
         }

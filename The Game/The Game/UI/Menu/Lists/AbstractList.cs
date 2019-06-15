@@ -33,7 +33,7 @@ namespace Confusing_Hobo_Unleashed.UI
 
         private void DrawItems()
         {
-            foreach (var uiObject in items) uiObject.Draw();
+            foreach (UIObject uiObject in items) uiObject.Draw();
         }
     }
 }
