@@ -7,11 +7,8 @@ namespace Confusing_Hobo_Unleashed.Shapes.Animations
     {
         private int duration; //TODO ms?
 
-        public Frame(Position position, int width, int height) : base(position, width, height)
-        {
-        }
 
-        public Frame(Pixel[,] imageGrid, Position position) : base(imageGrid, position)
+        public Frame(Pixel[,] imageGrid, Position position, Window window) : base(imageGrid, position, window)
         {
         }
 

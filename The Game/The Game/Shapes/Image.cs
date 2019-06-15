@@ -6,18 +6,13 @@ namespace Confusing_Hobo_Unleashed.Shapes
     public class Image : BoundingBox, Drawable
     {
         private readonly Pixel[,] imageGrid;
-        private Window window;
+        private Window window; 
 
-
-        public Image(Position position, int width, int height) : base(position, width, height)
-        {
-            imageGrid = new Pixel[width, height];
-        }
-
-        public Image(Pixel[,] imageGrid, Position position) : base(position, imageGrid.GetLength(0),
+        public Image(Pixel[,] imageGrid, Position position, Window window) : base(position, imageGrid.GetLength(0),
             imageGrid.GetLength(1)) //TODO new pos
         {
             this.imageGrid = imageGrid;
+            this.window = window;
         }
 
         public void Draw()
@@ -65,7 +60,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
                 imagegrid[i, j] = pixel;
             }
 
-            return new Image(imagegrid, topLeft);
+            return AbstractUIFactory.getInstance().buildImage(imagegrid, topLeft);
         }
     }
 }

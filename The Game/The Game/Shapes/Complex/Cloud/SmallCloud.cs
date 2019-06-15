@@ -5,7 +5,7 @@ using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.Shapes.Complex
 {
-    public class SmallCloud : Image
+    public class SmallCloud : GeneratedImage
     {
         protected static Pixel v = new Pixel(BaseColor.Void, BaseColor.Void, ' ');
         protected static Pixel c = new Pixel(BaseColor.White, BaseColor.White, ' ');
@@ -18,8 +18,9 @@ namespace Confusing_Hobo_Unleashed.Shapes.Complex
             {c, c, c, c, c, c, v, v, v, v, v}
         };
 
-        public SmallCloud(Position position) : base(cloud, position)
+        public Image toImage()
         {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,10 +6,9 @@ namespace Confusing_Hobo_Unleashed.UI
 {
     public interface Window
     {
-        
-         void Draw(Position position, Pixel pixel);
+        void Draw(Position position, Pixel pixel);
         void DrawText(Position position, ColorPoint color, string text);
-         
+
         void Clear();
         void Paint();
         int getWidthPosFromPercentage(double percentage);

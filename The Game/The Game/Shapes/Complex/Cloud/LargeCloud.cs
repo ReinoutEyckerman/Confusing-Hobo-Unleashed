@@ -5,7 +5,7 @@ using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.Shapes.Complex
 {
-    public class LargeCloud : Image
+    public class LargeCloud : GeneratedImage
     {
             
         //TODO Recoloring
@@ -20,9 +20,10 @@ namespace Confusing_Hobo_Unleashed.Shapes.Complex
             {v, v, c, c, c, c, c, c, c, c, c, c, v, v, v, v, v, v}
         };
 
-        public LargeCloud(Position position) : base(cloud,position)
-        {
-        }
 
+        public Image toImage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

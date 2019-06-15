@@ -6,7 +6,6 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Input;
 using Confusing_Hobo_Unleashed.AI;
-using Confusing_Hobo_Unleashed.Colors;
 using Confusing_Hobo_Unleashed.User;
 using Lidgren.Network;
 using Timer = System.Timers.Timer;
@@ -45,12 +44,15 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                 if (Uri.CheckHostName(hostip) != UriHostNameType.IPv4)
                     Console.WriteLine("Faulty IP entered. Please try again.");
             } while (Uri.CheckHostName(hostip) != UriHostNameType.IPv4);
-            var config = new NetPeerConfiguration("game");
+
+            NetPeerConfiguration config = new NetPeerConfiguration("game");
             _client = new NetClient(config);
-            var outmsg = _client.CreateMessage();
+            NetOutgoingMessage outmsg = _client.CreateMessage();
             _client.Start();
             outmsg.Write((byte) PacketTypes.Login);
-            var user = new Player(MainGame.CurrentLoadedMap, 3, 3, 100, Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], Painter.Instance.Paint(ConsoleColor.Black), Painter.Instance.Paint(ConsoleColor.White, true));
+            Player user = new Player(MainGame.CurrentLoadedMap, 3, 3, 100,
+                Encoding.GetEncoding(437).GetChars(new byte[] {001})[0], Painter.Instance.Paint(ConsoleColor.Black),
+                Painter.Instance.Paint(ConsoleColor.White, true));
             LidgrenAdaptions.CompileCore(outmsg, user);
             _client.Connect(hostip, 22401, outmsg);
             Console.WriteLine("Client Started");
@@ -73,12 +75,11 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
 
         private static void WaitForStartingInfo()
         {
-            var canStart = false;
+            bool canStart = false;
             while (!canStart)
             {
                 NetIncomingMessage inc;
                 if ((inc = _client.ReadMessage()) != null)
-                {
                     switch (inc.MessageType)
                     {
                         case NetIncomingMessageType.Data:
@@ -92,26 +93,27 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                                 LidgrenAdaptions.OneReadList(inc);
                                 //
                                 PlayerNumber = inc.ReadInt16();
-                                var count = Convert.ToInt16(PlayerNumber + 1);
-                                for (var i = 0; i < count; i++)
+                                short count = Convert.ToInt16(PlayerNumber + 1);
+                                for (int i = 0; i < count; i++)
                                 {
                                     // Create new character to hold the data
-                                    var ch = new Player(MainGame.CurrentLoadedMap);
+                                    Player ch = new Player(MainGame.CurrentLoadedMap);
                                     // Read all properties ( Server writes characters all props, so now we can read em here. Easy )
                                     LidgrenAdaptions.DecompileCore(inc, ch);
                                     // Add it to list
                                     MainGame.Players.Add(ch);
                                 }
+
                                 MainGame.FillEntities();
                                 canStart = true;
                             }
+
                             break;
 
                         default:
                             Console.WriteLine(inc.ReadString() + " Strange message");
                             break;
                     }
-                }
             }
         }
 
@@ -119,26 +121,23 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         {
             NetIncomingMessage inc;
             while ((inc = _client.ReadMessage()) != null)
-            {
                 if (inc.MessageType == NetIncomingMessageType.Data)
                 {
-                    var packet = inc.ReadByte();
+                    byte packet = inc.ReadByte();
                     if (packet == (byte) PacketTypes.Worldstate2)
                     {
-                        var count = inc.ReadInt16();
-                        for (var i = 0; i < count; i++)
-                        {
-                            LidgrenAdaptions.DecompileCore(inc, MainGame.Players[i]);
-                        }
+                        short count = inc.ReadInt16();
+                        for (int i = 0; i < count; i++) LidgrenAdaptions.DecompileCore(inc, MainGame.Players[i]);
                         count = inc.ReadInt16();
                         MainGame.Bullets = new List<BulletCore>();
-                        for (var i = 0; i < count; i++)
+                        for (int i = 0; i < count; i++)
                         {
-                            var bullet = new BulletCore();
+                            BulletCore bullet = new BulletCore();
                             LidgrenAdaptions.DeCompileBullet(inc, bullet);
                             MainGame.Bullets.Add(bullet);
                         }
-                        var change = inc.ReadBoolean();
+
+                        bool change = inc.ReadBoolean();
                         if (change)
                             LidgrenAdaptions.VarReadList(inc);
                     }
@@ -151,7 +150,6 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
                         LidgrenAdaptions.DecompileCore(inc, MainGame.Players[MainGame.Players.Count - 1]);
                     }
                 }
-            }
         }
 
         // Get input from player and send it to server
@@ -159,35 +157,28 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         private static void GetInput()
         {
             FrameTimer.Restart();
-            var outmsg = _client.CreateMessage();
+            NetOutgoingMessage outmsg = _client.CreateMessage();
             outmsg.Write((byte) PacketTypes.Input);
             outmsg.Write((byte) PlayerNumber);
-            for (byte i = 0; i < Input.GetLength(0); i++)
-            {
-                Input[i] = (byte) Key.None;
-            }
+            for (byte i = 0; i < Input.GetLength(0); i++) Input[i] = (byte) Key.None;
             InputHandler.GameInputHandling();
             for (byte i = 0; i < Input.GetLength(0); i++)
-            {
                 if (Input[i] != Key.None)
                 {
                     outmsg.Write((byte) 1);
                     outmsg.Write((byte) Input[i]);
                 }
-            }
+
             outmsg.Write((byte) 0);
             for (byte i = 0; i < Input.GetLength(0); i++)
-            {
                 if (Input[i] != Key.None)
                 {
                     _client.SendMessage(outmsg, NetDeliveryMethod.ReliableSequenced);
                     break;
                 }
-            }
+
             if (FrameTimer.ElapsedMilliseconds < VarDatabase.FrameTimeMs)
-            {
                 Thread.Sleep(VarDatabase.FrameTimeMs - (int) FrameTimer.ElapsedMilliseconds);
-            }
         }
     }
 

@@ -45,21 +45,6 @@ namespace Confusing_Hobo_Unleashed.UI
         }
 
 
-        private static BoundingBox growBounds2D(List<UIObject> uiObjects, int padding, int maxWidth)
-        {
-            throw new NotImplementedException();
-            int width = 0;
-            int height = 0;
-            foreach (UIObject uiObject in uiObjects)
-                if (uiObject.getBoundingBox().getWidth() + width > maxWidth)
-                {
-                }
-                else
-                {
-                    width += uiObject.getBoundingBox().getWidth();
-                }
-        }
-
         protected static int getTotalWidth(List<UIObject> uiObjects)
         {
             return uiObjects.Select(o => o.getBoundingBox().getWidth()).Sum();

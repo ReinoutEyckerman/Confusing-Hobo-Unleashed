@@ -21,7 +21,7 @@ namespace Confusing_Hobo_Unleashed
         [STAThread]
         public static void Main()
         {
-            Window window = new MicrosoftWindow();
+            AbstractUIFactory.setInstance(new MSConsoleUIFactory());
             AlphaBootScreen.DrawAlphaSymbol(window);
             Thread.Sleep(5000);
             window.Clear();

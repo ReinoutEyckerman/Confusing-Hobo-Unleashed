@@ -26,7 +26,7 @@ namespace Confusing_Hobo_Unleashed.UI
                 }
             }
 
-            return new Image(grid, this.shape.getPosition());
+            return AbstractUIFactory.getInstance().buildImage(grid, this.shape.getPosition());
         }
     }
 }

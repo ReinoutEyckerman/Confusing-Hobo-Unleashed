@@ -28,9 +28,9 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
             triggerEvent = null;
         }
 
-        public void HandleAction(Input action)
+        public void HandleAction(object param)
         {
-            triggerEvent?.Invoke();
+            triggerEvent?.Invoke(param);
         }
     }
 }

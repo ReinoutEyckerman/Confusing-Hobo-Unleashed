@@ -43,7 +43,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
                 grid[x, 0] = new Pixel(this.colorPoint.GetBackgroundColor(), this.colorPoint.GetForegroundColor(), text[x]);
             }
 
-            return new Image(grid, this.position);
+            return AbstractUIFactory.getInstance().buildImage(grid, this.position);
         }
 
         public object Clone()
