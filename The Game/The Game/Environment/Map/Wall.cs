@@ -1,3 +1,4 @@
+using System;
 using Confusing_Hobo_Unleashed.Shapes;
 
 namespace Confusing_Hobo_Unleashed
@@ -48,6 +49,7 @@ namespace Confusing_Hobo_Unleashed
             }
             else
             {
+                throw new NotImplementedException();
                 return null;//TODO
             }
         }

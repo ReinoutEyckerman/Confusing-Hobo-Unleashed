@@ -11,8 +11,5 @@ namespace Confusing_Hobo_Unleashed
         public static bool Day;
         //Debug Options
         public static bool Debug = false;
-        public static bool ShowDeadEnd = false;
-        public static bool ShowApprovementRate = false;
-        public static bool ShowSideMatrix = false;
     }
 }

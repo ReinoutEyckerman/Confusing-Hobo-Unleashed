@@ -12,8 +12,13 @@ namespace Confusing_Hobo_Unleashed.UI
         private readonly ButtonTriggerHandler _buttonTriggerHandler;
         private object parameter;
 
-        public Button(ButtonTrigger buttonTrigger, Position position, Image image, object parameter = null) : base(
-            position, image)
+        public Button(ButtonTrigger buttonTrigger, Position position, Image image, object parameter = null) : this(
+            buttonTrigger, position, image,image,parameter)
+        {
+        }
+        
+        public Button(ButtonTrigger buttonTrigger, Position position, Image activeImage, Image inactiveImage, object parameter = null) : base(
+            position, activeImage,inactiveImage)
         {
             _buttonTriggerHandler = new ButtonTriggerHandler();
             _buttonTriggerHandler.addTrigger(buttonTrigger);
