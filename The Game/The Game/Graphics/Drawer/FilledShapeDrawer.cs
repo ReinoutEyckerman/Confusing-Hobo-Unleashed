@@ -1,13 +1,18 @@
+using Confusing_Hobo_Unleashed.Graphics.Image;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public class ContouredShapeDrawer :ShapeDrawer
+    public class FilledShapeDrawer : ShapeDrawer
     {
+        private RegularShape shape;
+        private Pixel pixel;
 
-        public ContouredShapeDrawer(RegularShape shape, Pixel pixel):base(shape,pixel)
+        public FilledShapeDrawer(RegularShape shape, Pixel pixel):base(shape,pixel)
         {
+            this.shape = shape;
+            this.pixel = pixel;
         }
 
         public override Image toImage()
@@ -17,7 +22,7 @@ namespace Confusing_Hobo_Unleashed.UI
             {
                 for (int y = 0; y < shape.getHeight(); y++)
                 {
-                    if (this.shape.IsOnBorder(x, y))
+                    if (this.shape.IsInsideShape(x, y))
                         grid[x, y] = this.pixel;
                 }
             }

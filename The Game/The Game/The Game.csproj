@@ -91,6 +91,18 @@
     <Compile Include="Entities\User\Player.cs" />
     <Compile Include="Entities\User\Weapon.cs" />
     <Compile Include="Entities\User\WeaponOptimized.cs" />
+    <Compile Include="Graphics\Image\Image.cs" />
+    <Compile Include="Graphics\Image\ImageBuilder.cs" />
+    <Compile Include="Graphics\Image\Interpolator.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Alpha.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Cloud\LargeCloud.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Cloud\SmallCloud.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Fire\Fire.cs" />
+    <Compile Include="Graphics\Shapes\Complex\JungleTree.cs" />
+    <Compile Include="Graphics\Shapes\Regular\ComplexShape.cs" />
+    <Compile Include="Graphics\Shapes\Regular\RegularEllipse.cs" />
+    <Compile Include="Graphics\Shapes\Regular\RegularRectangle.cs" />
+    <Compile Include="Graphics\Shapes\Regular\RegularShape.cs" />
     <Compile Include="Input\GamepadControls.cs" />
     <Compile Include="Input\GamepadInputHandler.cs" />
     <Compile Include="Input\Input.cs" />
@@ -115,28 +127,18 @@
     <Compile Include="Multiplayer\Client.cs" />
     <Compile Include="Multiplayer\LidgrenAdaptions.cs" />
     <Compile Include="Multiplayer\Server.cs" />
-    <Compile Include="Shapes\Animations\Animation.cs" />
-    <Compile Include="Shapes\Animations\Frame.cs" />
-    <Compile Include="Shapes\Drawer\ComplexDrawer.cs" />
-    <Compile Include="Shapes\Drawer\ContouredShapeDrawer.cs" />
-    <Compile Include="Shapes\Drawer\ShapeDrawer.cs" />
-    <Compile Include="Shapes\Complex\Cloud\LargeCloud.cs" />
-    <Compile Include="Shapes\Complex\Cloud\SmallCloud.cs" />
-    <Compile Include="Shapes\Complex\Fire\Fire.cs" />
-    <Compile Include="Shapes\Complex\JungleTree.cs" />
-    <Compile Include="Shapes\GeneratedImage.cs" />
-    <Compile Include="Shapes\Image.cs" />
-    <Compile Include="Shapes\ImageBuilder.cs" />
-    <Compile Include="Shapes\Orientation.cs" />
-    <Compile Include="Shapes\OrientationTransformation.cs" />
-    <Compile Include="Shapes\Regular\ComplexShape.cs" />
-    <Compile Include="Shapes\Regular\RegularEllipse.cs" />
-    <Compile Include="Shapes\Regular\RegularRectangle.cs" />
-    <Compile Include="Shapes\Regular\RegularShape.cs" />
-    <Compile Include="Shapes\BoundingBox.cs" />
-    <Compile Include="Shapes\Drawer\FilledShapeDrawer.cs" />
-    <Compile Include="Shapes\ShapeBuilder.cs" />
-    <Compile Include="Shapes\Text\Text.cs" />
+    <Compile Include="Graphics\Animations\Animation.cs" />
+    <Compile Include="Graphics\Animations\Frame.cs" />
+    <Compile Include="Graphics\Drawer\ComplexDrawer.cs" />
+    <Compile Include="Graphics\Drawer\ContouredShapeDrawer.cs" />
+    <Compile Include="Graphics\Drawer\ShapeDrawer.cs" />
+    <Compile Include="Graphics\GeneratedImage.cs" />
+    <Compile Include="Graphics\Orientation.cs" />
+    <Compile Include="Graphics\OrientationTransformation.cs" />
+    <Compile Include="Graphics\BoundingBox.cs" />
+    <Compile Include="Graphics\Drawer\FilledShapeDrawer.cs" />
+    <Compile Include="Graphics\ShapeBuilder.cs" />
+    <Compile Include="Graphics\Text\Text.cs" />
     <Compile Include="Terrain\Block.cs" />
     <Compile Include="Terrain\Dirt.cs" />
     <Compile Include="Terrain\Grass.cs" />
@@ -232,6 +234,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Graphics\Shapes" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

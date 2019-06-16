@@ -1,4 +1,5 @@
 using System;
+using Confusing_Hobo_Unleashed.Graphics.Image;
 using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.UI.Colors;
 using Confusing_Hobo_Unleashed.UI.Windows;

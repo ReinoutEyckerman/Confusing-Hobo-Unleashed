@@ -1,7 +1,8 @@
+using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI;
 using Confusing_Hobo_Unleashed.UI.Colors;
 
-namespace Confusing_Hobo_Unleashed.Shapes
+namespace Confusing_Hobo_Unleashed.Graphics.Image
 {
     public class Image : BoundingBox, Drawable
     {
@@ -62,5 +63,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
 
             return AbstractUIFactory.getInstance().buildImage(imagegrid, topLeft);
         }
+
+        public Pixel[,] ImageGrid => imageGrid;
     }
 }
