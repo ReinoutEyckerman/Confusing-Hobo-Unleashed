@@ -1,29 +1,32 @@
+using System;
+using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
-    public abstract class Entity
+    public class Entity:Updateable
     {
-        protected BoundingBox bounds;
+        protected RegularShape shape;
+
         protected int currentHp;
+        protected int maxHp;
 
         protected bool invincible;
 
-        protected int maxHp;
 
-        protected Entity(Entity copy)
+        public Entity(Entity copy)
         {
             maxHp = copy.maxHp;
             currentHp = copy.currentHp;
             invincible = copy.invincible;
-            bounds = new BoundingBox(copy.bounds);
+            //TODO bounds = new BoundingBox(copy.bounds);
         }
 
-        protected Entity(int maxHp, BoundingBox bounds, bool invincible = false)
+        public Entity(int maxHp, BoundingBox bounds, bool invincible = false)
         {
             this.maxHp = maxHp;
             currentHp = currentHp;
-            this.bounds = bounds;
+       //TODO     this.bounds = bounds;
             this.invincible = invincible;
         }
 
@@ -33,5 +36,10 @@ namespace Confusing_Hobo_Unleashed.Enemies
         }
 
         protected abstract void Damage();
-    }
+
+        public virtual void Update()
+        {
+            throw new NotImplementedException();
+        }
+}
 }

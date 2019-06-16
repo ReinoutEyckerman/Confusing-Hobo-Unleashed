@@ -12,7 +12,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
         {
             activeImage = null;
             inactiveImage = null;
-            position = null;
+            position = new Position(0,0);
         }
 
         protected virtual UIObjectBuilder setImage(Image image)

@@ -6,7 +6,7 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
-    internal class Harpy : AiCore
+    internal class HarpyOld : AiCore
     {
         private readonly int _originalmaxhorizontalproximity;
         private short _x;
