@@ -3,130 +3,42 @@ using System.Collections.Generic;
 using System.Text;
 using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Graphics.Image;
+using Confusing_Hobo_Unleashed.Shapes;
+using Confusing_Hobo_Unleashed.UI;
+using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.UI.Menu.MenuImpl;
+using Confusing_Hobo_Unleashed.UI.Windows;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
-    internal class Necromancer : AiCore
+    internal class Necromancer : Updateable
     {
-        private short _timer;
+        private Updateable _entity;
+        private static readonly int maxHp = 40;
+        private static readonly int maxMana = 310;
+        private static readonly int startMana = 0;
 
-        public Necromancer(CustomMap map) : base(map)
+        private static readonly Pixel design = new Pixel(BaseColor.Green, BaseColor.Black,
+            Encoding.GetEncoding(437).GetChars(new byte[] {127})[0]);
+
+        private static readonly string weapon = "Iron Sword";
+        private static readonly string spell = "Resurrect";
+
+        private static readonly ShapedImage shape = new ShapedImage(
+            AbstractUIFactory.getInstance().buildImage(new[,] {{design}}),
+            new RegularRectangle(new Position(0, 0), 1, 1)); //TODO Fix this position problem!
+
+        public Necromancer(Difficulty difficulty)
         {
-            Background = Painter.Instance.Paint(ConsoleColor.Green);
-            Foreground = Painter.Instance.Paint(ConsoleColor.Black, true);
-            DrawChar = Encoding.GetEncoding(437).GetChars(new byte[] {127})[0];
-            HpTotal = 40;
-            HpCurrent = (int) HpTotal;
-            MinHorizontalProximity = 20 + Random.Next(-5, 6);
-            MaxHorizontalProximity = 1;
-            MaxVerticalProximity = 1;
-            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
-            WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Iron Sword", WeaponType.Sword, 10, 5);
-            CurrentClass = Classes.Necromancer;
-            MaxMana = 310;
+            _entity = new RandomMovement(
+                new DamageController(new SpellController(startMana, maxMana, new Entity(maxHp, shape))));
         }
 
-        public override void CalculateAttack()
+        public void Update()
         {
-        }
-
-        public override void SelectTarget()
-        {
-            _timer++;
-            if (Target == null || _timer > 50 && Target.CurrentClass != Classes.Grave)
-            {
-                _timer = 0;
-                foreach (var t in MainGame.Entities)
-                {
-                    if (t.CurrentClass == Classes.Grave)
-                    {
-                        Target = t;
-                        MinHorizontalProximity /= 3;
-                        MaxHorizontalProximity = 1;
-                        MaxVerticalProximity = 1;
-                        return;
-                    }
-                }
-
-                Target = MainGame.Players[Random.Next(MainGame.Players.Count)];
-                MinHorizontalProximity = 20 + Random.Next(-5, 6);
-                MaxHorizontalProximity = 1;
-                MaxVerticalProximity = 1;
-            }
-        }
-
-        public override void Special()
-        {
-            if (Mana - 40 > 0 && Target.CurrentClass == Classes.Grave)
-            {
-                for (var index = 0; index < MainGame.Entities.Count; index++)
-                {
-                    if (MainGame.Entities[index].CurrentClass == Classes.Grave)
-                    {
-                        var tempx = X - MainGame.Entities[index].X;
-                        var tempy = Y - MainGame.Entities[index].Y;
-                        if (tempx < 10 && tempx > -10 && tempy < 5 && tempy > -5)
-                        {
-                            Mana -= 40;
-                            MainGame.Entities[index].Special();
-                            MainGame.Entities.RemoveAt(index);
-                            Target = null;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    internal class Grave : AiCore
-    {
-        private readonly AiCore _graveBot;
-
-        public Grave(CustomMap map, AiCore bot) : base(map)
-        {
-            X = bot.X;
-            Y = bot.Y;
-            _graveBot = bot;
-            DrawChar = Encoding.GetEncoding(437).GetChars(new byte[] {127})[0];
-            Background = Painter.Instance.Paint(ConsoleColor.DarkGray);
-            Foreground = Painter.Instance.Paint(ConsoleColor.White);
-            CurrentClass = Classes.Grave;
-            HpCurrent = 15;
-        }
-
-        public override void CalculateAttack()
-        {
-        }
-
-        public override void SelectTarget()
-        {
-        }
-
-        public override void Movement(CustomMap map)
-        {
-        }
-
-        public override void Special()
-        {
-            if (_graveBot.HpTotal != null) _graveBot.HpCurrent = (int) _graveBot.HpTotal;
-            switch (_graveBot.CurrentClass)
-            {
-                case Classes.Zerg:
-                    MainGame.Entities.Add(new Zerg(Map));
-                    break;
-                case Classes.Harpy:
-                    MainGame.Entities.Add(new Harpy(Map));
-                    break;
-                case Classes.Roflcopter:
-                    MainGame.Entities.Add(new Roflcopter(Map));
-                    break;
-                case Classes.Necromancer:
-                    MainGame.Entities.Add(new Necromancer(Map));
-                    break;
-            }
-            MainGame.Entities[MainGame.Entities.Count - 1] = _graveBot;
+            _entity.Update();
         }
     }
 }

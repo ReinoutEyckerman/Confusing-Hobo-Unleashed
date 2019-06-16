@@ -16,33 +16,12 @@ namespace Confusing_Hobo_Unleashed
 {
     internal class MainGame
     {
-        public static Stopwatch GameTimer = new Stopwatch();
-
         [STAThread]
         public static void Main()
         {
             AbstractUIFactory.setInstance(new MSConsoleUIFactory());
-            AlphaBootScreen.DrawAlphaSymbol(window);
-            Thread.Sleep(5000);
-            window.Clear();
-            MainMenu menu = new MainMenu();
-        }
-        
-        public static string GameDuration(int x)
-        {
-            switch (x)
-            {
-                case 0:
-                    GameTimer.Start();
-                    break;
-                case 1:
-                    var time = GameTimer.Elapsed;
-                    return time.ToString("hh\\:mm\\:ss");
-                case 2:
-                    GameTimer.Stop();
-                    break;
-            }
-            return " ";
+            GameStateManager manager = new GameStateManager();
+            manager.Run();
         }
     }
 }

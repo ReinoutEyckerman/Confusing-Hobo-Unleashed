@@ -2,70 +2,41 @@
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Graphics.Image;
+using Confusing_Hobo_Unleashed.Shapes;
+using Confusing_Hobo_Unleashed.UI;
+using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.UI.Menu.MenuImpl;
+using Confusing_Hobo_Unleashed.UI.Windows;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
-    internal class Zerg : AiCore
+    internal class Zerg : Updateable
     {
-        public Zerg(CustomMap map) : base(map)
+        private Updateable _entity;
+        private static readonly int maxHp = 5;
+        private static readonly int maxMana = 400;
+        private static readonly int startMana = 50;
+
+        private static readonly Pixel design = new Pixel(BaseColor.DarkRed, BaseColor.White, '7');
+
+        private static readonly string weapon = "Fist";
+        private static readonly string spell = "MakeItRain";
+
+        private static readonly ShapedImage shape = new ShapedImage(
+            AbstractUIFactory.getInstance().buildImage(new[,] {{design}}),
+            new RegularRectangle(new Position(0, 0), 1, 1)); //TODO Fix this position problem!
+
+        public Zerg(Difficulty difficulty)
         {
-            Background = Painter.Instance.Paint(ConsoleColor.DarkRed);
-            Foreground = Painter.Instance.Paint(ConsoleColor.White);
-            DrawChar = '7';
-            HpTotal = 5;
-            HpCurrent = (int) HpTotal;
-            MaxMana = 400;
-            Mana = 50;
-            MinVerticalProximity = 0;
-            MinHorizontalProximity = 0;
-            MaxHorizontalProximity = 0;
-            MaxVerticalProximity = 0;
-            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
-            WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Fist", WeaponType.Fist, 2, 5);
-            CurrentClass = Classes.Zerg;
+            _entity = new FlyingController(
+                new DamageController(new SpellController(startMana, maxMana, new Entity(maxHp, shape))));
         }
 
-        public override void CalculateAttack()
+        public void Update()
         {
-            switch (Target.X - X)
-            {
-                case 1:
-                    if (Target.Y - Y == 0)
-                        Attack(Map, Move.Right);
-                    break;
-                case -1:
-                    if (Target.Y - Y == 0)
-                        Attack(Map, Move.Left);
-                    break;
-                case 0:
-                    switch (Target.Y - Y)
-                    {
-                        case 1:
-                            Attack(Map, Move.Down);
-                            break;
-                        case -1:
-                            Attack(Map, Move.Up);
-                            break;
-                    }
-                    break;
-            }
-        }
-
-        public override void SelectTarget()
-        {
-            Target = MainGame.Players[Random.Next(MainGame.Players.Count)];
-        }
-
-        public override void Special()
-        {
-            if (Mana - 350 > 0)
-            {
-                MainGame.Entities.Add(new Zerg(Map));
-                MainGame.Entities[MainGame.Entities.Count - 1].SetSpawn();
-                Mana -= 350 + Random.Next(-50, 50);
-            }
+            _entity.Update();
         }
     }
 }

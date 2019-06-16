@@ -26,5 +26,7 @@ namespace Confusing_Hobo_Unleashed.UI
 
             return instance;
         }
+
+        public abstract Image buildImage(Pixel[,] imageGrid);
     }
 }

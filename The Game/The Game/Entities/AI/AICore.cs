@@ -5,16 +5,6 @@ using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.AI
 {
-    internal enum Classes
-    {
-        Zerg,
-        Roflcopter,
-        Harpy,
-        Necromancer,
-        Grave,
-        Player,
-        Boss
-    }
 
     abstract partial class AiCore
     {

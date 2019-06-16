@@ -9,6 +9,12 @@ namespace Confusing_Hobo_Unleashed.Graphics.Image
         private readonly Pixel[,] imageGrid;
         private Window window; 
 
+        public Image(Pixel[,] imageGrid, Window window) : base(new Position(0,0), imageGrid.GetLength(0),
+            imageGrid.GetLength(1)) //TODO new pos
+        {
+            this.imageGrid = imageGrid;
+            this.window = window;
+        }
         public Image(Pixel[,] imageGrid, Position position, Window window) : base(position, imageGrid.GetLength(0),
             imageGrid.GetLength(1)) //TODO new pos
         {

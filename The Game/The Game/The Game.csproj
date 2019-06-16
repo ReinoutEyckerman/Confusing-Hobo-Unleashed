@@ -79,10 +79,8 @@
     <Compile Include="Entities\AI\AICore.cs" />
     <Compile Include="Entities\AI\AIMovementCore.cs" />
     <Compile Include="Entities\AI\BulletCore.cs" />
-    <Compile Include="Entities\Enemies\Enemy.cs" />
-    <Compile Include="Entities\Enemies\EnemyFactory.cs" />
     <Compile Include="Entities\Enemies\Godzilla.cs" />
-    <Compile Include="Entities\Enemies\Harpy - Copy.cs" />
+    <Compile Include="Entities\Enemies\Grave.cs" />
     <Compile Include="Entities\Enemies\Harpy.cs" />
     <Compile Include="Entities\Enemies\Necromancer.cs" />
     <Compile Include="Entities\Enemies\Roflcopter.cs" />
@@ -90,6 +88,7 @@
     <Compile Include="Entities\Entity\DamageController.cs" />
     <Compile Include="Entities\Entity\Entity.cs" />
     <Compile Include="Entities\Entity\EntityDecorator.cs" />
+    <Compile Include="Entities\Entity\Movement\FlyingController.cs" />
     <Compile Include="Entities\Entity\Movement\MovementController.cs" />
     <Compile Include="Entities\Entity\Movement\RandomMovement.cs" />
     <Compile Include="Entities\Entity\SpellController.cs" />
@@ -100,14 +99,18 @@
     <Compile Include="Entities\User\WeaponOptimized.cs" />
     <Compile Include="Environment\LevelEdit\CustomMap.cs" />
     <Compile Include="Environment\LevelEdit\Layer.cs" />
+    <Compile Include="GameStateManager.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Game\GameLoop.cs" />
     <Compile Include="Graphics\Image\Image.cs" />
     <Compile Include="Graphics\Image\ImageBuilder.cs" />
     <Compile Include="Graphics\Image\Interpolator.cs" />
+    <Compile Include="Graphics\Image\ShapedImage.cs" />
     <Compile Include="Graphics\Shapes\Complex\Alpha.cs" />
     <Compile Include="Graphics\Shapes\Complex\Cloud\LargeCloud.cs" />
     <Compile Include="Graphics\Shapes\Complex\Cloud\SmallCloud.cs" />
     <Compile Include="Graphics\Shapes\Complex\Fire\Fire.cs" />
+    <Compile Include="Graphics\Shapes\Complex\GodzillaDrawing.cs" />
     <Compile Include="Graphics\Shapes\Complex\JungleTree.cs" />
     <Compile Include="Graphics\Shapes\Regular\ComplexShape.cs" />
     <Compile Include="Graphics\Shapes\Regular\RegularEllipse.cs" />
@@ -126,7 +129,6 @@
     <Compile Include="Environment\Map\MST\Prim.cs" />
     <Compile Include="Environment\Map\Overview.cs" />
     <Compile Include="Environment\Map\Wall.cs" />
-    <Compile Include="Endgame.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Multiplayer\Client.cs" />
     <Compile Include="Multiplayer\LidgrenAdaptions.cs" />

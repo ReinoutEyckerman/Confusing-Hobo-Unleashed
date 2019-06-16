@@ -1,64 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Graphics.Image;
+using Confusing_Hobo_Unleashed.Shapes;
+using Confusing_Hobo_Unleashed.UI;
+using Confusing_Hobo_Unleashed.UI.Colors;
+using Confusing_Hobo_Unleashed.UI.Menu.MenuImpl;
+using Confusing_Hobo_Unleashed.UI.Windows;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.Enemies
 {
-    internal class Roflcopter : AiCore
+    internal class Roflcopter : Updateable
     {
-        private bool _raining;
+        
+        private Updateable _entity;
+        private static readonly int maxHp = 35;
+        private static readonly int maxMana = 1000;
+        private static readonly int startMana = 600;
 
-        public Roflcopter(CustomMap map) : base(map)
+        private static readonly Pixel design = new Pixel(BaseColor.DarkRed, BaseColor.White, 'T');
+
+        private static readonly string weapon = "Bomb";
+        private static readonly string spell = "MakeItRain";
+
+        private static readonly ShapedImage shape = new ShapedImage(
+            AbstractUIFactory.getInstance().buildImage(new[,] {{design}}),
+            new RegularRectangle(new Position(0, 0), 1, 1)); //TODO Fix this position problem!
+
+        public Roflcopter(Difficulty difficulty)
         {
-            Background = Painter.Instance.Paint(ConsoleColor.DarkRed);
-            Foreground = Painter.Instance.Paint(ConsoleColor.White);
-            DrawChar = 'T';
-            HpTotal = 35;
-            HpCurrent = (int) HpTotal;
-            MaxMana = 1000;
-            Mana = 600;
-            CanFly = true;
-            MovementMinTime = 2;
-            MaxHorizontalProximity = MinHorizontalProximity;
-            MinVerticalProximity = 10;
-            CurrentClass = Classes.Roflcopter;
-            MaxVerticalProximity = 30;
-            PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
-            WeaponInv = new Dictionary<byte, Weapon>();
-            WeaponInv[0] = new Weapon("Bomb", WeaponType.Bomb, 2, 10, bulletBackground: Painter.Instance.Paint(ConsoleColor.White), bulletForeground: Painter.Instance.Paint(ConsoleColor.Black), speed: 1);
+            _entity = new FlyingController(
+                new DamageController(new SpellController(startMana, maxMana, new Entity(maxHp, shape))));
         }
 
-        public override void CalculateAttack()
+        public void Update()
         {
-            if (Target != null && Target.X - X < 3 && X - Target.X < 3)
-                Attack(Map, Move.Down);
-        }
-
-        public override void SelectTarget()
-        {
-            if (Mana%50 == 0 || Target == null)
-                Target = MainGame.Players[Random.Next(MainGame.Players.Count)];
-        }
-
-        public override void Special()
-        {
-            if (Mana - 900 > 0)
-            {
-                _raining = true;
-                Mana -= 750;
-            }
-            if (_raining && Mana > 0)
-            {
-                var vert = 0;
-                if (VarDatabase.Invertrate == 1)
-                    vert = Map.Mapheight - 1;
-                WeaponInv[0].Shoot(300, Random.Next(Map.Mapwidth), vert);
-                Mana -= 5;
-                if (Mana < 0)
-                    _raining = false;
-            }
+            _entity.Update();
         }
     }
 }

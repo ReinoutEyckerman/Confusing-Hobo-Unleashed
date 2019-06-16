@@ -14,6 +14,10 @@ namespace Confusing_Hobo_Unleashed.UI
             return _window;
         }
 
+        public override Image buildImage(Pixel[,] imageGrid)
+        {
+            return new Image(imageGrid,  _window);
+        }
         public override Image buildImage(Pixel[,] imageGrid, Position position)
         {
             return new Image(imageGrid, position, _window);
