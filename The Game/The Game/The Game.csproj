@@ -110,7 +110,6 @@
     <Compile Include="Input\KeyboardInputHandler.cs" />
     <Compile Include="Map\CustomMap.cs" />
     <Compile Include="Map\Layer.cs" />
-    <Compile Include="AlphaBootScreen.cs" />
     <Compile Include="Map\Level\Background.cs" />
     <Compile Include="Map\Level\Level.cs" />
     <Compile Include="Map\MapEdit\MapEditor.cs" />
@@ -177,6 +176,7 @@
     <Compile Include="UI\Menu\Lists\Builder\VerticalListBuilder.cs" />
     <Compile Include="UI\Menu\Lists\HorizonalList.cs" />
     <Compile Include="UI\Menu\Lists\VerticalList.cs" />
+    <Compile Include="UI\Menu\MenuImpl\AlphaScreen.cs" />
     <Compile Include="UI\Menu\MenuImpl\Configuration\Configuration.cs" />
     <Compile Include="UI\Menu\MenuImpl\Configuration\ConfigurationMenu.cs" />
     <Compile Include="UI\Menu\MenuImpl\Configuration\Difficulty.cs" />
@@ -195,6 +195,7 @@
     <Compile Include="UI\Position.cs" />
     <Compile Include="UI\UIElements\Button.cs" />
     <Compile Include="UI\UIElements\ButtonBuilder.cs" />
+    <Compile Include="UI\UIElements\ImageFrame.cs" />
     <Compile Include="UI\UIElements\InsertBox.cs" />
     <Compile Include="UI\UIElements\LoadBar.cs" />
     <Compile Include="UI\UIElements\TextBlock.cs" />
