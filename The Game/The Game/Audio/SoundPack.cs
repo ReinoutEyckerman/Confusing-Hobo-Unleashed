@@ -10,6 +10,12 @@ namespace Confusing_Hobo_Unleashed
         Christmas2
     }
 
+    public enum SFX
+    {
+        Punch,
+        Swipe,
+    }
+
     public class SoundPack
     {
         private static readonly Dictionary<int, SoundPlayer> SoundTracks = new Dictionary<int, SoundPlayer>

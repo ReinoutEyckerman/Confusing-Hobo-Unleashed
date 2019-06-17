@@ -12,7 +12,6 @@ namespace Confusing_Hobo_Unleashed.AI
         private int? _hptotal;
         private short _x;
         private short _y;
-        public Classes CurrentClass;
 
         protected AiCore(CustomMap map)
         {
@@ -34,7 +33,6 @@ namespace Confusing_Hobo_Unleashed.AI
             AttackCooldown = 0;
             PlayerColor = Painter.Instance.ColorsToAttribute(Background, Foreground);
             SpeedY = 0;
-            WeaponInv = new Dictionary<byte, Weapon>();
             GenerateClass();
         }
 

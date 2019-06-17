@@ -6,7 +6,6 @@ namespace Confusing_Hobo_Unleashed
     {
         public const int FrameTimeMs = 40;
         public static int Invertrate = 1;
-        public static Layers CurrentLayer = Layers.Earth;
         public static int SeaLevel = 30;
         public static bool Day;
         //Debug Options

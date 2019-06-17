@@ -94,9 +94,12 @@
     <Compile Include="Entities\Entity\SpellController.cs" />
     <Compile Include="Entities\Entity\Updateable.cs" />
     <Compile Include="Entities\MovementCoordinator.cs" />
+    <Compile Include="Entities\User\Bomb.cs" />
+    <Compile Include="Entities\User\Fist.cs" />
+    <Compile Include="Entities\User\Gun.cs" />
     <Compile Include="Entities\User\Player.cs" />
+    <Compile Include="Entities\User\Sword.cs" />
     <Compile Include="Entities\User\Weapon.cs" />
-    <Compile Include="Entities\User\WeaponOptimized.cs" />
     <Compile Include="Environment\LevelEdit\CustomMap.cs" />
     <Compile Include="Environment\LevelEdit\Layer.cs" />
     <Compile Include="Environment\Terrain\Dirt.cs" />
@@ -119,7 +122,6 @@
     <Compile Include="Environment\Terrain\TerrainGen\Terrain.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\TerrainGenerationModules.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\TerrainGraphics.cs" />
-    <Compile Include="Environment\Terrain\TerrainGen\TerrainSelection.cs" />
     <Compile Include="GameStateManager.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Game\GameLoop.cs" />
@@ -132,7 +134,11 @@
     <Compile Include="Graphics\Shapes\Complex\Cloud\SmallCloud.cs" />
     <Compile Include="Graphics\Shapes\Complex\Fire\Fire.cs" />
     <Compile Include="Graphics\Shapes\Complex\GodzillaDrawing.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Helicopter.cs" />
     <Compile Include="Graphics\Shapes\Complex\JungleTree.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Moon.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Sun.cs" />
+    <Compile Include="Graphics\Shapes\Complex\Weed.cs" />
     <Compile Include="Graphics\Shapes\Regular\ComplexShape.cs" />
     <Compile Include="Graphics\Shapes\Regular\RegularEllipse.cs" />
     <Compile Include="Graphics\Shapes\Regular\RegularRectangle.cs" />

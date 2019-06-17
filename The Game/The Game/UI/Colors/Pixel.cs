@@ -20,6 +20,11 @@ namespace Confusing_Hobo_Unleashed.UI.Colors
         {
             this.character = character;
         }
+        
+        public Pixel(ColorPoint pointColor, char character) : base(pointColor)
+        {
+            this.character = character;
+        }
 
         public char getCharacter()
         {
