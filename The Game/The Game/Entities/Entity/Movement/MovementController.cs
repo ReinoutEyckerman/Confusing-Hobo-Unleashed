@@ -1,3 +1,5 @@
+using System;
+
 namespace Confusing_Hobo_Unleashed.Enemies
 {
     public abstract class MovementController:EntityDecorator
@@ -9,6 +11,12 @@ namespace Confusing_Hobo_Unleashed.Enemies
         public override void Update()
         {
             base.Update();
+        }
+
+        private bool isMovementAllowed(Direction direction)
+        {
+            //TODO level.checkallowed
+            throw new NotImplementedException();
         }
     }
 }

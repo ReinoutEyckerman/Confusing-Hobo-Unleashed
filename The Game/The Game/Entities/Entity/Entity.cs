@@ -44,6 +44,37 @@ namespace Confusing_Hobo_Unleashed.Enemies
         public virtual void Update()
         {
             throw new NotImplementedException();
+            //TODO Mana regen
+        }
+        //TODO
+        public virtual void SetSpawn()
+        {
+            int X = 0;
+            int Y = 0;
+            for (var xpos = Convert.ToInt16(Map.Mapwidth - 1); xpos >= 0; xpos--)
+            {
+                for (short ypos = 0; ypos < Map.Mapheight; ypos++)
+                {
+                    if (Map.Grav[ypos, xpos] >= 0)
+                    {
+                        if (ypos + 1 < Map.Mapheight && !Map.Collision[ypos, xpos] && Map.Collision[ypos + 1, xpos])
+                        {
+                            Y = ypos;
+                            X = xpos;
+                            break;
+                        }
+                    }
+                    else if (Map.Grav[ypos, xpos] < 0)
+                        if (ypos - 1 > 0 && !Map.Collision[ypos, xpos] && Map.Collision[ypos - 1, xpos])
+                        {
+                            Y = ypos;
+                            X = xpos;
+                            break;
+                        }
+                }
+                if (X != 0 || Y != 0)
+                    break;
+            }
         }
 }
 }

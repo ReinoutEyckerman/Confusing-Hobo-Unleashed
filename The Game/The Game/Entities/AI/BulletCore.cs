@@ -17,7 +17,6 @@ namespace Confusing_Hobo_Unleashed.AI
         public BulletCore()
         {
             Character = 'o';
-            BulletColor = Painter.Instance.ColorsToAttribute(Painter.Instance.Paint(ConsoleColor.Black), Painter.Instance.Paint(ConsoleColor.White));
             Damage = 10;
         }
 

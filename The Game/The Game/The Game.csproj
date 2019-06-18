@@ -75,9 +75,6 @@
   <ItemGroup>
     <Compile Include="Audio\SoundEngine.cs" />
     <Compile Include="Audio\SoundPack.cs" />
-    <Compile Include="Entities\AI\AIAttackCore.cs" />
-    <Compile Include="Entities\AI\AICore.cs" />
-    <Compile Include="Entities\AI\AIMovementCore.cs" />
     <Compile Include="Entities\AI\BulletCore.cs" />
     <Compile Include="Entities\Enemies\Godzilla.cs" />
     <Compile Include="Entities\Enemies\Grave.cs" />
@@ -88,6 +85,7 @@
     <Compile Include="Entities\Entity\DamageController.cs" />
     <Compile Include="Entities\Entity\Entity.cs" />
     <Compile Include="Entities\Entity\EntityDecorator.cs" />
+    <Compile Include="Entities\Entity\Movement\Direction.cs" />
     <Compile Include="Entities\Entity\Movement\FlyingController.cs" />
     <Compile Include="Entities\Entity\Movement\MovementController.cs" />
     <Compile Include="Entities\Entity\Movement\RandomMovement.cs" />

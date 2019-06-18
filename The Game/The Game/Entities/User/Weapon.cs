@@ -2,16 +2,16 @@
 using System.Media;
 using Confusing_Hobo_Unleashed.AI;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Enemies;
 using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.User
 {
-
-    internal class WeaponOptimized
+    public abstract class Weapon
     {
         private int _speed;
-
-        public WeaponOptimized( int damage, byte cooldown, Pixel pixel, int speed = 0)
+        //TODO Range?
+        public Weapon( int damage, byte cooldown, Pixel pixel, int speed = 0)
         {
             Speed = speed;
             Damage = damage;
@@ -35,6 +35,9 @@ namespace Confusing_Hobo_Unleashed.User
         public bool IsMelee { get; set; }
         public SoundPlayer WeaponSound { get; set; }
         public char[] UseAnimation { get; set; }
+
+        public abstract void Use(Direction direction);
+        //TODO DestructibleCheck(xpos, ypos);
 
     }
 }
