@@ -123,6 +123,11 @@
     <Compile Include="GameStateManager.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Game\GameLoop.cs" />
+    <Compile Include="Graphics\Colors\BaseColor.cs" />
+    <Compile Include="Graphics\Colors\ColorPoint.cs" />
+    <Compile Include="Graphics\Colors\ColorScheme.cs" />
+    <Compile Include="Graphics\Colors\ColorSchemes.cs" />
+    <Compile Include="Graphics\Colors\Pixel.cs" />
     <Compile Include="Graphics\Image\Image.cs" />
     <Compile Include="Graphics\Image\ImageBuilder.cs" />
     <Compile Include="Graphics\Image\Interpolator.cs" />
@@ -179,11 +184,6 @@
     <Compile Include="UI\Banners\CongratulationsBanner.cs" />
     <Compile Include="UI\Banners\LostBanner.cs" />
     <Compile Include="UI\Banners\TitleBanner.cs" />
-    <Compile Include="UI\Colors\BaseColor.cs" />
-    <Compile Include="UI\Colors\ColorPoint.cs" />
-    <Compile Include="UI\Colors\Pixel.cs" />
-    <Compile Include="UI\Colors\ColorScheme.cs" />
-    <Compile Include="UI\Colors\ColorSchemes.cs" />
     <Compile Include="UI\Drawable.cs" />
     <Compile Include="UI\Menu\Lists\AbstractList.cs" />
     <Compile Include="UI\Menu\Lists\Builder\AbstractListBuilder.cs" />
