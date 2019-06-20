@@ -26,7 +26,7 @@ namespace Confusing_Hobo_Unleashed.TerrainGen.Fillers
             Entity[,] hatTop = Line.fillLine(orientation, null, width, height, startX, endX);
             Entity[,] hatBottom = Line.fillLine(orientation.Next().Next(), null, width, height, startX + holeStartWidth, endX+ holeEndWidth);
             Entity[,] Leg = Cavern(orientation.Next(), width, height, holeStartWidth, holeEndWidth, startX, endX);
-            return Glue.glue(hatTop, Glue.crack(hatBottom, Leg, Orientation.SOUTH, 0), Orientation.SOUTH, 0);
+            return Glue.glue(hatTop, Glue.crack(hatBottom, Leg, Orientation.South, 0), Orientation.South, 0);
         }
 
         public Entity[,] LCavern(Orientation orientation, int width, int height, int holeStartWidth, int holeEndWidth, int holeBottomWidth, int startX, int endX, int bottomX)

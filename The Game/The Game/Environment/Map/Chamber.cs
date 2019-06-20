@@ -16,10 +16,10 @@ namespace Confusing_Hobo_Unleashed
             this._position = position;
             this.directions = new Dictionary<Orientation, bool>()
             {
-                {Orientation.NORTH, false},
-                {Orientation.EAST, false},
-                {Orientation.SOUTH, false},
-                {Orientation.WEST, false}
+                {Orientation.North, false},
+                {Orientation.East, false},
+                {Orientation.South, false},
+                {Orientation.West, false}
             };
         }
 

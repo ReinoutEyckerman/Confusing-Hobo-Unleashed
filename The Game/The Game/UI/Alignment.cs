@@ -1,6 +1,6 @@
 namespace Confusing_Hobo_Unleashed.UI
 {
-    public enum Align
+    public enum Alignment
     {
         TopLeft,
         TopCenter,

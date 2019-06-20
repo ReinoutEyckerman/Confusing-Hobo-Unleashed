@@ -74,22 +74,22 @@ namespace Confusing_Hobo_Unleashed.UI
             {
                 if (x < position.x)
                 {
-                    return Orientation.EAST;
+                    return Orientation.East;
                 }
                 else
                 {
-                    return Orientation.WEST;
+                    return Orientation.West;
                 }
             }
             else
             {
                 if (y < position.y)
                 {
-                    return Orientation.SOUTH;
+                    return Orientation.South;
                 }
                 else
                 {
-                    return Orientation.NORTH;
+                    return Orientation.North;
                 }
             }
         }

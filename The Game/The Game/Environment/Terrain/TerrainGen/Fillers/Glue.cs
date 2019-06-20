@@ -22,10 +22,10 @@ namespace Confusing_Hobo_Unleashed.TerrainGen.Fillers
             int height = main.GetLength(1) + addition.GetLength(1);
             switch (orientation)
             {
-                case Orientation.EAST:
+                case Orientation.East:
                     width -= glueDistance;
                     break;
-                case Orientation.WEST:
+                case Orientation.West:
                     width -= glueDistance;
             }
 

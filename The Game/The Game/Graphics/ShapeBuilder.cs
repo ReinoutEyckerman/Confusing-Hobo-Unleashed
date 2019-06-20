@@ -21,7 +21,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.width = 0;
             this.height = 0;
             this.position = new Position(0, 0);
-            this.orientation = Orientation.NORTH;
+            this.orientation = Orientation.North;
             this.type = typeof(RegularRectangle);
         }
 

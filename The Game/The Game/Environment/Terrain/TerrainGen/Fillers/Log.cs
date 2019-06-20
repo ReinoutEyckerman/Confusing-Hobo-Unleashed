@@ -11,17 +11,17 @@ namespace Confusing_Hobo_Unleashed.TerrainGen.Fillers
         {
             switch (orientation)
             {
-                case Orientation.EAST:
+                case Orientation.East:
                     return line(block, height, width, start, stop); //TODO Rotate!
-                case Orientation.WEST:
+                case Orientation.West:
                     stop = width - stop;
                     start = width - start;
                     return line(block, height, width, start, stop); //TODO Rotate!
-                case Orientation.NORTH:
+                case Orientation.North:
                     stop = height - stop;
                     start = height - start;
                     return line(block, width, height, start, stop);
-                case Orientation.SOUTH:
+                case Orientation.South:
                     return line(block, width, height, start, stop);
             }
             throw new NotImplementedException();//TODO

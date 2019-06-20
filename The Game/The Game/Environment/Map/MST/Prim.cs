@@ -38,22 +38,22 @@ namespace Confusing_Hobo_Unleashed.MST
             chamber.setDiscovered();
             int x = chamber.getPosition().x;
             int y = chamber.getPosition().y;
-            if (x > 0 && !chamber.isCorridorUnlocked(Orientation.NORTH))
+            if (x > 0 && !chamber.isCorridorUnlocked(Orientation.North))
             {
                 walls.Add(new Wall(chamber, chambers[x - 1, y]));
             }
 
-            if (x < chambers.GetLength(0) - 1 && !chamber.isCorridorUnlocked(Orientation.SOUTH))
+            if (x < chambers.GetLength(0) - 1 && !chamber.isCorridorUnlocked(Orientation.South))
             {
                 walls.Add(new Wall(chamber, chambers[x + 1, y]));
             }
 
-            if (y > 0 && !chamber.isCorridorUnlocked(Orientation.WEST))
+            if (y > 0 && !chamber.isCorridorUnlocked(Orientation.West))
             {
                 walls.Add(new Wall(chamber, chambers[x, y - 1]));
             }
 
-            if (y < chambers.GetLength(1) - 1 && !chamber.isCorridorUnlocked(Orientation.EAST))
+            if (y < chambers.GetLength(1) - 1 && !chamber.isCorridorUnlocked(Orientation.East))
             {
                 walls.Add(new Wall(chamber, chambers[x, y + 1]));
             }

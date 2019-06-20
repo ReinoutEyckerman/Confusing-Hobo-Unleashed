@@ -10,19 +10,19 @@ namespace Confusing_Hobo_Unleashed.Shapes
             int y;
             switch (orientation)
             {
-                case Orientation.NORTH:
+                case Orientation.North:
                     return position;
-                case Orientation.SOUTH:
+                case Orientation.South:
                     position.setX(width - position.getX());
                     position.setY(height - position.getY());
                     return position;
-                case Orientation.EAST:
+                case Orientation.East:
                     x = height - position.getY();
                     y = position.getX();
                     position.setX(x);
                     position.setY(y);
                     return position;
-                case Orientation.WEST:
+                case Orientation.West:
                     x = position.getY();
                     y = width - position.getX();
                     position.setX(x);

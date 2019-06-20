@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Confusing_Hobo_Unleashed.Colors;
+using Confusing_Hobo_Unleashed.Graphics.Image;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 using Confusing_Hobo_Unleashed.User;
@@ -12,15 +13,12 @@ namespace Confusing_Hobo_Unleashed.UI
     public class TextBox:UIObject
     {
         
-        private Shape inactiveShape;
-        private Shape activeShape;
-        private Window _window; //todo
-        
-        protected TextBox( Shape activeShape, Shape inactiveShape, string text): base(activeShape,inactiveShape)
+        public TextBox(Position position, Image image) : base(position, image)
         {
-            this.activeShape = activeShape;
-            this.inactiveShape = inactiveShape;
-            this.text = new CenteredText(text, shape.getPosition(), shape);
+        }
+
+        public TextBox(Position position, Image activeImage, Image inactiveImage) : base(position, activeImage, inactiveImage)
+        {
         }
 
         public string Message { get; set; }
@@ -131,5 +129,6 @@ namespace Confusing_Hobo_Unleashed.UI
                 inactiveShape.Draw();
             }
         }
+
     }
 }
