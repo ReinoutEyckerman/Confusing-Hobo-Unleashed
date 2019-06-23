@@ -23,5 +23,15 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
         {
             throw new NotImplementedException();
         }
+
+        protected override void Run()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override GameState defaultExitState()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

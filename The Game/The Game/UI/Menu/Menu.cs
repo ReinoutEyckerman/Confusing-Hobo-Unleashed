@@ -1,11 +1,12 @@
 using System.Diagnostics;
+using Confusing_Hobo_Unleashed.UI.UIElements;
 using Confusing_Hobo_Unleashed.User;
 
 namespace Confusing_Hobo_Unleashed.UI.Menu
 {
     public abstract class Menu : Drawable
     {
-        protected AbstractList root;
+        protected UIObject root;
         protected GameState? GameState = null;
 
         public GameState Start()

@@ -28,5 +28,6 @@ namespace Confusing_Hobo_Unleashed.UI
         }
 
         public abstract Image buildImage(Pixel[,] imageGrid);
+        public abstract Window getWindow();
     }
 }

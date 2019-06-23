@@ -1,3 +1,4 @@
+using System;
 using Confusing_Hobo_Unleashed.Graphics.Image;
 using Confusing_Hobo_Unleashed.Shapes;
 using Confusing_Hobo_Unleashed.UI.Colors;
@@ -11,6 +12,13 @@ namespace Confusing_Hobo_Unleashed.UI
         public override Window createWindow()
         {
             this._window = new MicrosoftWindow();
+            return _window;
+        }
+
+        public override Window getWindow()
+        {
+            if(_window==null)
+                throw new NotImplementedException();
             return _window;
         }
 

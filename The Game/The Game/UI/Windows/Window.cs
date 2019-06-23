@@ -11,6 +11,8 @@ namespace Confusing_Hobo_Unleashed.UI
 
         void Clear();
         void Paint();
+        int getWidth();
+        int getHeight();
         int getWidthPosFromPercentage(double percentage);
         int getHeightPosFromPercentage(double percentage);
         void setColorScheme(ColorSchemes colorScheme);

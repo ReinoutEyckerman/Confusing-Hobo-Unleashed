@@ -18,7 +18,8 @@ namespace Confusing_Hobo_Unleashed.UI
         public static extern IntPtr GetConsoleWindow();
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy,
+            int wFlags);
 
         public static IntPtr MyConsole = GetConsoleWindow();
 
@@ -48,7 +49,7 @@ namespace Confusing_Hobo_Unleashed.UI
             ColorPoint translatedColor = colorScheme.translateColor(color);
             buffer.Draw(text, position.x, position.y, color);
         }
-        
+
         public void Draw(Position position, Pixel pixel)
         {
             ColorPoint translatedColor = colorScheme.translateColor(pixel);
@@ -63,6 +64,16 @@ namespace Confusing_Hobo_Unleashed.UI
         public void Paint()
         {
             buffer.Print();
+        }
+
+        public int getWidth()
+        {
+            return width;
+        }
+
+        public int getHeight()
+        {
+            return height;
         }
 
         public int getWidthPosFromPercentage(double percentage)
