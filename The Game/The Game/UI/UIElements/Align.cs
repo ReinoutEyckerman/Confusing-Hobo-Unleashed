@@ -6,6 +6,94 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
 {
     public static class Align
     {
+        public static void AlignUI(BoundingBox bounds, List<UIObject> uiObjects, int padding, Alignment alignment)
+        {
+            List<UIObject> uiObjectsCopy = new List<UIObject>();
+            uiObjectsCopy.AddRange(uiObjects);
+            
+            while (uiObjectsCopy.Count > 0)
+            {
+                int rowFitCount = Align.rowFitCount(bounds, uiObjects, padding);
+                List<UIObject> objects = uiObjectsCopy.GetRange(0, rowFitCount);
+                int height = minHeightCount(bounds, objects, padding);
+            }
+        }
+
+        private static void executeAlignment(BoundingBox bounds,  UIObject uiObject, Alignment alignment)
+        {
+            switch (alignment)
+            {
+                case Alignment.TopLeft:
+                    alignTop(bounds,uiObject);
+                    alignLeft(bounds, uiObject);
+                    break;
+                case Alignment.TopCenter:
+                    alignTop(bounds, uiObject);
+                    horizontalAlignCenter(bounds,uiObject);
+                    break;
+                case Alignment.TopRight:
+                    alignTop(bounds,uiObject);
+                    alignRight(bounds,uiObject);
+                    break;
+                case Alignment.CenterLeft:
+                    verticalAlignCenter(bounds,uiObject);
+                    alignLeft(bounds, uiObject);
+                    break;
+                case Alignment.Center:
+                    verticalAlignCenter(bounds,uiObject);
+                    horizontalAlignCenter(bounds,uiObject);
+                    break;
+                case Alignment.CenterRight:
+                    verticalAlignCenter(bounds,uiObject);
+                    alignRight(bounds,uiObject);
+                    break;
+                case Alignment.BottomLeft:
+                    alignTop(bounds,uiObject);
+                    alignLeft(bounds, uiObject);
+                    break;
+                case Alignment.BottomCenter:
+                    alignBottom(bounds, uiObject);
+                    horizontalAlignCenter(bounds,uiObject);
+                    break;
+                case Alignment.BottomRight:
+                    alignBottom(bounds,uiObject);
+                    alignRight(bounds,uiObject);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(alignment), alignment, null);
+            }
+        }
+        
+
+        private static int rowFitCount(BoundingBox bounds, List<UIObject> uiObjects, int padding)
+        {
+            int maxWidth = bounds.getWidth();
+            int width = padding;
+            int i = 0;
+            while (width < maxWidth)
+            {
+                width += uiObjects[i++].getBoundingBox().getWidth() + padding;
+            }
+
+            return i;
+        }
+
+        private static int minHeightCount(BoundingBox bounds, List<UIObject> uiObjects, int padding)
+        {
+            int minHeight = 0;
+            foreach (UIObject uiObject in uiObjects)
+            {
+                int height = uiObject.getBoundingBox().getHeight();
+                if (minHeight < height)
+                {
+                    minHeight = height;
+                }
+            }
+
+            return minHeight + 2 * padding;
+        }
+
+
         public static void AlignUI(BoundingBox bounds, UIObject uiObject, int padding, Alignment alignment)
         {
             switch (alignment)
@@ -16,7 +104,7 @@ namespace Confusing_Hobo_Unleashed.UI.UIElements
             }
         }
 
-        private static void AlignTopLeft(BoundingBox boundingBox, UIObject uiObject, int padding)
+        private static void AlignUI(BoundingBox boundingBox, UIObject uiObject, int padding)
         {
         }
 
