@@ -22,6 +22,7 @@ using Timer = System.Timers.Timer;
 
 namespace Confusing_Hobo_Unleashed.Multiplayer
 {
+    /*
     internal class Client
     {
         private static NetClient _client;
@@ -192,4 +193,5 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
         Worldstate2,
         Newplayer
     }
+    */
 }

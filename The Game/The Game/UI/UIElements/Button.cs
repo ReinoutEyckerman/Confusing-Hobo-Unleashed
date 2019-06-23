@@ -25,14 +25,6 @@ namespace Confusing_Hobo_Unleashed.UI
             this.parameter = parameter;
         }
 
-        private bool Value { get; set; }
-        public List<int> VarChanger { get; set; }
-
-        public void ChangeValue()
-        {
-            Value = !Value;
-        }
-
         public override bool IsActive()
         {
             throw new NotImplementedException();

@@ -6,21 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Confusing_Hobo_Unleashed.Graphics.Image;
+using Confusing_Hobo_Unleashed.Shapes.Animations;
 using Confusing_Hobo_Unleashed.UI.Colors;
 
 namespace Confusing_Hobo_Unleashed.Shapes
 {
-    class Fire : ShapeDecorator
+    class FireFrameGenerator : BoundingBox, GeneratedImage
     {
-        private Window window; //TODO
 
+        private Pixel pixel;
         private Random fireRandomizer;
         private int layers = 3;
         private Pixel outerFire;
         private Pixel middleFire;
         private Pixel coreFire;
+        private BoundingBox bounds;
 
-        public Fire(Fire copy) : base(copy)
+        public FireFrameGenerator(FireFrameGenerator copy) : base(copy)
         {
             this.outerFire = new Pixel(copy.outerFire);
             this.middleFire = new Pixel(copy.middleFire);
@@ -28,15 +30,17 @@ namespace Confusing_Hobo_Unleashed.Shapes
             this.fireRandomizer = new Random();
         }
 
-        public Fire(Shape decoratedShape, Pixel pixel, Window window, Position position, int width, int height) : base(decoratedShape, pixel, window, position, width, height)
+        public FireFrameGenerator( Pixel pixel, BoundingBox bounds) :base(bounds)
         {
+            this.pixel = pixel;
             this.outerFire = outerFire;
             this.middleFire = middleFire;
             this.coreFire = coreFire;
             this.fireRandomizer = new Random();
+            this.bounds = bounds;
         }
 
-        public override Image toImage()
+        public Image toImage()
         {
             int width = this.getWidth();
             int height = getHeight();
@@ -75,12 +79,7 @@ namespace Confusing_Hobo_Unleashed.Shapes
                 }
             }
 
-            return base.toImage().addTopLayer(new Image(grid, this.position));
-        }
-
-        public override Shape Clone()
-        {
-            return new Fire(this);
+            return toImage().addTopLayer(AbstractUIFactory.getInstance().buildImage(grid));
         }
 
         private int getRandomDirection(int x)

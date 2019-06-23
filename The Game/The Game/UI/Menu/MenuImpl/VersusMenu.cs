@@ -35,13 +35,13 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
         private void lan(object parameter)
         {
             throw new NotImplementedException();
-            Client.Start(); //TODO
+            //Client.Start(); //TODO
         }
 
         private void lanServer(object parameter)
         {
             throw new NotImplementedException();
-            Server.Start(); //TODO
+            //Server.Start(); //TODO
         }
     }
 }

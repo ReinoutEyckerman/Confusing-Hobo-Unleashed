@@ -9,13 +9,15 @@ namespace Confusing_Hobo_Unleashed.Shapes.Animations
         private int duration; //TODO ms?
 
 
-        public Frame(Pixel[,] imageGrid, Position position, Window window) : base(imageGrid, position, window)
+        public Frame(int duration, Pixel[,] imageGrid, Position position, Window window) : base(imageGrid, position,
+            window)
         {
+            this.duration = duration;
         }
 
-        public void setDuration()
+        public Frame(Image image, int duration) : base(image)
         {
-            duration = duration;
+            this.duration = duration;
         }
 
         public int getDuration()

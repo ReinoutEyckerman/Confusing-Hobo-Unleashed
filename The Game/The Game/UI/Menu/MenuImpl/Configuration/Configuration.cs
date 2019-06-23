@@ -1,4 +1,5 @@
 using Confusing_Hobo_Unleashed.Tools;
+using Confusing_Hobo_Unleashed.UI.UIElements;
 
 namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 {
@@ -28,6 +29,21 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
         public void setDifficulty(object difficulty)
         {
             _difficulty = EnumExtensions.Parse<Difficulty>(difficulty.ToString());
+        }
+
+        public void setColorScheme(object scheme)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void setInversion(object parameter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void setWorldType(object parameter)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -4,6 +4,7 @@ using Lidgren.Network;
 
 namespace Confusing_Hobo_Unleashed.Multiplayer
 {
+    /*
     internal class LidgrenAdaptions
     {
         public static void Write2DArray(char?[,] ar, NetOutgoingMessage outmsg)
@@ -168,4 +169,5 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             outmsg.Write((byte) bullet.Character);
         }
     }
+    */
 }

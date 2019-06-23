@@ -11,6 +11,7 @@ using Lidgren.Network;
 
 namespace Confusing_Hobo_Unleashed.Multiplayer
 {
+    /*
     internal class Server
     {
         public static bool Change;
@@ -180,4 +181,5 @@ namespace Confusing_Hobo_Unleashed.Multiplayer
             return outmsg;
         }
     }
+    */
 }

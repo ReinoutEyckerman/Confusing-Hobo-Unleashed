@@ -61,14 +61,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MonoGame.Framework.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c">
+      <HintPath>..\packages\NLog.4.6.5\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -132,17 +143,18 @@
     <Compile Include="Graphics\Image\ImageBuilder.cs" />
     <Compile Include="Graphics\Image\Interpolator.cs" />
     <Compile Include="Graphics\Image\ShapedImage.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Alpha.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Cloud\LargeCloud.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Cloud\SmallCloud.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Fire\Fire.cs" />
-    <Compile Include="Graphics\Shapes\Complex\GodzillaDrawing.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Helicopter.cs" />
-    <Compile Include="Graphics\Shapes\Complex\JungleTree.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Moon.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Sun.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Text.cs" />
-    <Compile Include="Graphics\Shapes\Complex\Weed.cs" />
+    <Compile Include="Graphics\Presets\Animations\Fire\Fire.cs" />
+    <Compile Include="Graphics\Presets\Animations\Fire\FireFrameGenerator.cs" />
+    <Compile Include="Graphics\Presets\Images\Alpha.cs" />
+    <Compile Include="Graphics\Presets\Images\Cloud\LargeCloud.cs" />
+    <Compile Include="Graphics\Presets\Images\Cloud\SmallCloud.cs" />
+    <Compile Include="Graphics\Presets\Images\GodzillaDrawing.cs" />
+    <Compile Include="Graphics\Presets\Images\Helicopter.cs" />
+    <Compile Include="Graphics\Presets\Images\JungleTree.cs" />
+    <Compile Include="Graphics\Presets\Images\Moon.cs" />
+    <Compile Include="Graphics\Presets\Images\Sun.cs" />
+    <Compile Include="Graphics\Presets\Images\Text.cs" />
+    <Compile Include="Graphics\Presets\Images\Weed.cs" />
     <Compile Include="Graphics\Shapes\Drawer\ComplexDrawer.cs" />
     <Compile Include="Graphics\Shapes\Drawer\ContouredShapeDrawer.cs" />
     <Compile Include="Graphics\Shapes\Drawer\FilledShapeDrawer.cs" />
@@ -256,6 +268,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Graphics\Presets\Animations" />
     <Folder Include="Graphics\Shapes" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

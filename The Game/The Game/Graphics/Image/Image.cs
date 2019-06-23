@@ -7,8 +7,14 @@ namespace Confusing_Hobo_Unleashed.Graphics.Image
     public class Image : BoundingBox, Drawable
     {
         private readonly Pixel[,] imageGrid;
-        private Window window; 
+        private Window window;
 
+        public Image(Image copy):base(copy.getPosition(),copy.getWidth(),copy.getHeight())
+        {
+            this.imageGrid = copy.imageGrid;
+            this.window = copy.window;
+        }
+        
         public Image(Pixel[,] imageGrid, Window window) : base(new Position(0,0), imageGrid.GetLength(0),
             imageGrid.GetLength(1)) //TODO new pos
         {

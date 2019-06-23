@@ -18,7 +18,7 @@ namespace Confusing_Hobo_Unleashed.Shapes.Animations
 
         public bool IsFinished { get; private set; }
 
-        public void Draw()
+        public virtual void Draw()
         {
             if (!validFrame())
                 return;
@@ -33,7 +33,7 @@ namespace Confusing_Hobo_Unleashed.Shapes.Animations
             frames[currentFrame].Draw();
         }
 
-        public void DrawRelative(Position relativeTo)
+        public virtual void DrawRelative(Position relativeTo)
         {
             if (!validFrame())
                 return;
