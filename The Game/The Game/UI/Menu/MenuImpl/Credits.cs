@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 {
-    public class Credits
+    public class Credits:Menu
     {
         
         public static void ShowCredits()
@@ -24,6 +24,15 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
                 }
                 Thread.Sleep(300);
             }
+        }
+
+        protected override void Run()
+        {
+        }
+
+        protected override GameState defaultExitState()
+        {
+            throw new NotImplementedException();
         }
     }
 }

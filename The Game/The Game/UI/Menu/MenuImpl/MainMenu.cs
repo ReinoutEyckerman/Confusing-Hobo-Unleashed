@@ -22,27 +22,37 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
 
         private void startGame(object parameter)
         {
-            throw new NotImplementedException();
+            exit(Confusing_Hobo_Unleashed.GameState.Loading);
         }
 
         private void versusScreen(object parameter)
         {
-            throw new NotImplementedException();
+            exit(Confusing_Hobo_Unleashed.GameState.Versus);
         }
 
         private void mapEditorScreen(object parameter)
         {
-            throw new NotImplementedException();
+            exit(Confusing_Hobo_Unleashed.GameState.MapEditor);
         }
 
         private void configScreen(object parameter)
         {
-            throw new NotImplementedException();
+            exit(Confusing_Hobo_Unleashed.GameState.Configuration);
         }
 
         private void creditsScreen(object parameter)
         {
-            throw new NotImplementedException();
+            exit(Confusing_Hobo_Unleashed.GameState.Credits);
+        }
+
+        protected override void Run()
+        {
+            
+        }
+
+        protected override GameState defaultExitState()
+        {
+            return Confusing_Hobo_Unleashed.GameState.Exit;
         }
     }
 }

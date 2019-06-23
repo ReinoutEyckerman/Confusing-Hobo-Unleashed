@@ -1,3 +1,4 @@
+using System;
 using Confusing_Hobo_Unleashed.Shapes.Complex;
 using Confusing_Hobo_Unleashed.UI.UIElements;
 
@@ -17,6 +18,18 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
                     UIFactory.createDefaultText("A Team Alpha Production", new Position(0, 0))))
                 .build();
             this.root = list;
+        }
+
+        protected override void Run()
+        {
+            //TODO Check if x seconds passed
+            throw new NotImplementedException();
+            exit(Confusing_Hobo_Unleashed.GameState.StartScreen);
+        }
+
+        protected override GameState defaultExitState()
+        {
+            return Confusing_Hobo_Unleashed.GameState.StartScreen;
         }
     }
 }

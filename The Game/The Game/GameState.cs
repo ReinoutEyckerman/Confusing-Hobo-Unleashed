@@ -8,6 +8,9 @@ namespace Confusing_Hobo_Unleashed
         Configuration,
         Map,
         Level,
-        Exit
+        Exit,
+        Versus,
+        MapEditor,
+        Credits
     }
 }

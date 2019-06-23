@@ -4,6 +4,7 @@ using Confusing_Hobo_Unleashed.UI.Windows;
 
 namespace Confusing_Hobo_Unleashed.Graphics.Image
 {
+    //TODO: add height of pixel into interpolation?
     public class Interpolator
     {
         //TODO Test this code
