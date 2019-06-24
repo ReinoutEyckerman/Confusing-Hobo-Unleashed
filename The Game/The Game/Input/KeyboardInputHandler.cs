@@ -12,7 +12,7 @@ namespace Confusing_Hobo_Unleashed.User
 {
     public class KeyboardInputHandler : InputHandler //TODO Configuration files
     {
-        public override Input handle()
+        public Input handle()
         {
             KeyboardState state = Keyboard.GetState();
 

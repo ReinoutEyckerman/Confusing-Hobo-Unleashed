@@ -46,5 +46,13 @@ namespace Confusing_Hobo_Unleashed.UI.Menu.MenuImpl
             {"Defining Variables...", Definevars}
         };
         */
+        protected override void Run()
+        {
+        }
+
+        protected override GameState defaultExitState()
+        {
+            return Confusing_Hobo_Unleashed.GameState.StartScreen;
+        }
     }
 }

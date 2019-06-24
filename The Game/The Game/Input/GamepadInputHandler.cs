@@ -11,7 +11,7 @@ namespace Confusing_Hobo_Unleashed.User
 {
     public class GamepadInputHandler : InputHandler
     {
-        public override Input handle()
+        public Input handle()
         {
             var controller = GamePad.GetState(PlayerIndex.One).IsConnected;
 

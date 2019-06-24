@@ -2,8 +2,8 @@
 
 namespace Confusing_Hobo_Unleashed.User
 {
-    public abstract class InputHandler
+    public interface InputHandler
     {
-        public abstract Input handle();
+        Input handle();
     }
 }

@@ -124,11 +124,9 @@
     <Compile Include="Environment\Terrain\TerrainGen\Fillers\Triangle.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\GravField.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\LandTerrain.cs" />
-    <Compile Include="Environment\Terrain\TerrainGen\Scenery.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\SeaTerrain.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\SkyTerrain.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\SpaceTerrain.cs" />
-    <Compile Include="Environment\Terrain\TerrainGen\Terrain.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\TerrainGenerationModules.cs" />
     <Compile Include="Environment\Terrain\TerrainGen\TerrainGraphics.cs" />
     <Compile Include="GameStateManager.cs" />
